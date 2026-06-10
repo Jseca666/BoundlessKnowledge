@@ -1157,6 +1157,7 @@ if ($null -ne $systemClosureMap) {
 }
 
 $canvasViewPathById = @{}
+$canvasViewById = @{}
 
 if ($null -ne $canvasRegistry) {
     $viewIds = New-Object System.Collections.Generic.HashSet[string]
@@ -1204,6 +1205,7 @@ if ($null -ne $canvasRegistry) {
         }
         elseif (-not [string]::IsNullOrWhiteSpace([string]$view.path)) {
             $canvasViewPathById[[string]$view.id] = [string]$view.path
+            $canvasViewById[[string]$view.id] = $view
         }
         Test-RegistryPath -PathValue $view.path -Context "canvas view '$($view.id)'"
         if ([string]::IsNullOrWhiteSpace($view.status)) {
@@ -1411,6 +1413,47 @@ if ($null -ne $visualCoverageMap) {
                 if ($closureVisualStatus -ne $decisionVisualStatus) {
                     $Errors.Add("system/visual-coverage-map.json: module_decision '$decisionModuleId' visual_projection_status '$decisionVisualStatus' does not match closure map status '$closureVisualStatus'")
                 }
+            }
+        }
+    }
+
+    foreach ($decision in @($visualCoverageMap.module_decisions)) {
+        if (-not ($decision.PSObject.Properties.Name -contains "module_id")) {
+            continue
+        }
+
+        $decisionModuleId = [string]$decision.module_id
+        $decisionRequiredViewIds = @()
+        if ($decision.PSObject.Properties.Name -contains "required_view_ids") {
+            $decisionRequiredViewIds = @($decision.required_view_ids | ForEach-Object { [string]$_ })
+        }
+        if ($decisionRequiredViewIds.Count -eq 0) {
+            continue
+        }
+
+        foreach ($coveredByViewIdValue in @($decision.covered_by_view_ids)) {
+            $coveredByViewId = [string]$coveredByViewIdValue
+            if ([string]::IsNullOrWhiteSpace($coveredByViewId) -or $decisionRequiredViewIds -contains $coveredByViewId) {
+                continue
+            }
+            if (-not $canvasViewById.ContainsKey($coveredByViewId)) {
+                continue
+            }
+
+            $coveredView = $canvasViewById[$coveredByViewId]
+            $navigationTargets = @($coveredView.navigation_nodes | ForEach-Object {
+                if ($_.PSObject.Properties.Name -contains "target_view") { [string]$_.target_view }
+            })
+            $hasNavigationToRequiredView = $false
+            foreach ($requiredViewId in $decisionRequiredViewIds) {
+                if ($navigationTargets -contains $requiredViewId) {
+                    $hasNavigationToRequiredView = $true
+                    break
+                }
+            }
+
+            if (-not $hasNavigationToRequiredView) {
+                $Errors.Add("system/visual-coverage-map.json: module_decision '$decisionModuleId' says covered_by_view '$coveredByViewId' covers required view(s) '$($decisionRequiredViewIds -join ', ')' but the covering view has no navigation_node to any required view")
             }
         }
     }

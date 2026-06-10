@@ -1,6 +1,6 @@
 {
     "id":  "canvas-screenshot-audit-report",
-    "generated_at":  "2026-06-10T16:17:58",
+    "generated_at":  "2026-06-10T16:31:43",
     "renderer":  "powershell-system-drawing",
     "scope":  "current-active-canvas-views",
     "output_dir":  "system/reviews/canvas-screenshots",
@@ -106,8 +106,8 @@
                       "status":  "current",
                       "view_type":  "system-architecture-map",
                       "screenshot_path":  "system/reviews/canvas-screenshots/knowledge-base-system-architecture-map.png",
-                      "node_count":  57,
-                      "edge_count":  15,
+                      "node_count":  62,
+                      "edge_count":  16,
                       "logical_bounds":  {
                                              "width":  3114,
                                              "height":  1630
@@ -116,8 +116,8 @@
                                              "width":  2600,
                                              "height":  1361,
                                              "scale":  0.8349,
-                                             "bytes":  212160,
-                                             "non_blank_pixel_ratio":  0.4228
+                                             "bytes":  218985,
+                                             "non_blank_pixel_ratio":  0.443
                                          },
                       "warnings":  [
 

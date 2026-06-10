@@ -4080,6 +4080,118 @@
 				]
 			},
 			"diagnosis_acceptance": "Accepted after the passive capture front gate was upgraded into an active knowledge-acquisition child subsystem with machine truth, candidate queue, route, information-map registration, topology, activation proof, visual coverage, dedicated Canvas and validation."
+		},
+		{
+			"issue_id": "diag-20260610-knowledge-acquisition-overview-visual-sync-gap",
+			"title": "Knowledge acquisition was registered but not visibly reachable from the L1 system overview",
+			"status": "captured",
+			"repair_class": "system_upgrade",
+			"failure_packet": "After adding the knowledge-acquisition child subsystem, the user inspected the L1 system architecture Canvas and reported that the graph did not look updated. Machine registries contained the new module and child view, but the L1 overview only changed the stage text and did not provide an explicit visible navigation entry or status projection for the new child subsystem.",
+			"incident_manifestation": {
+				"observed_incident": "The system overview Canvas still read as the old high-level flow from the user perspective; the new knowledge-acquisition view was not reachable as a visible L1 navigation item.",
+				"evidence_surface": [
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas before repair lacked knowledge-acquisition-canvas-file navigation node",
+					"system/canvas-registry.json listed knowledge-acquisition-architecture-map as related to the overview but did not register an overview navigation node to it",
+					"system/canvas-view-graph.json had no overview -> knowledge-acquisition edge before this repair"
+				],
+				"why_it_is_not_root_problem": "The symptom was not only one missing button. The deeper problem was that visual coverage could claim an upper view covered a child module without requiring a visible entry point from that upper view."
+			},
+			"lower_evidence_track": "Inspection showed route, information-map, closure, visual coverage and child view registration were present, while the L1 overview Canvas lacked a visible navigation node, visible module status card and graph edge from overview to the child view.",
+			"upper_principle_track": "Canvas is the visual shadow of the file system and system topology. System upgrades must synchronize related routes, machine truth, closure and visual projection. A module should not be considered visually covered by an upper view if users cannot find or enter it from that view.",
+			"failed_mindset": "registry-only closure thinking: treating canvas-registry/view-graph consistency as sufficient even when the human-facing upper Canvas did not visibly expose the new subsystem.",
+			"immediate_root_cause": "validate-system did not require a covering view listed in visual-coverage-map to have a navigation_node to the required dedicated view for modules with dedicated visual coverage.",
+			"root_problem": {
+				"problem_statement": "Visual coverage declarations could outpace visible Canvas entry points, producing a hidden visual shadow gap for newly activated child subsystems.",
+				"recurrence_mechanism": "Future modules could be registered, closed and related in the view graph while the user-facing overview or parent view still lacks a visible way to discover them.",
+				"owning_system_model": "architecture-views coordinated with visual-coverage-map, canvas-registry, canvas-view-graph, validation and diagnostics"
+			},
+			"owning_repair_layer": [
+				"architecture-views",
+				"canvas-system",
+				"system-closure",
+				"system-information-map",
+				"diagnostics",
+				"validation"
+			],
+			"positive_model_repair": "Add a visible L1 overview navigation item, status projection and graph edge for knowledge-acquisition; add a validation gate requiring covering views to navigate to required dedicated views when a module declares both required_view_ids and extra covered_by_view_ids.",
+			"constraint_decision": "Use a targeted positive coverage-to-navigation contract instead of a blanket rule that every related view must link to every other related view, which would make Canvas navigation noisy again.",
+			"affected_surfaces": [
+				"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"system/visual-coverage-map.json",
+				"scripts/validate-system.ps1",
+				"system/diagnostics/issue-repair-queue.json",
+				"system/reviews/canvas-screenshots/latest-report.json"
+			],
+			"generalization_scan": {
+				"observed_instance": "knowledge-acquisition had machine truth and a child Canvas but was not visibly reachable from the L1 overview that visual coverage said covered it.",
+				"failure_class": "visual coverage declaration without visible upper-view entry point",
+				"same_class_assets_checked": [
+					"visual-coverage-map module_decisions with required_view_ids and covered_by_view_ids",
+					"canvas-registry navigation_nodes",
+					"canvas-view-graph edges",
+					"L1 system overview Canvas",
+					"knowledge-ingestion parent Canvas"
+				],
+				"sibling_surfaces_checked": [
+					"git-governance overview navigation already exists",
+					"knowledge-ingestion parent view already links to knowledge-acquisition",
+					"review/domain/loop related views are not forced to become dense navigation meshes"
+				],
+				"affected_modules": [
+					"architecture-views",
+					"knowledge-acquisition",
+					"knowledge-ingestion",
+					"system-closure",
+					"diagnostics",
+					"validation"
+				],
+				"exemptions": [
+					"Modules with no dedicated required_view_ids are not forced into navigation entries by this gate.",
+					"Pure related views are not forced to mutually link unless visual coverage says one view covers a module with a required dedicated view."
+				],
+				"recurrence_gate": "scripts/validate-system.ps1 now fails when a module decision declares a covering view outside required_view_ids but that covering view has no navigation_node to any required view."
+			},
+			"system_regulation_target": {
+				"target_surface": [
+					"system/visual-coverage-map.json module_decisions",
+					"system/canvas-registry.json navigation_nodes",
+					"system/canvas-view-graph.json edges",
+					"scripts/validate-system.ps1 visual coverage navigation gate"
+				],
+				"update_mode": "positive visual coverage-to-navigation contract",
+				"acceptance_gate": "L1 overview visibly links to knowledge-acquisition, strict Canvas visual audit passes, screenshot audit passes and validate-system enforces the covering-view navigation rule."
+			},
+			"failure_learning_decision": {
+				"status": "deferred",
+				"reason": "The failure is a concrete visual coverage validation gap and is repaired with an executable gate; open a broader failure-learning object only if hidden visual coverage gaps recur across multiple modules.",
+				"risk_level": "medium",
+				"refs": [
+					"scripts/validate-system.ps1",
+					"system/visual-coverage-map.json",
+					"system/canvas-registry.json"
+				]
+			},
+			"capture_paths": [
+				"system/diagnostics/issue-repair-queue.json",
+				"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"scripts/validate-system.ps1"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/audit-canvas-screenshot.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/validate-reviews.ps1"
+				]
+			},
+			"diagnosis_acceptance": "Accepted when the L1 overview exposes knowledge-acquisition as a visible navigation/status projection, canvas registry and view graph contain the overview-to-child navigation edge, and validate-system enforces the coverage-to-navigation gate."
 		}
 	],
 	"updated": "2026-06-10"

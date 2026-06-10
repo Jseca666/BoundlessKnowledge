@@ -1194,6 +1194,8 @@
 				"system/module-relationship-map.json",
 				"system/project-ontology.json",
 				"system/knowledge-ingestion-system.json",
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
 				"system/git-governance-system.json",
 				"system/git-governance-docs-map.json"
 			],
@@ -1201,7 +1203,8 @@
 				"用户讨论当前知识库系统架构图",
 				"用户讨论捕获、分类、提炼、索引和 Codex 消费的数据流",
 				"需要先确认系统模块和数据流方向",
-				"需要理解无界知识作为知识工程系统的整体定位和 Codex 工作流角色"
+				"需要理解无界知识作为知识工程系统的整体定位和 Codex 工作流角色",
+				"需要从系统总览进入知识获取与入库决策子系统，确认主动寻找权威知识和候选入库判断"
 			],
 			"parent_views": [
 				"kb-navigation-index"
@@ -1279,6 +1282,11 @@
 					"direction": "down"
 				},
 				{
+					"node_id": "knowledge-acquisition-canvas-file",
+					"target_view": "knowledge-acquisition-architecture-map",
+					"direction": "side"
+				},
+				{
 					"node_id": "git-governance-canvas-file",
 					"target_view": "git-governance-architecture-map",
 					"direction": "down"
@@ -1337,6 +1345,12 @@
 					"support_node": "file-label-information-map-file",
 					"target_node": "stage-capture",
 					"label": "maps module boundaries"
+				},
+				{
+					"binding_id": "bind-knowledge-acquisition-status",
+					"support_node": "file-label-information-map-file",
+					"target_node": "acquisition-status",
+					"label": "maps acquisition module status"
 				},
 				{
 					"binding_id": "bind-route-registry-codex",

@@ -23,7 +23,7 @@
 		{
 			"id": "stage-capture",
 			"type": "text",
-			"text": "# 1. 知识发现与入库决策\n\n主动寻找候选来源，评价质量、价值和风险，再决定登记、审查、继续寻找或观望。\n\n输出：入库决策。",
+			"text": "# 1. 知识发现与入库决策\n\n由 knowledge-acquisition 接管：主动寻找候选来源，评价质量、价值和风险，再决定登记、审查、继续寻找或观望。\n\n输出：入库决策。",
 			"x": -1040,
 			"y": -300,
 			"width": 360,
@@ -255,7 +255,7 @@
 			"type": "text",
 			"text": "下钻：Canvas 子系统",
 			"x": 1500,
-			"y": -350,
+			"y": -170,
 			"width": 330,
 			"height": 48,
 			"color": "5"
@@ -305,7 +305,7 @@
 			"type": "file",
 			"file": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
 			"x": 1850,
-			"y": -350,
+			"y": -170,
 			"width": 64,
 			"height": 48,
 			"color": "5"
@@ -474,7 +474,7 @@
 			"id": "nav-label-loop-orchestration-canvas-file",
 			"type": "text",
 			"x": 1500,
-			"y": -240,
+			"y": -230,
 			"width": 330,
 			"height": 48,
 			"color": "5",
@@ -484,7 +484,7 @@
 			"id": "loop-orchestration-canvas-file",
 			"type": "file",
 			"x": 1850,
-			"y": -240,
+			"y": -230,
 			"width": 64,
 			"height": 48,
 			"color": "5",
@@ -525,7 +525,7 @@
 			"type": "file",
 			"file": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
 			"x": 1850,
-			"y": -292,
+			"y": -350,
 			"width": 64,
 			"height": 48,
 			"color": "4"
@@ -535,7 +535,7 @@
 			"type": "text",
 			"text": "下钻：知识摄入子系统",
 			"x": 1500,
-			"y": -292,
+			"y": -350,
 			"width": 330,
 			"height": 48,
 			"color": "4"
@@ -545,7 +545,7 @@
 			"type": "text",
 			"text": "对应：进入链路",
 			"x": 1300,
-			"y": -292,
+			"y": -350,
 			"width": 170,
 			"height": 48,
 			"color": "4"
@@ -569,6 +569,56 @@
 			"height": 48,
 			"color": "5",
 			"file": "30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas"
+		},
+		{
+			"id": "acquisition-status",
+			"type": "text",
+			"text": "# 入库决策状态\n\nknowledge-acquisition 已激活：候选队列、质量价值初评、主动寻找权威来源和 review/loop 交接。",
+			"x": -1040,
+			"y": 230,
+			"width": 420,
+			"height": 150,
+			"color": "4"
+		},
+		{
+			"id": "nav-label-knowledge-acquisition-canvas-file",
+			"type": "text",
+			"text": "下钻：知识获取与入库决策",
+			"x": 1500,
+			"y": -290,
+			"width": 330,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "knowledge-acquisition-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+			"x": 1850,
+			"y": -290,
+			"width": 64,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "bridge-anchor-knowledge-acquisition",
+			"type": "text",
+			"text": "对应：入库决策",
+			"x": 1300,
+			"y": -290,
+			"width": 170,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "bridge-anchor-canvas-system",
+			"type": "text",
+			"text": "对应：存储与索引",
+			"x": 1300,
+			"y": -170,
+			"width": 170,
+			"height": 48,
+			"color": "5"
 		}
 	],
 	"edges": [
@@ -625,8 +675,8 @@
 			"id": "bridge-edge-canvas-system",
 			"fromNode": "nav-label-canvas-system-canvas-file",
 			"fromSide": "left",
-			"toNode": "stage-index",
-			"toSide": "top",
+			"toNode": "bridge-anchor-canvas-system",
+			"toSide": "right",
 			"color": "5",
 			"label": "对应："
 		},
@@ -691,7 +741,7 @@
 			"toNode": "bridge-anchor-knowledge-ingestion",
 			"toSide": "right",
 			"color": "4",
-			"label": "对应：进入链路"
+			"label": "对应：摄入总览"
 		},
 		{
 			"id": "bridge-edge-git-governance",
@@ -701,6 +751,15 @@
 			"toSide": "right",
 			"color": "5",
 			"label": "对应：版本治理"
+		},
+		{
+			"id": "bridge-edge-knowledge-acquisition",
+			"fromNode": "nav-label-knowledge-acquisition-canvas-file",
+			"fromSide": "left",
+			"toNode": "bridge-anchor-knowledge-acquisition",
+			"toSide": "right",
+			"color": "4",
+			"label": "对应：入库决策"
 		}
 	]
 }

@@ -147,6 +147,8 @@
 				"system/module-relationship-map.json",
 				"system/project-ontology.json",
 				"system/knowledge-ingestion-system.json",
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
 				"system/git-governance-system.json",
 				"system/git-governance-docs-map.json"
 			]
@@ -762,6 +764,12 @@
 			"to_view": "knowledge-base-system-architecture-map",
 			"relation": "related",
 			"navigation_node_id": "kb-system-canvas-file"
+		},
+		{
+			"from_view": "knowledge-base-system-architecture-map",
+			"to_view": "knowledge-acquisition-architecture-map",
+			"relation": "related",
+			"navigation_node_id": "knowledge-acquisition-canvas-file"
 		}
 	]
 }
