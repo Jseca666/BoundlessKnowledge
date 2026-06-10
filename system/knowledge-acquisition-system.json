@@ -1,0 +1,266 @@
+{
+	"id": "knowledge-acquisition-system",
+	"version": "0.1.0",
+	"updated": "2026-06-10",
+	"owner_module": "knowledge-acquisition",
+	"parent_module": "knowledge-ingestion",
+	"role": "knowledge-discovery-and-intake-decision",
+	"purpose": "把知识进入链路的第一步从被动捕获升级为主动发现、候选评估、入库决策和交接治理。",
+	"positioning": {
+		"project_role": "知识工程系统的前置入口能力，负责决定什么知识值得进入知识库以及下一步交给谁。",
+		"parent_contract": "knowledge-ingestion 仍是父系统；knowledge-acquisition 是其中负责发现、候选、质量/价值初评和入库决策的子系统。",
+		"content_boundary": "候选队列不是可引用知识真相；正式引用仍以 source record、atomic note、synthesis 和 catalog 为准。"
+	},
+	"diagnosis": {
+		"incident": "系统总览第一块仍被表达为捕获与来源登记，默认知识已经被用户带入，只处理 inbox/source record。",
+		"root_cause": "知识摄入父系统缺少独立的前置获取与入库决策层，导致主动寻找权威知识、质量价值评估和候选去向没有稳定机器契约。",
+		"repair_decision": "在 knowledge-ingestion 下创建 child module: knowledge-acquisition，并同步 route、information map、closure、visual coverage、Canvas 和校验。"
+	},
+	"responsibility_boundary": {
+		"owns": [
+			"知识需求和领域缺口转成 discovery request",
+			"主动寻找权威候选来源的触发模式和候选队列",
+			"候选来源的质量、权威性、时效性、风险和知识价值初评",
+			"入库决策：登记、先审查、继续寻找、观望或拒绝",
+			"把通过初评的候选交给 source-registry、domain routing、review-system 或 loop-orchestration"
+		],
+		"does_not_own": [
+			"正式 source record 的长期内容真相",
+			"外部知识的正式审查结论",
+			"领域分类树本身",
+			"原子知识、综合产物或项目工作流的最终内容",
+			"无人值守爬虫或第三方发布动作"
+		],
+		"escalation_rule": "高风险、高不确定、高价值但证据不足、版权敏感或跨领域冲突的候选必须交给 review-system；重复性发现任务可交给 loop-orchestration。"
+	},
+	"discovery_modes": [
+		{
+			"id": "user-provided-material",
+			"trigger": "用户给出论文、教材、链接、GitHub 项目、网页或草稿。",
+			"output": "candidate-source with provenance and initial intake intent"
+		},
+		{
+			"id": "gap-driven-discovery",
+			"trigger": "领域分类、审查、诊断或项目工作流发现缺少权威来源。",
+			"output": "discovery request and candidate search scope"
+		},
+		{
+			"id": "project-need-backtracking",
+			"trigger": "某个 Codex 项目需要准确行业认知或技术依据。",
+			"output": "task-linked candidate sources and value rationale"
+		},
+		{
+			"id": "authority-seed-search",
+			"trigger": "需要为一个领域建立基础底座。",
+			"output": "authoritative textbooks, standards, surveys, official docs or benchmark reports"
+		},
+		{
+			"id": "source-following",
+			"trigger": "已有高质量来源给出关键引用、作者、机构、标准或项目线索。",
+			"output": "follow-up candidates with lineage to seed source"
+		},
+		{
+			"id": "github-topic-scouting",
+			"trigger": "技术主题需要当前工程生态证据。",
+			"output": "candidate repositories with maintenance, license, maturity and risk signals"
+		},
+		{
+			"id": "paper-book-foundation-search",
+			"trigger": "某领域需要权威、系统、可长期复用的基础知识。",
+			"output": "textbook/book/paper candidates scored for foundational value"
+		},
+		{
+			"id": "official-docs-and-standards",
+			"trigger": "知识依赖规则、API、协议、标准、法律或平台行为。",
+			"output": "official or primary source candidate with last_checked_at requirement"
+		}
+	],
+	"quality_value_model": {
+		"scoring_scale": {
+			"min": 0,
+			"max": 5,
+			"rule": "0 = unknown/reject, 1 = weak clue, 2 = usable clue, 3 = useful source, 4 = high-value source, 5 = foundational or authoritative source."
+		},
+		"required_dimensions": [
+			{
+				"id": "source_authority",
+				"question": "来源是否来自权威作者、机构、标准组织、官方文档、经典教材或高质量同行评审体系。"
+			},
+			{
+				"id": "evidence_strength",
+				"question": "证据链、方法、数据、实现、引用和可复核性是否足以支持后续知识条目。"
+			},
+			{
+				"id": "foundational_value",
+				"question": "它是否能作为一个领域的底层框架、概念系统、核心方法或长期可复用底座。"
+			},
+			{
+				"id": "project_reuse_value",
+				"question": "它是否能明显提升后续 Codex 项目、行业认知、工程决策或知识检索质量。"
+			},
+			{
+				"id": "recency_and_volatility",
+				"question": "知识是否会快速变化，是否必须记录 last_checked_at、版本、发布日期或适用窗口。"
+			},
+			{
+				"id": "domain_fit_and_gap_coverage",
+				"question": "它是否填补当前领域分类、三级方向、workflow 或 synthesis 的明确缺口。"
+			},
+			{
+				"id": "risk_and_rights",
+				"question": "是否存在版权、隐私、安全、医疗法律金融高风险、营销偏见或引用限制。"
+			},
+			{
+				"id": "acquisition_cost",
+				"question": "获取、阅读、处理、维护和定期复查的成本是否与价值匹配。"
+			}
+		],
+		"decision_outputs": [
+			{
+				"id": "register-source",
+				"use_when": "质量和价值足够，来源身份清晰，风险可控。",
+				"handoff": "10-sources/ with source type template and catalog refresh"
+			},
+			{
+				"id": "review-before-register",
+				"use_when": "价值高但存在高风险、证据冲突、版权敏感、医学法律金融等高后果领域或可信度不确定。",
+				"handoff": "review-system external_knowledge_review"
+			},
+			{
+				"id": "continue-discovery",
+				"use_when": "方向重要但当前候选不够权威，应该继续寻找教材、综述、官方文档或更强来源。",
+				"handoff": "loop-orchestration or next candidate queue item"
+			},
+			{
+				"id": "watch",
+				"use_when": "主题可能有价值但当前不急、不稳或证据不足。",
+				"handoff": "10-sources/acquisition-queue.json status=watching"
+			},
+			{
+				"id": "reject",
+				"use_when": "来源低质、重复、不可追溯、风险过高或与知识库目标无关。",
+				"handoff": "record rejection reason only if useful for future routing"
+			}
+		],
+		"minimum_decision_contract": [
+			"candidate_id",
+			"discovery_mode",
+			"source_type_candidate",
+			"domain_candidates",
+			"quality_scores",
+			"value_scores",
+			"risk_flags",
+			"intake_decision",
+			"decision_reason",
+			"next_handoff"
+		]
+	},
+	"workflow": [
+		{
+			"step": "1. trigger",
+			"action": "接收用户材料、系统缺口、项目需求、审查发现或领域空白。",
+			"output": "discovery_request"
+		},
+		{
+			"step": "2. scout",
+			"action": "按领域和来源类型寻找权威候选，优先教材/权威图书、综述、官方文档、标准、优秀 GitHub 项目和高质量论文。",
+			"output": "candidate_source"
+		},
+		{
+			"step": "3. evaluate",
+			"action": "按质量价值模型打分，记录不确定性、时效、版权和风险。",
+			"output": "quality_value_decision_packet"
+		},
+		{
+			"step": "4. decide",
+			"action": "选择 register-source、review-before-register、continue-discovery、watch 或 reject。",
+			"output": "intake_decision"
+		},
+		{
+			"step": "5. handoff",
+			"action": "把候选交给来源登记、领域路由、审查系统、loop 或索引刷新。",
+			"output": "registered source, review packet, loop request or queue update"
+		}
+	],
+	"candidate_queue_contract": {
+		"path": "10-sources/acquisition-queue.json",
+		"queue_role": "存放尚未成为正式 source record 的候选来源和发现请求。",
+		"status_values": [
+			"new",
+			"scouting",
+			"evaluating",
+			"ready_to_register",
+			"review_required",
+			"watching",
+			"rejected",
+			"registered",
+			"blocked"
+		],
+		"durable_rule": "队列记录可以被更新和归档，但不能作为知识事实引用；正式知识引用必须回到 source record 或更下游产物。"
+	},
+	"handoffs": [
+		{
+			"target": "source-registry",
+			"when": "candidate intake_decision = register-source",
+			"payload": [
+				"source_type",
+				"provenance",
+				"authority_notes",
+				"quality_scores",
+				"risk_flags",
+				"domain_candidates"
+			]
+		},
+		{
+			"target": "domain-maps",
+			"when": "候选需要一级、二级、三级分类或发现 taxonomy gap",
+			"payload": [
+				"domain_candidates",
+				"classification_uncertainty",
+				"taxonomy_gap_reason"
+			]
+		},
+		{
+			"target": "review-system",
+			"when": "候选高价值但证据、风险、版权、时效或高后果领域不确定",
+			"payload": [
+				"quality_value_decision_packet",
+				"risk_flags",
+				"review_question"
+			]
+		},
+		{
+			"target": "loop-orchestration",
+			"when": "需要持续寻找某领域权威来源或批量候选打磨",
+			"payload": [
+				"discovery_request",
+				"search_scope",
+				"stop_condition"
+			]
+		},
+		{
+			"target": "knowledge-ingestion",
+			"when": "候选通过入库决策后进入父系统的来源类型、质量门、原子化准备和索引链路",
+			"payload": [
+				"intake_decision",
+				"candidate_id",
+				"next_handoff"
+			]
+		}
+	],
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-canvas.ps1",
+		"scripts/audit-canvas-visual.ps1",
+		"scripts/audit-canvas-screenshot.ps1",
+		"scripts/validate-reviews.ps1",
+		"scripts/validate-diagnostics.ps1",
+		"scripts/build-index.ps1",
+		"scripts/validate-kb.ps1"
+	],
+	"visual_projection": [
+		"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+		"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+		"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+	]
+}

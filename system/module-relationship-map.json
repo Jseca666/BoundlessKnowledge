@@ -1,6 +1,6 @@
 {
 	"id": "module-relationship-map",
-	"version": "0.9.0",
+	"version": "1.0.0",
 	"updated": "2026-06-10",
 	"role": "canonical-system-module-topology",
 	"purpose": "记录系统稳定模块之间的归属、关系、分支和协同边，作为 system-structure-governance 判断新模块归属或新建分支的机器真相。",
@@ -45,6 +45,7 @@
 				"review-system",
 				"project-ontology",
 				"knowledge-ingestion",
+				"knowledge-acquisition",
 				"git-governance"
 			],
 			"branch_policy": "Governance truth lives in JSON registries, queues, policies, topology maps and docs maps; Markdown is explanatory."
@@ -245,6 +246,13 @@
 			"module_kind": "knowledge-ingestion-subsystem",
 			"status": "current",
 			"reason": "治理知识进入方式、来源类型、质量门、领域路由交接、旧摄入资产接管和可视化覆盖。"
+		},
+		{
+			"module_id": "knowledge-acquisition",
+			"branch_id": "system-governance",
+			"module_kind": "knowledge-acquisition-subsystem",
+			"status": "current",
+			"reason": "作为 knowledge-ingestion 的 child module，负责主动知识发现、候选队列、质量价值初评和入库决策；正式来源记录、外部知识审查和领域分类分别归 source-registry、review-system 和 domain-maps。"
 		},
 		{
 			"module_id": "git-governance",
@@ -584,6 +592,42 @@
 			"to": "system-closure",
 			"relation": "feeds",
 			"reason": "Git 周期管理把状态快照、校验结果、本地提交、远端授权门和后续 handoff 反馈给系统闭环。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "knowledge-acquisition",
+			"relation": "parent_of",
+			"reason": "知识获取与入库决策是知识摄入父系统的前置子系统。"
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "knowledge-ingestion",
+			"relation": "child_of",
+			"reason": "入库决策通过后回到知识摄入父系统的来源登记、质量门、领域路由和索引链路。"
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "source-registry",
+			"relation": "routes_to",
+			"reason": "通过质量价值初评的候选来源进入正式 source record。"
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "domain-maps",
+			"relation": "routes_to",
+			"reason": "候选来源在入库前需要领域候选、三级分类或 taxonomy gap。"
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "review-system",
+			"relation": "hands_off_to",
+			"reason": "高价值但证据、风险、版权或高后果不确定的候选交给外部知识审查。"
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "loop-orchestration",
+			"relation": "invokes",
+			"reason": "重复性权威来源寻找或批量候选打磨交给 loop 编排。"
 		}
 	],
 	"branch_decision_policy": {
@@ -601,7 +645,7 @@
 	"current_layer_relationship_audit": {
 		"date": "2026-06-10",
 		"status": "closed",
-		"trigger": "Git governance version-cycle closure added a system-closure feedback edge.",
+		"trigger": "knowledge-acquisition child module activation",
 		"scope": [
 			"system/information-map.json modules",
 			"system/module-layer-model.json owner_layer/module_kind snapshot",
@@ -617,11 +661,11 @@
 			"Require activation proof, visual coverage and route synchronization before claiming the subsystem is effective."
 		],
 		"module_coverage": {
-			"information_map_modules": 23,
-			"layer_assignments": 23,
-			"topology_modules": 23,
-			"closure_modules": 23,
-			"audited_modules": 23,
+			"information_map_modules": 24,
+			"layer_assignments": 24,
+			"topology_modules": 24,
+			"closure_modules": 24,
+			"audited_modules": 24,
 			"mismatches": []
 		},
 		"layer_alignment": [
@@ -697,7 +741,7 @@
 			}
 		],
 		"relationship_edge_audit": {
-			"total_edges": 55,
+			"total_edges": 61,
 			"orphan_edges": [],
 			"action": "adopt_current_relationship_edges_with_git_cycle_closure_handoffs",
 			"result": "relationship_edge_count_matches_current_relationships_after_git_cycle_closure_activation"
@@ -739,7 +783,7 @@
 				"result": "overview entry point linking to dedicated knowledge-ingestion subsystem view"
 			}
 		],
-		"acceptance": "Accepted. git-governance is a system-governance module for local version control, remote origin, validation, approval boundaries and version-cycle closure; 23 stable modules and all current relationship edges are covered across information-map, module-layer-model, module-relationship-map and system-closure-map."
+		"acceptance": "knowledge-acquisition is registered as a child of knowledge-ingestion across information-map, layer model, topology, closure, visual coverage and route surfaces."
 	},
 	"latest_project_ontology_structure_audit": {
 		"date": "2026-06-08",

@@ -20,6 +20,8 @@
 				"dataflow_entrypoints",
 				"project_ontology_ref",
 				"knowledge_ingestion_ref",
+				"candidate_acquisition_queue_ref",
+				"knowledge_acquisition_ref",
 				"source_type_registry_ref"
 			],
 			"read_policy": "Use for module boundary, dataflow, entrypoint and root information-map refs."
@@ -34,7 +36,8 @@
 				"route_refs",
 				"validation_refs",
 				"project_ontology_closure_and_visual_refs",
-				"knowledge_ingestion_closure_and_visual_refs"
+				"knowledge_ingestion_closure_and_visual_refs",
+				"knowledge_acquisition_route_closure_and_visual_refs"
 			],
 			"read_policy": "Use before changing information-map related governance surfaces."
 		}
@@ -44,6 +47,8 @@
 		"system/route-registry.json",
 		"system/project-ontology.json",
 		"system/knowledge-ingestion-system.json",
+		"system/knowledge-acquisition-system.json",
+		"10-sources/acquisition-queue.json",
 		"system/knowledge-ingestion-source-types.json"
 	],
 	"validation_refs": [

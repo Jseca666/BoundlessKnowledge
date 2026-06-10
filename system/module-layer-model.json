@@ -1,6 +1,6 @@
 {
 	"id": "module-layer-model",
-	"version": "0.7.0",
+	"version": "0.8.0",
 	"updated": "2026-06-10",
 	"role": "derived-module-layer-assignment-snapshot",
 	"purpose": "Provide the derived owner_layer/module_kind snapshot produced by system-structure-governance so information-map, closure map and Canvas entry views stay aligned without treating this file as the full topology brain.",
@@ -323,6 +323,18 @@
 			"cross_cutting_roles": [
 				"knowledge-entry-governance",
 				"source-quality-gate",
+				"cross-module-handoff"
+			]
+		},
+		{
+			"module_id": "knowledge-acquisition",
+			"owner_layer": "system-governance",
+			"module_kind": "knowledge-acquisition-subsystem",
+			"reason": "知识获取与入库决策是 knowledge-ingestion 的前置子系统，治理主动发现、候选评估、质量价值初评和交接，不保存正式知识内容。",
+			"cross_cutting_roles": [
+				"knowledge-entry-governance",
+				"source-scouting",
+				"quality-value-gate",
 				"cross-module-handoff"
 			]
 		},

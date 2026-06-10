@@ -1,6 +1,6 @@
 {
 	"id": "system-closure-map",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"updated": "2026-06-10",
 	"role": "machine-readable-module-closure-matrix",
 	"purpose": "Track whether each stable module has enough routing, truth, validation, documentation, diagnostics and lifecycle coverage to be maintained without relying on chat memory.",
@@ -1166,7 +1166,9 @@
 			"canonical_truth": [
 				"system/knowledge-ingestion-system.json",
 				"system/knowledge-ingestion-docs-map.json",
-				"system/knowledge-ingestion-source-types.json"
+				"system/knowledge-ingestion-source-types.json",
+				"10-sources/acquisition-queue.json",
+				"system/knowledge-acquisition-system.json"
 			],
 			"routes": [
 				{
@@ -1186,6 +1188,7 @@
 			],
 			"documentation": [
 				"docs/knowledge-ingestion/README.md",
+				"docs/knowledge-ingestion/acquisition.md",
 				"docs/ingestion-workflow.md",
 				"docs/source-quality.md",
 				"00-inbox/README.md",
@@ -1194,7 +1197,8 @@
 			"visual_projection": {
 				"status": "closed",
 				"views": [
-					"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas"
+					"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+					"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas"
 				]
 			},
 			"diagnostics": {
@@ -1214,9 +1218,9 @@
 			},
 			"known_gaps": [
 				"No dedicated source-record registry JSON yet; current source records still rely on Markdown/frontmatter plus catalog indexing.",
-				"No automatic ingestion crawler or unattended source watcher is part of the current subsystem."
+				"No unattended crawler is enabled; knowledge-acquisition currently supports triggered agent/user discovery, candidate queues and loop handoff rather than scheduled autonomous scraping."
 			],
-			"next_action": "When a new source family repeats or needs distinct provenance/quality/template rules, add it to system/knowledge-ingestion-source-types.json and synchronize template, schema, validators, route and Canvas.",
+			"next_action": "Use knowledge-acquisition for proactive authoritative source scouting and intake decisions; add durable discovery loops only when repeated discovery requests justify loop-orchestration registration.",
 			"activation_proof": {
 				"activation_id": "activation-20260610-knowledge-ingestion",
 				"module_id": "knowledge-ingestion",
@@ -1251,6 +1255,87 @@
 					"personal-draft"
 				],
 				"gap_handler": "future-source-type"
+			}
+		},
+		{
+			"module_id": "knowledge-acquisition",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json"
+			],
+			"routes": [
+				{
+					"route_id": "knowledge-acquisition",
+					"status": "closed"
+				},
+				{
+					"route_id": "knowledge-ingestion",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1",
+				"scripts/audit-canvas-screenshot.ps1",
+				"scripts/validate-reviews.ps1",
+				"scripts/validate-diagnostics.ps1",
+				"scripts/build-index.ps1",
+				"scripts/validate-kb.ps1"
+			],
+			"documentation": [
+				"docs/knowledge-ingestion/acquisition.md",
+				"docs/knowledge-ingestion/README.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"No unattended scheduled crawler is active; discovery is triggered by user request, project need, review/diagnostic gap or future loop handoff."
+			],
+			"next_action": "When a discovery request repeats, consider registering a dedicated knowledge-acquisition discovery loop under loop-orchestration.",
+			"activation_proof": {
+				"activation_id": "activation-20260610-knowledge-acquisition",
+				"module_id": "knowledge-acquisition",
+				"activation_status": "active",
+				"activation_date": "2026-06-10",
+				"route_registered": "knowledge-acquisition",
+				"information_map_registered": "system/information-map.json#modules.knowledge-acquisition",
+				"closure_registered": "system/system-closure-map.json#modules.knowledge-acquisition",
+				"topology_registered": "system/module-relationship-map.json#modules.knowledge-acquisition",
+				"legacy_asset_audit": "system/diagnostics/issue-repair-queue.json#diag-20260610-knowledge-acquisition-front-gate-too-passive",
+				"visual_coverage_decision": "system/visual-coverage-map.json#module_decisions.knowledge-acquisition",
+				"validation_reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/audit-canvas-screenshot.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				],
+				"acceptance": "Active after the passive capture block was upgraded into a routed child subsystem with machine truth, candidate queue, information-map registration, topology placement, closure proof, dedicated Canvas view and validation gates."
 			}
 		},
 		{
@@ -1403,9 +1488,10 @@
 			"loop-orchestration",
 			"project-ontology",
 			"knowledge-ingestion",
+			"knowledge-acquisition",
 			"git-governance"
 		],
-		"result": "git-governance now has activation_proof, remote origin contract, route, topology, information-map, dedicated visual coverage and local Git asset adoption.",
+		"result": "knowledge-acquisition activation proof added as a child module under knowledge-ingestion.",
 		"proof": "system/system-closure-map.json#modules.git-governance.activation_proof"
 	},
 	"latest_project_ontology_audit": {
@@ -1434,5 +1520,11 @@
 			"dedicated ingestion Canvas"
 		],
 		"result": "Promoted knowledge entry from route/docs fragments to a stable system-governance subsystem with closure and visual coverage."
+	},
+	"latest_knowledge_acquisition_audit": {
+		"date": "2026-06-10",
+		"status": "closed",
+		"scope": "knowledge-acquisition child module activation",
+		"result": "front-gate discovery, quality/value evaluation and intake decision are now registered in route, information map, topology, closure and Canvas."
 	}
 }

@@ -191,6 +191,8 @@ $loopRegistry = Read-JsonFile "system/loop-registry.json"
 $domainTaxonomy = Read-JsonFile "30-maps/domains/domain-taxonomy.registry.json"
 $domainTaxonomyDocsMap = Read-JsonFile "30-maps/domains/domain-taxonomy.docs.json"
 $knowledgeIngestionSourceTypes = Read-JsonFile "system/knowledge-ingestion-source-types.json"
+$knowledgeAcquisitionSystem = Read-JsonFile "system/knowledge-acquisition-system.json"
+$knowledgeAcquisitionQueue = Read-JsonFile "10-sources/acquisition-queue.json"
 
 $textIntegrityRoots = @(
     "system",
@@ -1746,6 +1748,140 @@ if ($null -ne $knowledgeIngestionSourceTypes) {
 
     foreach ($pathValue in @($knowledgeIngestionSourceTypes.validation)) {
         Test-RegistryPath -PathValue ([string]$pathValue) -Context "system/knowledge-ingestion-source-types.json validation"
+    }
+}
+
+if ($null -ne $knowledgeAcquisitionSystem) {
+    foreach ($fieldName in @("id", "version", "updated", "owner_module", "parent_module", "role", "purpose", "responsibility_boundary", "discovery_modes", "quality_value_model", "workflow", "candidate_queue_contract", "handoffs", "validation", "visual_projection")) {
+        Test-RequiredField -Object $knowledgeAcquisitionSystem -Field $fieldName -Context "system/knowledge-acquisition-system.json" | Out-Null
+    }
+
+    if ([string]$knowledgeAcquisitionSystem.owner_module -ne "knowledge-acquisition") {
+        $Errors.Add("system/knowledge-acquisition-system.json: owner_module must be knowledge-acquisition")
+    }
+    if ([string]$knowledgeAcquisitionSystem.parent_module -ne "knowledge-ingestion") {
+        $Errors.Add("system/knowledge-acquisition-system.json: parent_module must be knowledge-ingestion")
+    }
+
+    foreach ($fieldName in @("owns", "does_not_own", "escalation_rule")) {
+        Test-RequiredField -Object $knowledgeAcquisitionSystem.responsibility_boundary -Field $fieldName -Context "system/knowledge-acquisition-system.json responsibility_boundary" | Out-Null
+    }
+
+    $discoveryModeIds = New-Object System.Collections.Generic.HashSet[string]
+    foreach ($discoveryMode in @($knowledgeAcquisitionSystem.discovery_modes)) {
+        if (-not (Test-RequiredField -Object $discoveryMode -Field "id" -Context "system/knowledge-acquisition-system.json discovery_mode")) {
+            continue
+        }
+        $modeId = [string]$discoveryMode.id
+        if (-not $discoveryModeIds.Add($modeId)) {
+            $Errors.Add("system/knowledge-acquisition-system.json: duplicate discovery mode '$modeId'")
+        }
+        foreach ($fieldName in @("trigger", "output")) {
+            Test-RequiredField -Object $discoveryMode -Field $fieldName -Context "system/knowledge-acquisition-system.json discovery_mode '$modeId'" | Out-Null
+        }
+    }
+
+    foreach ($requiredModeId in @("user-provided-material", "gap-driven-discovery", "project-need-backtracking", "authority-seed-search", "source-following", "github-topic-scouting", "paper-book-foundation-search", "official-docs-and-standards")) {
+        if (-not $discoveryModeIds.Contains($requiredModeId)) {
+            $Errors.Add("system/knowledge-acquisition-system.json: missing discovery mode '$requiredModeId'")
+        }
+    }
+
+    foreach ($fieldName in @("scoring_scale", "required_dimensions", "decision_outputs", "minimum_decision_contract")) {
+        Test-RequiredField -Object $knowledgeAcquisitionSystem.quality_value_model -Field $fieldName -Context "system/knowledge-acquisition-system.json quality_value_model" | Out-Null
+    }
+
+    $dimensionIds = New-Object System.Collections.Generic.HashSet[string]
+    foreach ($dimension in @($knowledgeAcquisitionSystem.quality_value_model.required_dimensions)) {
+        if (-not (Test-RequiredField -Object $dimension -Field "id" -Context "system/knowledge-acquisition-system.json quality dimension")) {
+            continue
+        }
+        $dimensionId = [string]$dimension.id
+        if (-not $dimensionIds.Add($dimensionId)) {
+            $Errors.Add("system/knowledge-acquisition-system.json: duplicate quality/value dimension '$dimensionId'")
+        }
+        Test-RequiredField -Object $dimension -Field "question" -Context "system/knowledge-acquisition-system.json quality dimension '$dimensionId'" | Out-Null
+    }
+
+    foreach ($requiredDimensionId in @("source_authority", "evidence_strength", "foundational_value", "project_reuse_value", "recency_and_volatility", "domain_fit_and_gap_coverage", "risk_and_rights", "acquisition_cost")) {
+        if (-not $dimensionIds.Contains($requiredDimensionId)) {
+            $Errors.Add("system/knowledge-acquisition-system.json: missing quality/value dimension '$requiredDimensionId'")
+        }
+    }
+
+    $decisionOutputIds = New-Object System.Collections.Generic.HashSet[string]
+    foreach ($decisionOutput in @($knowledgeAcquisitionSystem.quality_value_model.decision_outputs)) {
+        if (-not (Test-RequiredField -Object $decisionOutput -Field "id" -Context "system/knowledge-acquisition-system.json decision_output")) {
+            continue
+        }
+        $decisionOutputId = [string]$decisionOutput.id
+        if (-not $decisionOutputIds.Add($decisionOutputId)) {
+            $Errors.Add("system/knowledge-acquisition-system.json: duplicate decision output '$decisionOutputId'")
+        }
+        foreach ($fieldName in @("use_when", "handoff")) {
+            Test-RequiredField -Object $decisionOutput -Field $fieldName -Context "system/knowledge-acquisition-system.json decision_output '$decisionOutputId'" | Out-Null
+        }
+    }
+
+    foreach ($requiredDecisionOutputId in @("register-source", "review-before-register", "continue-discovery", "watch", "reject")) {
+        if (-not $decisionOutputIds.Contains($requiredDecisionOutputId)) {
+            $Errors.Add("system/knowledge-acquisition-system.json: missing decision output '$requiredDecisionOutputId'")
+        }
+    }
+
+    foreach ($workflowStep in @($knowledgeAcquisitionSystem.workflow)) {
+        foreach ($fieldName in @("step", "action", "output")) {
+            Test-RequiredField -Object $workflowStep -Field $fieldName -Context "system/knowledge-acquisition-system.json workflow" | Out-Null
+        }
+    }
+
+    foreach ($fieldName in @("path", "queue_role", "status_values", "durable_rule")) {
+        Test-RequiredField -Object $knowledgeAcquisitionSystem.candidate_queue_contract -Field $fieldName -Context "system/knowledge-acquisition-system.json candidate_queue_contract" | Out-Null
+    }
+    if ($knowledgeAcquisitionSystem.candidate_queue_contract.PSObject.Properties.Name -contains "path") {
+        Test-RegistryPath -PathValue ([string]$knowledgeAcquisitionSystem.candidate_queue_contract.path) -Context "system/knowledge-acquisition-system.json candidate_queue_contract path"
+    }
+
+    foreach ($handoff in @($knowledgeAcquisitionSystem.handoffs)) {
+        foreach ($fieldName in @("target", "when", "payload")) {
+            Test-RequiredField -Object $handoff -Field $fieldName -Context "system/knowledge-acquisition-system.json handoff" | Out-Null
+        }
+    }
+
+    foreach ($pathValue in @($knowledgeAcquisitionSystem.validation)) {
+        Test-RegistryPath -PathValue ([string]$pathValue) -Context "system/knowledge-acquisition-system.json validation"
+    }
+    foreach ($pathValue in @($knowledgeAcquisitionSystem.visual_projection)) {
+        Test-RegistryPath -PathValue ([string]$pathValue) -Context "system/knowledge-acquisition-system.json visual_projection"
+    }
+}
+
+if ($null -ne $knowledgeAcquisitionQueue) {
+    foreach ($fieldName in @("id", "version", "updated", "owner_module", "parent_module", "role", "purpose", "boundary", "status_values", "intake_decisions", "scoring_dimensions", "discovery_requests", "candidates")) {
+        Test-RequiredField -Object $knowledgeAcquisitionQueue -Field $fieldName -Context "10-sources/acquisition-queue.json" | Out-Null
+    }
+
+    if ([string]$knowledgeAcquisitionQueue.owner_module -ne "knowledge-acquisition") {
+        $Errors.Add("10-sources/acquisition-queue.json: owner_module must be knowledge-acquisition")
+    }
+    if ([string]$knowledgeAcquisitionQueue.parent_module -ne "knowledge-ingestion") {
+        $Errors.Add("10-sources/acquisition-queue.json: parent_module must be knowledge-ingestion")
+    }
+
+    foreach ($requiredQueueStatus in @("new", "scouting", "evaluating", "ready_to_register", "review_required", "watching", "rejected", "registered", "blocked")) {
+        if (@($knowledgeAcquisitionQueue.status_values) -notcontains $requiredQueueStatus) {
+            $Errors.Add("10-sources/acquisition-queue.json: missing status value '$requiredQueueStatus'")
+        }
+    }
+    foreach ($requiredDecision in @("register-source", "review-before-register", "continue-discovery", "watch", "reject")) {
+        if (@($knowledgeAcquisitionQueue.intake_decisions) -notcontains $requiredDecision) {
+            $Errors.Add("10-sources/acquisition-queue.json: missing intake decision '$requiredDecision'")
+        }
+    }
+    foreach ($requiredDimensionId in @("source_authority", "evidence_strength", "foundational_value", "project_reuse_value", "recency_and_volatility", "domain_fit_and_gap_coverage", "risk_and_rights", "acquisition_cost")) {
+        if (@($knowledgeAcquisitionQueue.scoring_dimensions) -notcontains $requiredDimensionId) {
+            $Errors.Add("10-sources/acquisition-queue.json: missing scoring dimension '$requiredDimensionId'")
+        }
     }
 }
 

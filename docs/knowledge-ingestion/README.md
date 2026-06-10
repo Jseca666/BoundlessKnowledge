@@ -6,7 +6,9 @@
 
 - `system/route-registry.json` route `knowledge-ingestion`
 - `system/knowledge-ingestion-system.json`
+- `system/knowledge-acquisition-system.json`
 - `system/knowledge-ingestion-docs-map.json`
+- `docs/knowledge-ingestion/acquisition.md`
 - `docs/ingestion-workflow.md`
 - `docs/source-quality.md`
 

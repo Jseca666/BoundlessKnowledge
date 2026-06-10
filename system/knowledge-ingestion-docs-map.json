@@ -1,6 +1,6 @@
 {
 	"id": "knowledge-ingestion-docs-map",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"updated": "2026-06-10",
 	"artifact_type": "subsystem-docs-map",
 	"owner_module": "knowledge-ingestion",
@@ -13,10 +13,13 @@
 	"machine_truth": [
 		"system/knowledge-ingestion-system.json",
 		"system/knowledge-ingestion-docs-map.json",
-		"system/knowledge-ingestion-source-types.json"
+		"system/knowledge-ingestion-source-types.json",
+		"10-sources/acquisition-queue.json",
+		"system/knowledge-acquisition-system.json"
 	],
 	"managed_human_docs": [
 		"docs/knowledge-ingestion/README.md",
+		"docs/knowledge-ingestion/acquisition.md",
 		"docs/ingestion-workflow.md",
 		"docs/source-quality.md",
 		"00-inbox/README.md"
@@ -27,6 +30,12 @@
 			"path": "docs/knowledge-ingestion/README.md",
 			"purpose": "薄入口和阅读顺序。",
 			"not_for": "具体工作流规则或来源质量细则。"
+		},
+		{
+			"id": "acquisition-human-guide",
+			"path": "docs/knowledge-ingestion/acquisition.md",
+			"purpose": "人读的知识发现、候选评估和入库决策说明。",
+			"not_for": "替代 system/knowledge-acquisition-system.json 的质量价值模型或候选队列真相。"
 		},
 		{
 			"id": "workflow-human-guide",
@@ -85,7 +94,8 @@
 		"Markdown 说明只能解释如何使用，不作为系统行为真相。",
 		"来源类型、质量门、handoff 和闭环状态以 system/knowledge-ingestion-system.json 为准。",
 		"如果摄入文档增长为多个专题，先更新本 docs map，再新增文档。",
-		"新增来源类型先更新 system/knowledge-ingestion-source-types.json，再同步模板、schema/validator、route 和 Canvas。"
+		"新增来源类型先更新 system/knowledge-ingestion-source-types.json，再同步模板、schema/validator、route 和 Canvas。",
+		"知识发现、候选评估和入库决策的机器真相由 system/knowledge-acquisition-system.json 接管；候选动态数据进入 10-sources/acquisition-queue.json。"
 	],
 	"validation": [
 		"scripts/validate-system.ps1",

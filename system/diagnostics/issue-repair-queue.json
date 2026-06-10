@@ -3933,6 +3933,153 @@
 				]
 			},
 			"diagnosis_acceptance": "Accepted when OR-inspired layer diagnosis and controlled failure-learning method surfaces are registered in machine truth, routed through information-map and route-registry, projected into the diagnostic Canvas, guarded by validate-diagnostics, and verified by system, Canvas, review, text-integrity, index and KB validations."
+		},
+		{
+			"issue_id": "diag-20260610-knowledge-acquisition-front-gate-too-passive",
+			"title": "Knowledge entry front gate was too passive for authoritative knowledge discovery",
+			"status": "captured",
+			"repair_class": "system_upgrade",
+			"failure_packet": "The user pointed at the first system-overview block, originally named capture and source registration, and clarified that this important module should become a knowledge-entry system that evaluates knowledge quality/value and proactively finds knowledge.",
+			"incident_manifestation": {
+				"observed_incident": "The visible first block only described incoming papers, GitHub, web pages and drafts entering inbox/source records.",
+				"evidence_surface": [
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas#stage-capture",
+					"system/knowledge-ingestion-system.json before repair",
+					"system/route-registry.json#routes.knowledge-ingestion before repair"
+				],
+				"why_it_is_not_root_problem": "The wording of one Canvas card was only the visible symptom. The root problem was the absence of a registered front-gate decision layer for discovery and intake."
+			},
+			"lower_evidence_track": "Route and information-map already had knowledge-ingestion, source types and quality precheck, but no child module, queue, route, closure proof or dedicated Canvas for proactive discovery and quality/value intake decisions.",
+			"upper_principle_track": "The system principles require diagnosis before repair, coordinated system upgrades, machine-friendly dataflow and new modules taking responsibility for existing content. The repair therefore had to update route, information map, topology, closure, visual coverage, Canvas and validators rather than only rename a block.",
+			"failed_mindset": "passive-capture thinking: assuming knowledge enters only after the user provides a source, instead of modeling the system responsibility to find authoritative candidates and decide if they deserve entry.",
+			"immediate_root_cause": "knowledge-ingestion lacked a child module for candidate discovery, quality/value scoring and intake decision before source registration.",
+			"root_problem": {
+				"problem_statement": "The knowledge-entry front gate did not have a durable positive model for proactive authoritative source discovery and intake decisions.",
+				"recurrence_mechanism": "Future important knowledge domains would keep relying on ad hoc user-provided sources or loose wording, making it hard to decide which first source is authoritative, worth storing or risky.",
+				"owning_system_model": "knowledge-ingestion coordinated with knowledge-acquisition, review-system, loop-orchestration, domain-maps and source-registry"
+			},
+			"owning_repair_layer": [
+				"knowledge-ingestion",
+				"knowledge-acquisition",
+				"system-structure-governance",
+				"system-information-map",
+				"architecture-views",
+				"review-system",
+				"diagnostics",
+				"validation"
+			],
+			"positive_model_repair": "Create knowledge-acquisition as a child subsystem under knowledge-ingestion with machine truth, candidate queue, route, information-map registration, topology relation, activation proof, dedicated Canvas view, review handoff and validation gate.",
+			"constraint_decision": "Use a positive model upgrade rather than negative wording rules. The recurring issue is solved by a routed child system and candidate queue, not by forbidding old labels.",
+			"affected_surfaces": [
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
+				"system/knowledge-ingestion-system.json",
+				"system/knowledge-ingestion-docs-map.json",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/information-map-manifest.json",
+				"system/information-map-shards/",
+				"system/module-layer-model.json",
+				"system/module-relationship-map.json",
+				"system/module-governance-policy.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"system/reviews/review-system.json",
+				"scripts/validate-system.ps1",
+				"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+				"docs/knowledge-ingestion/acquisition.md"
+			],
+			"generalization_scan": {
+				"observed_instance": "The first visible entry block was too narrow for the actual knowledge-engineering need.",
+				"failure_class": "important system capability represented only as a passive stage card without its own machine contract, queue, route and visual child view",
+				"same_class_assets_checked": [
+					"knowledge-ingestion parent system",
+					"route registry",
+					"information map",
+					"module layer model",
+					"module relationship map",
+					"system closure map",
+					"visual coverage map",
+					"canvas registry",
+					"canvas view graph",
+					"review system",
+					"diagnostic queue"
+				],
+				"sibling_surfaces_checked": [
+					"source-registry remains content-layer source records",
+					"review-system remains formal review/handoff owner",
+					"domain-maps remains classification owner",
+					"loop-orchestration remains durable repeatable loop owner",
+					"Canvas remains visual projection, not system truth"
+				],
+				"affected_modules": [
+					"knowledge-ingestion",
+					"knowledge-acquisition",
+					"review-system",
+					"loop-orchestration",
+					"domain-maps",
+					"architecture-views",
+					"diagnostics",
+					"system-information-map",
+					"system-structure-governance"
+				],
+				"exemptions": [
+					"No unattended crawler is enabled in this repair; external search remains triggered and subject to source quality/risk decisions.",
+					"No concrete source candidate is inserted as authoritative knowledge by this system upgrade."
+				],
+				"recurrence_gate": "Future stable entry-stage capabilities must be checked for machine truth, route, queue/state if dynamic, visual coverage and closure proof before being treated as active."
+			},
+			"system_regulation_target": {
+				"target_surface": [
+					"system/knowledge-acquisition-system.json",
+					"10-sources/acquisition-queue.json",
+					"system/route-registry.json#routes.knowledge-acquisition",
+					"system/information-map.json#modules.knowledge-acquisition",
+					"system/system-closure-map.json#modules.knowledge-acquisition",
+					"system/visual-coverage-map.json#module_decisions.knowledge-acquisition",
+					"scripts/validate-system.ps1"
+				],
+				"update_mode": "positive model upgrade: active knowledge acquisition and intake decision child subsystem",
+				"acceptance_gate": "Validation passes after route, information map, topology, closure, visual coverage, Canvas registry/view graph and dedicated Canvas are synchronized."
+			},
+			"failure_learning_decision": {
+				"status": "deferred",
+				"reason": "This is a knowledge-ingestion capability upgrade, not a repeated diagnostic method failure. The recurrence gate is captured in diagnostics, and no separate failure-learning postmortem is needed unless the same front-gate activation failure recurs.",
+				"risk_level": "medium",
+				"refs": [
+					"system/knowledge-acquisition-system.json",
+					"system/diagnostics/issue-repair-queue.json"
+				]
+			},
+			"capture_paths": [
+				"system/diagnostics/issue-repair-queue.json",
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"system/canvas-registry.json",
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/audit-canvas-screenshot.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				]
+			},
+			"diagnosis_acceptance": "Accepted after the passive capture front gate was upgraded into an active knowledge-acquisition child subsystem with machine truth, candidate queue, route, information-map registration, topology, activation proof, visual coverage, dedicated Canvas and validation."
 		}
 	],
 	"updated": "2026-06-10"

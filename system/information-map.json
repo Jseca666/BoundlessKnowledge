@@ -1,6 +1,6 @@
 {
 	"id": "information-map",
-	"version": "1.13.0",
+	"version": "1.14.0",
 	"updated": "2026-06-10",
 	"canonical_truth": {
 		"system_behavior": [
@@ -495,6 +495,28 @@
 			"module_kind": "knowledge-ingestion-subsystem"
 		},
 		{
+			"id": "knowledge-acquisition",
+			"name": "知识获取与入库决策",
+			"paths": [
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
+				"docs/knowledge-ingestion/acquisition.md",
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas"
+			],
+			"boundary": "knowledge-ingestion 父系统下的前置子系统，负责主动发现候选知识、质量价值初评、入库决策和交接；不保存正式知识事实，不替代 source-registry、review-system、domain-maps 或原子知识。",
+			"outputs": [
+				"discovery-request",
+				"candidate-source-queue",
+				"quality-value-score",
+				"intake-decision",
+				"source-registration-handoff",
+				"review-handoff",
+				"loop-discovery-handoff"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "knowledge-acquisition-subsystem"
+		},
+		{
 			"id": "git-governance",
 			"name": "Git 版本治理",
 			"paths": [
@@ -598,7 +620,8 @@
 				"review-system",
 				"system-structure-governance",
 				"system-information-map",
-				"knowledge-ingestion"
+				"knowledge-ingestion",
+				"knowledge-acquisition"
 			],
 			"verb": "govern-placement-registration-validation",
 			"machine_readable_output": "system/module-governance-policy.json"
@@ -616,7 +639,8 @@
 				"domain-maps",
 				"diagnostics",
 				"review-system",
-				"knowledge-ingestion"
+				"knowledge-ingestion",
+				"knowledge-acquisition"
 			],
 			"verb": "define-root-identity-and-role-boundaries",
 			"machine_readable_output": "system/project-ontology.json"
@@ -641,6 +665,7 @@
 				"system-information-map",
 				"project-ontology",
 				"knowledge-ingestion",
+				"knowledge-acquisition",
 				"git-governance"
 			],
 			"to": "diagnostics",
@@ -668,6 +693,7 @@
 				"system-information-map",
 				"project-ontology",
 				"knowledge-ingestion",
+				"knowledge-acquisition",
 				"git-governance"
 			],
 			"verb": "route-repair-and-accept",
@@ -691,12 +717,14 @@
 				"system-information-map",
 				"project-ontology",
 				"knowledge-ingestion",
+				"knowledge-acquisition",
 				"git-governance"
 			],
 			"to": [
 				"architecture-views",
 				"review-system",
-				"project-ontology"
+				"project-ontology",
+				"knowledge-acquisition"
 			],
 			"verb": "project-visual-architecture-view",
 			"machine_readable_output": "system/canvas-registry.json, system/canvas-view-graph.json and system/visual-coverage-map.json"
@@ -720,13 +748,15 @@
 				"system-information-map",
 				"project-ontology",
 				"knowledge-ingestion",
+				"knowledge-acquisition",
 				"git-governance"
 			],
 			"to": [
 				"system-closure",
 				"review-system",
 				"system-structure-governance",
-				"project-ontology"
+				"project-ontology",
+				"knowledge-acquisition"
 			],
 			"verb": "audit-module-closure",
 			"machine_readable_output": "system/system-closure-map.json"
@@ -761,6 +791,7 @@
 				"system-information-map",
 				"project-ontology",
 				"knowledge-ingestion",
+				"knowledge-acquisition",
 				"git-governance"
 			],
 			"to": "review-system",
@@ -815,6 +846,7 @@
 				"tools",
 				"project-ontology",
 				"knowledge-ingestion",
+				"knowledge-acquisition",
 				"git-governance"
 			],
 			"to": "system-information-map",
@@ -842,6 +874,34 @@
 			],
 			"verb": "govern-capture-and-source-registration",
 			"machine_readable_output": "source type, provenance fields and source-quality precheck contract"
+		},
+		{
+			"id": "knowledge-acquisition-to-source-registry",
+			"from": "knowledge-acquisition",
+			"to": [
+				"inbox",
+				"source-registry"
+			],
+			"verb": "decide-candidate-intake-and-source-registration",
+			"machine_readable_output": "candidate intake decision, source type, provenance, quality/value score and source record handoff"
+		},
+		{
+			"id": "knowledge-acquisition-to-domain-review-loop",
+			"from": "knowledge-acquisition",
+			"to": [
+				"domain-maps",
+				"review-system",
+				"loop-orchestration"
+			],
+			"verb": "handoff-domain-gap-quality-risk-or-repeatable-discovery",
+			"machine_readable_output": "domain candidates, review packet or discovery loop request"
+		},
+		{
+			"id": "knowledge-ingestion-to-knowledge-acquisition",
+			"from": "knowledge-ingestion",
+			"to": "knowledge-acquisition",
+			"verb": "govern-front-gate-discovery-and-intake-decision",
+			"machine_readable_output": "system/knowledge-acquisition-system.json and 10-sources/acquisition-queue.json"
 		},
 		{
 			"id": "knowledge-ingestion-to-domain-routing",
@@ -949,6 +1009,11 @@
 			"id": "knowledge-ingestion",
 			"path": "docs/knowledge-ingestion/README.md",
 			"purpose": "thin human entrypoint for the knowledge ingestion subsystem; machine truth lives in system/knowledge-ingestion-system.json"
+		},
+		{
+			"id": "knowledge-acquisition",
+			"path": "docs/knowledge-ingestion/acquisition.md",
+			"purpose": "thin human entrypoint for knowledge discovery, quality/value scoring and intake decision; machine truth lives in system/knowledge-acquisition-system.json"
 		},
 		{
 			"id": "git-governance",

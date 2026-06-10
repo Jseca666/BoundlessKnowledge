@@ -5,7 +5,7 @@
 	"artifact_type": "subsystem-machine-truth",
 	"owner_module": "knowledge-ingestion",
 	"role": "知识摄入子系统的机器真相",
-	"purpose": "治理外部知识从捕获、来源登记、质量预审、领域路由、原子化准备到索引和审查交接的进入方式。",
+	"purpose": "治理外部知识从主动发现、入库决策、捕获、来源登记、质量预审、领域路由、原子化准备到索引和审查交接的进入方式。",
 	"positioning": {
 		"owner_layer": "system-governance",
 		"module_kind": "knowledge-ingestion-subsystem",
@@ -39,10 +39,13 @@
 			"system/module-relationship-map.json#modules.knowledge-ingestion",
 			"system/system-closure-map.json#modules.knowledge-ingestion",
 			"system/visual-coverage-map.json#module_decisions.knowledge-ingestion",
-			"system/knowledge-ingestion-source-types.json"
+			"system/knowledge-ingestion-source-types.json",
+			"10-sources/acquisition-queue.json",
+			"system/knowledge-acquisition-system.json"
 		],
 		"human_docs": [
 			"docs/knowledge-ingestion/README.md",
+			"docs/knowledge-ingestion/acquisition.md",
 			"docs/ingestion-workflow.md",
 			"docs/source-quality.md",
 			"00-inbox/README.md"
@@ -67,6 +70,7 @@
 		],
 		"visual_projection": [
 			"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+			"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
 			"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
 		]
 	},
@@ -320,5 +324,107 @@
 			"personal-draft"
 		],
 		"gap_handler": "future-source-type"
-	}
+	},
+	"child_modules": [
+		{
+			"id": "knowledge-acquisition",
+			"path": "system/knowledge-acquisition-system.json",
+			"role": "主动发现候选知识、评价质量与价值、决定是否入库，并把候选交给来源登记、审查、领域路由或 loop。",
+			"status": "active",
+			"parent_boundary": "属于 knowledge-ingestion 的前置决策层，不替代 source-registry、review-system 或 domain-maps。"
+		}
+	],
+	"workflow": [
+		{
+			"stage": "1. knowledge-acquisition",
+			"name": "知识发现与入库决策",
+			"owner_module": "knowledge-acquisition",
+			"output": "candidate source, quality/value score and intake decision"
+		},
+		{
+			"stage": "2. source-type-and-registration",
+			"name": "来源类型与来源登记",
+			"owner_module": "knowledge-ingestion",
+			"output": "source_type and source record"
+		},
+		{
+			"stage": "3. source-quality-precheck",
+			"name": "来源质量预审",
+			"owner_module": "knowledge-ingestion",
+			"output": "quality gate and review trigger"
+		},
+		{
+			"stage": "4. domain-routing",
+			"name": "领域路由",
+			"owner_module": "domain-maps",
+			"output": "level-1/2/3 candidates or taxonomy gap"
+		},
+		{
+			"stage": "5. distillation-handoff",
+			"name": "知识工程提炼交接",
+			"owner_module": "atomic-knowledge",
+			"output": "atomic notes, synthesis or workflows"
+		},
+		{
+			"stage": "6. index-refresh",
+			"name": "索引刷新",
+			"owner_module": "indexes",
+			"output": "catalog refresh requirement"
+		}
+	],
+	"handoffs": [
+		{
+			"from": "knowledge-acquisition",
+			"to": "source-registry",
+			"when": "candidate intake_decision = register-source",
+			"payload": [
+				"source_type",
+				"provenance",
+				"authority_notes",
+				"quality_scores",
+				"risk_flags",
+				"domain_candidates"
+			]
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "knowledge-ingestion",
+			"when": "候选通过入库决策后进入父系统的来源类型、质量门、原子化准备和索引链路",
+			"payload": [
+				"intake_decision",
+				"candidate_id",
+				"next_handoff"
+			]
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "loop-orchestration",
+			"when": "需要持续寻找某领域权威来源或批量候选打磨",
+			"payload": [
+				"discovery_request",
+				"search_scope",
+				"stop_condition"
+			]
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "review-system",
+			"when": "候选高价值但证据、风险、版权、时效或高后果领域不确定",
+			"payload": [
+				"quality_value_decision_packet",
+				"risk_flags",
+				"review_question"
+			]
+		},
+		{
+			"from": "knowledge-acquisition",
+			"to": "domain-maps",
+			"when": "候选需要一级、二级、三级分类或发现 taxonomy gap",
+			"payload": [
+				"domain_candidates",
+				"classification_uncertainty",
+				"taxonomy_gap_reason"
+			]
+		}
+	]
 }

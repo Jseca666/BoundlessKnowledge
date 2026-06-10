@@ -89,6 +89,22 @@
 				"route.knowledge-ingestion",
 				"visual.knowledge-ingestion"
 			]
+		},
+		{
+			"entry_id": "module.knowledge-acquisition",
+			"entry_type": "system_module",
+			"owner_module": "knowledge-acquisition",
+			"summary": "Child subsystem under knowledge-ingestion for proactive source discovery, candidate queueing, quality/value evaluation and intake decisions before formal source registration.",
+			"reference_surfaces": [
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
+				"system/information-map.json#modules.knowledge-acquisition"
+			],
+			"related_entries": [
+				"route.knowledge-acquisition",
+				"visual.knowledge-acquisition",
+				"module.knowledge-ingestion"
+			]
 		}
 	],
 	"boundary_refs": [

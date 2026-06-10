@@ -1,6 +1,6 @@
 {
 	"id": "canvas-view-graph",
-	"version": "1.11.0",
+	"version": "1.12.0",
 	"updated": "2026-06-10",
 	"role": "machine-readable-canvas-navigation-graph",
 	"canonical_source": "system/canvas-registry.json",
@@ -130,7 +130,8 @@
 				"git-governance-architecture-map"
 			],
 			"related_view_ids": [
-				"canvas-directory-layout-map"
+				"canvas-directory-layout-map",
+				"knowledge-acquisition-architecture-map"
 			],
 			"source_of_truth": [
 				"system/information-map.json",
@@ -221,7 +222,8 @@
 				"domain-taxonomy-level-3-matrix-map"
 			],
 			"related_view_ids": [
-				"knowledge-ingestion-architecture-map"
+				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map"
 			],
 			"source_of_truth": [
 				"30-maps/domains/domain-taxonomy.docs.json",
@@ -281,6 +283,7 @@
 			"related_view_ids": [
 				"diagnostic-system-architecture-map",
 				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map",
 				"git-governance-architecture-map"
 			],
 			"source_of_truth": [
@@ -358,7 +361,8 @@
 			],
 			"child_view_ids": [],
 			"related_view_ids": [
-				"knowledge-ingestion-architecture-map"
+				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map"
 			],
 			"source_of_truth": [
 				"system/loop-registry.json",
@@ -385,7 +389,9 @@
 			"parent_view_ids": [
 				"knowledge-base-system-architecture-map"
 			],
-			"child_view_ids": [],
+			"child_view_ids": [
+				"knowledge-acquisition-architecture-map"
+			],
 			"related_view_ids": [
 				"domain-taxonomy-overview-map",
 				"review-system-architecture-map",
@@ -402,8 +408,42 @@
 				"system/visual-coverage-map.json",
 				"docs/ingestion-workflow.md",
 				"docs/source-quality.md",
+				"docs/knowledge-ingestion/acquisition.md",
 				"system/knowledge-ingestion-source-types.json",
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
 				"templates/book-source.md"
+			]
+		},
+		{
+			"view_id": "knowledge-acquisition-architecture-map",
+			"status": "current",
+			"view_family": "knowledge-acquisition-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+			"parent_view_ids": [
+				"knowledge-ingestion-architecture-map"
+			],
+			"child_view_ids": [],
+			"related_view_ids": [
+				"domain-taxonomy-overview-map",
+				"review-system-architecture-map",
+				"loop-orchestration-architecture-map",
+				"knowledge-base-system-architecture-map"
+			],
+			"source_of_truth": [
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
+				"system/knowledge-ingestion-system.json",
+				"system/knowledge-ingestion-docs-map.json",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/module-relationship-map.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"system/reviews/review-system.json",
+				"docs/knowledge-ingestion/acquisition.md"
 			]
 		},
 		{
@@ -686,6 +726,42 @@
 			"to_view": "system-closure-architecture-map",
 			"relation": "related",
 			"navigation_node_id": "system-closure-canvas-file"
+		},
+		{
+			"from_view": "knowledge-ingestion-architecture-map",
+			"to_view": "knowledge-acquisition-architecture-map",
+			"relation": "child",
+			"navigation_node_id": "knowledge-acquisition-canvas-file"
+		},
+		{
+			"from_view": "knowledge-acquisition-architecture-map",
+			"to_view": "knowledge-ingestion-architecture-map",
+			"relation": "parent",
+			"navigation_node_id": "parent-knowledge-ingestion-canvas-file"
+		},
+		{
+			"from_view": "knowledge-acquisition-architecture-map",
+			"to_view": "domain-taxonomy-overview-map",
+			"relation": "related",
+			"navigation_node_id": "domain-taxonomy-canvas-file"
+		},
+		{
+			"from_view": "knowledge-acquisition-architecture-map",
+			"to_view": "review-system-architecture-map",
+			"relation": "related",
+			"navigation_node_id": "review-system-canvas-file"
+		},
+		{
+			"from_view": "knowledge-acquisition-architecture-map",
+			"to_view": "loop-orchestration-architecture-map",
+			"relation": "related",
+			"navigation_node_id": "loop-orchestration-canvas-file"
+		},
+		{
+			"from_view": "knowledge-acquisition-architecture-map",
+			"to_view": "knowledge-base-system-architecture-map",
+			"relation": "related",
+			"navigation_node_id": "kb-system-canvas-file"
 		}
 	]
 }

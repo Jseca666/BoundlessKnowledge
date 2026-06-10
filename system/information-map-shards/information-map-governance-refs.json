@@ -184,6 +184,20 @@
 			]
 		},
 		{
+			"entry_id": "route.knowledge-acquisition",
+			"entry_type": "route",
+			"owner_module": "knowledge-acquisition",
+			"summary": "Task route for proactive knowledge discovery, candidate source scouting, quality/value scoring and intake decision handoffs.",
+			"reference_surfaces": [
+				"system/route-registry.json#routes.knowledge-acquisition",
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json"
+			],
+			"related_entries": [
+				"module.knowledge-acquisition"
+			]
+		},
+		{
 			"entry_id": "topology.knowledge-ingestion",
 			"entry_type": "topology",
 			"owner_module": "system-structure-governance",
@@ -194,6 +208,19 @@
 			],
 			"related_entries": [
 				"closure.knowledge-ingestion"
+			]
+		},
+		{
+			"entry_id": "topology.knowledge-acquisition",
+			"entry_type": "topology",
+			"owner_module": "system-structure-governance",
+			"summary": "Topology placement for knowledge-acquisition as a child module under knowledge-ingestion.",
+			"reference_surfaces": [
+				"system/module-layer-model.json#module_assignments.knowledge-acquisition",
+				"system/module-relationship-map.json#modules.knowledge-acquisition"
+			],
+			"related_entries": [
+				"closure.knowledge-acquisition"
 			]
 		},
 		{
@@ -209,6 +236,18 @@
 			]
 		},
 		{
+			"entry_id": "closure.knowledge-acquisition",
+			"entry_type": "closure",
+			"owner_module": "system-closure",
+			"summary": "Closure and activation proof for the knowledge-acquisition front gate after route, information map, topology and visual coverage registration.",
+			"reference_surfaces": [
+				"system/system-closure-map.json#modules.knowledge-acquisition"
+			],
+			"related_entries": [
+				"visual.knowledge-acquisition"
+			]
+		},
+		{
 			"entry_id": "visual.knowledge-ingestion",
 			"entry_type": "visual_projection",
 			"owner_module": "architecture-views",
@@ -220,6 +259,20 @@
 			],
 			"related_entries": [
 				"closure.knowledge-ingestion"
+			]
+		},
+		{
+			"entry_id": "visual.knowledge-acquisition",
+			"entry_type": "visual_projection",
+			"owner_module": "architecture-views",
+			"summary": "Dedicated Canvas view for knowledge discovery, quality/value evaluation, candidate queue and intake decision handoffs.",
+			"reference_surfaces": [
+				"system/visual-coverage-map.json#module_decisions.knowledge-acquisition",
+				"system/canvas-registry.json#views.knowledge-acquisition-architecture-map",
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas"
+			],
+			"related_entries": [
+				"closure.knowledge-acquisition"
 			]
 		}
 	],

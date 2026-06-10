@@ -1,6 +1,6 @@
 {
 	"id": "review-system",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"updated": "2026-06-10",
 	"role": "system-and-knowledge-review",
 	"purpose": "Provide a reusable review module for proactive inspection of system structure and external knowledge quality before defects are handed to diagnostics.",
@@ -39,7 +39,7 @@
 		},
 		{
 			"id": "external_knowledge_review",
-			"scope": "Papers, web sources, GitHub topics, claims, evidence chains, recency, source quality, domain placement and uncertainty.",
+			"scope": "Papers, web sources, GitHub topics, claims, evidence chains, recency, source quality, domain placement and uncertainty. It can review knowledge-acquisition candidate sources when intake value is high but evidence, risk, copyright or recency is uncertain.",
 			"default_handoff": "knowledge workflow, evals or diagnostics depending on whether the issue is content quality, measurable quality or system structure"
 		},
 		{
@@ -165,6 +165,10 @@
 		{
 			"id": "knowledge-workflow",
 			"rule": "Use when the finding is a content update, source-quality note, claim uncertainty or synthesis issue."
+		},
+		{
+			"id": "knowledge-acquisition",
+			"rule": "Use when a review finding says a source candidate should be rescored, replaced by a stronger authority, kept watching, or routed back to intake discovery before formal registration."
 		}
 	],
 	"core_workflow": [
@@ -271,7 +275,8 @@
 				"domain classification reaches level 3 when applicable",
 				"copyright-sensitive content is summarized rather than copied",
 				"source quality or methodological limits are visible",
-				"knowledge item can be indexed and retrieved"
+				"knowledge item can be indexed and retrieved",
+				"candidate intake decision and quality/value rationale are explicit when review is triggered by knowledge-acquisition"
 			]
 		},
 		{

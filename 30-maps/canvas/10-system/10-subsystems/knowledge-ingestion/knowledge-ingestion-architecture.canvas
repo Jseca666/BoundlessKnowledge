@@ -8,7 +8,7 @@
 			"width": 2320,
 			"height": 120,
 			"color": "6",
-			"text": "# 知识摄入子系统：知识进入知识库的治理层\n\n治理论文、教材/权威图书、GitHub、网页、个人草稿和未来来源从捕获到可引用知识的进入方式；具体内容仍保存在 inbox、sources、notes、synthesis 和 workflows。"
+			"text": "# 知识摄入子系统：知识进入知识库的治理层\n\n治理论文、教材/权威图书、GitHub、网页、个人草稿和未来来源从主动发现、入库决策到可引用知识的进入方式；具体内容仍保存在 inbox、sources、notes、synthesis 和 workflows。"
 		},
 		{
 			"id": "scope-note",
@@ -28,7 +28,7 @@
 			"width": 360,
 			"height": 190,
 			"color": "4",
-			"text": "# 1. 捕获入口\n\n来源可以先进入 00-inbox，也可以信息足够时直接登记。\n\n不绕过来源身份。"
+			"text": "# 1. 知识发现与入库决策\n\n主动寻找候选来源，评价质量、价值、风险和领域缺口。\n\n输出：入库决策。"
 		},
 		{
 			"id": "source-type",
@@ -38,7 +38,7 @@
 			"width": 360,
 			"height": 190,
 			"color": "4",
-			"text": "# 2. 来源类型\n\n先查 source type registry：论文、教材/权威图书、GitHub、网页、个人经验或未来来源缺口。\n\n输出 source_type。"
+			"text": "# 2. 来源类型与登记\n\n通过入库决策后查 source type registry：论文、教材/权威图书、GitHub、网页、个人经验或未来来源缺口。\n\n输出 source_type。"
 		},
 		{
 			"id": "quality-precheck",
@@ -48,7 +48,7 @@
 			"width": 360,
 			"height": 190,
 			"color": "5",
-			"text": "# 3. 质量预审\n\n记录可信层级、时效性、局限、风险和 last_checked_at。\n\n高风险进入审查。"
+			"text": "# 3. 质量预审\n\n复核可信层级、时效性、局限、风险和 last_checked_at。\n\n高风险进入审查。"
 		},
 		{
 			"id": "domain-routing",
@@ -98,7 +98,7 @@
 			"width": 500,
 			"height": 170,
 			"color": "2",
-			"text": "# 交接对象\n\ndomain-maps、review-system、diagnostics、loop-orchestration、indexes 和 Codex workflows。\n\n交接载荷由机器真相定义。"
+			"text": "# 交接对象\n\nknowledge-acquisition、source-registry、domain-maps、review-system、diagnostics、loop-orchestration、indexes 和 Codex workflows。\n\n交接载荷由机器真相定义。"
 		},
 		{
 			"id": "quality-gates",
@@ -118,7 +118,7 @@
 			"width": 500,
 			"height": 170,
 			"color": "4",
-			"text": "# 未来扩展\n\n新增来源类型时先更新 source type registry，再同步模板、schema、validator、review 触发、taxonomy 交接和可视化覆盖。"
+			"text": "# 未来扩展\n\n新增来源类型或主动发现模式时，先更新 acquisition/source type 机器真相，再同步模板、schema、validator、review 触发、taxonomy 交接和可视化覆盖。"
 		},
 		{
 			"id": "machine-truth-band",
@@ -285,7 +285,7 @@
 			"type": "file",
 			"file": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
 			"x": 1910,
-			"y": -410,
+			"y": -350,
 			"width": 64,
 			"height": 48,
 			"color": "3"
@@ -294,7 +294,7 @@
 			"id": "nav-label-domain-taxonomy-canvas-file",
 			"type": "text",
 			"x": 1560,
-			"y": -410,
+			"y": -350,
 			"width": 330,
 			"height": 48,
 			"color": "3",
@@ -305,7 +305,7 @@
 			"type": "file",
 			"file": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
 			"x": 1910,
-			"y": -350,
+			"y": -290,
 			"width": 64,
 			"height": 48,
 			"color": "5"
@@ -314,7 +314,7 @@
 			"id": "nav-label-review-system-canvas-file",
 			"type": "text",
 			"x": 1560,
-			"y": -350,
+			"y": -290,
 			"width": 330,
 			"height": 48,
 			"color": "5",
@@ -325,7 +325,7 @@
 			"type": "file",
 			"file": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
 			"x": 1910,
-			"y": -290,
+			"y": -230,
 			"width": 64,
 			"height": 48,
 			"color": "1"
@@ -334,7 +334,7 @@
 			"id": "nav-label-diagnostic-system-canvas-file",
 			"type": "text",
 			"x": 1560,
-			"y": -290,
+			"y": -230,
 			"width": 330,
 			"height": 48,
 			"color": "1",
@@ -345,7 +345,7 @@
 			"type": "file",
 			"file": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
 			"x": 1910,
-			"y": -230,
+			"y": -170,
 			"width": 64,
 			"height": 48,
 			"color": "5"
@@ -354,7 +354,7 @@
 			"id": "nav-label-loop-orchestration-canvas-file",
 			"type": "text",
 			"x": 1560,
-			"y": -230,
+			"y": -170,
 			"width": 330,
 			"height": 48,
 			"color": "5",
@@ -374,7 +374,7 @@
 			"id": "bridge-anchor-domain",
 			"type": "text",
 			"x": 1320,
-			"y": -410,
+			"y": -350,
 			"width": 210,
 			"height": 48,
 			"color": "3",
@@ -384,7 +384,7 @@
 			"id": "bridge-anchor-review",
 			"type": "text",
 			"x": 1320,
-			"y": -350,
+			"y": -290,
 			"width": 210,
 			"height": 48,
 			"color": "5",
@@ -394,7 +394,7 @@
 			"id": "bridge-anchor-diagnostic",
 			"type": "text",
 			"x": 1320,
-			"y": -290,
+			"y": -230,
 			"width": 210,
 			"height": 48,
 			"color": "1",
@@ -404,7 +404,7 @@
 			"id": "bridge-anchor-loop",
 			"type": "text",
 			"x": 1320,
-			"y": -230,
+			"y": -170,
 			"width": 210,
 			"height": 48,
 			"color": "5",
@@ -439,6 +439,36 @@
 			"height": 48,
 			"color": "6",
 			"file": "system/knowledge-ingestion-source-types.json"
+		},
+		{
+			"id": "nav-label-knowledge-acquisition-canvas-file",
+			"type": "text",
+			"text": "下钻：知识获取与入库决策",
+			"x": 1560,
+			"y": -410,
+			"width": 330,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "knowledge-acquisition-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+			"x": 1910,
+			"y": -410,
+			"width": 64,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "bridge-anchor-acquisition",
+			"type": "text",
+			"text": "对应：前置决策",
+			"x": 1320,
+			"y": -410,
+			"width": 210,
+			"height": 48,
+			"color": "4"
 		}
 	],
 	"edges": [
@@ -518,6 +548,15 @@
 			"toSide": "right",
 			"color": "5",
 			"label": "对应：批量打磨"
+		},
+		{
+			"id": "bridge-edge-acquisition",
+			"fromNode": "nav-label-knowledge-acquisition-canvas-file",
+			"fromSide": "left",
+			"toNode": "bridge-anchor-acquisition",
+			"toSide": "right",
+			"color": "4",
+			"label": "对应："
 		}
 	]
 }

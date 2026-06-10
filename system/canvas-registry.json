@@ -1219,7 +1219,8 @@
 				"git-governance-architecture-map"
 			],
 			"related_views": [
-				"canvas-directory-layout-map"
+				"canvas-directory-layout-map",
+				"knowledge-acquisition-architecture-map"
 			],
 			"navigation_nodes": [
 				{
@@ -1739,7 +1740,8 @@
 				"domain-taxonomy-level-3-matrix-map"
 			],
 			"related_views": [
-				"knowledge-ingestion-architecture-map"
+				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map"
 			],
 			"navigation_nodes": [
 				{
@@ -1970,6 +1972,7 @@
 			"related_views": [
 				"diagnostic-system-architecture-map",
 				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map",
 				"git-governance-architecture-map"
 			],
 			"navigation_nodes": [
@@ -2372,7 +2375,8 @@
 			],
 			"child_views": [],
 			"related_views": [
-				"knowledge-ingestion-architecture-map"
+				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map"
 			],
 			"navigation_nodes": [
 				{
@@ -2513,7 +2517,10 @@
 				"system/visual-coverage-map.json",
 				"docs/ingestion-workflow.md",
 				"docs/source-quality.md",
+				"docs/knowledge-ingestion/acquisition.md",
 				"system/knowledge-ingestion-source-types.json",
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
 				"templates/book-source.md"
 			],
 			"use_when": [
@@ -2521,12 +2528,15 @@
 				"用户讨论论文、GitHub、网页或个人草稿如何登记",
 				"需要判断新来源类型、模板、质量门或摄入交接是否应该新增",
 				"需要解释 inbox/source-registry/domain/review/diagnostics/loop 之间的进入链路",
-				"需要判断教材/权威图书或其他新来源类型如何进入知识库"
+				"需要判断教材/权威图书或其他新来源类型如何进入知识库",
+				"需要判断系统应该主动寻找什么权威知识、如何评估候选来源质量价值、以及是否值得入库"
 			],
 			"parent_views": [
 				"knowledge-base-system-architecture-map"
 			],
-			"child_views": [],
+			"child_views": [
+				"knowledge-acquisition-architecture-map"
+			],
 			"related_views": [
 				"domain-taxonomy-overview-map",
 				"review-system-architecture-map",
@@ -2538,6 +2548,11 @@
 					"node_id": "parent-kb-system-canvas-file",
 					"target_view": "knowledge-base-system-architecture-map",
 					"direction": "up"
+				},
+				{
+					"node_id": "knowledge-acquisition-canvas-file",
+					"target_view": "knowledge-acquisition-architecture-map",
+					"direction": "down"
 				},
 				{
 					"node_id": "domain-taxonomy-canvas-file",
@@ -2646,6 +2661,169 @@
 					"support_node": "file-label-source-types-file",
 					"target_node": "source-type",
 					"label": "registers source types"
+				}
+			]
+		},
+		{
+			"id": "knowledge-acquisition-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+			"status": "current",
+			"view_family": "knowledge-acquisition-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"view_level": "L3",
+			"view_category": "module-architecture",
+			"primary_subject": "Knowledge acquisition and intake decision child subsystem under knowledge ingestion",
+			"boundary": "展示知识获取与入库决策的触发、主动寻找、质量价值初评、候选队列、入库决策和交接关系；不保存具体外部知识事实。",
+			"not_for": [
+				"Formal source record content",
+				"Full source review result",
+				"Domain taxonomy design itself",
+				"Unattended crawler runtime implementation"
+			],
+			"purpose": "Current architecture view for the knowledge-acquisition child subsystem.",
+			"source_of_truth": [
+				"system/knowledge-acquisition-system.json",
+				"10-sources/acquisition-queue.json",
+				"system/knowledge-ingestion-system.json",
+				"system/knowledge-ingestion-docs-map.json",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/module-relationship-map.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"system/reviews/review-system.json",
+				"docs/knowledge-ingestion/acquisition.md"
+			],
+			"use_when": [
+				"用户讨论如何主动寻找权威知识",
+				"用户讨论某领域第一份重要知识来源如何确定",
+				"需要评价候选来源质量、价值、风险或是否入库",
+				"需要决定候选来源进入 source-registry、review-system、loop-orchestration 或 domain-maps"
+			],
+			"parent_views": [
+				"knowledge-ingestion-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"domain-taxonomy-overview-map",
+				"review-system-architecture-map",
+				"loop-orchestration-architecture-map",
+				"knowledge-base-system-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-knowledge-ingestion-canvas-file",
+					"target_view": "knowledge-ingestion-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "domain-taxonomy-canvas-file",
+					"target_view": "domain-taxonomy-overview-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "review-system-canvas-file",
+					"target_view": "review-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "loop-orchestration-canvas-file",
+					"target_view": "loop-orchestration-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "kb-system-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish source/input, evaluation/review, taxonomy decision, handoff, loop status and machine truth surfaces."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-acq-system-to-queue",
+					"from_node": "file-label-acq-system-file",
+					"to_node": "file-label-acq-queue-file",
+					"label": "system truth owns queue contract"
+				},
+				{
+					"relation_id": "rel-acq-system-to-review",
+					"from_node": "file-label-acq-system-file",
+					"to_node": "file-label-review-system-file",
+					"label": "uncertain candidates route to review"
+				},
+				{
+					"relation_id": "rel-acq-system-to-ki-system",
+					"from_node": "file-label-acq-system-file",
+					"to_node": "file-label-ki-system-file",
+					"label": "child reports to parent ingestion"
+				},
+				{
+					"relation_id": "rel-route-to-acq-system",
+					"from_node": "file-label-route-file",
+					"to_node": "file-label-acq-system-file",
+					"label": "route activates acquisition"
+				},
+				{
+					"relation_id": "rel-closure-to-acq-system",
+					"from_node": "file-label-closure-file",
+					"to_node": "file-label-acq-system-file",
+					"label": "closure proves activation"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-acq-system-workflow",
+					"support_node": "file-label-acq-system-file",
+					"target_node": "trigger",
+					"label": "defines workflow"
+				},
+				{
+					"binding_id": "bind-acq-system-evaluate",
+					"support_node": "file-label-acq-system-file",
+					"target_node": "evaluate",
+					"label": "defines scoring model"
+				},
+				{
+					"binding_id": "bind-acq-queue-state",
+					"support_node": "file-label-acq-queue-file",
+					"target_node": "queue-state",
+					"label": "stores candidates"
+				},
+				{
+					"binding_id": "bind-review-system-gate",
+					"support_node": "file-label-review-system-file",
+					"target_node": "review-gate",
+					"label": "owns formal review"
+				},
+				{
+					"binding_id": "bind-ki-system-parent-return",
+					"support_node": "file-label-ki-system-file",
+					"target_node": "parent-return",
+					"label": "continues ingestion chain"
+				},
+				{
+					"binding_id": "bind-source-types-handoff",
+					"support_node": "file-label-source-types-file",
+					"target_node": "handoff",
+					"label": "selects source type"
+				},
+				{
+					"binding_id": "bind-route-trigger",
+					"support_node": "file-label-route-file",
+					"target_node": "trigger",
+					"label": "routes acquisition tasks"
+				},
+				{
+					"binding_id": "bind-closure-activation",
+					"support_node": "file-label-closure-file",
+					"target_node": "machine-truth-band",
+					"label": "records activation proof"
 				}
 			]
 		},

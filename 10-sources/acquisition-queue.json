@@ -1,0 +1,45 @@
+{
+	"id": "knowledge-acquisition-queue",
+	"version": "0.1.0",
+	"updated": "2026-06-10",
+	"owner_module": "knowledge-acquisition",
+	"parent_module": "knowledge-ingestion",
+	"role": "candidate-source-and-discovery-request-queue",
+	"purpose": "存放知识正式入库前的候选来源、发现请求、质量价值初评和下一步决策。",
+	"boundary": {
+		"is_machine_readable_operational_data": true,
+		"not_truth_source": "本队列不是可引用知识来源；只有登记为 source record、atomic note 或 synthesis 后才进入正式知识引用链。",
+		"owner_system": "system/knowledge-acquisition-system.json"
+	},
+	"status_values": [
+		"new",
+		"scouting",
+		"evaluating",
+		"ready_to_register",
+		"review_required",
+		"watching",
+		"rejected",
+		"registered",
+		"blocked"
+	],
+	"intake_decisions": [
+		"register-source",
+		"review-before-register",
+		"continue-discovery",
+		"watch",
+		"reject"
+	],
+	"scoring_dimensions": [
+		"source_authority",
+		"evidence_strength",
+		"foundational_value",
+		"project_reuse_value",
+		"recency_and_volatility",
+		"domain_fit_and_gap_coverage",
+		"risk_and_rights",
+		"acquisition_cost"
+	],
+	"discovery_requests": [],
+	"candidates": [],
+	"archival_policy": "注册为正式 source record 后，将候选状态设为 registered 并记录 source_record_ref；不在队列中复制长文本内容。"
+}

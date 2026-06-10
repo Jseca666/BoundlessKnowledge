@@ -1,6 +1,6 @@
 {
     "id":  "canvas-screenshot-audit-report",
-    "generated_at":  "2026-06-10T15:50:43",
+    "generated_at":  "2026-06-10T16:17:58",
     "renderer":  "powershell-system-drawing",
     "scope":  "current-active-canvas-views",
     "output_dir":  "system/reviews/canvas-screenshots",
@@ -16,10 +16,10 @@
                    "registered color legend node exists when declared"
                ],
     "result":  {
-                   "view_count":  14,
+                   "view_count":  15,
                    "error_count":  0,
                    "warning_count":  0,
-                   "strict":  false
+                   "strict":  true
                },
     "views":  [
                   {
@@ -116,7 +116,7 @@
                                              "width":  2600,
                                              "height":  1361,
                                              "scale":  0.8349,
-                                             "bytes":  210728,
+                                             "bytes":  212160,
                                              "non_blank_pixel_ratio":  0.4228
                                          },
                       "warnings":  [
@@ -340,8 +340,8 @@
                       "status":  "current",
                       "view_type":  "module-architecture-map",
                       "screenshot_path":  "system/reviews/canvas-screenshots/knowledge-ingestion-architecture-map.png",
-                      "node_count":  44,
-                      "edge_count":  9,
+                      "node_count":  47,
+                      "edge_count":  10,
                       "logical_bounds":  {
                                              "width":  3174,
                                              "height":  1632
@@ -350,8 +350,34 @@
                                              "width":  2600,
                                              "height":  1337,
                                              "scale":  0.8192,
-                                             "bytes":  177487,
-                                             "non_blank_pixel_ratio":  0.4127
+                                             "bytes":  183852,
+                                             "non_blank_pixel_ratio":  0.419
+                                         },
+                      "warnings":  [
+
+                                   ],
+                      "errors":  [
+
+                                 ]
+                  },
+                  {
+                      "view_id":  "knowledge-acquisition-architecture-map",
+                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+                      "status":  "current",
+                      "view_type":  "module-architecture-map",
+                      "screenshot_path":  "system/reviews/canvas-screenshots/knowledge-acquisition-architecture-map.png",
+                      "node_count":  44,
+                      "edge_count":  9,
+                      "logical_bounds":  {
+                                             "width":  3034,
+                                             "height":  1618
+                                         },
+                      "rendered_image":  {
+                                             "width":  2600,
+                                             "height":  1387,
+                                             "scale":  0.857,
+                                             "bytes":  192702,
+                                             "non_blank_pixel_ratio":  0.3837
                                          },
                       "warnings":  [
 

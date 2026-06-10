@@ -1,6 +1,6 @@
 {
 	"id": "visual-coverage-map",
-	"version": "0.8.0",
+	"version": "0.9.0",
 	"updated": "2026-06-10",
 	"role": "machine-readable-visual-coverage-governance",
 	"purpose": "Prevent visual blind spots by declaring which stable system modules require Canvas views, which modules are covered by shared views, and which modules are explicitly deferred or not applicable.",
@@ -141,6 +141,16 @@
 			"path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
 			"coverage": "Dedicated architecture view for the knowledge ingestion subsystem, intake modes, source-quality gates, legacy asset adoption and handoffs into domain/review/diagnostics/loop/index surfaces.",
 			"owner_modules": [
+				"knowledge-ingestion",
+				"architecture-views"
+			]
+		},
+		{
+			"view_id": "knowledge-acquisition-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-acquisition-system.canvas",
+			"coverage": "Dedicated architecture view for knowledge discovery, candidate source queue, quality/value evaluation, intake decision and handoff boundaries under the knowledge ingestion subsystem.",
+			"owner_modules": [
+				"knowledge-acquisition",
 				"knowledge-ingestion",
 				"architecture-views"
 			]
@@ -403,14 +413,31 @@
 			"decision": "dedicated_required",
 			"visual_projection_status": "closed",
 			"required_view_ids": [
-				"knowledge-ingestion-architecture-map"
+				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map"
 			],
 			"covered_by_view_ids": [
 				"knowledge-ingestion-architecture-map",
+				"knowledge-acquisition-architecture-map",
 				"knowledge-base-system-architecture-map"
 			],
-			"reason": "知识进入方式是长期稳定、跨模块的系统能力，必须有 dedicated 视觉影子，避免只在 source-registry 或系统总览阶段块里隐形。",
+			"reason": "知识进入方式是长期稳定、跨模块的系统能力；父系统必须覆盖整体摄入架构，并把前置知识获取与入库决策子系统作为必要视觉投影。",
 			"review_trigger": "当新增来源类型、摄入模板、来源质量门、领域路由交接、review/diagnostics/loop handoff、source-registry 结构或 source type registry 变化时，审查此图。"
+		},
+		{
+			"module_id": "knowledge-acquisition",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"knowledge-acquisition-architecture-map"
+			],
+			"covered_by_view_ids": [
+				"knowledge-acquisition-architecture-map",
+				"knowledge-ingestion-architecture-map",
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "知识获取与入库决策是知识进入链路的前置系统能力，负责主动发现、质量价值初评和候选去向，必须有独立视觉影子，避免退化为一张来源登记卡。",
+			"review_trigger": "当 discovery modes、质量价值模型、候选队列字段、入库决策输出、review/loop/domain/source handoff 或主动寻找策略变化时，审查此图。"
 		},
 		{
 			"module_id": "git-governance",

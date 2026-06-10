@@ -521,7 +521,8 @@
 			"system-information-map",
 			"loop-orchestration",
 			"project-ontology",
-			"knowledge-ingestion"
+			"knowledge-ingestion",
+			"knowledge-acquisition"
 		],
 		"activation_status_values": [
 			"active",
