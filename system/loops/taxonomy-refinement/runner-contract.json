@@ -1,0 +1,53 @@
+{
+  "id": "taxonomy-refinement-runner-contract",
+  "version": "0.2.0",
+  "updated": "2026-06-05",
+  "loop_id": "taxonomy-refinement",
+  "runner_role": "Codex agent executes one loop iteration per request unless the user asks for continuous progress.",
+  "commands": [
+    {
+      "name": "status",
+      "effect": "Read loop.json, queue.json and state.json; report current unit, completed units and next unit."
+    },
+    {
+      "name": "run-one",
+      "effect": "Execute one full iteration for state.current_unit, write outputs, write run log, update state."
+    },
+    {
+      "name": "pause",
+      "effect": "Set state.status to paused and record reason."
+    },
+    {
+      "name": "resume",
+      "effect": "Set state.status to active and continue from state.current_unit."
+    }
+  ],
+  "run_record_schema": {
+    "required_fields": [
+      "id",
+      "loop_id",
+      "unit_id",
+      "started_at",
+      "completed_at",
+      "inputs",
+      "outputs",
+      "diagnosis",
+      "quality_gate_result",
+      "state_transition"
+    ]
+  },
+  "state_transition_contract": {
+    "before": "state.current_unit must equal run.unit_id",
+    "after_success": [
+      "mark unit completed in state.unit_status",
+      "write run log under runs/",
+      "write or update output summary under outputs/",
+      "advance state.current_unit to next uncompleted queue unit"
+    ],
+    "after_blocked": [
+      "record blocked unit and reason",
+      "do not delete partial output",
+      "pause loop if pause_conditions are met"
+    ]
+  }
+}

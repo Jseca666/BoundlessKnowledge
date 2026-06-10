@@ -1,0 +1,308 @@
+{
+	"id": "system-structure-governance",
+	"version": "0.4.0",
+	"updated": "2026-06-10",
+	"role": "system-module-topology-and-branching-governance",
+	"purpose": "为无界知识系统维护稳定模块之间的拓扑关系、归属判断和新分支决策，避免每次新增模块都靠局部文件或单张 Canvas 临时归类。",
+	"owner_module": "system-structure-governance",
+	"owns": [
+		"module relationship topology",
+		"module branch and parent-child ownership decisions",
+		"new stable module placement decision",
+		"split, merge, retire and new-branch decision records",
+		"module-layer-model as a derived owner_layer snapshot",
+		"coordination contract between module-governance, information-map, closure, review, diagnostics and Canvas projection",
+		"legacy asset ownership audit for new system modules",
+		"root project identity placement and ontology-to-module relationship alignment"
+	],
+	"does_not_own": [
+		"external knowledge domain taxonomy content",
+		"concrete implementation inside another module",
+		"Canvas layout aesthetics or coordinates",
+		"root-cause repair after a structural defect is confirmed",
+		"review finding classification"
+	],
+	"decision_workflow": [
+		{
+			"step": "build-structure-decision-packet",
+			"required_input": [
+				"candidate name",
+				"purpose",
+				"stable responsibility",
+				"expected consumers",
+				"canonical truth candidate",
+				"affected existing modules"
+			],
+			"output": "structure_decision_packet"
+		},
+		{
+			"step": "compare-against-current-topology",
+			"required_input": [
+				"system/module-relationship-map.json",
+				"system/information-map.json",
+				"system/system-closure-map.json"
+			],
+			"output": "candidate existing owner, parent module or missing branch"
+		},
+		{
+			"step": "audit-existing-governed-assets",
+			"required_input": [
+				"candidate responsibility boundary",
+				"filesystem paths",
+				"route-registry",
+				"information-map",
+				"canvas-registry",
+				"module-relationship-map",
+				"system-closure-map"
+			],
+			"output": "legacy_asset_audit with adopt | migrate | deprecate | archive | exempt_with_reason | queue_follow_up actions"
+		},
+		{
+			"step": "choose-branch-decision",
+			"required_input": [
+				"boundary difference",
+				"dataflow impact",
+				"validation lifecycle",
+				"visual projection need"
+			],
+			"output": "attach_to_existing_module | create_child_module | create_peer_module | create_new_branch | defer_as_draft | merge_or_retire"
+		},
+		{
+			"step": "synchronize-registries",
+			"required_input": [
+				"chosen branch decision"
+			],
+			"output": [
+				"module-relationship-map",
+				"module-layer-model",
+				"information-map",
+				"route-registry",
+				"system-closure-map",
+				"visual-coverage-map"
+			]
+		},
+		{
+			"step": "project-and-review",
+			"required_input": [
+				"visual coverage decision",
+				"review criteria",
+				"diagnostics if a defect exists"
+			],
+			"output": [
+				"Canvas projection updated or explicitly deferred",
+				"review/diagnostic acceptance"
+			]
+		},
+		{
+			"step": "prove-module-activation",
+			"required_input": [
+				"synchronized registries",
+				"legacy_asset_audit",
+				"visual coverage decision",
+				"validation results",
+				"review or diagnostic acceptance when relevant"
+			],
+			"output": [
+				"activation_proof in system/system-closure-map.json",
+				"module may be called active/effective only after this proof exists"
+			]
+		}
+	],
+	"branch_decision_values": [
+		{
+			"decision": "attach_to_existing_module",
+			"use_when": "新增内容只是现有模块的一份文件、脚本、文档、视图或子资产，没有独立长期责任边界。"
+		},
+		{
+			"decision": "create_child_module",
+			"use_when": "新增能力在同一分支内有独立机器真相、路由、校验或生命周期，但仍由一个上级模块语义包含。"
+		},
+		{
+			"decision": "create_peer_module",
+			"use_when": "新增能力与现有模块同属一个 owner_layer，但责任边界、消费者和闭环状态足够独立。"
+		},
+		{
+			"decision": "create_new_branch",
+			"use_when": "新增能力无法被现有 owner_layer 表达，并且会形成多个稳定模块、专属真相、路由、校验和可视化生命周期。"
+		},
+		{
+			"decision": "defer_as_draft",
+			"use_when": "边界、消费者或长期责任尚不稳定，只能进入 draft/inbox/archive 生命周期。"
+		},
+		{
+			"decision": "merge_or_retire",
+			"use_when": "现有模块边界被新结构吸收、重复或废弃，需要合并、迁移或归档。"
+		}
+	],
+	"relation_types": [
+		"owns",
+		"parent_of",
+		"child_of",
+		"depends_on",
+		"produces",
+		"consumes",
+		"routes_to",
+		"indexes",
+		"governs",
+		"invokes",
+		"feeds",
+		"validates",
+		"audits",
+		"repairs",
+		"projects_visual",
+		"hands_off_to",
+		"supports"
+	],
+	"canonical_outputs": [
+		"system/module-relationship-map.json",
+		"system/module-layer-model.json",
+		"system/information-map.json",
+		"system/system-closure-map.json",
+		"system/visual-coverage-map.json",
+		"system/canvas-registry.json",
+		"system/canvas-view-graph.json",
+		"system/development-principles.json",
+		"system/module-governance-policy.json",
+		"system/project-ontology.json"
+	],
+	"quality_gates": [
+		"新增稳定模块前必须先形成 structure_decision_packet，说明归入现有模块、子模块、同级模块、新分支、草稿暂缓或合并归档中的哪一种。",
+		"module-layer-model 只是本模块输出的 owner_layer/module_kind 快照，不再单独承担结构判断。",
+		"information-map、system-closure-map 和 module-relationship-map 必须覆盖同一组稳定模块。",
+		"module-relationship-map 中的关系边只能指向已登记模块，不能指向不存在或未闭环的临时概念。",
+		"当结构判断影响重要模块或分支时，必须同步 visual-coverage-map 和对应 Canvas 视图。",
+		"新增或升级出的系统模块必须处理职责范围内旧资产：接管、迁移、弃用、归档、说明豁免或登记后续队列；不能只接管未来内容。",
+		"A structure-governance decision does not activate a module by itself; activation requires closure-map activation_proof that references legacy asset audit and validation evidence."
+	],
+	"validation": [
+		"scripts/validate-system.ps1"
+	],
+	"legacy_asset_policy": {
+		"rule": "新系统模块成立时，必须对职责范围内已存在的系统内容负责。结构判断不能只决定未来归属，也必须处理旧资产继承。",
+		"required_when": [
+			"create_child_module",
+			"create_peer_module",
+			"create_new_branch",
+			"merge_or_retire",
+			"system module responsibility expansion"
+		],
+		"actions": [
+			"adopt",
+			"migrate",
+			"deprecate",
+			"archive",
+			"exempt_with_reason",
+			"queue_follow_up"
+		],
+		"required_outputs": [
+			"legacy_scope",
+			"legacy_asset_audit",
+			"legacy_asset_action",
+			"affected_registry_updates",
+			"acceptance_status"
+		]
+	},
+	"latest_existing_layer_relationship_audit": {
+		"date": "2026-06-10",
+		"status": "closed",
+		"record": "system/module-relationship-map.json#current_layer_relationship_audit",
+		"result": "Accepted. knowledge-ingestion is added as a system-governance subsystem while inbox and source-registry remain knowledge-content assets; topology, layer snapshot, closure and visual coverage are synchronized."
+	},
+	"latest_activation_acceptance": {
+		"date": "2026-06-07",
+		"status": "active_after_correction",
+		"proof": "system/system-closure-map.json#modules.system-structure-governance.activation_proof",
+		"corrected_failure": "The first module acceptance treated registration and synchronization as enough. This correction makes activation depend on explicit proof and legacy responsibility evidence.",
+		"acceptance": "system-structure-governance is active only after current_layer_relationship_audit is recorded, closure activation_proof exists, and validate-system checks both."
+	},
+	"latest_loop_orchestration_structure_audit": {
+		"date": "2026-06-08",
+		"status": "accepted",
+		"decision": "promote loop-orchestration from thin taxonomy-loop surface to stable system-governance module",
+		"reason": "durable loops will serve many future modules and must own registry, lifecycle, state, handoff intake, legacy adoption and visual coverage independent of any single serving module",
+		"adopted_legacy_assets": [
+			"system/loop-registry.json",
+			"system/loops/taxonomy-refinement/"
+		],
+		"synchronized_surfaces": [
+			"system/module-layer-model.json",
+			"system/module-relationship-map.json",
+			"system/system-closure-map.json",
+			"system/visual-coverage-map.json",
+			"system/canvas-registry.json",
+			"system/canvas-view-graph.json",
+			"system/information-map.json",
+			"system/route-registry.json"
+		]
+	},
+	"latest_project_ontology_structure_audit": {
+		"date": "2026-06-08",
+		"status": "accepted",
+		"decision": "create_peer_module",
+		"owner_layer": "system-governance",
+		"module_kind": "root-identity-contract",
+		"reason": "知识工程系统根定位是模块分层和 Codex workflow 角色判断的上游契约，不能散落在 README、聊天记忆或 Canvas 标题里。",
+		"legacy_asset_actions": [
+			{
+				"asset": "README.md",
+				"action": "adopt",
+				"result": "human project intro now points to knowledge engineering system positioning"
+			},
+			{
+				"asset": "docs/architecture.md",
+				"action": "adopt",
+				"result": "human architecture doc reflects system + lifecycle model"
+			},
+			{
+				"asset": "docs/codex-integration.md",
+				"action": "adopt",
+				"result": "Codex integration doc records dual role of workflows"
+			},
+			{
+				"asset": "L0/L1 Canvas wording",
+				"action": "migrate",
+				"result": "shared visual projection now exposes knowledge engineering root identity"
+			},
+			{
+				"asset": "project-consumption layer wording",
+				"action": "migrate",
+				"result": "renamed semantically to Codex workflow operation and project invocation while preserving owner_layer id for compatibility"
+			}
+		],
+		"synchronized_surfaces": [
+			"system/project-ontology.json",
+			"system/module-layer-model.json",
+			"system/module-relationship-map.json",
+			"system/system-closure-map.json",
+			"system/visual-coverage-map.json"
+		]
+	},
+	"latest_knowledge_ingestion_structure_audit": {
+		"date": "2026-06-10",
+		"status": "accepted",
+		"decision": "create_peer_module",
+		"owner_layer": "system-governance",
+		"module_kind": "knowledge-ingestion-subsystem",
+		"reason": "知识进入知识库是一条长期稳定、跨 inbox/source/domain/review/diagnostics/loop/index 的系统能力，不能只作为 source-registry 或文档路由的局部说明。",
+		"adopted_legacy_assets": [
+			"docs/ingestion-workflow.md",
+			"docs/source-quality.md",
+			"00-inbox/README.md",
+			"templates/",
+			"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas#stage-capture"
+		],
+		"synchronized_surfaces": [
+			"system/knowledge-ingestion-system.json",
+			"system/knowledge-ingestion-docs-map.json",
+			"system/route-registry.json",
+			"system/information-map.json",
+			"system/module-layer-model.json",
+			"system/module-relationship-map.json",
+			"system/system-closure-map.json",
+			"system/visual-coverage-map.json",
+			"system/canvas-registry.json",
+			"system/canvas-view-graph.json",
+			"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas"
+		]
+	}
+}

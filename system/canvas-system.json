@@ -1,0 +1,760 @@
+{
+	"id": "canvas-system",
+	"version": "1.9.0",
+	"updated": "2026-06-10",
+	"role": "visual-architecture-operating-layer",
+	"principle": "Canvas is the visual shadow layer for the knowledge-base system: it projects filesystem placement, module boundaries, routes, dataflows, registries, workflows, diagnostics, taxonomy and project context into inspectable visual views, while machine-readable registries remain the source of truth.",
+	"operating_model": {
+		"status": "highest-spec-system-surface",
+		"rule": "Any stable structure that affects system understanding, routing, execution, quality gates or project consumption should be eligible for a registered visual architecture view.",
+		"not_just": [
+			"decorative diagrams",
+			"one-off sketches",
+			"manual screenshots",
+			"unregistered whiteboards"
+		],
+		"must_support": [
+			"top-level navigation",
+			"system architecture",
+			"module internal structure",
+			"workflow and dataflow",
+			"skill and agent entrypoints",
+			"schema and contract boundaries",
+			"tool/runtime maps",
+			"loop and queue state",
+			"diagnostic and repair closure",
+			"domain taxonomy and knowledge maps",
+			"project consumption context"
+		]
+	},
+	"responsibilities": [
+		{
+			"id": "visual-entrypoint",
+			"description": "Provide the first visual entry for knowledge-base system architecture and important subsystem maps."
+		},
+		{
+			"id": "architecture-sync",
+			"description": "Keep visual architecture views aligned with information-map, route-registry, tool-map, loop-registry and domain taxonomy."
+		},
+		{
+			"id": "structure-observability",
+			"description": "Expose deep structure of modules, skills, workflows, dataflows, schemas, tools, loops and diagnostic gates so humans can inspect how the system really works."
+		},
+		{
+			"id": "design-before-expansion",
+			"description": "Use Canvas as a design surface before adding major modules, workflows, skills, data stores, services or system rules."
+		},
+		{
+			"id": "view-lifecycle",
+			"description": "Manage current, active, draft, superseded and archived Canvas views through canvas-registry."
+		},
+		{
+			"id": "directory-boundaries",
+			"description": "Keep Canvas directories separated by numbered layer, reading order, module boundary and lifecycle: entry, system overview, system submodules, knowledge maps, workflows, projects, drafts and archive."
+		},
+		{
+			"id": "source-binding",
+			"description": "Every trusted Canvas view must point to source_of_truth files that decide system behavior."
+		},
+		{
+			"id": "support-relation-semantics",
+			"description": "Register how support files relate to upper Canvas modules, gates, statuses or workflow nodes through canvas-registry support_bindings/support_relations instead of relying on loose visual file clusters."
+		},
+		{
+			"id": "bidirectional-navigation",
+			"description": "Connect higher-level and lower-level Canvas views with Obsidian file nodes so users can drill down from module cards and return to parent views."
+		},
+		{
+			"id": "data-separation",
+			"description": "Separate layout-heavy human Canvas files from layout-free machine view graph data."
+		},
+		{
+			"id": "visual-audit",
+			"description": "Validate canvas JSON, registration, placement, parent-child navigation, visual scannability and edge routing before treating views as reliable."
+		},
+		{
+			"id": "visual-coverage-governance",
+			"description": "Decide which stable structures need visual coverage through system/visual-coverage-map.json, and keep those decisions current as machine truth changes."
+		},
+		{
+			"id": "view-boundary-governance",
+			"description": "Govern Canvas views by visual level, category and subject boundary with the same seriousness as filesystem placement."
+		},
+		{
+			"id": "subsystem-documentation-governance",
+			"description": "Keep Canvas subsystem documentation thin, routed and split by boundary through canvas-docs-map, mirroring the root AGENTS.md thin-entry pattern."
+		},
+		{
+			"id": "screenshot-visual-evidence",
+			"description": "Generate screenshot-level evidence for current/active Canvas views so visual acceptance is not limited to JSON or geometry inference."
+		}
+	],
+	"view_granularity_levels": [
+		{
+			"level": "L0",
+			"name": "entry-navigation",
+			"purpose": "Choose which registered view layer to open; no architecture dataflow."
+		},
+		{
+			"level": "L1",
+			"name": "system-overview",
+			"purpose": "Show the major system modules and cross-module dataflow."
+		},
+		{
+			"level": "L2",
+			"name": "module-architecture",
+			"purpose": "Show one module's internal structure, owner files, gates and inputs/outputs."
+		},
+		{
+			"level": "L3",
+			"name": "workflow-dataflow",
+			"purpose": "Show ordered execution, state transitions, queues, tools and quality gates."
+		},
+		{
+			"level": "L4",
+			"name": "contract-state",
+			"purpose": "Show schema fields, registry contracts, issue states, loop states or generated machine surfaces."
+		}
+	],
+	"view_boundary_model": {
+		"rule": "Canvas view classification is as important as filesystem placement. Storage layout decides where a canvas file lives; view boundary classification decides what the canvas is allowed to express.",
+		"required_axes": [
+			{
+				"axis": "layer",
+				"purpose": "Decides which system surface owns the view: entry, system-subsystem, knowledge-content, workflow, project, draft or archive."
+			},
+			{
+				"axis": "view_level",
+				"purpose": "Decides the zoom level: L0 navigation, L1 system overview, L2 module architecture, L3 workflow/dataflow, L4 contract/state."
+			},
+			{
+				"axis": "view_category",
+				"purpose": "Decides the relationship semantics shown by arrows and grouping: navigation, system-overview, module-architecture, workflow, dataflow, taxonomy, skill, schema, tool, loop, diagnostic, project-context or archive."
+			},
+			{
+				"axis": "primary_subject",
+				"purpose": "Names the one main object the view explains."
+			},
+			{
+				"axis": "boundary",
+				"purpose": "States what the view owns and what it must not mix in."
+			}
+		],
+		"boundary_rules": [
+			"A current or active view must have one primary subject.",
+			"A view may link to other subjects, but linked subjects should become child_views or related_views instead of being merged into the main body.",
+			"A navigation view must not express architecture, workflow, taxonomy or dataflow.",
+			"A system overview view must not expand every module's internals; it should link to L2 module views.",
+			"A module architecture view must not become a global system overview or domain taxonomy map.",
+			"A workflow or dataflow view must not become a static directory map or domain taxonomy map.",
+			"A taxonomy or knowledge map must not explain system runtime behavior.",
+			"A project context view must not redefine global system truth.",
+			"A directory layout view explains placement boundaries, not the full internal behavior of every module.",
+			"Canvas view_level is a visual zoom level, not a module owner_layer. Use system/module-layer-model.json for module responsibility layers."
+		],
+		"promotion_rule": "Before a draft view becomes current or active, it must declare layer, view_level, view_category, primary_subject, boundary and not_for in canvas-registry."
+	},
+	"directory_hierarchy_model": {
+		"rule": "Canvas folders must show the expected reading path before they show module identity.",
+		"canonical_read_order": [
+			{
+				"path": "30-maps/canvas/00-entry/",
+				"meaning": "Start here; only top-level visual navigation."
+			},
+			{
+				"path": "30-maps/canvas/10-system/00-overview/",
+				"meaning": "Read next for knowledge-base system overview and major module relations."
+			},
+			{
+				"path": "30-maps/canvas/10-system/10-subsystems/",
+				"meaning": "Drill into individual system modules, skills, tools, schemas, loops, diagnostics and closure views."
+			},
+			{
+				"path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/",
+				"meaning": "Read for knowledge-content classification and taxonomy views."
+			}
+		],
+		"placement_rule": "A stable Canvas path should encode layer and zoom level first, then the module or topic directory. Do not place L1 system overview views and L2 subsystem views as sibling folders.",
+		"future_subsystem_rule": "New system-module visualizations should normally live under 30-maps/canvas/10-system/10-subsystems/{module-id}/ unless they are true system overview views.",
+		"human_navigation_goal": "A user opening the file tree should be able to infer entry, overview and drilldown order without reading registry JSON first."
+	},
+	"documentation_model": {
+		"id": "thin-entry-routed-docs",
+		"machine_truth": "system/canvas-docs-map.json",
+		"baseline_doc": "docs/canvas/README.md",
+		"rule": "Canvas subsystem documentation must follow the root AGENTS.md pattern: the baseline document stays thin, machine truth stays in JSON registries, and detailed human explanations are routed to boundary-specific docs.",
+		"human_doc_home": "docs/canvas/",
+		"boundary_rule": "If a Canvas documentation topic grows beyond a short pointer, create or update a routed docs/canvas/*.md file and register it in system/canvas-docs-map.json instead of expanding the baseline document.",
+		"not_for": [
+			"Putting all Canvas rules into docs/canvas/README.md",
+			"Treating Markdown as machine truth",
+			"Hiding subsystem behavior in unregistered child-agent notes"
+		]
+	},
+	"diagram_kinds": [
+		"navigation-index",
+		"system-architecture",
+		"module-architecture",
+		"module-internal-structure",
+		"workflow-map",
+		"dataflow-map",
+		"skill-architecture",
+		"schema-contract-map",
+		"tool-runtime-map",
+		"loop-state-map",
+		"diagnostic-repair-map",
+		"domain-taxonomy-map",
+		"knowledge-map",
+		"project-context-map"
+	],
+	"visual_coverage_policy": {
+		"required_when": [
+			"A stable module has multiple internal files, gates or dataflows.",
+			"A workflow spans three or more steps or tools.",
+			"A skill is part of a mixed module with machine truth, queue, schema or validator.",
+			"A schema or registry becomes a system contract consumed by other modules.",
+			"A loop, queue or diagnostic process has state transitions.",
+			"A closure matrix, module maturity table or cross-module gap list is used for system governance.",
+			"A project context pack or workflow will be reused across Codex projects.",
+			"A user needs to understand or operate the structure repeatedly."
+		],
+		"optional_when": [
+			"The artifact is a small one-off note.",
+			"The structure is still a rough draft.",
+			"A route entry and source_of_truth are enough for machine operation and no human navigation benefit exists."
+		],
+		"promotion_rule": "Draft sketches may stay in 80-drafts. Once a view explains stable structure or becomes a navigation entry, register it in canvas-registry, canvas-view-graph and visual-coverage-map when it covers a required module decision.",
+		"machine_truth": "system/visual-coverage-map.json",
+		"no_blind_spot_rule": "Every module in system/system-closure-map.json must have a visual coverage decision: dedicated_required, shared_required, deferred, or not_applicable."
+	},
+	"layout_protocol": {
+		"id": "main-structure-left-navigation-right",
+		"status": "global-current-active-view-rule",
+		"applies_to": [
+			"system-architecture",
+			"module-architecture",
+			"module-internal-structure",
+			"workflow-map",
+			"dataflow-map",
+			"skill-architecture",
+			"schema-contract-map",
+			"tool-runtime-map",
+			"loop-state-map",
+			"diagnostic-repair-map",
+			"domain-taxonomy-map",
+			"knowledge-map",
+			"project-context-map"
+		],
+		"excludes": [
+			"navigation-index",
+			"rough draft sketches that are not treated as current or active"
+		],
+		"rule": "Every current or active non-navigation structural Canvas view must reserve the left/main area for the primary structure, workflow, taxonomy, state transition, knowledge structure, project context or dataflow. If the view needs parent, child or related-view navigation, those navigation targets must be grouped in a clearly separated right-side vertical navigation panel.",
+		"edge_rule": "Navigation edges must stay inside the right-side navigation panel or connect only at the panel boundary; they must not cross the main structure, workflow, taxonomy, state transition, knowledge structure, project context or dataflow path.",
+		"navigation_button_rule": "In structural views, registered navigation file nodes are compact click targets, not information cards. Keep them visually small and put the human meaning in nearby nav-label-* text nodes.",
+		"gutter_rule": "Keep a clear whitespace gutter between the main content right edge and the right-side navigation labels. Target about 220px of separation and do not allow current or active structural views to fall below 200px.",
+		"reason": "This keeps every stable view readable at scale and prevents navigation edges from being mistaken for system relationships or dataflow."
+	},
+	"archive_view_protocol": {
+		"id": "visible-legacy-view-retirement",
+		"status": "global-archive-view-rule",
+		"applies_to": [
+			"30-maps/canvas/90-archive/",
+			"legacy-draft",
+			"superseded",
+			"archived"
+		],
+		"rule": "Archived or legacy Canvas views may preserve historical layout, but they must not look like current architecture truth. If a legacy view remains visible in the Canvas system, it must show an archive-status note and provide a compact right-side navigation button to the replaced_by current view.",
+		"validation_gate": "scripts/validate-canvas.ps1 checks archive-status-note, replaced_by and replacement navigation nodes for registered legacy/archive Canvas views."
+	},
+	"navigation_index_protocol": {
+		"id": "layer-aware-current-view-route-map",
+		"status": "global-current-entry-rule",
+		"applies_to": [
+			"visual-navigation-index"
+		],
+		"rule": "A current or active L0 navigation index is a pure Obsidian jump surface and must read as a layer-aware route map. It should group destinations by system/module-layer-model.json plus registered view_level, Canvas layer and primary_subject instead of vague mental categories.",
+		"visual_form": "Use title/scope bands plus ownership-layer sections. Put human meaning and target view_level in nav-label-* cards, and keep .canvas file nodes as compact click buttons instead of large information cards. When a stable layer has no dedicated current view, state that it is covered by system overview instead of creating a fake placeholder.",
+		"forbidden": [
+			"machine truth JSON, Markdown or script file nodes on the L0 entry canvas",
+			"future placeholder cards as navigable targets",
+			"edges that do not connect to a registered navigation file node",
+			"using the entry view to express architecture, taxonomy detail, workflow, dataflow or governance relationships",
+			"subjective grouping that hides whether a target is system overview, knowledge content or system subsystem",
+			"treating Canvas L0/L1/L2 as the same axis as module owner_layer"
+		],
+		"validation_gate": "scripts/validate-canvas.ps1 rejects current or active navigation views with non-canvas file nodes, unregistered canvas file nodes, missing destination label nodes, target view_level missing from L0 nav labels, or edges that do not touch a registered navigation node."
+	},
+	"context_bridge_protocol": {
+		"id": "navigation-to-main-content-context-bridge",
+		"status": "optional-current-active-view-rule",
+		"applies_to": [
+			"current and active non-navigation Canvas views"
+		],
+		"rule": "A context bridge should show which right-side navigation item corresponds to which current-view content without duplicating the same explanation in the navigation panel and the main body. The preferred form is one nav-label-* interpretation node, one compact navigation file button, and one direct bridge-* line from that label to the corresponding content module.",
+		"visual_form": "Use nav-label-* as the single human-readable explanation for the navigation target. Keep the file node as a compact click button beside the label. Connect the label directly to the corresponding current-layer content node with one bridge-* edge. bridge-anchor-*, content-marker-* and context-route-* are exceptional escape hatches, not the default visual language.",
+		"forbidden": [
+			"using bridge edges in L0 navigation-index views",
+			"using bridge edges to express system dataflow or execution order",
+			"unlabeled bridge edges",
+			"long diagonal bridge edges that cross main cards, status bands or machine-truth bands",
+			"bridge edges between two navigation nodes or two unrelated main-content nodes",
+			"visible colored route cards or dot cards for context-rail/context-corridor/context-port nodes",
+			"treating long routed navigation-to-content lines as the default visual language",
+			"building visible wiring rails or route spines between the navigation panel and main structure",
+			"using content-marker-* badges as a duplicate copy of the navigation explanation",
+			"using bridge-anchor-* and content-marker-* together when one direct nav-label-to-content line would be clear"
+		],
+		"validation_gate": "scripts/validate-canvas.ps1 checks bridge-* semantics; scripts/audit-canvas-visual.ps1 checks line obstruction, warns on excessive direct-line length, checks main-to-navigation gutter, and rejects visible route-card clutter."
+	},
+	"visual_semantic_language": {
+		"id": "view-scoped-color-semantics-and-layer-guides",
+		"status": "global-current-active-view-rule",
+		"reference_origin": "C:/Users/dzw/Desktop/or/projects/cc-multi-uav-powerline-inspection Canvas subsystem, adapted as method only.",
+		"rule": "Canvas color is a governed visual review language, not decoration. Every current or active view must declare a color_semantics contract in system/canvas-registry.json and render a visible color-legend node in the .canvas file.",
+		"view_scoped_palette_rule": "Palette meaning is scoped by view category. System, module, diagnostic, review and workflow views use system-role colors; taxonomy views may use domain-family colors; loop views may use loop-state colors. A taxonomy color must not be interpreted as a system status color outside that taxonomy view.",
+		"legend_rule": "The visible legend explains the active palette briefly. It is a human-reading aid and must not become machine truth.",
+		"layer_guide_rule": "Parent-child or drilldown guidance should be represented by registered navigation_nodes, canvas-view-graph edges, and sparse bridge-* correspondence lines. Main workflow/dataflow edges remain separate from navigation and layer-guide lines.",
+		"machine_truth_boundary": "Color, coordinates and visible legend text stay out of system/canvas-view-graph.json. The registry names the palette and source files; the .canvas file carries the visual legend.",
+		"validation_gate": "scripts/validate-canvas.ps1 checks color_semantics, palette ids, visible legend nodes, palette color membership and stable color token compatibility; scripts/audit-canvas-visual.ps1 checks that the legend is readable and not visually tiny.",
+		"color_token_rule": "Current and active Canvas views must use stable Obsidian color tokens: preset values 1-6 or hex #RRGGBB. Human color names are not stable palette tokens."
+	},
+	"dataflow": [
+		{
+			"from": "system/information-map.json",
+			"to": "canvas views",
+			"verb": "project-module-boundaries"
+		},
+		{
+			"from": "system/route-registry.json",
+			"to": "canvas views",
+			"verb": "project-routing-entrypoints"
+		},
+		{
+			"from": "30-maps/domains/domain-taxonomy.registry.json",
+			"to": "domain canvas views",
+			"verb": "project-taxonomy-shape"
+		},
+		{
+			"from": "system/loop-registry.json",
+			"to": "canvas views",
+			"verb": "project-loop-state"
+		},
+		{
+			"from": ".agents/skills/",
+			"to": "skill canvas views",
+			"verb": "project-skill-entrypoints"
+		},
+		{
+			"from": "schemas/",
+			"to": "schema canvas views",
+			"verb": "project-contract-boundaries"
+		},
+		{
+			"from": "system/system-closure-map.json",
+			"to": "canvas views",
+			"verb": "project-module-closure-state"
+		},
+		{
+			"from": "system/diagnostics/",
+			"to": "diagnostic canvas views",
+			"verb": "project-diagnosis-closure"
+		},
+		{
+			"from": "system/canvas-registry.json",
+			"to": "Obsidian and Codex",
+			"verb": "resolve-current-view"
+		},
+		{
+			"from": "system/canvas-registry.json",
+			"to": "canvas views",
+			"verb": "resolve-parent-child-navigation"
+		},
+		{
+			"from": "system/canvas-registry.json",
+			"to": "system/canvas-view-graph.json",
+			"verb": "project-layout-free-view-graph"
+		},
+		{
+			"from": "system/canvas-docs-map.json",
+			"to": "docs/canvas/",
+			"verb": "route-human-documentation"
+		},
+		{
+			"from": "system/canvas-view-graph.json",
+			"to": "Codex",
+			"verb": "provide-machine-navigation"
+		},
+		{
+			"from": "system/visual-coverage-map.json",
+			"to": "canvas views",
+			"verb": "gate-required-visual-coverage"
+		},
+		{
+			"from": "system/knowledge-ingestion-system.json",
+			"to": "canvas views",
+			"verb": "project-knowledge-ingestion-boundary-and-handoffs"
+		}
+	],
+	"view_families": [
+		{
+			"id": "visual-navigation",
+			"default_current": "kb-navigation-index",
+			"purpose": "Top-level Obsidian navigation index. It routes to lower-level views but does not represent architecture dataflow."
+		},
+		{
+			"id": "knowledge-base-system-architecture",
+			"default_current": "knowledge-base-system-architecture-map",
+			"purpose": "Overall architecture of the knowledge-base operating system."
+		},
+		{
+			"id": "diagnostic-system-architecture",
+			"default_current": "diagnostic-system-architecture-map",
+			"purpose": "Architecture of the diagnosis and system-repair routing module."
+		},
+		{
+			"id": "canvas-system-architecture",
+			"default_current": "canvas-system-architecture-map",
+			"purpose": "Architecture of the Canvas subsystem itself."
+		},
+		{
+			"id": "canvas-directory-layout",
+			"default_current": "canvas-directory-layout-map",
+			"purpose": "Directory boundary and placement map for Canvas files."
+		},
+		{
+			"id": "domain-taxonomy-visualization",
+			"default_current": "domain-taxonomy-overview-map",
+			"purpose": "Visual maps for domain taxonomy, including the high-level overview and the required full level-3 matrix used for primary_level_3 routing."
+		},
+		{
+			"id": "system-closure-architecture",
+			"default_current": "system-closure-architecture-map",
+			"purpose": "Visual maps for module closure status, maturity audit, known gaps and closure quality gates."
+		},
+		{
+			"id": "workflow-visualization",
+			"default_current": null,
+			"purpose": "Visual maps for ingestion, retrieval, quality gates and Codex workflows."
+		},
+		{
+			"id": "skill-visualization",
+			"default_current": null,
+			"purpose": "Visual maps for thin skill entrypoints, ownership boundaries, mixed skill-system modules and method routing."
+		},
+		{
+			"id": "schema-contract-visualization",
+			"default_current": null,
+			"purpose": "Visual maps for schema fields, registry contracts and machine-readable data boundaries."
+		},
+		{
+			"id": "tool-runtime-visualization",
+			"default_current": null,
+			"purpose": "Visual maps for tools, scripts, runtimes, inputs, outputs and migration triggers."
+		},
+		{
+			"id": "knowledge-ingestion-architecture",
+			"default_current": "knowledge-ingestion-architecture-map",
+			"purpose": "Visual map for the knowledge ingestion subsystem: intake modes, source-quality gates, legacy adoption and cross-module handoffs."
+		}
+	],
+	"sync_triggers": [
+		{
+			"changed": "system/information-map.json",
+			"check": "system architecture Canvas views"
+		},
+		{
+			"changed": "system/route-registry.json",
+			"check": "route and workflow Canvas views"
+		},
+		{
+			"changed": "system/diagnostics/",
+			"check": "diagnostic system Canvas views"
+		},
+		{
+			"changed": ".agents/skills/",
+			"check": "skill and mixed module Canvas views"
+		},
+		{
+			"changed": "schemas/",
+			"check": "schema contract Canvas views"
+		},
+		{
+			"changed": "system/tool-map.json or scripts/",
+			"check": "tool runtime Canvas views"
+		},
+		{
+			"changed": "30-maps/domains/domain-taxonomy.registry.json",
+			"check": "domain taxonomy Canvas views"
+		},
+		{
+			"changed": "30-maps/domains/domain-taxonomy.docs.json",
+			"check": "domain taxonomy documentation and Canvas source binding"
+		},
+		{
+			"changed": "system/loop-registry.json or system/loops/",
+			"check": "loop and progress Canvas views"
+		},
+		{
+			"changed": "system/system-closure-map.json",
+			"check": "system closure Canvas views"
+		},
+		{
+			"changed": "50-workflows/",
+			"check": "workflow Canvas views"
+		},
+		{
+			"changed": "docs/canvas/ or system/canvas-docs-map.json",
+			"check": "Canvas documentation boundary, thin entrypoint and route references"
+		},
+		{
+			"changed": "system/visual-coverage-map.json",
+			"check": "required Canvas views, module visual decisions, closure map visual_projection and visual blind-spot gate"
+		},
+		{
+			"changed": "system/module-layer-model.json",
+			"check": "entry, system overview and module-owner visual projections"
+		},
+		{
+			"changed": "system/system-structure-governance.json or system/module-relationship-map.json",
+			"check": "system structure governance Canvas view, entry navigation, system overview and visual coverage decisions"
+		},
+		{
+			"changed": "system/knowledge-ingestion-system.json or system/knowledge-ingestion-docs-map.json",
+			"check": "knowledge-ingestion subsystem Canvas view and system overview navigation"
+		}
+	],
+	"quality_gates": [
+		"Every trusted Canvas file must be registered in system/canvas-registry.json.",
+		"Every registered Canvas file must parse as JSON and contain nodes and edges arrays.",
+		"Every current Canvas view must belong to a view_family, and each view_family may have at most one current view.",
+		"Every current or active Canvas view must declare view_level, view_category, primary_subject, boundary and not_for in system/canvas-registry.json.",
+		"Every current or active Canvas view must keep one primary subject; cross-boundary material must be represented as child_views, related_views or source_of_truth instead of being merged into the main body.",
+		"Every trusted Canvas view must list source_of_truth files.",
+		"New Canvas files must follow storage_layout unless listed under placement_exceptions.",
+		"Current and active child views should include an Obsidian file-node link back to their parent view.",
+		"Higher-level views should expose file-node links to important lower-level views instead of burying them only in text.",
+		"Current Canvas views should separate title, primary path, drilldown or return links, supporting status and machine truth zones.",
+		"Every important module-internal architecture view should show trigger/input, core steps, owner files, machine truth, validation and navigation.",
+		"Every mixed skill-system module view should separate thin skill entrypoint, machine protocol, queue/state, schema, validator and Canvas projection.",
+		"Every workflow or dataflow view should make direction, state transitions and quality gates visually explicit.",
+		"Every schema or contract view should distinguish human explanation from machine fields and consumers.",
+		"Every current or active L0 navigation view must stay a pure jump list: file nodes point only to registered .canvas views, all canvas file nodes are listed in navigation_nodes, every navigation node has a visible Chinese destination label, and edges connect to registered navigation file nodes.",
+		"Every current or active view must register each visible file node that points to another registered Canvas view in navigation_nodes and provide a visible human-readable destination label.",
+		"Every current or active non-navigation structural view should keep registered navigation file nodes as compact buttons; nav-label-* carries both destination meaning and current-content correspondence.",
+		"Every current or active non-navigation structural view should leave a clear whitespace gutter between the main content and right-side navigation labels; target about 220px and never below 200px.",
+		"Every visible legacy/archive Canvas view must clearly mark itself as archived and provide a compact right-side navigation button to its replaced_by current view.",
+		"Optional context bridge edges should normally connect nav-label-* interpretation nodes directly to the corresponding current-content node; bridge-anchor-*, content-marker-* and context-route-* are exceptions for cases where one direct line cannot stay readable.",
+		"Stable structural diagrams must be registered before they are treated as current knowledge.",
+		"Navigation views should only express Obsidian jump paths. Every current or active non-navigation structural view should keep the main structure, workflow, taxonomy, state transition, knowledge structure, project context or dataflow on the left/main area and place parent, child or related-view navigation in a separated right-side vertical navigation panel.",
+		"Navigation edges must stay inside the right-side navigation panel or connect only at the panel boundary; they must not cross the main structure, workflow, taxonomy, state transition, knowledge structure, project context or dataflow path.",
+		"scripts/validate-canvas.ps1 must reject current or active non-navigation structural views whose registered navigation nodes are not positioned to the right of the main structure.",
+		"scripts/audit-canvas-visual.ps1 must pass before a current or active Canvas view is considered visually accepted; it checks empty text cards, node overlap, cramped bridge anchors and overly long lines.",
+		"Canvas subsystem documentation must keep docs/canvas/README.md thin and route detailed topics through system/canvas-docs-map.json.",
+		"Machine agents should use system/canvas-view-graph.json for view traversal instead of parsing .canvas text or coordinates.",
+		"system/canvas-view-graph.json must not contain Canvas layout fields such as x, y, width, height, color or card text.",
+		"Canvas explanations must not override machine-readable registry truth.",
+		"Canvas line placement is part of visual quality: current or active views must not let edges cross unrelated cards, section bands, navigation labels, file nodes or machine-truth blocks.",
+		"Low-value reference lines should be removed or replaced with grouping, labels, local notes or nearby anchors when they reduce scanability.",
+		"scripts/audit-canvas-visual.ps1 must pass in strict mode after Canvas visual edits before a current or active view is visually accepted.",
+		"Navigation-to-content correspondence should not duplicate the same explanation in both the navigation panel and the main body; use one nav-label-* interpretation and one direct bridge-* line to the real current-content node.",
+		"context-route-* and context-rail/context-corridor/context-port helpers are exceptional escape hatches; if used, helper nodes must be near-invisible group nodes, not visible text cards or colored boxes.",
+		"scripts/audit-canvas-visual.ps1 -Strict must warn or fail when navigation-to-content relationships create visible route spines or duplicate interpretation layers; prefer one direct nav-label-to-content line.",
+		"A stable domain taxonomy that requires primary_level_3 routing must have a registered visual level-3 matrix view, not only a high-level overview.",
+		"Every module in system/system-closure-map.json must have exactly one visual coverage decision in system/visual-coverage-map.json. Required and shared views must be registered in canvas-registry and canvas-view-graph.",
+		"Canvas is a visual shadow of filesystem and registry structure: every trusted view must point back to machine truth, and shadow mismatch must be repaired through the owning registry or map.",
+		"Every trusted Canvas view must pass text integrity checks: node text and edge labels must not contain literal question-mark placeholder runs, Unicode replacement characters or mojibake markers.",
+		"System JSON that governs Canvas, routes, principles, closure, reviews, diagnostics, schemas or domain taxonomy must pass text integrity checks before system validation can pass.",
+		"Every current or active L0 navigation view must expose the target view_level in each nav-label-* so users can see hierarchy before opening the child Canvas.",
+		"Every current or active L0 navigation view should group destinations by registered layer, view_level and primary_subject; subjective mixed buckets are not accepted as entry-level information architecture.",
+		"Module responsibility layers must come from system/module-layer-model.json; Canvas view_level, Canvas layer, filesystem path and lifecycle status cannot substitute for owner_layer.",
+		"When module-layer-model changes, update entry/system overview Canvas source_of_truth and rerun validate-system plus Canvas validation/audit.",
+		"When system-structure-governance or module-relationship-map changes, update the dedicated structure-governance Canvas plus any affected entry/system overview navigation.",
+		"When a new system module appears, Canvas must check whether existing views in that module boundary are adopted, migrated, deprecated, archived, exempted, or queued for follow-up.",
+		"Every current or active Canvas view must declare view-scoped color_semantics in system/canvas-registry.json and render a visible color-legend node; taxonomy/domain palettes, system-role palettes and loop-state palettes must not be silently mixed.",
+		"Every current or active Canvas palette color, node color and edge color must use an Obsidian-compatible preset token 1-6 or hex #RRGGBB; plain named colors are not accepted.",
+		"Canvas visual acceptance must distinguish static validation from user-visible acceptance: passing validate-canvas and audit-canvas-visual is evidence, but final acceptance must check the original visual concern or record rendered-inspection limitations.",
+		"Canvas visual acceptance for current/active views must include screenshot-level evidence from scripts/audit-canvas-screenshot.ps1 when layout, navigation, color, readability or user-visible visual concerns are touched.",
+		"Every current or active non-navigation support file label must have a support_bindings entry to an upper Canvas content node.",
+		"Support relation semantics live in canvas-registry; visible edges are optional and should be drawn only when they improve readability."
+	],
+	"tools": [
+		"scripts/validate-canvas.ps1",
+		"scripts/audit-canvas-visual.ps1",
+		"scripts/validate-diagnostics.ps1",
+		"scripts/validate-system.ps1",
+		"scripts/audit-canvas-screenshot.ps1"
+	],
+	"edge_routing_protocol": {
+		"id": "line-routing-and-obstruction-control",
+		"status": "global-current-active-view-rule",
+		"applies_to": [
+			"current and active Canvas views"
+		],
+		"rule": "Canvas edges are visual layout objects. A line must not cross unrelated cards, section bands, navigation labels, file nodes, or machine-truth blocks. Prefer fewer meaningful lines over dense reference wiring.",
+		"required_patterns": [
+			"Keep primary flow lines short and aligned with the dominant reading direction.",
+			"Keep primary-flow edges unlabeled by default; put semantics in numbered cards, section titles, local notes and spatial order.",
+			"Use file-label-* as the integrated readable card for every non-navigation support file; keep the file node as a compact embedded click button.",
+			"Use spatial grouping, labels, local notes, or bridge-anchor-* nodes instead of long low-value reference lines.",
+			"Right-side navigation should be readable without internal vertical connector lines when those lines would pass through labels.",
+			"Keep the right-side navigation panel far enough from the main structure that bridge lines pass through whitespace instead of crowding the main cards.",
+			"Machine-truth file nodes may be grouped without arrows when arrows would cross section bands or main cards.",
+			"When navigation needs to point into current content, prefer one nav-label-* interpretation node connected directly to the content module with one bridge-* edge.",
+			"Context route points and duplicate content markers are escape hatches only; users should perceive one explanation and one line, not routing plumbing."
+		],
+		"forbidden": [
+			"Lines crossing non-endpoint cards, labels, bands, or file nodes.",
+			"Primary-flow edge labels between adjacent structural cards in current or active views.",
+			"Horizontal edge labels squeezed into gaps that are narrower than the label itself.",
+			"Long diagonal lines used only to show static reference or grouping.",
+			"Navigation chain lines that pass through nav-label-* nodes.",
+			"Fan-out lines from a section title to every child card when layout already shows grouping.",
+			"Navigation-to-content route spines that visually compete with the main system dataflow."
+		],
+		"validation_gate": "scripts/audit-canvas-visual.ps1 computes side-anchor edge geometry and fails when an edge intersects an unrelated node; strict mode also fails long diagonal, primary-flow-label and edge-label-clearance warnings."
+	},
+	"visual_shadow_model": {
+		"id": "filesystem-and-system-structure-visual-shadow",
+		"rule": "Canvas behaves like the visual shadow of the filesystem and system registries. It should make hidden structure visible, but it must stay synchronized with the real machine truth instead of becoming a second truth system.",
+		"shadow_sources": [
+			"filesystem paths and directory hierarchy",
+			"system/information-map.json module boundaries and dataflows",
+			"system/route-registry.json task routing",
+			"system/canvas-registry.json view status and placement",
+			"system/canvas-view-graph.json layout-free navigation graph",
+			"system/visual-coverage-map.json required and shared visual coverage decisions",
+			"domain, workflow, loop, schema, diagnostic and tool registries",
+			"system/module-layer-model.json module owner layers and module kinds",
+			"system/module-relationship-map.json module topology and branch decisions"
+		],
+		"shadow_responsibilities": [
+			"show reading order and drilldown paths that the filesystem alone cannot express clearly",
+			"make module internals, workflows, dataflows, loops and diagnostic gates visible to humans",
+			"provide Obsidian jump points through compact file nodes",
+			"help detect mismatches between what exists in files and what the system claims to operate"
+		],
+		"shadow_limits": [
+			"Canvas text and coordinates do not decide system truth",
+			"a Canvas view cannot replace route, information map, schema, registry, index or validator updates",
+			"if the shadow disagrees with machine truth, repair the owning registry and then regenerate or revise the Canvas view"
+		]
+	},
+	"text_integrity_protocol": {
+		"id": "canvas-and-system-text-integrity",
+		"status": "global-current-active-view-rule",
+		"rule": "Trusted Canvas and system registry text must remain human-readable. Literal question-mark placeholder runs, Unicode replacement characters and mojibake markers are content corruption, not acceptable visual shorthand.",
+		"detects": [
+			"four or more consecutive question-mark placeholders",
+			"Unicode replacement character",
+			"common CJK mojibake markers"
+		],
+		"validation_gate": "scripts/validate-canvas.ps1 checks Canvas node text and edge labels; scripts/validate-system.ps1 checks system, schema and domain JSON strings."
+	},
+	"module_layer_boundary": {
+		"machine_truth": "system/module-layer-model.json",
+		"topology_truth": "system/module-relationship-map.json",
+		"owner_module": "system-structure-governance",
+		"rule": "Canvas view_level/layer describe visual view boundaries. Stable module owner_layer and module_kind are derived from system-structure-governance, while module relationships and branch decisions live in system/module-relationship-map.json.",
+		"axes_to_keep_separate": [
+			"owner_layer",
+			"module_relationship",
+			"storage_path",
+			"lifecycle_status",
+			"canvas_view_level"
+		]
+	},
+	"system_invariants": [
+		"L2 system-subsystem Canvas views belong under the L1 system overview in the view graph. L0 may expose shortcuts but cannot be their canonical parent."
+	],
+	"change_log": [
+		{
+			"id": "entry-parentage-repair-20260607",
+			"changed": [
+				"kb-navigation-index",
+				"canvas-view-graph",
+				"canvas-registry",
+				"system-subsystem Canvas return links"
+			],
+			"result": "Repaired the L0/L1/L2 hierarchy so Canvas, diagnostic, review, closure and structure-governance maps are L2 system-subsystems under the L1 system overview, not peers of the system overview."
+		},
+		{
+			"id": "view-scoped-color-semantics-20260608",
+			"changed": [
+				"canvas color semantics",
+				"visible color legends",
+				"palette validation",
+				"layer guide interpretation"
+			],
+			"result": "Adapted the OR Canvas color and layer-guide pattern as a governed visual language: colors are scoped by view category, every current/active view declares a palette and visible legend, and validation rejects undeclared or out-of-palette color usage."
+		},
+		{
+			"id": "loop-color-token-repair-20260609",
+			"changed": [
+				"loop Canvas colors",
+				"system overview loop shortcut colors",
+				"canvas palette token rule",
+				"validate-canvas color token gate"
+			],
+			"result": "Repaired loop graph style drift by replacing named colors with Obsidian preset tokens and making stable color tokens part of Canvas validation."
+		},
+		{
+			"id": "canvas-visual-acceptance-boundary-20260609",
+			"changed": [
+				"Canvas visual acceptance boundary",
+				"diagnostic self-audit trigger",
+				"review visual criteria"
+			],
+			"result": "Promoted post-validation user-visible Canvas defects to a diagnostic self-audit trigger and clarified that static validation is evidence rather than visual acceptance by itself."
+		},
+		{
+			"id": "canvas-screenshot-audit-gate-20260609",
+			"changed": [
+				"Canvas screenshot-level audit tool",
+				"visual acceptance boundary",
+				"review evidence path"
+			],
+			"result": "Added PNG screenshot evidence generation for all current/active Canvas views and made it part of visual acceptance evidence."
+		},
+		{
+			"id": "or-support-semantics-adoption-20260610",
+			"date": "2026-06-10",
+			"summary": "Adopted OR-style support relation semantics as registry-first support_bindings/support_relations, migrated current and active structural Canvas views, and connected validation plus visual audit gates."
+		}
+	],
+	"visual_acceptance_boundary": {
+		"id": "static-validation-plus-user-visible-acceptance",
+		"rule": "Canvas validation is necessary evidence, not visual acceptance by itself. A current/active Canvas visual change is accepted only when machine gates pass and the original user-visible concern is checked against the actual visible view or an explicit rendered-view limitation is recorded.",
+		"static_evidence": [
+			"scripts/validate-canvas.ps1",
+			"scripts/audit-canvas-visual.ps1 -Strict",
+			"scripts/audit-text-integrity.ps1 when text or encoding was touched",
+			"scripts/audit-canvas-screenshot.ps1 -Strict",
+			"system/reviews/canvas-screenshots/latest-report.json"
+		],
+		"user_visible_acceptance": [
+			"re-read the changed Canvas nodes/labels/legend that caused the failure",
+			"compare the repair to the original user-visible failure packet",
+			"state any limitation when Obsidian rendered screenshot inspection is not available in the current run",
+			"open or inspect the generated PNG screenshot evidence when Obsidian-native rendering is not available"
+		],
+		"escalation_rule": "If the user rejects a post-validation Canvas repair as still wrong or serious, classify diagnostics itself as affected and run diagnostic self-audit."
+	},
+	"support_relation_protocol": {
+		"id": "registry-first-support-semantics",
+		"status": "active",
+		"adopted_from": "OR project canvas registry pattern, adapted to avoid dense visible wiring",
+		"purpose": "Make bottom machine-truth/support file bands interpretable by agents without forcing every relation to appear as a visible Canvas line.",
+		"rule": "For every current or active non-navigation Canvas view, each non-navigation file-label-* support card must have a support_bindings entry to the upper Canvas node it supports. Relationships among support cards are recorded in support_relations. Visible Canvas edges are optional and must be referenced with visual_edge_id only when deliberately drawn.",
+		"boundaries": [
+			"support_bindings and support_relations live in system/canvas-registry.json, not in AGENTS.md or Markdown prose",
+			"file-label-* cards remain human-readable role explanations on the Canvas surface",
+			"do not add dense reference wiring when the registry can carry the semantics more cleanly",
+			"navigation nodes remain governed by navigation_nodes and bridge-* rules, not by support_bindings"
+		],
+		"validation_gate": [
+			"scripts/validate-canvas.ps1 requires every support label to bind upward and checks optional visual_edge_id endpoints",
+			"scripts/audit-canvas-visual.ps1 -Strict warns when support labels read as loose bibliography without bindings"
+		]
+	}
+}

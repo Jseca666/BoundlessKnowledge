@@ -1,0 +1,509 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -1080,
+			"y": -680,
+			"width": 2760,
+			"height": 120,
+			"color": "1",
+			"text": "# 诊断与系统修复模块\n\n先诊断，再定位责任层；先修正向模型，再决定是否需要护栏；最后同步机器契约、现有资产、可视化投影与验收。"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"x": -1080,
+			"y": -520,
+			"width": 2760,
+			"height": 90,
+			"color": "6",
+			"text": "# 读图口径\n\n左侧是诊断主流程；中部是新记录契约；底部是机器真相；右侧只做跳转导航。Canvas 是视觉投影，不替代 JSON / schema / validator。"
+		},
+		{
+			"id": "failure-packet",
+			"type": "text",
+			"x": -1080,
+			"y": -330,
+			"width": 360,
+			"height": 170,
+			"color": "1",
+			"text": "# 1. Failure Packet\n\n冻结事故表现：当前文件、画布、命令、输出、用户纠正和上游输入。事故只是证据入口，不是根因问题。"
+		},
+		{
+			"id": "evidence-tracks",
+			"type": "text",
+			"x": -540,
+			"y": -330,
+			"width": 360,
+			"height": 170,
+			"color": "4",
+			"text": "# 2. 事故与根因问题\n\n分离 incident_manifestation、root_problem 和 system_regulation_target，再追下层证据链和上层原则链。"
+		},
+		{
+			"id": "owner-and-class",
+			"type": "text",
+			"x": 0,
+			"y": -330,
+			"width": 360,
+			"height": 170,
+			"color": "5",
+			"text": "# 3. 责任层与修复分类\n\n确定 owning repair layer。\n分类为 local_repair / system_upgrade / blocked_investigation。"
+		},
+		{
+			"id": "positive-model-repair",
+			"type": "text",
+			"x": 540,
+			"y": -330,
+			"width": 360,
+			"height": 170,
+			"color": "3",
+			"text": "# 4. 正向模型修复\n\n必填：positive_model_repair。\n先修模块边界、路由、registry、schema、dataflow、状态或生成机制。"
+		},
+		{
+			"id": "constraint-decision",
+			"type": "text",
+			"x": 1080,
+			"y": -330,
+			"width": 360,
+			"height": 170,
+			"color": "6",
+			"text": "# 5. 约束决策\n\n必填：constraint_decision。\n只有当正向模型不足以防复发时，才补 forbidden_pattern 或 quality_gate。"
+		},
+		{
+			"id": "surface-sync",
+			"type": "text",
+			"x": -1080,
+			"y": -70,
+			"width": 420,
+			"height": 170,
+			"color": "2",
+			"text": "# 6. 协同升级面\n\nsystem_upgrade 不能只改局部。先确认 failure_class，再扫描同类资产、兄弟模块、同层视图、route、schema、validator、review、Canvas 投影和 registry 关系。"
+		},
+		{
+			"id": "validation",
+			"type": "text",
+			"x": -480,
+			"y": -70,
+			"width": 420,
+			"height": 170,
+			"color": "3",
+			"text": "# 7. 校验\n\n运行相关 validator。校验通过只是证据，不等于诊断接受；接受必须回到原 failure packet。"
+		},
+		{
+			"id": "acceptance",
+			"type": "text",
+			"x": 120,
+			"y": -70,
+			"width": 420,
+			"height": 170,
+			"color": "3",
+			"text": "# 8. Diagnosis Acceptance\n\n验收不仅看目标对象是否修好；如果用户纠正暴露漏诊、误判或提前闭环，必须进入诊断自审。"
+		},
+		{
+			"id": "visual-projection-sync",
+			"type": "text",
+			"x": 720,
+			"y": -70,
+			"width": 720,
+			"height": 170,
+			"color": "5",
+			"text": "# 9. 可视化投影同步\n\n如果升级模块有 Canvas 覆盖，必须更新对应画布、view graph、support bindings / relations，或登记不需要更新的理由。"
+		},
+		{
+			"id": "contract-band",
+			"type": "text",
+			"x": -1080,
+			"y": 170,
+			"width": 2760,
+			"height": 80,
+			"color": "6",
+			"text": "# 当前诊断记录契约\n\n机器记录以 positive_model_repair + constraint_decision 为主；旧字段只作为历史兼容或明确护栏时的补充。"
+		},
+		{
+			"id": "required-contract",
+			"type": "text",
+			"x": -1080,
+			"y": 290,
+			"width": 600,
+			"height": 160,
+			"color": "6",
+			"text": "# 必填字段\n\nincident_manifestation / root_problem / system_regulation_target / evidence tracks / owning_repair_layer / positive_model_repair / constraint_decision / generalization_scan"
+		},
+		{
+			"id": "optional-guardrail",
+			"type": "text",
+			"x": -360,
+			"y": 290,
+			"width": 600,
+			"height": 160,
+			"color": "6",
+			"text": "# 可选护栏字段\n\npositive_rule / forbidden_pattern / quality_gate 仅用于历史记录或明确需要硬护栏时。它们不再强迫每个诊断都生成禁令。"
+		},
+		{
+			"id": "closed-loop-note",
+			"type": "text",
+			"x": 360,
+			"y": 290,
+			"width": 720,
+			"height": 160,
+			"color": "5",
+			"text": "# 本次闭环修复点\n\n新增 OR 借鉴层：先用层级矩阵判断责任层，再由失败学习循环决定是否生成 postmortem、proposal、regression guard 和 promotion decision。"
+		},
+		{
+			"id": "machine-truth-band",
+			"type": "text",
+			"x": -1080,
+			"y": 500,
+			"width": 2760,
+			"height": 80,
+			"color": "6",
+			"text": "# 机器真相\n\n诊断控制器、层级矩阵、失败学习循环、问题队列、schema 和 validator 决定系统行为；Canvas 只做可读入口和结构投影。"
+		},
+		{
+			"id": "diagnostic-system-file",
+			"type": "file",
+			"x": -856,
+			"y": 670,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": "system/diagnostics/diagnostic-system.json"
+		},
+		{
+			"id": "diagnostic-queue-file",
+			"type": "file",
+			"x": -396,
+			"y": 670,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": "system/diagnostics/issue-repair-queue.json"
+		},
+		{
+			"id": "diagnostic-schema-file",
+			"type": "file",
+			"x": 64,
+			"y": 670,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "schemas/diagnostic-issue.schema.json"
+		},
+		{
+			"id": "diagnostic-validator-file",
+			"type": "file",
+			"x": 524,
+			"y": 670,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "scripts/validate-diagnostics.ps1"
+		},
+		{
+			"id": "diagnostic-skill-file",
+			"type": "file",
+			"x": 984,
+			"y": 670,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": ".agents/skills/diagnostic-system/SKILL.md"
+		},
+		{
+			"id": "diagnostic-doc-file",
+			"type": "file",
+			"x": 1444,
+			"y": 670,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "docs/diagnostic-system.md"
+		},
+		{
+			"id": "right-nav-title",
+			"type": "text",
+			"x": 1920,
+			"y": -520,
+			"width": 420,
+			"height": 110,
+			"color": "5",
+			"text": "# 导航栏\n\n只负责跳转，不参与左侧诊断流程。"
+		},
+		{
+			"id": "nav-label-parent-kb-system-architecture-canvas-file",
+			"type": "text",
+			"x": 1920,
+			"y": -350,
+			"width": 330,
+			"height": 48,
+			"color": "6",
+			"text": "返回：系统总览"
+		},
+		{
+			"id": "parent-kb-system-architecture-canvas-file",
+			"type": "file",
+			"x": 2270,
+			"y": -350,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-canvas-system-canvas-file",
+			"type": "text",
+			"x": 1920,
+			"y": 10,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "相关：Canvas 子系统"
+		},
+		{
+			"id": "canvas-system-canvas-file",
+			"type": "file",
+			"x": 2270,
+			"y": 10,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-system-closure-canvas-file",
+			"type": "text",
+			"x": 1920,
+			"y": 190,
+			"width": 330,
+			"height": 48,
+			"color": "4",
+			"text": "相关：系统闭环总表"
+		},
+		{
+			"id": "system-closure-canvas-file",
+			"type": "file",
+			"x": 2270,
+			"y": 190,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas"
+		},
+		{
+			"id": "nav-label-review-system-canvas-file",
+			"type": "text",
+			"x": 1920,
+			"y": 370,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "相关：审查模块"
+		},
+		{
+			"id": "review-system-canvas-file",
+			"type": "file",
+			"x": 2270,
+			"y": 370,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas"
+		},
+		{
+			"id": "file-label-diagnostic-system-file",
+			"type": "text",
+			"x": -1080,
+			"y": 640,
+			"width": 300,
+			"height": 90,
+			"color": "1",
+			"text": "诊断协议\n流程与责任层"
+		},
+		{
+			"id": "file-label-diagnostic-queue-file",
+			"type": "text",
+			"x": -620,
+			"y": 640,
+			"width": 300,
+			"height": 90,
+			"color": "1",
+			"text": "问题队列\n诊断与验收记录"
+		},
+		{
+			"id": "file-label-diagnostic-schema-file",
+			"type": "text",
+			"x": -160,
+			"y": 640,
+			"width": 300,
+			"height": 90,
+			"color": "6",
+			"text": "记录 schema\n诊断字段契约"
+		},
+		{
+			"id": "file-label-diagnostic-validator-file",
+			"type": "text",
+			"x": 300,
+			"y": 640,
+			"width": 300,
+			"height": 90,
+			"color": "3",
+			"text": "校验脚本\n诊断记录"
+		},
+		{
+			"id": "file-label-diagnostic-skill-file",
+			"type": "text",
+			"x": 760,
+			"y": 640,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "薄入口 skill\n调用诊断"
+		},
+		{
+			"id": "file-label-diagnostic-doc-file",
+			"type": "text",
+			"x": 1220,
+			"y": 640,
+			"width": 300,
+			"height": 90,
+			"color": "4",
+			"text": "人读说明\n诊断系统"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构.",
+			"x": 1920,
+			"y": 463,
+			"width": 420,
+			"height": 130,
+			"color": "6"
+		},
+		{
+			"id": "failure-learning-loop",
+			"type": "text",
+			"x": 1120,
+			"y": 290,
+			"width": 560,
+			"height": 160,
+			"color": "2",
+			"text": "# 10. 失败学习循环\n\n高风险或重复问题才进入。借鉴 OR：postmortem -> proposal -> sandbox/dry-run -> regression guard -> promotion decision。只生成受控改进对象，不自动晋升规则或记忆。"
+		},
+		{
+			"id": "file-label-layer-matrix-file",
+			"type": "text",
+			"x": -1080,
+			"y": 760,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "层级矩阵\nowner layer 判断"
+		},
+		{
+			"id": "layer-matrix-file",
+			"type": "file",
+			"x": -856,
+			"y": 790,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "system/diagnostics/diagnostic-layer-matrix.json"
+		},
+		{
+			"id": "file-label-failure-learning-loop-file",
+			"type": "text",
+			"x": -620,
+			"y": 760,
+			"width": 300,
+			"height": 90,
+			"color": "2",
+			"text": "失败学习\npostmortem / proposal / guard"
+		},
+		{
+			"id": "failure-learning-loop-file",
+			"type": "file",
+			"x": -396,
+			"y": 790,
+			"width": 64,
+			"height": 48,
+			"color": "2",
+			"file": "system/diagnostics/failure-learning-loop.json"
+		}
+	],
+	"edges": [
+		{
+			"id": "e1",
+			"fromNode": "failure-packet",
+			"fromSide": "right",
+			"toNode": "evidence-tracks",
+			"toSide": "left",
+			"color": "1"
+		},
+		{
+			"id": "e2",
+			"fromNode": "evidence-tracks",
+			"fromSide": "right",
+			"toNode": "owner-and-class",
+			"toSide": "left",
+			"color": "4"
+		},
+		{
+			"id": "e3",
+			"fromNode": "owner-and-class",
+			"fromSide": "right",
+			"toNode": "positive-model-repair",
+			"toSide": "left",
+			"color": "3"
+		},
+		{
+			"id": "e4",
+			"fromNode": "positive-model-repair",
+			"fromSide": "right",
+			"toNode": "constraint-decision",
+			"toSide": "left",
+			"color": "6"
+		},
+		{
+			"id": "e5",
+			"fromNode": "constraint-decision",
+			"fromSide": "bottom",
+			"toNode": "visual-projection-sync",
+			"toSide": "top",
+			"color": "5"
+		},
+		{
+			"id": "e6",
+			"fromNode": "surface-sync",
+			"fromSide": "right",
+			"toNode": "validation",
+			"toSide": "left",
+			"color": "3"
+		},
+		{
+			"id": "e7",
+			"fromNode": "validation",
+			"fromSide": "right",
+			"toNode": "acceptance",
+			"toSide": "left",
+			"color": "3"
+		},
+		{
+			"id": "bridge-edge-canvas-system",
+			"fromNode": "nav-label-canvas-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "visual-projection-sync",
+			"toSide": "right",
+			"label": "对应：可视化投影同步",
+			"color": "5"
+		},
+		{
+			"id": "e8",
+			"fromNode": "closed-loop-note",
+			"fromSide": "right",
+			"toNode": "failure-learning-loop",
+			"toSide": "left",
+			"color": "2"
+		}
+	]
+}

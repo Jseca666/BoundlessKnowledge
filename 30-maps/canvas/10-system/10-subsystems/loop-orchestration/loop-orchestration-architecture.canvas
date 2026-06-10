@@ -1,0 +1,447 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -1040,
+			"y": -700,
+			"width": 2700,
+			"height": 120,
+			"color": "6",
+			"text": "# Loop 子系统：循环编排与持续改进\n\nloop-orchestration 是系统级模块，负责登记、接管和推进稳定循环；单个 loop 可以服务知识分类、审查、诊断或未来运维，但循环机制本身由这里治理。"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"x": -1040,
+			"y": -540,
+			"width": 2700,
+			"height": 90,
+			"color": "5",
+			"text": "# 读图口径\n\n左侧是 loop 生命周期主流程；中部是接管状态与未来扩展；底部是机器真相；右侧只做 Obsidian 跳转。"
+		},
+		{
+			"id": "trigger-intake",
+			"type": "text",
+			"x": -1040,
+			"y": -320,
+			"width": 360,
+			"height": 190,
+			"color": "1",
+			"text": "# 1. 触发与登记\n\n来源：用户要求、review handoff、diagnostics 修复、taxonomy gap 或运维巡检。\n\n先判断是否是 durable loop。"
+		},
+		{
+			"id": "loop-selection",
+			"type": "text",
+			"x": -560,
+			"y": -320,
+			"width": 360,
+			"height": 190,
+			"color": "3",
+			"text": "# 2. 选择 loop\n\n已有 loop：进入 registry。\n新 loop：先定 owner、scope、queue、state、runner contract 和暂停条件。"
+		},
+		{
+			"id": "run-unit",
+			"type": "text",
+			"x": -80,
+			"y": -320,
+			"width": 360,
+			"height": 190,
+			"color": "5",
+			"text": "# 3. 执行单元\n\n一次只推进一个清晰单元；读取 loop.json / queue / state，产出 run record 和 output summary。"
+		},
+		{
+			"id": "state-update",
+			"type": "text",
+			"x": 400,
+			"y": -320,
+			"width": 360,
+			"height": 190,
+			"color": "4",
+			"text": "# 4. 状态推进\n\n成功：记录 completed 并推进 current_unit。\n阻塞：记录原因、保留部分产物，必要时 pause。"
+		},
+		{
+			"id": "gate-handoff",
+			"type": "text",
+			"x": 880,
+			"y": -320,
+			"width": 380,
+			"height": 190,
+			"color": "2",
+			"text": "# 5. 验收与回流\n\n通过质量门后回写所属模块。\n失败或发现结构性问题时交给 diagnostics / review / closure。"
+		},
+		{
+			"id": "status-band",
+			"type": "text",
+			"x": -1040,
+			"y": -70,
+			"width": 2700,
+			"height": 80,
+			"color": "6",
+			"text": "# 模块状态\n\n当前 scope 是系统级登记、生命周期和人工/agent 协作循环；无人值守多 loop 调度暂不作为当前必需服务。"
+		},
+		{
+			"id": "registry-status",
+			"type": "text",
+			"x": -1040,
+			"y": 50,
+			"width": 400,
+			"height": 160,
+			"color": "5",
+			"text": "# loop registry\n\n`system/loop-registry.json` 是所有 durable loop 的入口。\n\n新增 loop 先进入这里。"
+		},
+		{
+			"id": "taxonomy-managed-loop",
+			"type": "text",
+			"x": -560,
+			"y": 50,
+			"width": 400,
+			"height": 160,
+			"color": "3",
+			"text": "# 已接管历史 loop\n\n`taxonomy-refinement` 是第一个 managed loop。\n\n45/45 二级分类已完成，状态由 state.json 记录。"
+		},
+		{
+			"id": "future-loop-intake",
+			"type": "text",
+			"x": -80,
+			"y": 50,
+			"width": 400,
+			"height": 160,
+			"color": "4",
+			"text": "# 未来 loop 入口\n\nreview、diagnostics、知识质量、运维巡检等重复任务出现时，先判断归入现有 loop 还是新增 loop。"
+		},
+		{
+			"id": "handoff-boundary",
+			"type": "text",
+			"x": 400,
+			"y": 50,
+			"width": 400,
+			"height": 160,
+			"color": "5",
+			"text": "# handoff 边界\n\nreview 负责发现，diagnostics 负责根因，loop 负责可重复推进。\n\n三者不互相冒充。"
+		},
+		{
+			"id": "closure-proof",
+			"type": "text",
+			"x": 880,
+			"y": 50,
+			"width": 400,
+			"height": 160,
+			"color": "6",
+			"text": "# 生效证明\n\n闭环表记录 activation_proof：route、information map、topology、visual coverage、旧资产接管和 validation。"
+		},
+		{
+			"id": "machine-truth-band",
+			"type": "text",
+			"x": -1040,
+			"y": 330,
+			"width": 2700,
+			"height": 80,
+			"color": "6",
+			"text": "# 机器真相\n\n这些文件决定 loop 行为和系统接管关系；Markdown 与 Canvas 只做人类说明和可视化入口。"
+		},
+		{
+			"id": "file-label-loop-registry-file",
+			"type": "text",
+			"x": -1040,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "loop 总表\n所有 durable loop 入口"
+		},
+		{
+			"id": "loop-registry-file",
+			"type": "file",
+			"x": -816,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "system/loop-registry.json"
+		},
+		{
+			"id": "file-label-loop-json-file",
+			"type": "text",
+			"x": -700,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "3",
+			"text": "loop 协议\n目标、阶段、质量门"
+		},
+		{
+			"id": "loop-json-file",
+			"type": "file",
+			"x": -476,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "system/loops/taxonomy-refinement/loop.json"
+		},
+		{
+			"id": "file-label-queue-file",
+			"type": "text",
+			"x": -360,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "3",
+			"text": "queue\n待推进单元"
+		},
+		{
+			"id": "queue-file",
+			"type": "file",
+			"x": -136,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "system/loops/taxonomy-refinement/queue.json"
+		},
+		{
+			"id": "file-label-state-file",
+			"type": "text",
+			"x": -20,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "state\n当前状态与进度"
+		},
+		{
+			"id": "state-file",
+			"type": "file",
+			"x": 204,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "system/loops/taxonomy-refinement/state.json"
+		},
+		{
+			"id": "file-label-runner-contract-file",
+			"type": "text",
+			"x": 320,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "4",
+			"text": "runner 契约\n命令与记录字段"
+		},
+		{
+			"id": "runner-contract-file",
+			"type": "file",
+			"x": 544,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "system/loops/taxonomy-refinement/runner-contract.json"
+		},
+		{
+			"id": "file-label-loop-doc-file",
+			"type": "text",
+			"x": 660,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "6",
+			"text": "人读入口\nloop 编排说明"
+		},
+		{
+			"id": "loop-doc-file",
+			"type": "file",
+			"x": 884,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "docs/loop-orchestration.md"
+		},
+		{
+			"id": "file-label-loop-status-tool",
+			"type": "text",
+			"x": 1000,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "状态工具\n只读报告 loop 状态"
+		},
+		{
+			"id": "loop-status-tool",
+			"type": "file",
+			"x": 1224,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "scripts/loop-status.ps1"
+		},
+		{
+			"id": "right-nav-title",
+			"type": "text",
+			"x": 1900,
+			"y": -540,
+			"width": 420,
+			"height": 110,
+			"color": "5",
+			"text": "# 导航栏\n\n只负责跳转，不参与左侧 loop 生命周期。"
+		},
+		{
+			"id": "nav-label-parent-kb-system-architecture-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -360,
+			"width": 330,
+			"height": 48,
+			"color": "6",
+			"text": "返回：系统总览"
+		},
+		{
+			"id": "parent-kb-system-architecture-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -360,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-domain-taxonomy-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -280,
+			"width": 330,
+			"height": 48,
+			"color": "3",
+			"text": "相关：知识领域分类"
+		},
+		{
+			"id": "domain-taxonomy-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -280,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas"
+		},
+		{
+			"id": "nav-label-review-system-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -200,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "相关：审查模块"
+		},
+		{
+			"id": "review-system-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -200,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-diagnostic-system-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -120,
+			"width": 330,
+			"height": 48,
+			"color": "1",
+			"text": "相关：诊断与修复系统"
+		},
+		{
+			"id": "diagnostic-system-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -120,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-system-closure-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -40,
+			"width": 330,
+			"height": 48,
+			"color": "4",
+			"text": "相关：系统闭环总表"
+		},
+		{
+			"id": "system-closure-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -40,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n6 根结构/机器真相；5 loop 运行面；3 选择/分类 loop；4 状态更新/未来接入；1 诊断触发；2 handoff gate。",
+			"x": 1900,
+			"y": 53,
+			"width": 420,
+			"height": 130,
+			"color": "6"
+		}
+	],
+	"edges": [
+		{
+			"id": "e1",
+			"fromNode": "trigger-intake",
+			"fromSide": "right",
+			"toNode": "loop-selection",
+			"toSide": "left",
+			"color": "1"
+		},
+		{
+			"id": "e2",
+			"fromNode": "loop-selection",
+			"fromSide": "right",
+			"toNode": "run-unit",
+			"toSide": "left",
+			"color": "3"
+		},
+		{
+			"id": "e3",
+			"fromNode": "run-unit",
+			"fromSide": "right",
+			"toNode": "state-update",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e4",
+			"fromNode": "state-update",
+			"fromSide": "right",
+			"toNode": "gate-handoff",
+			"toSide": "left",
+			"color": "4"
+		},
+		{
+			"id": "bridge-edge-closure",
+			"fromNode": "nav-label-system-closure-canvas-file",
+			"fromSide": "left",
+			"toNode": "closure-proof",
+			"toSide": "right",
+			"color": "4",
+			"label": "对应：activation proof"
+		}
+	]
+}

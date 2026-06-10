@@ -1,0 +1,68 @@
+{
+  "id": "2026-06-05-007",
+  "loop_id": "taxonomy-refinement",
+  "unit_id": "1.7",
+  "started_at": "2026-06-05",
+  "completed_at": "2026-06-05",
+  "inputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/queue.json",
+    "system/loops/taxonomy-refinement/state.json"
+  ],
+  "outputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/outputs/1.7-summary.md"
+  ],
+  "diagnosis": {
+    "level_1": "形式与自然科学",
+    "level_2": "计算理论与信息基础",
+    "boundary": "覆盖“形式与自然科学”下与“计算理论与信息基础”相关的稳定知识方向、研究对象、方法体系、证据形态和实践接口。若条目核心问题属于相邻二级，应以主要对象和主要证据链确定 primary_level_2，其他方向作为 related_level_3 关联。",
+    "adjacent_overlap_rule": "以知识条目的主要对象、主要证据链和主要使用场景确定 primary_level_3；交叉方向登记到 related_level_3。",
+    "risk_notes": [
+      "避免把工具、公司、产品、短期热点作为三级分类。",
+      "新兴交叉主题先落入最近三级方向簇，并通过 taxonomy_gap 标注缺口。"
+    ]
+  },
+  "level_3_count": 10,
+  "routing_examples": [
+    {
+      "item": "自动机、形式语言与可计算性相关知识条目",
+      "primary_level_3": "1.7.1 自动机、形式语言与可计算性",
+      "related_level_3": []
+    },
+    {
+      "item": "算法设计与复杂性理论相关知识条目",
+      "primary_level_3": "1.7.2 算法设计与复杂性理论",
+      "related_level_3": [
+        "1.7.1 自动机、形式语言与可计算性"
+      ]
+    },
+    {
+      "item": "数据结构与离散计算模型相关知识条目",
+      "primary_level_3": "1.7.3 数据结构与离散计算模型",
+      "related_level_3": [
+        "1.7.1 自动机、形式语言与可计算性"
+      ]
+    },
+    {
+      "item": "信息论、编码与通信基础相关知识条目",
+      "primary_level_3": "1.7.4 信息论、编码与通信基础",
+      "related_level_3": [
+        "1.7.1 自动机、形式语言与可计算性"
+      ]
+    }
+  ],
+  "quality_gate_result": {
+    "passed": true,
+    "coverage": "pass",
+    "stability": "pass",
+    "non_tool_or_product": "pass",
+    "routability": "pass",
+    "no_unclassified": "pass"
+  },
+  "state_transition": {
+    "from": "pending_or_in_progress",
+    "to": "completed",
+    "next_unit": "2.1"
+  }
+}

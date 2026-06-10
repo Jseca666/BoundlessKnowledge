@@ -1,0 +1,384 @@
+{
+  "id": "taxonomy-refinement-state",
+  "version": "0.3.0",
+  "updated": "2026-06-05",
+  "loop_id": "taxonomy-refinement",
+  "status": "completed",
+  "current_unit": "6.7",
+  "current_phase": "completed",
+  "run_counter": 45,
+  "last_run_id": "2026-06-05-045",
+  "taxonomy_level_status": {
+    "level_1": "provisionally_locked",
+    "level_2": "provisionally_locked",
+    "level_3": "refined-v0.1-complete"
+  },
+  "unit_status": {
+    "1.1": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-001",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/1.1-summary.md",
+      "level_3_count": 10
+    },
+    "1.2": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-002",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/1.2-summary.md",
+      "level_3_count": 10
+    },
+    "1.3": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-003",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/1.3-summary.md",
+      "level_3_count": 10
+    },
+    "1.4": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-004",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/1.4-summary.md",
+      "level_3_count": 10
+    },
+    "1.5": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-005",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/1.5-summary.md",
+      "level_3_count": 10
+    },
+    "1.6": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-006",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/1.6-summary.md",
+      "level_3_count": 10
+    },
+    "1.7": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-007",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/1.7-summary.md",
+      "level_3_count": 10
+    },
+    "2.1": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-008",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.1-summary.md",
+      "level_3_count": 10
+    },
+    "2.2": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-009",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.2-summary.md",
+      "level_3_count": 10
+    },
+    "2.3": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-010",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.3-summary.md",
+      "level_3_count": 10
+    },
+    "2.4": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-011",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.4-summary.md",
+      "level_3_count": 10
+    },
+    "2.5": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-012",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.5-summary.md",
+      "level_3_count": 10
+    },
+    "2.6": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-013",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.6-summary.md",
+      "level_3_count": 10
+    },
+    "2.7": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-014",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.7-summary.md",
+      "level_3_count": 10
+    },
+    "2.8": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-015",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/2.8-summary.md",
+      "level_3_count": 10
+    },
+    "3.1": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-016",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/3.1-summary.md",
+      "level_3_count": 10
+    },
+    "3.2": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-017",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/3.2-summary.md",
+      "level_3_count": 10
+    },
+    "3.3": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-018",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/3.3-summary.md",
+      "level_3_count": 10
+    },
+    "3.4": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-019",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/3.4-summary.md",
+      "level_3_count": 10
+    },
+    "3.5": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-020",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/3.5-summary.md",
+      "level_3_count": 10
+    },
+    "3.6": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-021",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/3.6-summary.md",
+      "level_3_count": 10
+    },
+    "3.7": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-022",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/3.7-summary.md",
+      "level_3_count": 10
+    },
+    "4.1": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-023",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.1-summary.md",
+      "level_3_count": 10
+    },
+    "4.2": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-024",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.2-summary.md",
+      "level_3_count": 10
+    },
+    "4.3": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-025",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.3-summary.md",
+      "level_3_count": 10
+    },
+    "4.4": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-026",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.4-summary.md",
+      "level_3_count": 10
+    },
+    "4.5": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-027",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.5-summary.md",
+      "level_3_count": 10
+    },
+    "4.6": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-028",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.6-summary.md",
+      "level_3_count": 10
+    },
+    "4.7": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-029",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.7-summary.md",
+      "level_3_count": 10
+    },
+    "4.8": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-030",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/4.8-summary.md",
+      "level_3_count": 10
+    },
+    "5.1": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-031",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.1-summary.md",
+      "level_3_count": 10
+    },
+    "5.2": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-032",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.2-summary.md",
+      "level_3_count": 10
+    },
+    "5.3": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-033",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.3-summary.md",
+      "level_3_count": 10
+    },
+    "5.4": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-034",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.4-summary.md",
+      "level_3_count": 10
+    },
+    "5.5": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-035",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.5-summary.md",
+      "level_3_count": 10
+    },
+    "5.6": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-036",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.6-summary.md",
+      "level_3_count": 10
+    },
+    "5.7": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-037",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.7-summary.md",
+      "level_3_count": 10
+    },
+    "5.8": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-038",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/5.8-summary.md",
+      "level_3_count": 10
+    },
+    "6.1": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-039",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/6.1-summary.md",
+      "level_3_count": 10
+    },
+    "6.2": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-040",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/6.2-summary.md",
+      "level_3_count": 10
+    },
+    "6.3": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-041",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/6.3-summary.md",
+      "level_3_count": 10
+    },
+    "6.4": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-042",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/6.4-summary.md",
+      "level_3_count": 10
+    },
+    "6.5": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-043",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/6.5-summary.md",
+      "level_3_count": 10
+    },
+    "6.6": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-044",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/6.6-summary.md",
+      "level_3_count": 10
+    },
+    "6.7": {
+      "status": "completed",
+      "completed_at": "2026-06-05",
+      "run_id": "2026-06-05-045",
+      "result_file": "30-maps/domains/domain-taxonomy.registry.json",
+      "output_summary": "system/loops/taxonomy-refinement/outputs/6.7-summary.md",
+      "level_3_count": 10
+    }
+  },
+  "blocked_units": [],
+  "state_rules": {
+    "completion_rule": "A unit is complete only when level-3 direction clusters, boundaries, routing examples, quality gate result and run log are recorded.",
+    "no_unclassified_rule": "Formal entries must not use unclassified as their level-3 value.",
+    "advance_rule": "After completing current_unit, choose the next queue unit without completed or blocked status."
+  }
+}

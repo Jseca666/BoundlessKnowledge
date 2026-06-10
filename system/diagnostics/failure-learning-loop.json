@@ -1,0 +1,285 @@
+{
+	"id": "failure-learning-loop",
+	"version": "0.1.0",
+	"updated": "2026-06-10",
+	"status": "active-seed",
+	"adapted_from": {
+		"project": "C:/Users/dzw/Desktop/or",
+		"sources": [
+			"C:/Users/dzw/Desktop/or/docs/p3-self-evolution-system-design.md",
+			"C:/Users/dzw/Desktop/or/services/gateway/app/services/p3_failure_loop.py",
+			"C:/Users/dzw/Desktop/or/database/sqlite_migrations/0009_local_self_evolution_tables.up.sql"
+		],
+		"boundary": "Adopt the controlled failure-learning pattern only. This project does not auto-modify workflows, durable memory, external resources or repository state from proposals."
+	},
+	"purpose": "Extend diagnostics from root-cause repair into controlled learning: repeated or high-impact failures can create postmortems, improvement proposals, regression guards and promotion decisions instead of ending at a captured issue.",
+	"position": {
+		"upstream_inputs": [
+			"system/diagnostics/issue-repair-queue.json",
+			"system/reviews/review-queue.json",
+			"scripts/validate-*.ps1 reports",
+			"Canvas visual and screenshot audit reports",
+			"user corrections and diagnostic_self_audit records"
+		],
+		"downstream_outputs": [
+			"postmortem records",
+			"improvement proposals",
+			"regression guard requirements",
+			"promotion or rejection decisions",
+			"memory or rule capture recommendations"
+		],
+		"does_not_own": [
+			"automatic code changes",
+			"automatic rule promotion",
+			"external publishing or remote actions",
+			"direct durable memory writeback",
+			"overwriting source truth or historical issue records"
+		]
+	},
+	"activation_policy": {
+		"open_when_any": [
+			"A same failure class recurs after a captured repair.",
+			"A system_upgrade has high or critical recurrence risk.",
+			"A validator or review gate falsely passed a defect that matters to future work.",
+			"A user correction reveals a diagnostic self-audit issue.",
+			"A change would modify prompts, routes, schemas, validators, workflow definitions, Canvas policies, source-quality gates or memory policy."
+		],
+		"do_not_open_when_all": [
+			"The issue is a one-off local artifact repair.",
+			"The owner layer was clear and the repair added a sufficient validator or review gate.",
+			"No reusable method, regression case or future proposal is needed."
+		],
+		"required_decision_field": "failure_learning_decision"
+	},
+	"pipeline": [
+		{
+			"step": "telemetry_or_issue",
+			"input": "Captured issue, review finding, validation failure, screenshot defect, user correction or repeated local repair.",
+			"output": "learning_candidate",
+			"gate": "Must reference evidence paths and owner layer."
+		},
+		{
+			"step": "failure_postmortem",
+			"input": "learning_candidate",
+			"output": "failure_postmortem",
+			"gate": "Must name affected objects, root cause, evidence refs and recommended actions."
+		},
+		{
+			"step": "improvement_proposal",
+			"input": "failure_postmortem plus current capability or closure signals",
+			"output": "evolution_proposal",
+			"gate": "Must state proposed change, expected gain, risk level, required regression evidence and rollback plan."
+		},
+		{
+			"step": "sandbox_or_dry_run",
+			"input": "evolution_proposal",
+			"output": "sandbox_experiment or dry_run_record",
+			"gate": "Must not mutate durable truth; use isolated branch, generated report or manual review when needed."
+		},
+		{
+			"step": "regression_guard",
+			"input": "proposal plus sandbox or dry-run results",
+			"output": "regression_guard_result",
+			"gate": "Must run required validators, evals, screenshot audits or human review notes before promotion."
+		},
+		{
+			"step": "promotion_decision",
+			"input": "regression_guard_result",
+			"output": "approved, rejected, deferred or rolled_back decision",
+			"gate": "High-risk or governance changes require explicit human approval."
+		},
+		{
+			"step": "memory_or_rule_capture",
+			"input": "approved or rejected promotion decision",
+			"output": "route update, rule update, validator update, review criterion, loop queue item or memory candidate",
+			"gate": "Durable memory writeback remains gated; chat memory alone is not closure."
+		}
+	],
+	"object_contracts": {
+		"failure_postmortem": {
+			"required_fields": [
+				"postmortem_id",
+				"source_issue_ids",
+				"owner_domain",
+				"related_domains",
+				"affected_objects",
+				"root_cause",
+				"evidence_refs",
+				"recommended_actions",
+				"status"
+			]
+		},
+		"evolution_proposal": {
+			"required_fields": [
+				"proposal_id",
+				"postmortem_id",
+				"owner_domain",
+				"target_object_type",
+				"target_object_id",
+				"problem_statement",
+				"proposed_change",
+				"expected_gain",
+				"risk_level",
+				"required_regression_gates",
+				"rollback_plan",
+				"status"
+			]
+		},
+		"regression_guard_result": {
+			"required_fields": [
+				"guard_result_id",
+				"proposal_id",
+				"checks",
+				"status",
+				"blocking_findings",
+				"human_review_required"
+			]
+		},
+		"promotion_decision": {
+			"required_fields": [
+				"promotion_id",
+				"proposal_id",
+				"decision",
+				"decision_evidence",
+				"applied_paths",
+				"rollback_reference",
+				"status"
+			]
+		}
+	},
+	"domain_specs": [
+		{
+			"domain_key": "diagnostics",
+			"owner_module": "diagnostics",
+			"observable_signal_types": [
+				"missed diagnosis",
+				"wrong owner layer",
+				"premature closure",
+				"repeated issue class"
+			],
+			"allowed_change_types": [
+				"diagnostic workflow update",
+				"layer matrix update",
+				"issue schema update",
+				"validator update"
+			],
+			"forbidden_change_types": [
+				"auto-close issue without validation",
+				"promote exact incident as generic rule without abstraction"
+			],
+			"required_regression_gates": [
+				"scripts/validate-diagnostics.ps1",
+				"scripts/validate-system.ps1"
+			]
+		},
+		{
+			"domain_key": "architecture_views",
+			"owner_module": "architecture-views",
+			"observable_signal_types": [
+				"visual blind spot",
+				"Canvas layout defect",
+				"support binding gap",
+				"screenshot mismatch"
+			],
+			"allowed_change_types": [
+				"canvas policy update",
+				"canvas registry update",
+				"visual audit update",
+				"screenshot audit update"
+			],
+			"forbidden_change_types": [
+				"treat Canvas coordinates as machine truth",
+				"skip visual projection after structure upgrade"
+			],
+			"required_regression_gates": [
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1 -Strict",
+				"scripts/audit-canvas-screenshot.ps1 -Strict"
+			]
+		},
+		{
+			"domain_key": "review_system",
+			"owner_module": "review-system",
+			"observable_signal_types": [
+				"missed review finding",
+				"wrong handoff",
+				"external knowledge quality issue",
+				"visual review gap"
+			],
+			"allowed_change_types": [
+				"review criterion update",
+				"review queue update",
+				"handoff rule update"
+			],
+			"forbidden_change_types": [
+				"perform root-cause repair inside review",
+				"skip diagnostics for confirmed systemic defect"
+			],
+			"required_regression_gates": [
+				"scripts/validate-reviews.ps1",
+				"scripts/validate-diagnostics.ps1"
+			]
+		},
+		{
+			"domain_key": "knowledge_ingestion",
+			"owner_module": "knowledge-ingestion",
+			"observable_signal_types": [
+				"source quality miss",
+				"intake route gap",
+				"template drift",
+				"taxonomy handoff gap"
+			],
+			"allowed_change_types": [
+				"source quality gate update",
+				"intake template update",
+				"ingestion route update"
+			],
+			"forbidden_change_types": [
+				"promote unreviewed source into knowledge truth",
+				"skip source identity before distillation"
+			],
+			"required_regression_gates": [
+				"scripts/validate-kb.ps1",
+				"scripts/build-index.ps1"
+			]
+		},
+		{
+			"domain_key": "system_information_map",
+			"owner_module": "system-information-map",
+			"observable_signal_types": [
+				"route cannot find owner",
+				"module boundary drift",
+				"shard missing reference",
+				"stale information map"
+			],
+			"allowed_change_types": [
+				"information map update",
+				"manifest update",
+				"shard update",
+				"schema update"
+			],
+			"forbidden_change_types": [
+				"make Markdown the system behavior truth",
+				"leave machine map unsynced after module change"
+			],
+			"required_regression_gates": [
+				"scripts/validate-system.ps1"
+			]
+		}
+	],
+	"risk_policy": {
+		"low": "May be closed with validators and local evidence.",
+		"medium": "Requires issue queue evidence plus relevant validator or review record.",
+		"high": "Requires regression guard and explicit user-visible summary before promotion.",
+		"critical": "Requires human approval before any durable policy, schema, validator or workflow promotion."
+	},
+	"storage_policy": {
+		"current_state": "This file defines the loop contract. Concrete postmortem/proposal queues are deferred until repeated failures require durable instances.",
+		"future_candidates": [
+			"system/diagnostics/failure-postmortems.json",
+			"system/diagnostics/evolution-proposals.json",
+			"system/diagnostics/regression-guards.json",
+			"system/diagnostics/promotion-decisions.json"
+		]
+	}
+}

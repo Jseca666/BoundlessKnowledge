@@ -1,0 +1,127 @@
+{
+	"id": "technical-docs-map",
+	"version": "0.2.0",
+	"updated": "2026-06-10",
+	"role": "machine-readable-documentation-map-for-operations-and-github-readiness",
+	"purpose": "Keep operational, maintenance and future GitHub publishing documentation separate from knowledge content and system behavior truth.",
+	"principle": "Technical documentation is an operations surface. It explains how to set up, validate, maintain and publish the repository, while machine-readable registries, schemas and scripts remain the system truth.",
+	"baseline_doc": {
+		"path": "docs/technical/README.md",
+		"role": "Thin entrypoint for technical documentation",
+		"not_for": [
+			"Full system architecture",
+			"Knowledge taxonomy truth",
+			"Canvas visual governance",
+			"All release procedures",
+			"Machine behavior truth"
+		]
+	},
+	"machine_truth": [
+		{
+			"path": "system/technical-docs-map.json",
+			"role": "Canonical map for technical documentation boundaries"
+		},
+		{
+			"path": "system/route-registry.json",
+			"role": "Task routing truth"
+		},
+		{
+			"path": "system/information-map.json",
+			"role": "Module and dataflow truth"
+		},
+		{
+			"path": "system/tool-map.json",
+			"role": "Tool and validation command truth"
+		},
+		{
+			"path": "system/module-governance-policy.json",
+			"role": "Module placement and documentation boundary truth"
+		},
+		{
+			"path": "system/git-governance-system.json",
+			"role": "Git governance and remote-action boundary truth"
+		}
+	],
+	"doc_routes": [
+		{
+			"id": "entry",
+			"path": "docs/technical/README.md",
+			"role": "Thin entry and read order",
+			"boundary": "Only explains where technical documentation starts and which file owns which topic.",
+			"not_for": [
+				"Detailed operations",
+				"Release checklist",
+				"Troubleshooting catalog",
+				"System truth"
+			]
+		},
+		{
+			"id": "setup",
+			"path": "docs/technical/setup.md",
+			"role": "Local setup and environment expectations",
+			"boundary": "Explains how to open, inspect and prepare the repository locally.",
+			"not_for": [
+				"Knowledge classification",
+				"Release checklist",
+				"System registry truth"
+			]
+		},
+		{
+			"id": "operations",
+			"path": "docs/technical/operations.md",
+			"role": "Routine maintenance commands and operational loop",
+			"boundary": "Explains regular maintenance and validation habits.",
+			"not_for": [
+				"Taxonomy design",
+				"Canvas design",
+				"GitHub publication policy"
+			]
+		},
+		{
+			"id": "validation",
+			"path": "docs/technical/validation.md",
+			"role": "Validation command map and when to run each command",
+			"boundary": "Explains validation workflow and command order for maintainers.",
+			"not_for": [
+				"Implementing validators",
+				"Knowledge content truth",
+				"Release notes"
+			]
+		},
+		{
+			"id": "github-readiness",
+			"path": "docs/technical/github-readiness.md",
+			"role": "Future GitHub publication checklist and repository hygiene",
+			"boundary": "Explains pre-publication checks, sensitive-data review and external-reader readiness.",
+			"not_for": [
+				"Remote publishing action",
+				"Credential handling",
+				"License decision"
+			]
+		},
+		{
+			"id": "troubleshooting",
+			"path": "docs/technical/troubleshooting.md",
+			"role": "Common local maintenance failures and diagnostic routing",
+			"boundary": "Explains common failure symptoms and which diagnostic route to use.",
+			"not_for": [
+				"Replacing diagnostic-system",
+				"Long-term issue queue",
+				"Module-specific repair details"
+			]
+		}
+	],
+	"split_policy": {
+		"baseline_doc_rule": "docs/technical/README.md stays thin. Detailed operations, validation, GitHub readiness and troubleshooting each live in their own routed file.",
+		"machine_truth_rule": "Technical docs explain how to operate the repository; JSON registries, schemas and scripts decide behavior.",
+		"github_rule": "GitHub publication documentation can prepare local checklists and drafts, but actual remote publication requires explicit user approval.",
+		"growth_trigger": "When a new operational topic becomes durable, add a docs/technical/*.md file and register it in doc_routes before relying on it."
+	},
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-diagnostics.ps1",
+		"scripts/build-index.ps1",
+		"scripts/validate-kb.ps1",
+		"scripts/audit-canvas-screenshot.ps1"
+	]
+}

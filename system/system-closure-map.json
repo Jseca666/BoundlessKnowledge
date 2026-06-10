@@ -1,0 +1,1404 @@
+{
+	"id": "system-closure-map",
+	"version": "0.9.0",
+	"updated": "2026-06-10",
+	"role": "machine-readable-module-closure-matrix",
+	"purpose": "Track whether each stable module has enough routing, truth, validation, documentation, diagnostics and lifecycle coverage to be maintained without relying on chat memory.",
+	"principle": "Closure means a module can be found, understood, modified, validated and repaired through registered system surfaces.",
+	"status_values": [
+		{
+			"status": "closed",
+			"meaning": "The facet has a durable registered owner and validation or route coverage."
+		},
+		{
+			"status": "shared",
+			"meaning": "The facet is covered by a broader route, validator or subsystem rather than a dedicated one."
+		},
+		{
+			"status": "partial",
+			"meaning": "The facet exists but has known gaps or weak automation."
+		},
+		{
+			"status": "seed",
+			"meaning": "The facet is newly created and intentionally thin."
+		},
+		{
+			"status": "missing",
+			"meaning": "The facet should exist but has no durable registered asset."
+		},
+		{
+			"status": "not_applicable",
+			"meaning": "The facet is not required for this module at the current lifecycle stage."
+		}
+	],
+	"required_facets": [
+		{
+			"id": "information_map",
+			"question": "Is the module registered in system/information-map.json with a boundary and paths?"
+		},
+		{
+			"id": "canonical_truth",
+			"question": "Does the module declare the machine-readable files or directories that act as truth?"
+		},
+		{
+			"id": "route",
+			"question": "Can future tasks route to the right read, update and validation surfaces?"
+		},
+		{
+			"id": "validation",
+			"question": "Can drift or missing files be detected by a registered validator?"
+		},
+		{
+			"id": "documentation",
+			"question": "Is human explanation thin, routed and separated from machine truth?"
+		},
+		{
+			"id": "visual_projection",
+			"question": "Does the module need a Canvas view, and if yes is it registered?"
+		},
+		{
+			"id": "diagnostics",
+			"question": "Can failures enter the diagnostic repair loop?"
+		},
+		{
+			"id": "lifecycle",
+			"question": "Is the module current, partial, seed, archived or otherwise explicitly staged?"
+		}
+	],
+	"closure_rule": {
+		"new_module_gate": "Every module in system/information-map.json must appear in this map.",
+		"route_gate": "Every route_id listed here must exist in system/route-registry.json.",
+		"path_gate": "Every canonical_truth, validation, documentation and visual view path listed here must exist.",
+		"gap_rule": "A partial or seed module must state known_gaps and next_action.",
+		"visual_coverage_gate": "Every closure module must have a matching module_decision in system/visual-coverage-map.json; closed/shared visual_projection views must be covered by required_views and registered in canvas-registry.",
+		"layer_gate": "Every closure module owner_layer must match system/module-layer-model.json, and every information-map module must have one model assignment."
+	},
+	"modules": [
+		{
+			"module_id": "inbox",
+			"owner_layer": "knowledge-content",
+			"lifecycle_status": "current",
+			"overall_status": "partial",
+			"canonical_truth": [
+				"00-inbox/"
+			],
+			"routes": [
+				{
+					"route_id": "knowledge-ingestion",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-kb.ps1"
+			],
+			"documentation": [
+				"README.md",
+				"docs/ingestion-workflow.md"
+			],
+			"visual_projection": {
+				"status": "not_applicable",
+				"views": []
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "partial",
+				"route": "shared",
+				"validation": "shared",
+				"documentation": "shared",
+				"visual_projection": "not_applicable",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"No dedicated intake queue schema or inbox validator yet."
+			],
+			"next_action": "Add an intake queue schema if inbox volume grows beyond simple capture."
+		},
+		{
+			"module_id": "source-registry",
+			"owner_layer": "knowledge-content",
+			"lifecycle_status": "current",
+			"overall_status": "partial",
+			"canonical_truth": [
+				"10-sources/"
+			],
+			"routes": [
+				{
+					"route_id": "knowledge-ingestion",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-kb.ps1",
+				"scripts/build-index.ps1"
+			],
+			"documentation": [
+				"docs/ingestion-workflow.md",
+				"docs/source-quality.md"
+			],
+			"visual_projection": {
+				"status": "not_applicable",
+				"views": []
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "partial",
+				"route": "shared",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "not_applicable",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"No source-specific registry JSON beyond Markdown frontmatter and catalog indexing."
+			],
+			"next_action": "Promote source metadata to a dedicated registry only when source volume or query needs justify it."
+		},
+		{
+			"module_id": "project-ontology",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/project-ontology.json"
+			],
+			"routes": [
+				{
+					"route_id": "project-ontology",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			],
+			"documentation": [
+				"AGENTS.md",
+				"README.md",
+				"docs/architecture.md",
+				"docs/codex-integration.md"
+			],
+			"visual_projection": {
+				"status": "shared",
+				"views": [
+					"30-maps/canvas/00-entry/kb-navigation-index.canvas",
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "shared",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep project ontology synchronized whenever project positioning, Codex workflow roles, lifecycle wording, system-vs-knowledge boundary or top-level Canvas entry wording changes.",
+			"activation_proof": {
+				"activation_id": "activation-20260608-project-ontology",
+				"module_id": "project-ontology",
+				"activation_status": "active",
+				"activation_date": "2026-06-08",
+				"route_registered": "project-ontology",
+				"information_map_registered": "system/information-map.json#modules.project-ontology",
+				"closure_registered": "system/system-closure-map.json#modules.project-ontology",
+				"topology_registered": "system/module-relationship-map.json#modules.project-ontology",
+				"legacy_asset_audit": "system/diagnostics/issue-repair-queue.json#diag-20260608-project-ontology-missing-root-identity",
+				"visual_coverage_decision": "system/visual-coverage-map.json#module_decisions.project-ontology",
+				"validation_reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				],
+				"acceptance": "Active after the project root identity is captured in system/project-ontology.json, existing human and Canvas surfaces are adopted, route/information-map/topology/closure/visual coverage are synchronized, and shared entry/system overview Canvas projections expose the knowledge-engineering-system positioning."
+			}
+		},
+		{
+			"module_id": "domain-maps",
+			"owner_layer": "knowledge-content",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"30-maps/domains/domain-taxonomy.registry.json",
+				"30-maps/domains/domain-taxonomy.docs.json"
+			],
+			"routes": [
+				{
+					"route_id": "domain-taxonomy",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/build-index.ps1",
+				"scripts/validate-kb.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			],
+			"documentation": [
+				"30-maps/domains/domain-taxonomy-seed.md",
+				"30-maps/domains/domain-taxonomy-baseline.md",
+				"30-maps/domains/domain-taxonomy-routing-guide.md",
+				"30-maps/domains/domain-taxonomy-overview.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
+					"30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep domain taxonomy registry, human overview, routing guide and required Canvas views synchronized whenever level-1, level-2 or level-3 categories change."
+		},
+		{
+			"module_id": "architecture-views",
+			"owner_layer": "visual-projection",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"system/canvas-docs-map.json",
+				"system/visual-coverage-map.json"
+			],
+			"routes": [
+				{
+					"route_id": "canvas",
+					"status": "closed"
+				},
+				{
+					"route_id": "system-architecture-views",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			],
+			"documentation": [
+				"docs/canvas/README.md",
+				"docs/canvas/architecture.md",
+				"docs/canvas/view-boundaries.md",
+				"docs/canvas/file-placement.md",
+				"docs/canvas/visual-audit.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/00-entry/kb-navigation-index.canvas",
+					"30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "closed",
+				"covered_by": "diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "closed",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep Canvas registry, view graph, visual coverage map, visual audit rules and archive retirement markers synchronized with new system modules and visual changes."
+		},
+		{
+			"module_id": "module-governance",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/module-governance-policy.json",
+				"system/module-layer-model.json"
+			],
+			"routes": [
+				{
+					"route_id": "module-governance",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1"
+			],
+			"documentation": [
+				"docs/module-governance-principles.md"
+			],
+			"visual_projection": {
+				"status": "shared",
+				"views": [
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "closed",
+				"covered_by": "diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "shared",
+				"diagnostics": "closed",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Use this module before adding any durable subsystem."
+		},
+		{
+			"module_id": "system-closure",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/system-closure-map.json"
+			],
+			"routes": [
+				{
+					"route_id": "system-closure",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			],
+			"documentation": [
+				"docs/system-closure.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep this closure matrix and visual-coverage map synchronized whenever modules, routes, validators, docs maps, Canvas views or visual audit gates change."
+		},
+		{
+			"module_id": "technical-documentation",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/technical-docs-map.json"
+			],
+			"routes": [
+				{
+					"route_id": "technical-documentation",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/validate-diagnostics.ps1"
+			],
+			"documentation": [
+				"docs/technical/README.md",
+				"docs/technical/operations.md",
+				"docs/technical/validation.md",
+				"docs/technical/github-readiness.md"
+			],
+			"visual_projection": {
+				"status": "not_applicable",
+				"views": []
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "not_applicable",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Split out an operations execution module only when CI, backup, release or scheduled checks become durable."
+		},
+		{
+			"module_id": "diagnostics",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/diagnostics/diagnostic-system.json",
+				"system/diagnostics/issue-repair-queue.json",
+				"schemas/diagnostic-issue.schema.json",
+				"system/diagnostics/diagnostic-layer-matrix.json",
+				"system/diagnostics/failure-learning-loop.json"
+			],
+			"routes": [
+				{
+					"route_id": "diagnostics",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-diagnostics.ps1",
+				"scripts/validate-system.ps1"
+			],
+			"documentation": [
+				".agents/skills/diagnostic-system/SKILL.md",
+				"docs/diagnostic-system.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "closed",
+				"covered_by": "diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "closed",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep diagnostic controller, layer matrix, failure-learning loop, issue queue, schema, validator, skill entry and dedicated Canvas view synchronized whenever the diagnostic workflow, record contract or controlled learning policy changes."
+		},
+		{
+			"module_id": "artifact-form-decision",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/artifact-form-policy.json"
+			],
+			"routes": [
+				{
+					"route_id": "artifact-form-decision",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1"
+			],
+			"documentation": [
+				"docs/module-governance-principles.md"
+			],
+			"visual_projection": {
+				"status": "shared",
+				"views": [
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "shared",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Use before converting thin scripts into larger tools or services."
+		},
+		{
+			"module_id": "loop-orchestration",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/loop-registry.json",
+				"system/loops/",
+				"system/loops/taxonomy-refinement/loop.json",
+				"system/loops/taxonomy-refinement/queue.json",
+				"system/loops/taxonomy-refinement/state.json",
+				"system/loops/taxonomy-refinement/runner-contract.json"
+			],
+			"routes": [
+				{
+					"route_id": "loop-orchestration",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			],
+			"documentation": [
+				"docs/loop-orchestration.md",
+				"system/loops/taxonomy-refinement/README.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "When a second durable loop appears, register it through system/loop-registry.json, add its loop directory, update route/closure/visual coverage, and decide whether multi-loop scheduling should become a runtime service.",
+			"activation_proof": {
+				"activation_id": "activation-20260608-loop-orchestration",
+				"module_id": "loop-orchestration",
+				"activation_status": "active",
+				"activation_date": "2026-06-08",
+				"route_registered": "loop-orchestration",
+				"information_map_registered": "system/information-map.json#modules.loop-orchestration",
+				"closure_registered": "system/system-closure-map.json#modules.loop-orchestration",
+				"topology_registered": "system/module-relationship-map.json#modules.loop-orchestration",
+				"legacy_asset_audit": "system/diagnostics/issue-repair-queue.json#diag-20260608-loop-orchestration-underclassified",
+				"visual_coverage_decision": "system/visual-coverage-map.json#module_decisions.loop-orchestration",
+				"validation_reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				],
+				"acceptance": "Active after loop-orchestration is treated as a system-governance module, taxonomy-refinement is adopted as the first managed loop, route/information-map/topology/closure/tool/visual coverage are synchronized, and a dedicated Canvas view exists."
+			}
+		},
+		{
+			"module_id": "atomic-knowledge",
+			"owner_layer": "knowledge-content",
+			"lifecycle_status": "current",
+			"overall_status": "partial",
+			"canonical_truth": [
+				"20-notes/"
+			],
+			"routes": [
+				{
+					"route_id": "knowledge-ingestion",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-kb.ps1",
+				"scripts/build-index.ps1"
+			],
+			"documentation": [
+				"README.md"
+			],
+			"visual_projection": {
+				"status": "not_applicable",
+				"views": []
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "partial",
+				"route": "shared",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "not_applicable",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"No dedicated atomic-note retrieval or quality route yet."
+			],
+			"next_action": "Add atomic knowledge route if note volume grows or retrieval errors appear."
+		},
+		{
+			"module_id": "synthesis",
+			"owner_layer": "knowledge-content",
+			"lifecycle_status": "current",
+			"overall_status": "partial",
+			"canonical_truth": [
+				"40-synthesis/"
+			],
+			"routes": [
+				{
+					"route_id": "codex-workflows",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-kb.ps1",
+				"scripts/build-index.ps1"
+			],
+			"documentation": [
+				"README.md"
+			],
+			"visual_projection": {
+				"status": "not_applicable",
+				"views": []
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "partial",
+				"route": "shared",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "not_applicable",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"No dedicated synthesis production workflow route yet."
+			],
+			"next_action": "Create a synthesis route when multi-source briefs become frequent."
+		},
+		{
+			"module_id": "workflows",
+			"owner_layer": "project-consumption",
+			"lifecycle_status": "current",
+			"overall_status": "partial",
+			"canonical_truth": [
+				"50-workflows/"
+			],
+			"routes": [
+				{
+					"route_id": "codex-workflows",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-kb.ps1",
+				"scripts/build-index.ps1"
+			],
+			"documentation": [
+				"docs/codex-integration.md",
+				"50-workflows/codex/kb-retrieval-context-pack.md"
+			],
+			"visual_projection": {
+				"status": "shared",
+				"views": [
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "partial",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "shared",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"Workflow packs are still early and do not yet have project-specific test cases."
+			],
+			"next_action": "Add workflow evals when a Codex project consumes the knowledge base."
+		},
+		{
+			"module_id": "evals",
+			"owner_layer": "knowledge-content",
+			"lifecycle_status": "current",
+			"overall_status": "partial",
+			"canonical_truth": [
+				"60-evals/"
+			],
+			"routes": [
+				{
+					"route_id": "codex-workflows",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-kb.ps1",
+				"scripts/build-index.ps1"
+			],
+			"documentation": [
+				"60-evals/retrieval-quality.md",
+				"60-evals/taxonomy-routing-audit.md"
+			],
+			"visual_projection": {
+				"status": "not_applicable",
+				"views": []
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "partial",
+				"route": "shared",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "not_applicable",
+				"diagnostics": "shared",
+				"lifecycle": "partial"
+			},
+			"known_gaps": [
+				"Eval cases are present but not yet tied to an automated eval runner."
+			],
+			"next_action": "Create an eval runner if retrieval or taxonomy quality starts regressing."
+		},
+		{
+			"module_id": "indexes",
+			"owner_layer": "machine-infrastructure",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"70-indexes/catalog.json",
+				"70-indexes/catalog.csv"
+			],
+			"routes": [
+				{
+					"route_id": "codex-workflows",
+					"status": "shared"
+				},
+				{
+					"route_id": "knowledge-ingestion",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/build-index.ps1",
+				"scripts/validate-kb.ps1"
+			],
+			"documentation": [
+				"70-indexes/README.md"
+			],
+			"visual_projection": {
+				"status": "not_applicable",
+				"views": []
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "shared",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "not_applicable",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Move indexing to Node.js or Python only when parsing and export formats grow."
+		},
+		{
+			"module_id": "schemas",
+			"owner_layer": "machine-infrastructure",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"schemas/kb-item.schema.json",
+				"schemas/diagnostic-issue.schema.json",
+				"schemas/review-record.schema.json"
+			],
+			"routes": [
+				{
+					"route_id": "schemas-and-templates",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-kb.ps1",
+				"scripts/validate-diagnostics.ps1",
+				"scripts/validate-system.ps1"
+			],
+			"documentation": [
+				"templates/concept-card.md"
+			],
+			"visual_projection": {
+				"status": "shared",
+				"views": [
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "shared",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep schema changes synchronized with validators and templates."
+		},
+		{
+			"module_id": "tools",
+			"owner_layer": "machine-infrastructure",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/tool-map.json",
+				"scripts/"
+			],
+			"routes": [
+				{
+					"route_id": "artifact-form-decision",
+					"status": "shared"
+				},
+				{
+					"route_id": "technical-documentation",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1"
+			],
+			"documentation": [
+				"docs/technical/validation.md"
+			],
+			"visual_projection": {
+				"status": "shared",
+				"views": [
+					"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "shared",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "shared",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Add a dedicated tools route only if scripts grow beyond validation and indexing."
+		},
+		{
+			"module_id": "review-system",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/reviews/review-system.json",
+				"system/reviews/review-queue.json",
+				"system/reviews/review-docs-map.json",
+				"schemas/review-record.schema.json"
+			],
+			"routes": [
+				{
+					"route_id": "review-system",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-reviews.ps1",
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			],
+			"documentation": [
+				".agents/skills/review-system/SKILL.md",
+				"docs/review/README.md",
+				"docs/review/system-review.md",
+				"docs/review/knowledge-review.md",
+				"docs/review/canvas-visual-aesthetic-review.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "review-to-downstream-handlers -> diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep review contract, queue, schema, validator, docs map, skill entry, Canvas visual aesthetic review and dedicated Canvas synchronized whenever review classes, criteria sets, specialized review modules or handoff rules change."
+		},
+		{
+			"module_id": "system-structure-governance",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/system-structure-governance.json",
+				"system/module-relationship-map.json",
+				"system/module-layer-model.json"
+			],
+			"routes": [
+				{
+					"route_id": "system-structure-governance",
+					"status": "closed"
+				},
+				{
+					"route_id": "module-governance",
+					"status": "shared"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1"
+			],
+			"documentation": [
+				"docs/module-governance-principles.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "shared",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "后续新增稳定模块或分支时，先写结构判断包，再更新 module-relationship-map 与派生快照。",
+			"activation_proof": {
+				"activation_id": "activation-20260607-system-structure-governance",
+				"module_id": "system-structure-governance",
+				"activation_status": "active",
+				"activation_date": "2026-06-07",
+				"route_registered": "system-structure-governance",
+				"information_map_registered": "system/information-map.json#modules.system-structure-governance",
+				"closure_registered": "system/system-closure-map.json#modules.system-structure-governance",
+				"topology_registered": "system/module-relationship-map.json#modules.system-structure-governance",
+				"legacy_asset_audit": "system/module-relationship-map.json#current_layer_relationship_audit",
+				"visual_coverage_decision": "system/visual-coverage-map.json#module_decisions.system-structure-governance",
+				"validation_reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				],
+				"acceptance": "Active after the existing 19-module layer/topology/closure relationship set was audited, adopted as current baseline, visually covered, and guarded by validation."
+			}
+		},
+		{
+			"module_id": "system-information-map",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/information-map.json",
+				"system/information-map-manifest.json",
+				"system/information-map-shards/",
+				"schemas/information-map.schema.json",
+				"schemas/information-map-manifest.schema.json",
+				"schemas/information-map-shard.schema.json"
+			],
+			"routes": [
+				{
+					"route_id": "system-information-map",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1"
+			],
+			"documentation": [
+				"docs/system-information-map.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [],
+			"next_action": "Keep manifest, shards, schemas, route, closure, topology and visual coverage synchronized whenever system reference surfaces change.",
+			"activation_proof": {
+				"activation_id": "activation-20260607-system-information-map",
+				"module_id": "system-information-map",
+				"activation_status": "active",
+				"activation_date": "2026-06-07",
+				"route_registered": "system-information-map",
+				"information_map_registered": "system/information-map.json#modules.system-information-map",
+				"closure_registered": "system/system-closure-map.json#modules.system-information-map",
+				"topology_registered": "system/module-relationship-map.json#modules.system-information-map",
+				"legacy_asset_audit": "system/diagnostics/issue-repair-queue.json#diag-20260607-system-information-map-self-description-gap",
+				"visual_coverage_decision": "system/visual-coverage-map.json#module_decisions.system-information-map",
+				"validation_reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				],
+				"acceptance": "Active after the previous standalone information-map file was adopted as this module root truth, manifest/shards/schemas/docs/Canvas were added, and route, closure, topology, visual coverage and validation surfaces were synchronized."
+			}
+		},
+		{
+			"module_id": "knowledge-ingestion",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/knowledge-ingestion-system.json",
+				"system/knowledge-ingestion-docs-map.json"
+			],
+			"routes": [
+				{
+					"route_id": "knowledge-ingestion",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1",
+				"scripts/audit-canvas-screenshot.ps1",
+				"scripts/validate-reviews.ps1",
+				"scripts/validate-diagnostics.ps1",
+				"scripts/build-index.ps1",
+				"scripts/validate-kb.ps1"
+			],
+			"documentation": [
+				"docs/knowledge-ingestion/README.md",
+				"docs/ingestion-workflow.md",
+				"docs/source-quality.md",
+				"00-inbox/README.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"No dedicated source-record registry JSON yet; current source records still rely on Markdown/frontmatter plus catalog indexing.",
+				"No automatic ingestion crawler or unattended source watcher is part of the current subsystem."
+			],
+			"next_action": "When source volume grows, decide whether source-registry needs a dedicated JSON registry, intake queue schema or ingestion loop runner.",
+			"activation_proof": {
+				"activation_id": "activation-20260610-knowledge-ingestion",
+				"module_id": "knowledge-ingestion",
+				"activation_status": "active",
+				"activation_date": "2026-06-10",
+				"route_registered": "knowledge-ingestion",
+				"information_map_registered": "system/information-map.json#modules.knowledge-ingestion",
+				"closure_registered": "system/system-closure-map.json#modules.knowledge-ingestion",
+				"topology_registered": "system/module-relationship-map.json#modules.knowledge-ingestion",
+				"legacy_asset_audit": "system/diagnostics/issue-repair-queue.json#diag-20260610-knowledge-ingestion-underclassified-as-route",
+				"visual_coverage_decision": "system/visual-coverage-map.json#module_decisions.knowledge-ingestion",
+				"validation_reports": [
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/audit-canvas-screenshot.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				],
+				"acceptance": "Active after knowledge-ingestion has its own machine truth, docs map, route, information-map module, topology placement, closure record, legacy asset adoption and dedicated Canvas view; inbox/source-registry remain knowledge-content assets governed by this subsystem."
+			}
+		},
+		{
+			"module_id": "git-governance",
+			"owner_layer": "system-governance",
+			"lifecycle_status": "current",
+			"overall_status": "closed",
+			"canonical_truth": [
+				"system/git-governance-system.json",
+				"system/git-governance-docs-map.json"
+			],
+			"routes": [
+				{
+					"route_id": "git-governance",
+					"status": "closed"
+				}
+			],
+			"validation": [
+				"scripts/validate-git-governance.ps1",
+				"scripts/validate-system.ps1",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1",
+				"scripts/validate-reviews.ps1",
+				"scripts/validate-diagnostics.ps1",
+				"scripts/audit-text-integrity.ps1"
+			],
+			"documentation": [
+				"docs/git-governance/README.md",
+				"docs/technical/github-readiness.md"
+			],
+			"visual_projection": {
+				"status": "closed",
+				"views": [
+					"30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas"
+				]
+			},
+			"diagnostics": {
+				"status": "shared",
+				"covered_by": "system-surfaces-to-diagnostics"
+			},
+			"facets": {
+				"information_map": "closed",
+				"canonical_truth": "closed",
+				"route": "closed",
+				"validation": "closed",
+				"documentation": "closed",
+				"visual_projection": "closed",
+				"diagnostics": "shared",
+				"lifecycle": "closed"
+			},
+			"known_gaps": [
+				"No initial commit or remote push was created by this module because staging, committing and pushing should remain explicit user actions unless requested.",
+				"No CI workflow is configured yet."
+			],
+			"next_action": "When the user asks for the first commit, run validation, review changed paths, stage intentionally, commit locally, then ask before push.",
+			"activation_proof": {
+				"activation_id": "activation-20260610-git-governance",
+				"module_id": "git-governance",
+				"activation_status": "active",
+				"activation_date": "2026-06-10",
+				"route_registered": "git-governance",
+				"information_map_registered": "system/information-map.json#modules.git-governance",
+				"closure_registered": "system/system-closure-map.json#modules.git-governance",
+				"topology_registered": "system/module-relationship-map.json#modules.git-governance",
+				"legacy_asset_audit": "system/git-governance-system.json#legacy_asset_adoption",
+				"visual_coverage_decision": "system/visual-coverage-map.json#module_decisions.git-governance",
+				"validation_reports": [
+					"scripts/validate-git-governance.ps1",
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/audit-canvas-screenshot.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/audit-text-integrity.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				],
+				"acceptance": "Active after origin remote was configured, Git governance machine truth/docs map/tools/route/information/topology/closure/visual coverage and dedicated Canvas were synchronized, while remote actions remain approval-gated."
+			}
+		}
+	],
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-diagnostics.ps1",
+		"scripts/validate-canvas.ps1",
+		"scripts/build-index.ps1",
+		"scripts/validate-kb.ps1",
+		"scripts/audit-canvas-visual.ps1",
+		"scripts/validate-reviews.ps1"
+	],
+	"latest_audit": {
+		"date": "2026-06-07",
+		"scope": [
+			"system-information-map",
+			"information-map manifest",
+			"information-map shards",
+			"schemas",
+			"Canvas coverage"
+		],
+		"result": "Activated system-information-map as an independent system-governance module and adopted the existing information-map root file as its owned machine truth."
+	},
+	"latest_module_layer_audit": {
+		"date": "2026-06-07",
+		"scope": [
+			"information-map",
+			"system-closure-map",
+			"module-governance-policy",
+			"canvas-entry"
+		],
+		"result": "Added system/module-layer-model.json as canonical owner_layer model and aligned closure module owner_layer values with information-map module assignments."
+	},
+	"latest_module_relationship_audit": {
+		"date": "2026-06-07",
+		"status": "closed",
+		"scope": [
+			"system/information-map.json modules",
+			"system/module-layer-model.json owner_layer/module_kind snapshot",
+			"system/module-relationship-map.json branches and relationships",
+			"system/system-closure-map.json module owner_layer and lifecycle",
+			"Canvas entry/system overview projection boundaries"
+		],
+		"result": "system-structure-governance reviewed existing layer relationships and recorded adoption/migration actions in system/module-relationship-map.json current_layer_relationship_audit."
+	},
+	"latest_module_activation_audit": {
+		"date": "2026-06-10",
+		"status": "closed",
+		"modules": [
+			"system-structure-governance",
+			"system-information-map",
+			"loop-orchestration",
+			"project-ontology",
+			"knowledge-ingestion",
+			"git-governance"
+		],
+		"result": "git-governance now has activation_proof, remote origin contract, route, topology, information-map, dedicated visual coverage and local Git asset adoption.",
+		"proof": "system/system-closure-map.json#modules.git-governance.activation_proof"
+	},
+	"latest_project_ontology_audit": {
+		"date": "2026-06-08",
+		"status": "closed",
+		"scope": [
+			"project-ontology",
+			"route-registry",
+			"information-map",
+			"module topology",
+			"closure map",
+			"visual coverage",
+			"Canvas entry and system overview"
+		],
+		"result": "Added project-ontology as the root identity contract for the knowledge engineering system and synchronized shared visual projection plus activation proof."
+	},
+	"latest_knowledge_ingestion_audit": {
+		"date": "2026-06-10",
+		"status": "closed",
+		"scope": [
+			"knowledge-ingestion",
+			"legacy ingestion docs",
+			"source quality docs",
+			"templates",
+			"system overview Canvas",
+			"dedicated ingestion Canvas"
+		],
+		"result": "Promoted knowledge entry from route/docs fragments to a stable system-governance subsystem with closure and visual coverage."
+	}
+}

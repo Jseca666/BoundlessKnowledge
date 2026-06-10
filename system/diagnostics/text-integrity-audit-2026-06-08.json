@@ -1,0 +1,1588 @@
+{
+    "id":  "text-integrity-audit",
+    "generated_at":  "2026-06-08T12:45:49",
+    "checked_count":  196,
+    "failed_count":  0,
+    "status":  "pass",
+    "paths":  [
+                  "system",
+                  "docs",
+                  ".agents",
+                  "scripts",
+                  "schemas",
+                  "30-maps",
+                  "70-indexes",
+                  "AGENTS.md",
+                  "README.md"
+              ],
+    "results":  [
+                    {
+                        "file":  ".agents/skills/diagnostic-system/agents/openai.yaml",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  ".agents/skills/diagnostic-system/SKILL.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  ".agents/skills/review-system/agents/openai.yaml",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  ".agents/skills/review-system/SKILL.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/00-entry/kb-navigation-index.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-directory-layout.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/90-archive/knowledge-base-architecture-detailed-draft-20260605.canvas",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/canvas/README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/domains/domain-taxonomy.docs.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/domains/domain-taxonomy.registry.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/domains/domain-taxonomy-baseline.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/domains/domain-taxonomy-overview.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/domains/domain-taxonomy-routing-guide.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/domains/domain-taxonomy-seed.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "30-maps/domains/general-knowledge-network.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "70-indexes/catalog.csv",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "70-indexes/catalog.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "70-indexes/README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "AGENTS.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/architecture.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/canvas/architecture.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/canvas/data-separation.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/canvas/file-placement.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/canvas/obsidian-workflow.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/canvas/README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/canvas/view-boundaries.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/canvas/visual-audit.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/codex-integration.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/diagnostic-system.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/ingestion-workflow.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/loop-orchestration.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/module-governance-principles.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/review/canvas-visual-aesthetic-review.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/review/knowledge-review.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/review/README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/review/system-review.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/roadmap.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/source-quality.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/system-closure.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/system-information-map.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/technical/github-readiness.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/technical/operations.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/technical/README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/technical/setup.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/technical/troubleshooting.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "docs/technical/validation.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "schemas/diagnostic-issue.schema.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "schemas/information-map.schema.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "schemas/information-map-manifest.schema.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "schemas/information-map-shard.schema.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "schemas/kb-item.schema.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "schemas/review-record.schema.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/audit-canvas-visual.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/audit-text-integrity.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/build-index.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/loop-status.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/new-kb-item.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/validate-canvas.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/validate-diagnostics.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/validate-kb.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/validate-reviews.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "scripts/validate-system.ps1",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/artifact-form-policy.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/canvas-docs-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/canvas-registry.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/canvas-system.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/canvas-view-graph.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/development-principles.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/diagnostics/diagnostic-system.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/diagnostics/issue-repair-queue.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/diagnostics/text-integrity-audit-2026-06-08.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/information-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/information-map-manifest.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/information-map-shards/information-map-core-refs.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/information-map-shards/information-map-governance-refs.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loop-registry.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/loop.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/1.1-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/1.2-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/1.3-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/1.4-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/1.5-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/1.6-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/1.7-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.1-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.2-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.3-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.4-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.5-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.6-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.7-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/2.8-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/3.1-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/3.2-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/3.3-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/3.4-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/3.5-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/3.6-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/3.7-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.1-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.2-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.3-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.4-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.5-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.6-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.7-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/4.8-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.1-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.2-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.3-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.4-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.5-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.6-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.7-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/5.8-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/6.1-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/6.2-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/6.3-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/6.4-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/6.5-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/6.6-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/6.7-summary.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/outputs/README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/queue.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/README.md",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runner-contract.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-001.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-002.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-003.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-004.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-005.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-006.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-007.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-008.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-009.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-010.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-011.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-012.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-013.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-014.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-015.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-016.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-017.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-018.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-019.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-020.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-021.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-022.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-023.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-024.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-025.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-026.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-027.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-028.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-029.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-030.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-031.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-032.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-033.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-034.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-035.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-036.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-037.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-038.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-039.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-040.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-041.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-042.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-043.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-044.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/runs/2026-06-05-045.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/loops/taxonomy-refinement/state.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/module-governance-policy.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/module-layer-model.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/module-relationship-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/project-ontology.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/reviews/review-docs-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/reviews/review-queue.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/reviews/review-system.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/route-registry.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/system-closure-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/system-structure-governance.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/technical-docs-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/tool-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    },
+                    {
+                        "file":  "system/visual-coverage-map.json",
+                        "status":  "pass",
+                        "utf8_round_trip":  true,
+                        "findings":  [
+
+                                     ]
+                    }
+                ]
+}

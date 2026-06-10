@@ -1,0 +1,68 @@
+{
+  "id": "2026-06-05-024",
+  "loop_id": "taxonomy-refinement",
+  "unit_id": "4.2",
+  "started_at": "2026-06-05",
+  "completed_at": "2026-06-05",
+  "inputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/queue.json",
+    "system/loops/taxonomy-refinement/state.json"
+  ],
+  "outputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/outputs/4.2-summary.md"
+  ],
+  "diagnosis": {
+    "level_1": "农业、生态与资源科学",
+    "level_2": "畜牧、水产与兽医",
+    "boundary": "覆盖“农业、生态与资源科学”下与“畜牧、水产与兽医”相关的稳定知识方向、研究对象、方法体系、证据形态和实践接口。若条目核心问题属于相邻二级，应以主要对象和主要证据链确定 primary_level_2，其他方向作为 related_level_3 关联。",
+    "adjacent_overlap_rule": "以知识条目的主要对象、主要证据链和主要使用场景确定 primary_level_3；交叉方向登记到 related_level_3。",
+    "risk_notes": [
+      "避免把工具、公司、产品、短期热点作为三级分类。",
+      "新兴交叉主题先落入最近三级方向簇，并通过 taxonomy_gap 标注缺口。"
+    ]
+  },
+  "level_3_count": 10,
+  "routing_examples": [
+    {
+      "item": "动物遗传育种与繁殖相关知识条目",
+      "primary_level_3": "4.2.1 动物遗传育种与繁殖",
+      "related_level_3": []
+    },
+    {
+      "item": "动物营养、饲料与养殖管理相关知识条目",
+      "primary_level_3": "4.2.2 动物营养、饲料与养殖管理",
+      "related_level_3": [
+        "4.2.1 动物遗传育种与繁殖"
+      ]
+    },
+    {
+      "item": "畜禽生产、福利与健康管理相关知识条目",
+      "primary_level_3": "4.2.3 畜禽生产、福利与健康管理",
+      "related_level_3": [
+        "4.2.1 动物遗传育种与繁殖"
+      ]
+    },
+    {
+      "item": "水产养殖、渔业资源与水生动物相关知识条目",
+      "primary_level_3": "4.2.4 水产养殖、渔业资源与水生动物",
+      "related_level_3": [
+        "4.2.1 动物遗传育种与繁殖"
+      ]
+    }
+  ],
+  "quality_gate_result": {
+    "passed": true,
+    "coverage": "pass",
+    "stability": "pass",
+    "non_tool_or_product": "pass",
+    "routability": "pass",
+    "no_unclassified": "pass"
+  },
+  "state_transition": {
+    "from": "pending_or_in_progress",
+    "to": "completed",
+    "next_unit": "4.3"
+  }
+}

@@ -1,0 +1,296 @@
+{
+	"id": "knowledge-ingestion-system",
+	"version": "0.1.0",
+	"updated": "2026-06-10",
+	"artifact_type": "subsystem-machine-truth",
+	"owner_module": "knowledge-ingestion",
+	"role": "知识摄入子系统的机器真相",
+	"purpose": "治理外部知识从捕获、来源登记、质量预审、领域路由、原子化准备到索引和审查交接的进入方式。",
+	"positioning": {
+		"owner_layer": "system-governance",
+		"module_kind": "knowledge-ingestion-subsystem",
+		"reason": "inbox、source-registry、atomic notes 等保存知识内容；知识摄入子系统治理这些内容资产如何进入、交接和被校验。"
+	},
+	"responsibility_boundary": {
+		"owns": [
+			"知识进入方式和入口模式",
+			"来源类型与来源记录前置规则",
+			"source quality precheck 和升级交接规则",
+			"进入领域分类、原子知识、综合、索引和 Codex workflow 的 handoff contract",
+			"旧摄入文档、模板和入口资产的接管状态",
+			"知识摄入可视化覆盖和闭环状态"
+		],
+		"does_not_own": [
+			"每条具体来源记录的事实内容",
+			"领域分类树本身",
+			"原子知识正文",
+			"综合产物结论",
+			"索引生成脚本实现",
+			"Canvas 坐标布局规则"
+		]
+	},
+	"managed_surfaces": {
+		"machine_truth": [
+			"system/knowledge-ingestion-system.json",
+			"system/knowledge-ingestion-docs-map.json",
+			"system/route-registry.json#routes.knowledge-ingestion",
+			"system/information-map.json#modules.knowledge-ingestion",
+			"system/module-relationship-map.json#modules.knowledge-ingestion",
+			"system/system-closure-map.json#modules.knowledge-ingestion",
+			"system/visual-coverage-map.json#module_decisions.knowledge-ingestion"
+		],
+		"human_docs": [
+			"docs/knowledge-ingestion/README.md",
+			"docs/ingestion-workflow.md",
+			"docs/source-quality.md",
+			"00-inbox/README.md"
+		],
+		"knowledge_content_assets": [
+			"00-inbox/",
+			"10-sources/",
+			"20-notes/",
+			"40-synthesis/",
+			"50-workflows/",
+			"70-indexes/catalog.json"
+		],
+		"templates": [
+			"templates/paper-source.md",
+			"templates/github-topic.md",
+			"templates/web-source.md",
+			"templates/personal-draft.md",
+			"templates/atomic-note.md",
+			"templates/synthesis-brief.md",
+			"templates/workflow-pack.md"
+		],
+		"visual_projection": [
+			"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+			"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		]
+	},
+	"entry_modes": [
+		{
+			"id": "paper",
+			"name": "论文",
+			"source_template": "templates/paper-source.md",
+			"required_precheck": [
+				"bibliographic identity",
+				"method and limitation",
+				"claim not treated as fact",
+				"source_quality_level"
+			]
+		},
+		{
+			"id": "github-topic",
+			"name": "GitHub 技术主题",
+			"source_template": "templates/github-topic.md",
+			"required_precheck": [
+				"repo identity",
+				"license",
+				"last_checked_at",
+				"maintenance signals",
+				"risk signals"
+			]
+		},
+		{
+			"id": "web-source",
+			"name": "专业网页",
+			"source_template": "templates/web-source.md",
+			"required_precheck": [
+				"publisher identity",
+				"accessed_at",
+				"recency",
+				"claim boundary",
+				"source_quality_level"
+			]
+		},
+		{
+			"id": "personal-draft",
+			"name": "个人草稿经验",
+			"source_template": "templates/personal-draft.md",
+			"required_precheck": [
+				"scenario",
+				"constraints",
+				"observed result",
+				"applicability boundary",
+				"external support status"
+			]
+		},
+		{
+			"id": "future-source-type",
+			"name": "未来来源类型",
+			"source_template": "templates/",
+			"required_precheck": [
+				"provenance",
+				"source type",
+				"quality level",
+				"domain candidates",
+				"review trigger"
+			]
+		}
+	],
+	"core_workflow": [
+		{
+			"step": "capture-or-direct-register",
+			"output": "raw_intake_or_source_candidate",
+			"rule": "材料可以先进入 00-inbox，也可以在信息足够时直接形成 source record；无论哪种路径，都不能绕过来源身份和质量预审。"
+		},
+		{
+			"step": "identify-source-type",
+			"output": "source_type",
+			"rule": "先判断论文、GitHub、网页、个人经验或未来来源类型，再选择模板和必填字段。"
+		},
+		{
+			"step": "register-provenance",
+			"output": "source_record",
+			"rule": "同一来源只保留一个 source record；知识条目引用 source record id，不只贴 URL。"
+		},
+		{
+			"step": "precheck-source-quality",
+			"output": "source_quality_and_risk_flags",
+			"rule": "按 docs/source-quality.md 记录可信层级、时效性、局限、争议和变动快的检查日期。"
+		},
+		{
+			"step": "route-domain-before-distillation",
+			"output": "domain_route_candidate",
+			"rule": "进入原子知识前先交给领域分类路由；至少要有可解释的一级/二级/三级候选或明确的 taxonomy gap。"
+		},
+		{
+			"step": "distill-ready-knowledge",
+			"output": "atomic_or_synthesis_candidate",
+			"rule": "只把可追溯、可复用、边界清晰的概念、判断、方法、模式和风险送入 20-notes 或 40-synthesis。"
+		},
+		{
+			"step": "index-review-and-feedback",
+			"output": "catalog_update_and_handoff",
+			"rule": "运行索引和校验；来源质量、分类不确定、事实时效或高风险内容交给 review-system，结构缺陷交给 diagnostics。"
+		}
+	],
+	"handoff_contracts": [
+		{
+			"to": "domain-maps",
+			"when": "source has enough context for primary/secondary domain routing or exposes a taxonomy gap",
+			"payload": [
+				"source_id",
+				"source_type",
+				"domain_candidates",
+				"uncertainty",
+				"classification_gap_if_any"
+			]
+		},
+		{
+			"to": "review-system",
+			"when": "source quality, claim strength, recency, copyright, uncertainty or classification confidence needs review",
+			"payload": [
+				"source_id",
+				"risk_flags",
+				"evidence_paths",
+				"requested_review_class"
+			]
+		},
+		{
+			"to": "diagnostics",
+			"when": "the ingestion path itself exposes missing schema, missing route, ownership drift, visual blind spot or repeated workflow failure",
+			"payload": [
+				"failure_packet",
+				"affected_surfaces",
+				"candidate_root_problem"
+			]
+		},
+		{
+			"to": "loop-orchestration",
+			"when": "a repeatable batch ingestion, taxonomy gap refinement or recurring source-quality cleanup should be advanced one unit at a time",
+			"payload": [
+				"loop_candidate",
+				"unit_granularity",
+				"queue_seed"
+			]
+		},
+		{
+			"to": "indexes",
+			"when": "source, note, synthesis or workflow files changed",
+			"payload": [
+				"changed_paths",
+				"catalog_rebuild_required"
+			]
+		}
+	],
+	"quality_gates": [
+		{
+			"id": "provenance-before-claim",
+			"rule": "任何可复用知识判断进入 notes/synthesis/workflow 前，必须能回到 source record 或个人经验记录。"
+		},
+		{
+			"id": "source-type-before-template",
+			"rule": "先确定来源类型，再选择模板；模板缺失时先登记 future-source-type gap。"
+		},
+		{
+			"id": "volatile-facts-need-last-checked-at",
+			"rule": "GitHub、价格、模型/API 能力、法规、版本和其他易变事实必须记录检查日期。"
+		},
+		{
+			"id": "domain-route-before-atomic-distillation",
+			"rule": "原子化前必须有领域路由候选或 taxonomy gap，避免知识进入后无法归类。"
+		},
+		{
+			"id": "review-uncertain-or-high-risk-intake",
+			"rule": "来源质量低、证据冲突、版权不确定、医疗法律金融等高风险材料，进入前必须触发 review-system。"
+		},
+		{
+			"id": "no-local-fix-for-ingestion-system-defect",
+			"rule": "如果问题属于进入链路的路由、schema、质量门或可视化盲区，交给 diagnostics 做系统升级，不在单条来源里局部修。"
+		}
+	],
+	"legacy_asset_adoption": [
+		{
+			"asset": "docs/ingestion-workflow.md",
+			"previous_role": "human workflow note for capture and distillation",
+			"action": "adopt",
+			"new_role": "managed human explanation under knowledge-ingestion-docs-map"
+		},
+		{
+			"asset": "docs/source-quality.md",
+			"previous_role": "standalone source quality guide",
+			"action": "adopt",
+			"new_role": "source quality precheck criteria for ingestion gates"
+		},
+		{
+			"asset": "00-inbox/README.md",
+			"previous_role": "local folder explanation",
+			"action": "adopt",
+			"new_role": "raw capture entry explanation governed by the ingestion subsystem"
+		},
+		{
+			"asset": "templates/",
+			"previous_role": "generic knowledge item templates",
+			"action": "adopt",
+			"new_role": "source-type and downstream output templates selected by ingestion workflow"
+		},
+		{
+			"asset": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas#stage-capture",
+			"previous_role": "system overview stage only",
+			"action": "migrate",
+			"new_role": "overview entry point linking to dedicated knowledge-ingestion subsystem view"
+		}
+	],
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-canvas.ps1",
+		"scripts/audit-canvas-visual.ps1",
+		"scripts/audit-canvas-screenshot.ps1",
+		"scripts/validate-reviews.ps1",
+		"scripts/validate-diagnostics.ps1",
+		"scripts/build-index.ps1",
+		"scripts/validate-kb.ps1"
+	],
+	"visual_projection": {
+		"decision": "dedicated_required",
+		"view_id": "knowledge-ingestion-architecture-map",
+		"path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+		"parent_view": "knowledge-base-system-architecture-map"
+	},
+	"status": {
+		"lifecycle_status": "current",
+		"closure_status": "closed",
+		"activation_ref": "system/system-closure-map.json#modules.knowledge-ingestion.activation_proof"
+	}
+}

@@ -1,0 +1,197 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://unbounded-knowledge.local/schemas/review-record.schema.json",
+	"title": "Review Record",
+	"type": "object",
+	"additionalProperties": true,
+	"required": [
+		"review_id",
+		"title",
+		"status",
+		"review_class",
+		"trigger",
+		"scope",
+		"evidence_paths",
+		"criteria",
+		"findings",
+		"risk_assessment",
+		"handoff_decision",
+		"capture_paths",
+		"validation",
+		"review_acceptance"
+	],
+	"properties": {
+		"review_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"title": {
+			"type": "string",
+			"minLength": 1
+		},
+		"status": {
+			"type": "string",
+			"enum": [
+				"new",
+				"in_progress",
+				"captured",
+				"blocked",
+				"archived"
+			]
+		},
+		"review_class": {
+			"type": "string",
+			"enum": [
+				"system_internal_review",
+				"external_knowledge_review",
+				"visual_review",
+				"release_readiness_review"
+			]
+		},
+		"trigger": {
+			"type": "string",
+			"minLength": 1
+		},
+		"scope": {
+			"type": "object",
+			"required": [
+				"in_scope",
+				"out_of_scope"
+			],
+			"properties": {
+				"in_scope": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"out_of_scope": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"evidence_paths": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"criteria": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			},
+			"minItems": 1
+		},
+		"findings": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"id",
+					"status",
+					"summary",
+					"evidence"
+				],
+				"properties": {
+					"id": {
+						"type": "string",
+						"minLength": 1
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"observation",
+							"risk",
+							"defect",
+							"blocked"
+						]
+					},
+					"summary": {
+						"type": "string",
+						"minLength": 1
+					},
+					"evidence": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					}
+				}
+			}
+		},
+		"risk_assessment": {
+			"type": "string",
+			"minLength": 1
+		},
+		"handoff_decision": {
+			"type": "object",
+			"required": [
+				"target",
+				"reason"
+			],
+			"properties": {
+				"target": {
+					"type": "string",
+					"enum": [
+						"none",
+						"diagnostics",
+						"evals",
+						"taxonomy-refinement-loop",
+						"knowledge-workflow"
+					]
+				},
+				"reason": {
+					"type": "string",
+					"minLength": 1
+				},
+				"handoff_record_id": {
+					"type": "string"
+				}
+			}
+		},
+		"capture_paths": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"validation": {
+			"type": "object",
+			"required": [
+				"status",
+				"reports"
+			],
+			"properties": {
+				"status": {
+					"type": "string",
+					"enum": [
+						"missing",
+						"pass",
+						"fail",
+						"blocked"
+					]
+				},
+				"reports": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		},
+		"review_acceptance": {
+			"type": "string",
+			"minLength": 1
+		}
+	}
+}

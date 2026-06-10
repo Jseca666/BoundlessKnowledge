@@ -1,0 +1,60 @@
+{
+	"id": "review-docs-map",
+	"version": "0.2.1",
+	"updated": "2026-06-09",
+	"role": "machine-readable-doc-boundary-map-for-review-system",
+	"module": "review-system",
+	"baseline_doc": "docs/review/README.md",
+	"doc_routes": [
+		{
+			"id": "entry",
+			"path": "docs/review/README.md",
+			"role": "entry",
+			"boundary": "Thin human entrypoint for review-system. It names the purpose, read order and handoff rule."
+		},
+		{
+			"id": "system-review",
+			"path": "docs/review/system-review.md",
+			"role": "workflow",
+			"boundary": "Human explanation for system-internal review criteria."
+		},
+		{
+			"id": "knowledge-review",
+			"path": "docs/review/knowledge-review.md",
+			"role": "workflow",
+			"boundary": "Human explanation for external-knowledge review criteria."
+		},
+		{
+			"id": "canvas-visual-aesthetic-review",
+			"path": "docs/review/canvas-visual-aesthetic-review.md",
+			"role": "specialized-review-module",
+			"boundary": "Human explanation for Canvas visual aesthetic review criteria, audit handoff and visual acceptance."
+		}
+	],
+	"managed_human_docs": [
+		"docs/review/README.md",
+		"docs/review/system-review.md",
+		"docs/review/knowledge-review.md",
+		"docs/review/canvas-visual-aesthetic-review.md"
+	],
+	"machine_truth": [
+		"system/reviews/review-system.json",
+		"system/reviews/review-queue.json",
+		"schemas/review-record.schema.json"
+	],
+	"visual_coverage": {
+		"required_views": [
+			{
+				"view_id": "review-system-architecture-map",
+				"path": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+				"coverage": "Dedicated review-system architecture, scope classes, Canvas visual aesthetic review, finding classification and handoff routing."
+			}
+		],
+		"validation_gate": "scripts/validate-reviews.ps1, scripts/validate-canvas.ps1, scripts/audit-canvas-visual.ps1 and scripts/audit-canvas-screenshot.ps1"
+	},
+	"validation": [
+		"scripts/validate-reviews.ps1",
+		"scripts/validate-system.ps1",
+		"scripts/audit-canvas-screenshot.ps1"
+	]
+}

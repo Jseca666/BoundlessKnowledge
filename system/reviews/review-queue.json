@@ -1,0 +1,674 @@
+{
+	"schema_version": "0.1.0",
+	"id": "review-queue",
+	"system_id": "review-system",
+	"updated": "2026-06-09",
+	"execution_policy": {
+		"queue_role": "Record durable system and knowledge reviews. Do not store large source excerpts here.",
+		"required_structured_fields": [
+			"review_id",
+			"title",
+			"status",
+			"review_class",
+			"trigger",
+			"scope",
+			"evidence_paths",
+			"criteria",
+			"findings",
+			"risk_assessment",
+			"handoff_decision",
+			"capture_paths",
+			"validation",
+			"review_acceptance"
+		],
+		"handoff_rule": "When a review finding is a confirmed systemic defect, create or update a diagnostic issue instead of trying to repair through the review queue."
+	},
+	"reviews": [
+		{
+			"review_id": "review-20260607-canvas-visual-aesthetic-edge-label-clearance",
+			"title": "Canvas 视觉审美审查发现边标签净空不足",
+			"status": "captured",
+			"review_class": "visual_review",
+			"trigger": "用户截图指出部分 Canvas 图内部两个单元之间的连线和文字被卡片遮挡，并要求把视觉审美审核模块登记到根审查模块中。",
+			"scope": {
+				"in_scope": [
+					"current / active Canvas 图的边标签净空",
+					"Canvas 视觉审美审查子模块登记",
+					"review-system 与 diagnostics 的 handoff"
+				],
+				"out_of_scope": [
+					"重新设计所有 Canvas 图视觉语言",
+					"替代 Canvas registry 或机器真相",
+					"外部知识内容质量审查"
+				]
+			},
+			"evidence_paths": [
+				"30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
+				"30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+				"30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+				"scripts/audit-canvas-visual.ps1",
+				"system/reviews/review-system.json",
+				"system/diagnostics/issue-repair-queue.json"
+			],
+			"criteria": [
+				"primary-flow edges are unlabeled by default",
+				"exceptional edge labels remain readable and do not overlap node borders",
+				"current / active Canvas views pass scripts/audit-canvas-visual.ps1 -Strict",
+				"confirmed recurring visual defects hand off to diagnostics",
+				"visual review submodules are registered under review-system"
+			],
+			"findings": [
+				{
+					"id": "edge-label-clearance-defect",
+					"status": "defect",
+					"summary": "System closure, diagnostic and review subsystem views used primary-flow edge labels that remained fragile in Obsidian even after clearance estimation.",
+					"evidence": [
+						"audit-canvas-visual initially reported insufficient horizontal clearance for labels such as inspect modules, repair model, decide guardrail and criteria",
+						"system-closure-architecture.canvas showed the same obstruction pattern as the user screenshot",
+						"follow-up user screenshot showed the issue persisted after estimated clearance passed"
+					]
+				},
+				{
+					"id": "review-submodule-registration-risk",
+					"status": "risk",
+					"summary": "Review-system had a generic visual_review class but no dedicated Canvas visual aesthetic review submodule or docs route.",
+					"evidence": [
+						"system/reviews/review-system.json listed visual_review but did not separately own edge label clearance or Canvas visual aesthetics",
+						"system/reviews/review-docs-map.json had no Canvas visual aesthetic review document route"
+					]
+				}
+			],
+			"risk_assessment": "High recurrence risk for future subsystem Canvas files unless primary-flow edge labels are disallowed by default and review-system owns a dedicated Canvas visual aesthetic review capability.",
+			"handoff_decision": {
+				"target": "diagnostics",
+				"reason": "The finding is a confirmed systemic visual quality gate gap with recurrence risk, so root-cause repair belongs in diagnostics while review-system owns the review criteria.",
+				"handoff_record_id": "diag-20260607-canvas-primary-flow-edge-labels-still-obstructed"
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"system/reviews/review-system.json",
+				"system/reviews/review-docs-map.json",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"scripts/audit-canvas-visual.ps1",
+				"scripts/validate-reviews.ps1",
+				"system/diagnostics/issue-repair-queue.json"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-reviews.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/validate-system.ps1"
+				]
+			},
+			"review_acceptance": "Accepted after follow-up correction. The visual review finding now treats primary-flow edge labels as the defect pattern, not merely insufficient clearance. The confirmed systemic defect is handed to diagnostics, Canvas visual aesthetic review is registered under review-system, and the strict Canvas visual audit now warns on non-bridge primary-flow labels."
+		},
+		{
+			"review_id": "review-20260607-entry-navigation-aesthetic-refresh",
+			"title": "Entry 入口图视觉审美刷新",
+			"status": "captured",
+			"review_class": "visual_review",
+			"trigger": "用户指出 entry 图的设计审美感觉一般。",
+			"scope": {
+				"in_scope": [
+					"L0 visual-navigation-index 的视觉层级",
+					"kb-navigation-index.canvas 的入口选择体验",
+					"Canvas 视觉审查准则中的 L0 入口图审美口径"
+				],
+				"out_of_scope": [
+					"改变 L0 入口图的纯跳转边界",
+					"重新设计下层系统架构图",
+					"修改 Canvas 机器真相或视图关系"
+				]
+			},
+			"evidence_paths": [
+				"30-maps/canvas/00-entry/kb-navigation-index.canvas",
+				"system/canvas-registry.json",
+				"system/canvas-system.json",
+				"system/reviews/review-system.json",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md"
+			],
+			"criteria": [
+				"L0 navigation index remains a pure jump surface",
+				"destination groups make the entry decision easier to scan",
+				"navigation file buttons stay visually subordinate to human-readable destination cards",
+				"entry canvas contains no machine truth file nodes or architecture/dataflow edges",
+				"scripts/audit-canvas-visual.ps1 -Strict passes before visual acceptance"
+			],
+			"findings": [
+				{
+					"id": "valid-but-flat-entry-layout",
+					"status": "observation",
+					"summary": "The previous entry canvas was structurally valid but visually flat because large file preview cards carried most of the surface weight.",
+					"evidence": [
+						"kb-navigation-index.canvas used three broad sections and full-size file cards",
+						"the layout satisfied L0 navigation rules but did not feel like a polished entry selector"
+					]
+				},
+				{
+					"id": "entry-pattern-regression-risk",
+					"status": "risk",
+					"summary": "Without a recorded L0 entry aesthetic pattern, future entry updates could regress into a plain file-preview stack.",
+					"evidence": [
+						"canvas-visual-aesthetic-review criteria previously focused on structural views, line routing and edge labels",
+						"navigation_index_layout did not state the grouped destination selector visual form"
+					]
+				}
+			],
+			"risk_assessment": "Low immediate risk and moderate recurrence risk. The issue affects human scanability of the first visual entrypoint, not machine truth or navigation correctness.",
+			"handoff_decision": {
+				"target": "none",
+				"reason": "This was a local visual polish and review-criteria refinement, not a confirmed systemic defect requiring diagnostic handoff."
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"system/reviews/review-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-system.json",
+				"30-maps/canvas/00-entry/kb-navigation-index.canvas",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-system.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				]
+			},
+			"review_acceptance": "Accepted after the entry canvas was redrawn as a grouped destination selector with compact Obsidian click buttons, the L0 aesthetic pattern was recorded in Canvas and review rules, and strict Canvas visual audit passed with 0 warnings."
+		},
+		{
+			"review_id": "review-20260607-canvas-support-file-label-readability",
+			"title": "Canvas 支撑文件节点可读性审查",
+			"status": "captured",
+			"review_class": "visual_review",
+			"trigger": "用户截图指出部分 Canvas 文件块只有文件名称，没有解读，可读性较差。",
+			"scope": {
+				"in_scope": [
+					"current / active Canvas 图中的非导航支撑文件节点",
+					"file-label-* 一体化支撑文件卡",
+					"Canvas 视觉审查脚本对裸文件节点的检查"
+				],
+				"out_of_scope": [
+					"改变文件节点指向的机器真相",
+					"重新设计所有 Canvas 主结构",
+					"修改领域分类内容本身"
+				]
+			},
+			"evidence_paths": [
+				"30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
+				"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+				"30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+				"30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+				"scripts/audit-canvas-visual.ps1",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			],
+			"criteria": [
+				"support files use file-label-* as integrated readable cards",
+				"file nodes remain compact embedded Obsidian click buttons rather than the whole information layer",
+				"current / active Canvas views pass scripts/audit-canvas-visual.ps1 -Strict",
+				"confirmed recurring visual quality gaps hand off to diagnostics"
+			],
+			"findings": [
+				{
+					"id": "support-file-label-missing",
+					"status": "defect",
+					"summary": "Non-navigation support file nodes in multiple current/active Canvas views relied on file names alone, so users could not quickly understand each file's role in the view.",
+					"evidence": [
+						"domain-taxonomy-overview.canvas showed source/support files as file-name blocks without role interpretation",
+						"scan found the same pattern in system overview, Canvas subsystem, diagnostics, system closure, level-3 matrix and review-system views"
+					]
+				}
+			],
+			"risk_assessment": "Moderate recurrence risk. Any future Canvas machine-truth band can become opaque if support file nodes are added without role labels.",
+			"handoff_decision": {
+				"target": "diagnostics",
+				"reason": "The finding affects multiple current/active views and requires a durable visual audit gate, so it is a systemic Canvas readability defect.",
+				"handoff_record_id": "diag-20260607-canvas-support-file-labels-missing"
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"system/reviews/review-system.json",
+				"scripts/audit-canvas-visual.ps1",
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md",
+				"system/diagnostics/issue-repair-queue.json"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-reviews.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/validate-system.ps1",
+					"scripts/build-index.ps1",
+					"scripts/validate-kb.ps1"
+				]
+			},
+			"review_acceptance": "Accepted after follow-up correction. The review finding was handed to diagnostics, all current/active support files now use file-label-* as integrated readable cards with compact embedded file buttons, and strict Canvas visual audit checks both missing support-file labels and oversized support file nodes."
+		},
+		{
+			"review_id": "review-20260608-or-canvas-color-layer-reference",
+			"title": "OR Canvas color semantics and layer-guide reference review",
+			"status": "captured",
+			"review_class": "visual_review",
+			"trigger": "User pointed to the OR project Canvas system as a useful reference for differentiated block colors and upper/lower guide lines.",
+			"scope": {
+				"in_scope": [
+					"method-level visual grammar from the OR Canvas subsystem",
+					"view-scoped color semantics for current / active Canvas views in this project",
+					"visible color-legend nodes and palette validation",
+					"separation between layer-guide lines and dataflow/workflow edges"
+				],
+				"out_of_scope": [
+					"copying OR project knowledge content, evidence, task state or research claims",
+					"hard-coding the OR palette across all taxonomy/domain views",
+					"large aesthetic redraw of every Canvas view"
+				]
+			},
+			"evidence_paths": [
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/reviews/review-system.json",
+				"system/tool-map.json",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1",
+				"docs/canvas/visual-audit.md",
+				"docs/review/canvas-visual-aesthetic-review.md"
+			],
+			"criteria": [
+				"method reference is adopted without importing external project content",
+				"colors are governed by view-scoped palettes instead of decoration",
+				"taxonomy/domain palette is separated from system role/status palette",
+				"every current/active view has a visible color-legend node",
+				"layer guide lines remain distinct from workflow/dataflow edges"
+			],
+			"findings": [
+				{
+					"id": "method-worth-adopting",
+					"status": "observation",
+					"summary": "The OR Canvas subsystem treats color as a governed visual language with visible legends and registry-level declarations, which is useful for this project.",
+					"evidence": [
+						"Local OR reference showed color roles and visible color-legend nodes in its Canvas subsystem docs and registry",
+						"The OR diagnosis record separates reusable workflow, stable project semantics and current-state colors"
+					]
+				},
+				{
+					"id": "project-needs-view-scoped-palettes",
+					"status": "risk",
+					"summary": "This project uses colors across system maps, taxonomy maps and loop maps, so a single global color meaning would blur boundaries unless palette scope is explicit.",
+					"evidence": [
+						"domain-taxonomy views use colors to distinguish knowledge-domain families",
+						"system/module views use colors for system roles, governance and machine truth",
+						"loop view uses named colors for state and runtime surfaces"
+					]
+				}
+			],
+			"risk_assessment": "Moderate recurrence risk if new Canvas views continue to use colors without palette scope or visible legends; low content risk because only the OR method is adopted, not its project knowledge.",
+			"handoff_decision": {
+				"target": "none",
+				"reason": "This is a review-driven method adoption with coordinated Canvas subsystem updates, not a confirmed recurring defect requiring a separate diagnostic handoff."
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"system/reviews/review-system.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/tool-map.json",
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1",
+				"docs/canvas/visual-audit.md",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"30-maps/canvas/"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-system.ps1"
+				],
+				"note": "Validation is rerun after this coordinated update; record is accepted only if the listed reports pass."
+			},
+			"review_acceptance": "Accepted when registry, Canvas files, visual review criteria and tooling are synchronized and validation passes."
+		},
+		{
+			"review_id": "review-20260609-loop-canvas-color-token-style",
+			"title": "Loop Canvas 图颜色 token 样式审查",
+			"status": "captured",
+			"review_class": "visual_review",
+			"trigger": "用户指出 loop 模块图样式有问题。审查发现 loop 图使用 purple/cyan/red/yellow/green/orange 等命名色，系统总览中也残留 cyan shortcut 色。",
+			"scope": {
+				"in_scope": [
+					"loop-orchestration-architecture.canvas 的颜色语义和图例",
+					"current/active Canvas 中命名色 token 的同类扫描",
+					"Canvas visual review 对颜色 token 稳定性的审查准则"
+				],
+				"out_of_scope": [
+					"重新设计 loop 模块业务流程",
+					"更换全部 Canvas 视觉语言",
+					"从 Canvas 颜色反推机器真相"
+				]
+			},
+			"evidence_paths": [
+				"30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
+				"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+				"system/canvas-registry.json",
+				"system/canvas-system.json",
+				"scripts/validate-canvas.ps1",
+				"docs/review/canvas-visual-aesthetic-review.md"
+			],
+			"criteria": [
+				"Current/active Canvas colors must use view-scoped palettes",
+				"Palette roles and allowed colors must use Obsidian-compatible tokens 1-6 or #RRGGBB",
+				"Visible color legends must remain readable after token migration",
+				"Same-class current/active views must be scanned for named color residue",
+				"scripts/validate-canvas.ps1 and scripts/audit-canvas-visual.ps1 -Strict must pass"
+			],
+			"findings": [
+				{
+					"id": "named-color-token-style-drift",
+					"status": "defect",
+					"summary": "Loop Canvas used plain named color tokens that were accepted by the palette contract but are not stable Obsidian Canvas color tokens.",
+					"evidence": [
+						"loop-orchestration-architecture.canvas contained purple, cyan, red, yellow, green and orange colors on nodes and edges",
+						"system_role_palette_v1 still allowed a cyan loop shortcut alias",
+						"validate-canvas checked palette membership but did not check palette token compatibility"
+					]
+				}
+			],
+			"risk_assessment": "Moderate recurrence risk. Future views could look inconsistent in Obsidian while still passing registry-level palette membership checks.",
+			"handoff_decision": {
+				"target": "diagnostics",
+				"reason": "The review found a confirmed systemic gate gap, so the root repair belongs in diagnostics and Canvas validation.",
+				"handoff_record_id": "diag-20260609-canvas-named-color-token-style-gap"
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"system/reviews/review-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-system.json",
+				"scripts/validate-canvas.ps1",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md",
+				"system/diagnostics/issue-repair-queue.json"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-diagnostics.ps1",
+					"scripts/validate-system.ps1"
+				]
+			},
+			"review_acceptance": "Accepted when named colors are removed from current/active Canvas nodes, edges and palettes; stable token compatibility is enforced by validate-canvas; and visual audit passes."
+		},
+		{
+			"review_id": "review-20260609-canvas-screenshot-level-visual-check",
+			"title": "Canvas 截图级视觉检查审查",
+			"status": "captured",
+			"review_class": "visual_review",
+			"trigger": "用户要求可视化系统需要有截图级别视觉检查。",
+			"scope": {
+				"in_scope": [
+					"current/active Canvas screenshot evidence generation",
+					"Canvas visual review acceptance criteria",
+					"review-to-diagnostics handoff for missing screenshot gate"
+				],
+				"out_of_scope": [
+					"Obsidian-native renderer automation",
+					"pixel-perfect visual diff baseline",
+					"rewriting every Canvas layout"
+				]
+			},
+			"evidence_paths": [
+				"scripts/audit-canvas-screenshot.ps1",
+				"system/reviews/canvas-screenshots/latest-report.json",
+				"system/reviews/canvas-screenshots/",
+				"system/canvas-system.json",
+				"system/reviews/review-system.json",
+				"system/diagnostics/issue-repair-queue.json"
+			],
+			"criteria": [
+				"screenshot-level audit produces PNG files for registered current/active Canvas views",
+				"latest-report.json records view_count, error_count, warning_count and screenshot paths",
+				"review-system criteria mention screenshot-level evidence",
+				"confirmed missing visual gate is handed to diagnostics",
+				"screenshot evidence does not replace Canvas machine truth"
+			],
+			"findings": [
+				{
+					"id": "missing-screenshot-level-gate",
+					"status": "defect",
+					"summary": "Before this change, Canvas visual review had static and geometry checks but no durable PNG screenshot evidence layer.",
+					"evidence": [
+						"tool-map had audit-canvas-visual but no audit-canvas-screenshot",
+						"visual_acceptance_boundary named user-visible acceptance but did not provide a local screenshot artifact path"
+					]
+				},
+				{
+					"id": "screenshot-audit-first-run",
+					"status": "evidence",
+					"summary": "The new screenshot audit rendered all 12 current/active Canvas views successfully with zero warnings and zero errors.",
+					"evidence": [
+						"system/reviews/canvas-screenshots/latest-report.json",
+						"system/reviews/canvas-screenshots/*.png"
+					]
+				}
+			],
+			"risk_assessment": "Medium-to-high recurrence risk without this gate: future Canvas changes could pass JSON/geometry checks while leaving no rendered artifact for human inspection.",
+			"handoff_decision": {
+				"target": "diagnostics",
+				"reason": "The missing screenshot layer is a systemic acceptance-gate defect, not a one-off drawing issue.",
+				"handoff_record_id": "diag-20260609-canvas-screenshot-level-visual-gate-missing"
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"system/reviews/review-system.json",
+				"scripts/audit-canvas-screenshot.ps1",
+				"system/reviews/canvas-screenshots/latest-report.json",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md",
+				"system/diagnostics/issue-repair-queue.json"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/audit-canvas-screenshot.ps1",
+					"system/reviews/canvas-screenshots/latest-report.json",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-system.ps1"
+				]
+			},
+			"review_acceptance": "Accepted after adding screenshot-level audit, generating PNG evidence for current/active Canvas views, and handing the systemic gate gap to diagnostics."
+		},
+		{
+			"review_id": "review-20260609-canvas-screenshot-key-step-complete-review",
+			"title": "Canvas 截图关键步骤完整闭环审查",
+			"status": "captured",
+			"review_class": "system_internal_review",
+			"trigger": "用户要求“审查一遍完整”，确认截图级视觉检查是否已经成为视觉审查关键步骤并完成系统闭环。",
+			"scope": {
+				"in_scope": [
+					"review-system workflow and criteria",
+					"Canvas screenshot audit tool registration",
+					"current/active Canvas screenshot report coverage",
+					"route, tool-map, diagnostics and technical-docs integration",
+					"review and diagnostic durable records"
+				],
+				"out_of_scope": [
+					"pixel-perfect redesign of each Canvas",
+					"Obsidian-native renderer automation",
+					"external knowledge content review"
+				]
+			},
+			"evidence_paths": [
+				"system/reviews/review-system.json",
+				"system/reviews/review-queue.json",
+				"system/reviews/review-docs-map.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/tool-map.json",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/diagnostics/issue-repair-queue.json",
+				"scripts/audit-canvas-screenshot.ps1",
+				"system/reviews/canvas-screenshots/latest-report.json",
+				"system/reviews/canvas-screenshots/",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md",
+				"docs/technical/validation.md"
+			],
+			"criteria": [
+				"Screenshot audit is in review-system core_workflow before final finding classification",
+				"Screenshot audit is registered as a key review step and quality gate",
+				"All current/active Canvas views have screenshot report entries and PNG files",
+				"Tool, route, review, diagnostic, Canvas and technical docs surfaces all reference the screenshot audit tool",
+				"Screenshot evidence is explicitly separated from Canvas machine truth",
+				"No systemic defect remains that requires diagnostics handoff"
+			],
+			"findings": [
+				{
+					"id": "complete-closure-pass",
+					"status": "observation",
+					"summary": "The screenshot-level visual check is now a key review step and is connected across workflow, criteria, quality gates, routes, tool-map, Canvas policy, diagnostics, docs and generated evidence.",
+					"evidence": [
+						"review-system core_workflow contains collect-visual-evidence before inspect-and-classify-findings",
+						"latest-report.json covers 12 registered current/active Canvas views with 0 errors and 0 warnings",
+						"route-registry includes scripts/audit-canvas-screenshot.ps1 for canvas, system-architecture-views, review-system, diagnostics and technical-documentation routes"
+					]
+				}
+			],
+			"risk_assessment": "Residual limitation: the current screenshot renderer is generated from .canvas JSON via System.Drawing, not Obsidian-native rendering. This limitation is documented and does not block the current evidence layer.",
+			"handoff_decision": {
+				"target": "none",
+				"reason": "No actionable defect found in the screenshot-key-step integration review; remaining limitation is already documented as future renderer upgrade path."
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"system/reviews/review-system.json",
+				"system/reviews/canvas-screenshots/latest-report.json",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md",
+				"docs/technical/validation.md"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/audit-canvas-screenshot.ps1",
+					"system/reviews/canvas-screenshots/latest-report.json",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-system.ps1",
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1"
+				]
+			},
+			"review_acceptance": "Accepted after complete cross-surface review confirmed screenshot audit is a key visual review step and all registered current/active Canvas views have PNG evidence with zero reported errors or warnings."
+		},
+		{
+			"review_id": "review-20260609-current-canvas-visual-pass-after-screenshot-gate",
+			"title": "current / active Canvas 截图级视觉审查一轮",
+			"status": "captured",
+			"review_class": "visual_review",
+			"trigger": "用户要求“用视觉审查审查一遍”，按 Canvas 视觉审美审查流程对 current / active 图做截图级视觉审查。",
+			"scope": {
+				"in_scope": [
+					"all current/active Canvas screenshot evidence",
+					"geometry visual audit result",
+					"manual inspection of generated PNG screenshots",
+					"review-system architecture visual projection after screenshot gate upgrade"
+				],
+				"out_of_scope": [
+					"Obsidian-native screenshot automation",
+					"domain taxonomy content redesign",
+					"pixel-perfect visual diff baselines"
+				]
+			},
+			"evidence_paths": [
+				"scripts/audit-canvas-visual.ps1",
+				"scripts/audit-canvas-screenshot.ps1",
+				"system/reviews/canvas-screenshots/latest-report.json",
+				"system/reviews/canvas-screenshots/",
+				"30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+				"30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas",
+				"system/reviews/review-system.json",
+				"system/canvas-registry.json"
+			],
+			"criteria": [
+				"main reading path is visible and stable",
+				"navigation panel remains separate from main structure",
+				"bridge lines do not obstruct content",
+				"support file labels are readable or intentionally compact",
+				"machine truth area is visually separate from workflow/content area",
+				"screenshot evidence exists for all current/active Canvas views",
+				"visual projection reflects the current review-system workflow"
+			],
+			"findings": [
+				{
+					"id": "review-system-canvas-missing-visual-evidence-step",
+					"status": "defect",
+					"summary": "The review-system architecture Canvas did not show the newly promoted collect-visual-evidence / screenshot audit step, even though review-system machine truth already required it.",
+					"evidence": [
+						"Before repair, review-system-architecture-map jumped from reading authoritative surfaces directly to finding classification.",
+						"After repair, the Canvas includes step 4 visual evidence and the screenshot audit tool in the machine-truth band."
+					]
+				},
+				{
+					"id": "domain-taxonomy-matrix-density-risk",
+					"status": "risk",
+					"summary": "The level-3 taxonomy matrix is visually dense and tall. It is readable when opened as a dedicated matrix view, but overview-scale screenshots make top support labels and card text small.",
+					"evidence": [
+						"domain-taxonomy-level-3-matrix-map is 836 x 1900 in the generated screenshot and contains all 45 level-2 groups.",
+						"No overlap or broken rendering was observed; this is a future split/zoom ergonomics risk, not a current defect."
+					]
+				},
+				{
+					"id": "remaining-current-active-views-pass-visual-scan",
+					"status": "observation",
+					"summary": "The other inspected current/active views show clear sectioning, separate navigation, readable machine-truth bands and no visible card/line obstruction in generated PNG screenshots.",
+					"evidence": [
+						"audit-canvas-visual.ps1 -Strict returned 0 warnings.",
+						"audit-canvas-screenshot.ps1 -Strict returned 12 views, 0 errors and 0 warnings."
+					]
+				}
+			],
+			"risk_assessment": "Low residual risk after repair. The only remaining visual risk is the inherent density of the level-3 taxonomy matrix; if users frequently inspect it at overview scale, it should be split into family subviews or paired with a zoom-first navigation pattern.",
+			"handoff_decision": {
+				"target": "none",
+				"reason": "The only confirmed defect was repaired inside architecture-views. No unresolved recurring system defect remains that requires diagnostics handoff."
+			},
+			"capture_paths": [
+				"system/reviews/review-queue.json",
+				"30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+				"system/canvas-registry.json",
+				"system/reviews/canvas-screenshots/latest-report.json"
+			],
+			"validation": {
+				"status": "pass",
+				"reports": [
+					"scripts/validate-canvas.ps1",
+					"scripts/audit-canvas-visual.ps1",
+					"scripts/audit-canvas-screenshot.ps1",
+					"scripts/validate-reviews.ps1",
+					"scripts/validate-system.ps1"
+				]
+			},
+			"review_acceptance": "Accepted after screenshot-level visual review found and repaired the review-system Canvas projection drift, then regenerated full current/active Canvas screenshot evidence with 12 views and 0 errors/warnings."
+		}
+	]
+}

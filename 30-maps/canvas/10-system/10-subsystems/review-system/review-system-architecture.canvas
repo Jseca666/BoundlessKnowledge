@@ -1,0 +1,415 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -1040,
+			"y": -700,
+			"width": 2700,
+			"height": 120,
+			"color": "5",
+			"text": "# 审查模块：系统与知识质量检查\n\n审查负责主动检查和发现：系统结构是否闭合，外部知识是否可靠。确认缺陷后交给诊断，不在审查里直接冒充根因修复。"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"x": -1040,
+			"y": -540,
+			"width": 2700,
+			"height": 90,
+			"color": "6",
+			"text": "# 读图口径\n\n左侧是审查主流程；视觉审查先产出几何审查与截图证据，再进入发现分级；中部是审查适用范围和记录契约；底部是机器真相；右侧只做 Obsidian 跳转。"
+		},
+		{
+			"id": "review-scope",
+			"type": "text",
+			"x": -1040,
+			"y": -320,
+			"width": 320,
+			"height": 190,
+			"color": "6",
+			"text": "# 1. 定义审查范围\n\n先写清楚审什么、为什么现在审、哪些面在范围内、哪些面不在范围内。"
+		},
+		{
+			"id": "criteria-router",
+			"type": "text",
+			"x": -600,
+			"y": -320,
+			"width": 320,
+			"height": 190,
+			"color": "3",
+			"text": "# 2. 选择审查准则\n\n系统内部、外部知识、视觉、发布准备使用不同 criteria set，不能一张万能清单审所有东西。"
+		},
+		{
+			"id": "evidence-loading",
+			"type": "text",
+			"x": -160,
+			"y": -320,
+			"width": 320,
+			"height": 190,
+			"color": "6",
+			"text": "# 3. 读取权威面\n\n按路由读取 registry、schema、docs map、source record、catalog、Canvas registry 的导航与支撑绑定。"
+		},
+		{
+			"id": "finding-classification",
+			"type": "text",
+			"x": 720,
+			"y": -320,
+			"width": 320,
+			"height": 190,
+			"color": "4",
+			"text": "# 5. 分类发现\n\nobservation / risk / defect / blocked。审查只负责发现和分级，不直接替代根因诊断。"
+		},
+		{
+			"id": "handoff-decision",
+			"type": "text",
+			"x": 1160,
+			"y": -320,
+			"width": 360,
+			"height": 190,
+			"color": "1",
+			"text": "# 6. Handoff 决策\n\n明确缺陷 -> diagnostics。\n可测质量 -> evals。\n分类缺口 -> taxonomy loop。\n内容问题 -> knowledge workflow。"
+		},
+		{
+			"id": "scope-band",
+			"type": "text",
+			"x": -1040,
+			"y": -70,
+			"width": 2700,
+			"height": 80,
+			"color": "5",
+			"text": "# 审查范围\n\n同一个 review-system 支持不同 scope；边界由 review_class 和 criteria_set 决定。"
+		},
+		{
+			"id": "system-review",
+			"type": "text",
+			"x": -1040,
+			"y": 50,
+			"width": 400,
+			"height": 160,
+			"color": "6",
+			"text": "# 系统内部审查\n\n路由、信息地图、闭环、schema、工具、Canvas、文档边界、生命周期。"
+		},
+		{
+			"id": "knowledge-review",
+			"type": "text",
+			"x": -560,
+			"y": 50,
+			"width": 400,
+			"height": 160,
+			"color": "3",
+			"text": "# 外部知识审查\n\n来源、证据、结论、时效性、不确定性、三级分类、版权安全、可检索性。"
+		},
+		{
+			"id": "visual-release-review",
+			"type": "text",
+			"x": -80,
+			"y": 50,
+			"width": 420,
+			"height": 160,
+			"color": "5",
+			"text": "# Canvas 视觉审美审查\n\n专审可读性、线条/标签净空、导航关系、颜色语义、截图证据、支撑绑定语义和视觉投影完整性。"
+		},
+		{
+			"id": "record-contract",
+			"type": "text",
+			"x": 420,
+			"y": 50,
+			"width": 980,
+			"height": 160,
+			"color": "4",
+			"text": "# 审查记录契约\n\nreview_id / review_class / scope / evidence_paths / criteria / findings / risk_assessment / handoff_decision / validation / review_acceptance。视觉审查要记录截图证据路径。"
+		},
+		{
+			"id": "machine-truth-band",
+			"type": "text",
+			"x": -1040,
+			"y": 330,
+			"width": 2700,
+			"height": 80,
+			"color": "6",
+			"text": "# 机器真相\n\n审查系统行为由 JSON、schema 和 validator 决定；Markdown 和 Canvas 只做人类说明与可视化入口。"
+		},
+		{
+			"id": "review-system-file",
+			"type": "file",
+			"x": -816,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "system/reviews/review-system.json"
+		},
+		{
+			"id": "review-queue-file",
+			"type": "file",
+			"x": -476,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "system/reviews/review-queue.json"
+		},
+		{
+			"id": "review-docs-map-file",
+			"type": "file",
+			"x": -136,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "system/reviews/review-docs-map.json"
+		},
+		{
+			"id": "review-schema-file",
+			"type": "file",
+			"x": 204,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "schemas/review-record.schema.json"
+		},
+		{
+			"id": "review-validator-file",
+			"type": "file",
+			"x": 544,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "scripts/validate-reviews.ps1"
+		},
+		{
+			"id": "review-skill-file",
+			"type": "file",
+			"x": 884,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": ".agents/skills/review-system/SKILL.md"
+		},
+		{
+			"id": "review-doc-file",
+			"type": "file",
+			"x": 1224,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "docs/review/README.md"
+		},
+		{
+			"id": "right-nav-title",
+			"type": "text",
+			"x": 1900,
+			"y": -540,
+			"width": 420,
+			"height": 110,
+			"color": "5",
+			"text": "# 导航栏\n\n只负责跳转，不参与左侧审查流程。"
+		},
+		{
+			"id": "nav-label-parent-kb-system-architecture-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -360,
+			"width": 330,
+			"height": 48,
+			"color": "6",
+			"text": "返回：系统总览"
+		},
+		{
+			"id": "parent-kb-system-architecture-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -360,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-diagnostic-system-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -80,
+			"width": 330,
+			"height": 48,
+			"color": "1",
+			"text": "相关：诊断与修复系统"
+		},
+		{
+			"id": "diagnostic-system-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -80,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas"
+		},
+		{
+			"id": "file-label-review-system-file",
+			"type": "text",
+			"x": -1040,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "审查协议\n范围与 handoff"
+		},
+		{
+			"id": "file-label-review-queue-file",
+			"type": "text",
+			"x": -700,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "审查队列\n发现与验收"
+		},
+		{
+			"id": "file-label-review-docs-map-file",
+			"type": "text",
+			"x": -360,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "6",
+			"text": "文档地图\n审查说明路由"
+		},
+		{
+			"id": "file-label-review-schema-file",
+			"type": "text",
+			"x": -20,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "4",
+			"text": "记录 schema\n审查字段契约"
+		},
+		{
+			"id": "file-label-review-validator-file",
+			"type": "text",
+			"x": 320,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "3",
+			"text": "校验脚本\n审查记录"
+		},
+		{
+			"id": "file-label-review-skill-file",
+			"type": "text",
+			"x": 660,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "薄入口 skill\n调用审查"
+		},
+		{
+			"id": "file-label-review-doc-file",
+			"type": "text",
+			"x": 1000,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "4",
+			"text": "人读入口\n审查模块"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构.",
+			"x": 1900,
+			"y": 13,
+			"width": 420,
+			"height": 130,
+			"color": "6"
+		},
+		{
+			"id": "visual-evidence",
+			"type": "text",
+			"x": 280,
+			"y": -320,
+			"width": 320,
+			"height": 190,
+			"color": "5",
+			"text": "# 4. 视觉证据\n\n先跑 audit-canvas-visual 与 audit-canvas-screenshot；同时检查 support_bindings 是否让支撑文件归属清楚。"
+		},
+		{
+			"id": "screenshot-audit-file",
+			"type": "file",
+			"x": 1564,
+			"y": 490,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "scripts/audit-canvas-screenshot.ps1"
+		},
+		{
+			"id": "file-label-screenshot-audit-file",
+			"type": "text",
+			"x": 1340,
+			"y": 460,
+			"width": 300,
+			"height": 90,
+			"color": "5",
+			"text": "截图审查\nPNG 证据"
+		}
+	],
+	"edges": [
+		{
+			"id": "e1",
+			"fromNode": "review-scope",
+			"fromSide": "right",
+			"toNode": "criteria-router",
+			"toSide": "left",
+			"color": "6"
+		},
+		{
+			"id": "e2",
+			"fromNode": "criteria-router",
+			"fromSide": "right",
+			"toNode": "evidence-loading",
+			"toSide": "left",
+			"color": "3"
+		},
+		{
+			"id": "e3",
+			"fromNode": "evidence-loading",
+			"fromSide": "right",
+			"toNode": "visual-evidence",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e4",
+			"fromNode": "visual-evidence",
+			"fromSide": "right",
+			"toNode": "finding-classification",
+			"toSide": "left",
+			"color": "4"
+		},
+		{
+			"id": "bridge-edge-diagnostic",
+			"fromNode": "nav-label-diagnostic-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "handoff-decision",
+			"toSide": "right",
+			"label": "对应：缺陷交给诊断",
+			"color": "1"
+		},
+		{
+			"id": "e5",
+			"fromNode": "finding-classification",
+			"fromSide": "right",
+			"toNode": "handoff-decision",
+			"toSide": "left",
+			"color": "1"
+		}
+	]
+}

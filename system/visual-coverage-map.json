@@ -1,0 +1,436 @@
+{
+	"id": "visual-coverage-map",
+	"version": "0.8.0",
+	"updated": "2026-06-10",
+	"role": "machine-readable-visual-coverage-governance",
+	"purpose": "Prevent visual blind spots by declaring which stable system modules require Canvas views, which modules are covered by shared views, and which modules are explicitly deferred or not applicable.",
+	"source_of_truth": [
+		"system/information-map.json",
+		"system/system-closure-map.json",
+		"system/canvas-system.json",
+		"system/canvas-registry.json",
+		"system/canvas-view-graph.json",
+		"system/module-layer-model.json",
+		"system/system-structure-governance.json",
+		"system/module-relationship-map.json",
+		"system/project-ontology.json"
+	],
+	"policy": {
+		"blind_spot_definition": "A module, workflow, registry, loop, schema, tool, taxonomy or governance surface is a visual blind spot when it affects system understanding or operation but has neither a required Canvas view nor an explicit visual decision with reason and review trigger.",
+		"no_implicit_status_rule": "Every module listed in system/system-closure-map.json must have exactly one module_decision here.",
+		"required_when": [
+			"The surface is a stable system governance module.",
+			"The surface explains architecture, route, dataflow, workflow, loop state, diagnostic repair, schema contract, tool runtime or closure status.",
+			"The surface is a knowledge routing structure used by machine-readable fields such as primary_level_3.",
+			"The surface is repeatedly inspected by humans to understand or operate the knowledge-base system."
+		],
+		"allowed_decisions": [
+			"dedicated_required",
+			"shared_required",
+			"deferred",
+			"not_applicable"
+		],
+		"validation_gate": "scripts/validate-system.ps1 must fail when a closure module lacks a visual decision, when a required view is missing from canvas-registry, or when a closed/shared visual projection references a Canvas path that is not covered here."
+	},
+	"required_views": [
+		{
+			"view_id": "kb-navigation-index",
+			"path": "30-maps/canvas/00-entry/kb-navigation-index.canvas",
+			"coverage": "Top-level visual entrypoint for current Canvas views.",
+			"owner_modules": [
+				"architecture-views",
+				"project-ontology"
+			]
+		},
+		{
+			"view_id": "knowledge-base-system-architecture-map",
+			"path": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+			"coverage": "Shared system overview for module boundaries, major dataflow, route-facing governance and early shared visual coverage.",
+			"owner_modules": [
+				"architecture-views",
+				"module-governance",
+				"artifact-form-decision",
+				"workflows",
+				"schemas",
+				"tools",
+				"project-ontology"
+			]
+		},
+		{
+			"view_id": "canvas-system-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+			"coverage": "Dedicated Canvas subsystem architecture, visual policy, view families, sync triggers and quality gates.",
+			"owner_modules": [
+				"architecture-views"
+			]
+		},
+		{
+			"view_id": "canvas-directory-layout-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-directory-layout.canvas",
+			"coverage": "Dedicated Canvas directory, reading-order and lifecycle boundary map.",
+			"owner_modules": [
+				"architecture-views"
+			]
+		},
+		{
+			"view_id": "domain-taxonomy-overview-map",
+			"path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
+			"coverage": "High-level knowledge-domain taxonomy overview and taxonomy-refinement loop status as a related domain concern.",
+			"owner_modules": [
+				"domain-maps"
+			]
+		},
+		{
+			"view_id": "domain-taxonomy-level-3-matrix-map",
+			"path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas",
+			"coverage": "Complete level-2 and level-3 taxonomy matrix required for primary_level_3 routing inspection.",
+			"owner_modules": [
+				"domain-maps"
+			]
+		},
+		{
+			"view_id": "diagnostic-system-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+			"coverage": "Dedicated diagnostic workflow, layer diagnosis matrix, controlled failure-learning loop, positive-model-first issue contract, optional guardrail fields, repair routing, visual projection sync and diagnosis acceptance architecture.",
+			"owner_modules": [
+				"diagnostics"
+			]
+		},
+		{
+			"view_id": "system-closure-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
+			"coverage": "Dedicated system-closure matrix, module maturity and closure quality-gate visualization.",
+			"owner_modules": [
+				"system-closure"
+			]
+		},
+		{
+			"view_id": "review-system-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+			"coverage": "Dedicated review-system architecture, review classes, Canvas visual aesthetic review, finding classification, external knowledge review boundary and handoff routing.",
+			"owner_modules": [
+				"review-system"
+			]
+		},
+		{
+			"view_id": "system-structure-governance-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas",
+			"coverage": "Dedicated Canvas for system module topology, branch decisions and relationship governance.",
+			"owner_modules": [
+				"system-structure-governance"
+			]
+		},
+		{
+			"view_id": "system-information-map-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
+			"coverage": "Dedicated architecture view for machine-readable information-map manifest, shard, root map and validation surfaces.",
+			"owner_modules": [
+				"system-information-map"
+			]
+		},
+		{
+			"view_id": "loop-orchestration-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
+			"coverage": "System-level loop orchestration architecture, durable loop registry, state lifecycle, managed loops, handoff intake and legacy taxonomy-refinement adoption.",
+			"owner_modules": [
+				"loop-orchestration"
+			]
+		},
+		{
+			"view_id": "knowledge-ingestion-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+			"coverage": "Dedicated architecture view for the knowledge ingestion subsystem, intake modes, source-quality gates, legacy asset adoption and handoffs into domain/review/diagnostics/loop/index surfaces.",
+			"owner_modules": [
+				"knowledge-ingestion",
+				"architecture-views"
+			]
+		},
+		{
+			"view_id": "git-governance-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
+			"coverage": "Dedicated architecture view for Git local version governance, remote origin contract, validation, sensitive-surface boundary and remote action approval gate.",
+			"owner_modules": [
+				"git-governance",
+				"architecture-views"
+			]
+		}
+	],
+	"module_decisions": [
+		{
+			"module_id": "inbox",
+			"decision": "not_applicable",
+			"visual_projection_status": "not_applicable",
+			"required_view_ids": [],
+			"covered_by_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "The inbox is temporary raw capture storage and is not a stable structure yet.",
+			"review_trigger": "Create a dedicated intake visual view if inbox gains a queue schema, triage workflow or recurring quality gate."
+		},
+		{
+			"module_id": "source-registry",
+			"decision": "deferred",
+			"visual_projection_status": "not_applicable",
+			"required_view_ids": [],
+			"covered_by_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "Source registration is currently represented by source files and catalog indexing; it has no dedicated registry graph yet.",
+			"review_trigger": "Create a source-registry view if source metadata becomes a dedicated JSON registry or source quality workflows become multi-step."
+		},
+		{
+			"module_id": "project-ontology",
+			"decision": "shared_required",
+			"visual_projection_status": "shared",
+			"required_view_ids": [
+				"kb-navigation-index",
+				"knowledge-base-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "项目根定位是读图口径和系统总览口径，不需要独立大图；入口图和系统总览必须共同暴露“无界知识是知识工程系统”的定位。",
+			"review_trigger": "当项目定位、Codex workflow 双重角色、系统/知识内容关系或 L0/L1 读图口径变化时，审查这两个共享视图。"
+		},
+		{
+			"module_id": "domain-maps",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"domain-taxonomy-overview-map",
+				"domain-taxonomy-level-3-matrix-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Domain taxonomy is a stable machine routing structure and level-3 classification must be inspectable visually.",
+			"review_trigger": "Update required views whenever level-1, level-2 or level-3 taxonomy changes."
+		},
+		{
+			"module_id": "architecture-views",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"kb-navigation-index",
+				"knowledge-base-system-architecture-map",
+				"canvas-system-architecture-map",
+				"canvas-directory-layout-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "The Canvas subsystem owns the visual architecture surface and must expose entry, overview, subsystem and placement governance views.",
+			"review_trigger": "Add or update required views whenever a new visual family, Canvas directory layer or visual quality gate becomes stable."
+		},
+		{
+			"module_id": "module-governance",
+			"decision": "shared_required",
+			"visual_projection_status": "shared",
+			"required_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Module governance is currently visualized through the system overview because it governs cross-module placement instead of an internal workflow.",
+			"review_trigger": "Create a dedicated module-governance Canvas view if the policy grows new state, subagents, schemas or multi-step intake."
+		},
+		{
+			"module_id": "system-closure",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"system-closure-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Closure status is a cross-module governance matrix and must remain visually inspectable.",
+			"review_trigger": "Update the closure view whenever closure facets, module statuses or visual coverage gates change."
+		},
+		{
+			"module_id": "technical-documentation",
+			"decision": "deferred",
+			"visual_projection_status": "not_applicable",
+			"required_view_ids": [],
+			"covered_by_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "Technical documentation is a routed docs module today; it does not yet have CI, release or operations workflows that need a dedicated Canvas view.",
+			"review_trigger": "Create a technical-operations view when release, backup, CI, scheduled validation or GitHub publishing becomes an executable workflow."
+		},
+		{
+			"module_id": "diagnostics",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"diagnostic-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Diagnosis has workflow stages, repair classes, layer diagnosis matrix, failure-learning loop, queue schema and acceptance gates that need a dedicated visual map.",
+			"review_trigger": "Update the diagnostic view whenever repair classes, issue schema, layer matrix, failure-learning policy, quality gates, visual projection rules or orchestration rules change."
+		},
+		{
+			"module_id": "artifact-form-decision",
+			"decision": "shared_required",
+			"visual_projection_status": "shared",
+			"required_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Artifact-form choice is currently a shared governance decision visible from the system overview and tool map.",
+			"review_trigger": "Create a dedicated artifact-form view if decisions become a reusable workflow with state, examples or multiple runtime branches."
+		},
+		{
+			"module_id": "loop-orchestration",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"loop-orchestration-architecture-map"
+			],
+			"covered_by_view_ids": [
+				"loop-orchestration-architecture-map"
+			],
+			"reason": "loop-orchestration is a system-governance module for durable cross-module loops, not only a taxonomy status block; it needs a dedicated view to prevent future loop/state/workflow visual blind spots.",
+			"review_trigger": "Review whenever a new durable loop is registered, loop runner automation is introduced, or loop handoff rules change."
+		},
+		{
+			"module_id": "atomic-knowledge",
+			"decision": "deferred",
+			"visual_projection_status": "not_applicable",
+			"required_view_ids": [],
+			"covered_by_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "Atomic notes are still content entries rather than a stable retrieval or quality workflow.",
+			"review_trigger": "Create an atomic-knowledge view when note retrieval topology, quality gates or concept graph structure becomes stable."
+		},
+		{
+			"module_id": "synthesis",
+			"decision": "deferred",
+			"visual_projection_status": "not_applicable",
+			"required_view_ids": [],
+			"covered_by_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "Synthesis outputs are early content artifacts without a dedicated production workflow.",
+			"review_trigger": "Create a synthesis workflow view when multi-source briefs become frequent or synthesis quality gates become durable."
+		},
+		{
+			"module_id": "workflows",
+			"decision": "shared_required",
+			"visual_projection_status": "shared",
+			"required_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Codex workflow consumption is represented in the system overview while workflow packs are still early.",
+			"review_trigger": "Create a dedicated workflow view when a workflow spans three or more stable steps or a project-specific context pack becomes reusable."
+		},
+		{
+			"module_id": "evals",
+			"decision": "deferred",
+			"visual_projection_status": "not_applicable",
+			"required_view_ids": [],
+			"covered_by_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "Eval cases exist, but no automated eval runner or multi-stage eval workflow is stable yet.",
+			"review_trigger": "Create an eval view when retrieval, taxonomy or workflow evaluation becomes a recurring executable gate."
+		},
+		{
+			"module_id": "indexes",
+			"decision": "deferred",
+			"visual_projection_status": "not_applicable",
+			"required_view_ids": [],
+			"covered_by_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "Indexing is currently a simple generated catalog rather than a multi-index architecture.",
+			"review_trigger": "Create an index architecture view when SQLite FTS, vector index, graph index or multiple export pipelines become active."
+		},
+		{
+			"module_id": "schemas",
+			"decision": "shared_required",
+			"visual_projection_status": "shared",
+			"required_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Schemas are currently small shared contracts referenced from the system overview and validators.",
+			"review_trigger": "Create a schema-contract view when schema consumers, migrations or cross-schema dependencies become complex."
+		},
+		{
+			"module_id": "tools",
+			"decision": "shared_required",
+			"visual_projection_status": "shared",
+			"required_view_ids": [
+				"knowledge-base-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Tool runtime decisions are currently visible from the system overview and tool-map registry.",
+			"review_trigger": "Create a tool-runtime view when scripts grow beyond validation/indexing or gain service-like runtime decisions."
+		},
+		{
+			"module_id": "review-system",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"review-system-architecture-map"
+			],
+			"covered_by_view_ids": [],
+			"reason": "Review is a stable upstream module for system, external knowledge and Canvas visual aesthetic quality inspection, and its handoff boundary with diagnostics must be visually inspectable.",
+			"review_trigger": "Update the review-system view whenever review classes, specialized review modules, criteria sets, handoff targets, review record contract or validator behavior changes."
+		},
+		{
+			"module_id": "system-structure-governance",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"system-structure-governance-architecture-map"
+			],
+			"covered_by_view_ids": [
+				"system-structure-governance-architecture-map"
+			],
+			"reason": "系统结构治理是新增稳定核心治理模块，负责新模块归属和分支决策，必须有专属可视化入口。",
+			"review_trigger": "当 module-relationship-map、branch_decision_policy 或 module-layer-model 派生逻辑变化时，审查并更新该专属 Canvas。"
+		},
+		{
+			"module_id": "system-information-map",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"system-information-map-architecture-map"
+			],
+			"covered_by_view_ids": [
+				"system-information-map-architecture-map"
+			],
+			"reason": "系统信息地图是稳定核心治理模块，负责系统机器字典、轻量读取入口和引用面索引，必须有专属可视化入口。",
+			"review_trigger": "当 information-map、manifest、shard、schema、route 或引用面同步策略变化时，审查并更新该专属 Canvas。"
+		},
+		{
+			"module_id": "knowledge-ingestion",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"knowledge-ingestion-architecture-map"
+			],
+			"covered_by_view_ids": [
+				"knowledge-ingestion-architecture-map",
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "知识进入方式是长期稳定、跨模块的系统能力，必须有 dedicated 视觉影子，避免只在 source-registry 或系统总览阶段块里隐形。",
+			"review_trigger": "当新增来源类型、摄入模板、来源质量门、领域路由交接、review/diagnostics/loop handoff 或 source-registry 结构变化时，审查此图。"
+		},
+		{
+			"module_id": "git-governance",
+			"decision": "dedicated_required",
+			"visual_projection_status": "closed",
+			"required_view_ids": [
+				"git-governance-architecture-map"
+			],
+			"covered_by_view_ids": [
+				"git-governance-architecture-map",
+				"knowledge-base-system-architecture-map"
+			],
+			"reason": "Git 版本治理是长期稳定的系统治理能力，影响所有文件的版本、发布和远端动作边界，必须有 dedicated 视觉影子。",
+			"review_trigger": "当 remote、branch policy、提交策略、发布策略、CI、敏感信息边界或 GitHub 操作权限变化时，审查此图。"
+		}
+	],
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-canvas.ps1",
+		"scripts/audit-canvas-visual.ps1",
+		"scripts/validate-reviews.ps1"
+	]
+}

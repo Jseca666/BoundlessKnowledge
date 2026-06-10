@@ -1,0 +1,98 @@
+{
+  "id": "project-ontology",
+  "version": "0.1.0",
+  "updated": "2026-06-08",
+  "artifact_type": "root-project-identity-contract",
+  "project_name": "无界知识",
+  "positioning": "knowledge-engineering-system",
+  "mission": "构建并运行一个持续演化的知识工程系统，把草稿经验、论文、专业网页、GitHub 技术主题和后续外部材料转化为可追溯、可分类、可审查、可检索、可被 Codex 工作流调用的知识网络。",
+  "not_for": [
+    "把项目理解成单纯笔记仓库",
+    "把项目理解成单一业务应用",
+    "把领域分类理解成项目顶层本体",
+    "把 Canvas 图理解成机器真相",
+    "把 Codex 工作流只理解成外部项目消费入口"
+  ],
+  "existence_form": {
+    "human_surface": [
+      "Obsidian Markdown",
+      "Obsidian Canvas",
+      "thin entrypoint docs"
+    ],
+    "machine_truth": [
+      "JSON registries",
+      "schemas",
+      "indexes",
+      "state files",
+      "route maps",
+      "information-map shards"
+    ],
+    "agent_runtime": [
+      "Codex agent workflows",
+      "skills",
+      "diagnostic/review handoffs",
+      "loops",
+      "validators"
+    ],
+    "local_tools": [
+      "PowerShell validators and index builders",
+      "future Node/Python tools when complexity grows"
+    ]
+  },
+  "codex_agent_workflow_roles": [
+    {
+      "id": "system-build-and-maintenance",
+      "role": "Codex 工作流作为系统搭建与维护能力，负责新增模块、修复故障、同步路由、维护 schema、更新 Canvas、运行校验和闭环验收。"
+    },
+    {
+      "id": "system-operation-closure",
+      "role": "Codex 工作流作为知识工程系统运行能力，负责让捕获、登记、分类、提炼、索引、检索、审查、诊断、loop 打磨和项目回流真正闭环。"
+    }
+  ],
+  "knowledge_engineering_lifecycle": [
+    "capture",
+    "register-source",
+    "review-source-quality",
+    "classify-and-route",
+    "distill-atomic-knowledge",
+    "synthesize",
+    "index",
+    "retrieve",
+    "consume-in-codex-workflow",
+    "review",
+    "diagnose",
+    "loop-refine",
+    "feedback-upgrade"
+  ],
+  "role_of_major_surfaces": {
+    "knowledge_content": "承载外部世界知识进入、来源、分类、原子化、综合和质量评估。",
+    "system_governance": "治理知识工程系统自身的结构、模块、规则、诊断、审查、闭环、文档和持续升级。",
+    "machine_infrastructure": "提供 schema、索引、脚本、工具和本地运行时，让知识工程行为可生成、可校验、可检索。",
+    "visual_projection": "把文件系统、模块关系、工作流、数据流、loop、diagnostic、review 和知识结构投影成可读 Canvas 影子。",
+    "codex_workflows": "既是系统搭建/维护工作流，也是系统运行闭环和项目调用的执行入口。"
+  },
+  "classification_position": "领域分类是知识内容层的知识路由能力，不是项目顶层本体；三级分类服务 primary_level_3 路由和检索。",
+  "canvas_position": "Canvas 是知识工程系统的视觉影子和导航面，必须从机器真相投影，不反向定义机器真相。",
+  "routing_policy": {
+    "route_id": "project-ontology",
+    "entry_order": [
+      "system/route-registry.json",
+      "system/project-ontology.json",
+      "system/information-map.json",
+      "system/module-relationship-map.json"
+    ]
+  },
+  "validation": [
+    "scripts/validate-system.ps1",
+    "scripts/validate-canvas.ps1",
+    "scripts/audit-canvas-visual.ps1"
+  ],
+  "visual_projection": {
+    "decision": "shared_required",
+    "view_ids": [
+      "kb-navigation-index",
+      "knowledge-base-system-architecture-map"
+    ],
+    "reason": "根定位应该出现在入口和系统总览中，但不需要扩展成独立大图；细节由路由和信息地图接管。"
+  }
+}

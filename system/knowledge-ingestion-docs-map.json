@@ -1,0 +1,89 @@
+{
+	"id": "knowledge-ingestion-docs-map",
+	"version": "0.1.0",
+	"updated": "2026-06-10",
+	"artifact_type": "subsystem-docs-map",
+	"owner_module": "knowledge-ingestion",
+	"role": "知识摄入子系统的人读文档路由",
+	"purpose": "让知识摄入子系统内部文档保持薄入口和分层治理，避免把所有流程塞进 README 或 AGENTS。",
+	"thin_entrypoint": {
+		"path": "docs/knowledge-ingestion/README.md",
+		"rule": "只说明入口顺序和边界，不承载具体来源类型、质量门或工作流细节。"
+	},
+	"machine_truth": [
+		"system/knowledge-ingestion-system.json",
+		"system/knowledge-ingestion-docs-map.json"
+	],
+	"managed_human_docs": [
+		"docs/knowledge-ingestion/README.md",
+		"docs/ingestion-workflow.md",
+		"docs/source-quality.md",
+		"00-inbox/README.md"
+	],
+	"doc_routes": [
+		{
+			"id": "entry",
+			"path": "docs/knowledge-ingestion/README.md",
+			"purpose": "薄入口和阅读顺序。",
+			"not_for": "具体工作流规则或来源质量细则。"
+		},
+		{
+			"id": "workflow-human-guide",
+			"path": "docs/ingestion-workflow.md",
+			"purpose": "人读的采集与沉淀流程说明。",
+			"not_for": "机器判断来源类型、质量门或闭环状态。"
+		},
+		{
+			"id": "source-quality-human-guide",
+			"path": "docs/source-quality.md",
+			"purpose": "来源可信度层级、记录原则和引用方式。",
+			"not_for": "替代 review-system 的外部知识审查记录。"
+		},
+		{
+			"id": "raw-inbox-folder-note",
+			"path": "00-inbox/README.md",
+			"purpose": "解释 inbox 只是原始暂存入口。",
+			"not_for": "作为可引用知识事实来源。"
+		}
+	],
+	"template_routes": [
+		{
+			"source_type": "paper",
+			"template": "templates/paper-source.md"
+		},
+		{
+			"source_type": "github-topic",
+			"template": "templates/github-topic.md"
+		},
+		{
+			"source_type": "web-source",
+			"template": "templates/web-source.md"
+		},
+		{
+			"source_type": "personal-draft",
+			"template": "templates/personal-draft.md"
+		},
+		{
+			"output_type": "atomic-note",
+			"template": "templates/atomic-note.md"
+		},
+		{
+			"output_type": "synthesis-brief",
+			"template": "templates/synthesis-brief.md"
+		},
+		{
+			"output_type": "workflow-pack",
+			"template": "templates/workflow-pack.md"
+		}
+	],
+	"boundary_rules": [
+		"Markdown 说明只能解释如何使用，不作为系统行为真相。",
+		"来源类型、质量门、handoff 和闭环状态以 system/knowledge-ingestion-system.json 为准。",
+		"如果摄入文档增长为多个专题，先更新本 docs map，再新增文档。"
+	],
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/build-index.ps1",
+		"scripts/validate-kb.ps1"
+	]
+}

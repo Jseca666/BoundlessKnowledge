@@ -1,0 +1,231 @@
+{
+	"id": "information-map-governance-refs",
+	"artifact_type": "information_map_shard",
+	"owner_module": "system-information-map",
+	"parent_manifest_ref": "system/information-map-manifest.json",
+	"scope": "Governance refs that keep the information-map module synchronized with route, topology, closure, visual coverage and validation surfaces.",
+	"routing_policy": "Use this shard before changing information-map module status, route, closure, topology, Canvas coverage or validators.",
+	"entry_refs": [
+		{
+			"entry_id": "route.system-information-map",
+			"entry_type": "route",
+			"owner_module": "system-information-map",
+			"summary": "Task route for information-map governance, manifest, shard and reference-surface work.",
+			"reference_surfaces": [
+				"system/route-registry.json#routes.system-information-map"
+			],
+			"related_entries": [
+				"manifest.information-map"
+			]
+		},
+		{
+			"entry_id": "route.project-ontology",
+			"entry_type": "route",
+			"owner_module": "project-ontology",
+			"summary": "Task route for project positioning, knowledge-engineering-system identity and Codex workflow role questions.",
+			"reference_surfaces": [
+				"system/route-registry.json#routes.project-ontology"
+			],
+			"related_entries": [
+				"module.project-ontology"
+			]
+		},
+		{
+			"entry_id": "topology.project-ontology",
+			"entry_type": "topology",
+			"owner_module": "system-structure-governance",
+			"summary": "Layer and relationship placement for project-ontology as a system-governance root identity module.",
+			"reference_surfaces": [
+				"system/module-layer-model.json#module_assignments.project-ontology",
+				"system/module-relationship-map.json#modules.project-ontology"
+			],
+			"related_entries": [
+				"closure.project-ontology"
+			]
+		},
+		{
+			"entry_id": "closure",
+			"entry_type": "closure",
+			"owner_module": "system-closure",
+			"summary": "Closure and activation proof for project-ontology after adopting prior human/Canvas root positioning surfaces.",
+			"reference_surfaces": [
+				"system/system-closure-map.json#modules.project-ontology"
+			],
+			"related_entries": [
+				"visual.project-ontology"
+			]
+		},
+		{
+			"entry_id": "topology.system-information-map",
+			"entry_type": "topology",
+			"owner_module": "system-structure-governance",
+			"summary": "Layer and relationship placement for the information-map module.",
+			"reference_surfaces": [
+				"system/module-layer-model.json#module_assignments.system-information-map",
+				"system/module-relationship-map.json#modules.system-information-map"
+			],
+			"related_entries": [
+				"closure.system-information-map"
+			]
+		},
+		{
+			"entry_id": "closure.system-information-map",
+			"entry_type": "closure",
+			"owner_module": "system-closure",
+			"summary": "Module closure and activation proof for information-map self-description.",
+			"reference_surfaces": [
+				"system/system-closure-map.json#modules.system-information-map"
+			],
+			"related_entries": [
+				"visual.system-information-map"
+			]
+		},
+		{
+			"entry_id": "visual.system-information-map",
+			"entry_type": "visual_projection",
+			"owner_module": "architecture-views",
+			"summary": "Dedicated Canvas view and visual coverage decision for the information-map module.",
+			"reference_surfaces": [
+				"system/visual-coverage-map.json#module_decisions.system-information-map",
+				"system/canvas-registry.json#views.system-information-map-architecture-map",
+				"30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas"
+			],
+			"related_entries": [
+				"closure.system-information-map"
+			]
+		},
+		{
+			"entry_id": "validator.system-information-map",
+			"entry_type": "validator",
+			"owner_module": "tools",
+			"summary": "System validator checks manifest, shards, refs and schema paths.",
+			"reference_surfaces": [
+				"scripts/validate-system.ps1"
+			],
+			"related_entries": [
+				"schema.information-map"
+			]
+		},
+		{
+			"entry_id": "route.loop-orchestration",
+			"entry_type": "route",
+			"owner_module": "loop-orchestration",
+			"summary": "Task route for durable loops, loop registry, loop state, runner contracts and loop visual coverage.",
+			"reference_surfaces": [
+				"system/route-registry.json#routes.loop-orchestration"
+			],
+			"related_entries": [
+				"module.loop-orchestration"
+			]
+		},
+		{
+			"entry_id": "topology.loop-orchestration",
+			"entry_type": "topology",
+			"owner_module": "system-structure-governance",
+			"summary": "Layer and relationship placement for loop-orchestration as a system-governance module.",
+			"reference_surfaces": [
+				"system/module-layer-model.json#module_assignments.loop-orchestration",
+				"system/module-relationship-map.json#modules.loop-orchestration"
+			],
+			"related_entries": [
+				"route.loop-orchestration"
+			]
+		},
+		{
+			"entry_id": "closure.loop-orchestration",
+			"entry_type": "closure",
+			"owner_module": "system-closure",
+			"summary": "Closure and activation proof for loop-orchestration after adopting taxonomy-refinement as the first managed loop.",
+			"reference_surfaces": [
+				"system/system-closure-map.json#modules.loop-orchestration"
+			],
+			"related_entries": [
+				"visual.loop-orchestration"
+			]
+		},
+		{
+			"entry_id": "visual.loop-orchestration",
+			"entry_type": "visual_projection",
+			"owner_module": "architecture-views",
+			"summary": "Dedicated Canvas view for loop orchestration, managed loop assets and future loop intake.",
+			"reference_surfaces": [
+				"system/visual-coverage-map.json#module_decisions.loop-orchestration",
+				"30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas"
+			],
+			"related_entries": [
+				"closure.loop-orchestration"
+			]
+		},
+		{
+			"entry_id": "visual.project-ontology",
+			"entry_type": "visual_projection",
+			"owner_module": "architecture-views",
+			"summary": "Shared Canvas projection of project ontology through L0 entry and L1 system overview.",
+			"reference_surfaces": [
+				"system/visual-coverage-map.json#module_decisions.project-ontology",
+				"30-maps/canvas/00-entry/kb-navigation-index.canvas",
+				"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+			],
+			"related_entries": [
+				"closure.project-ontology"
+			]
+		},
+		{
+			"entry_id": "route.knowledge-ingestion",
+			"entry_type": "route",
+			"owner_module": "knowledge-ingestion",
+			"summary": "Task route for knowledge ingestion, source types, intake templates, source quality, legacy ingestion docs and handoffs.",
+			"reference_surfaces": [
+				"system/route-registry.json#routes.knowledge-ingestion"
+			],
+			"related_entries": [
+				"module.knowledge-ingestion"
+			]
+		},
+		{
+			"entry_id": "topology.knowledge-ingestion",
+			"entry_type": "topology",
+			"owner_module": "system-structure-governance",
+			"summary": "Layer and relationship placement for knowledge-ingestion as a system-governance subsystem while inbox/source-registry remain knowledge-content assets.",
+			"reference_surfaces": [
+				"system/module-layer-model.json#module_assignments.knowledge-ingestion",
+				"system/module-relationship-map.json#modules.knowledge-ingestion"
+			],
+			"related_entries": [
+				"closure.knowledge-ingestion"
+			]
+		},
+		{
+			"entry_id": "closure.knowledge-ingestion",
+			"entry_type": "closure",
+			"owner_module": "system-closure",
+			"summary": "Closure and activation proof for knowledge-ingestion after adopting legacy ingestion docs, templates and overview Canvas entry.",
+			"reference_surfaces": [
+				"system/system-closure-map.json#modules.knowledge-ingestion"
+			],
+			"related_entries": [
+				"visual.knowledge-ingestion"
+			]
+		},
+		{
+			"entry_id": "visual.knowledge-ingestion",
+			"entry_type": "visual_projection",
+			"owner_module": "architecture-views",
+			"summary": "Dedicated Canvas view and visual coverage decision for the knowledge ingestion subsystem.",
+			"reference_surfaces": [
+				"system/visual-coverage-map.json#module_decisions.knowledge-ingestion",
+				"system/canvas-registry.json#views.knowledge-ingestion-architecture-map",
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas"
+			],
+			"related_entries": [
+				"closure.knowledge-ingestion"
+			]
+		}
+	],
+	"boundary_refs": [
+		"system_information_map_indexes_reference_surfaces_not_topology_decisions",
+		"structure_governance_owns_branch_decisions",
+		"architecture_views_owns_canvas_layout_not_map_truth"
+	],
+	"updated": "2026-06-10"
+}

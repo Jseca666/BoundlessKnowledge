@@ -1,0 +1,202 @@
+{
+	"id": "diagnostic-layer-matrix",
+	"version": "1.0.0",
+	"updated": "2026-06-10",
+	"status": "active",
+	"adapted_from": {
+		"project": "C:/Users/dzw/Desktop/or",
+		"source": "C:/Users/dzw/Desktop/or/.agents/skills/research-issue-diagnosis/references/layer-diagnosis-matrix.md",
+		"boundary": "Transfer the diagnostic method only. Do not import OR research-domain objects, paper-specific stages or project assumptions."
+	},
+	"purpose": "Give diagnostics a machine-readable layer matrix so root cause is assigned by bottom-up evidence, not by the location where the symptom appeared.",
+	"trace_rule": {
+		"id": "bottom-up-parallel-trace",
+		"rule": "Start at the observed failure surface. Build a lower evidence track and an upper principle track side by side. Promote a meta or constitutional cause only when lower evidence justifies it.",
+		"stop_condition": "Stop climbing at the earliest layer that can prevent recurrence without relying on downstream cleanup.",
+		"anti_pattern": "Do not assign the owning repair layer merely because a symptom appeared in a file, Canvas view, script output or user screenshot."
+	},
+	"bottom_up_steps": [
+		{
+			"step": "failure_packet",
+			"lower_evidence_question": "What command, report, artifact, Canvas view, user correction or validation result proves the failure?",
+			"upper_principle_question": "What kind of reliability, truth, boundary or closure risk does this expose?"
+		},
+		{
+			"step": "local_surface",
+			"lower_evidence_question": "Is the visible artifact itself wrong, stale, malformed, incomplete or misleading?",
+			"upper_principle_question": "Did the system treat prose, layout or local files as truth without a governed validity state?"
+		},
+		{
+			"step": "producer",
+			"lower_evidence_question": "Which skill, script, generator, route, workflow or manual step produced the surface?",
+			"upper_principle_question": "Did role authority, owner boundary or operating mode invite the wrong action?"
+		},
+		{
+			"step": "machine_gate",
+			"lower_evidence_question": "Did a validator, review gate, visual audit, screenshot audit or closure check miss or falsely pass the defect?",
+			"upper_principle_question": "Is the evaluation observing the wrong signal or accepting incomplete evidence?"
+		},
+		{
+			"step": "consumed_data_or_contract",
+			"lower_evidence_question": "Did the producer consume stale, incomplete, ambiguous or boundary-violating registry, schema, source record, catalog, route, context pack or Canvas graph data?",
+			"upper_principle_question": "Is the data/control-plane split weak or is the evidence ontology missing a needed type?"
+		},
+		{
+			"step": "source_or_root_registry",
+			"lower_evidence_question": "Is the source, registry, route, information map, module map, taxonomy, loop state or project ontology wrong or missing?",
+			"upper_principle_question": "Is the collaboration contract, project identity, authority model or lifecycle model underspecified?"
+		},
+		{
+			"step": "meta_or_constitutional_layer",
+			"lower_evidence_question": "Do several lower surfaces point to the same organizing mistake?",
+			"upper_principle_question": "Should the system objective, evidence ontology, authority model, state model, failure philosophy or learning constitution be changed?"
+		}
+	],
+	"constitutional_root_layers": [
+		{
+			"layer": "objective_function",
+			"failure_pattern": "The system optimizes for producing artifacts, passing gates or moving the loop instead of preserving knowledge truth and boundary integrity.",
+			"durable_response": "State that evidence sufficiency, source fidelity, machine truth and boundary integrity outrank throughput."
+		},
+		{
+			"layer": "evidence_ontology",
+			"failure_pattern": "The system lacks first-class types for source fact, extraction, transformation, inference, visual projection, review finding, diagnosis and repair proposal.",
+			"durable_response": "Define the missing object type and forbid silent promotion between evidence classes."
+		},
+		{
+			"layer": "authority_model",
+			"failure_pattern": "The system lacks a hierarchy for who may define truth, interpret truth, write prose, accept outputs, change gates or promote rules.",
+			"durable_response": "Declare owner layers and permission boundaries for the affected module or workflow."
+		},
+		{
+			"layer": "state_model",
+			"failure_pattern": "Artifacts are treated as loose files instead of governed state with provenance, status, dependencies and invalidation.",
+			"durable_response": "Add manifests, statuses, dependency edges, lifecycle values or invalidation rules."
+		},
+		{
+			"layer": "failure_philosophy",
+			"failure_pattern": "The system fails open when evidence is missing, stale, ambiguous, out of boundary or visually unverified.",
+			"durable_response": "Make unsafe states blocked, pending, review_required or diagnosis_required until the owner layer repairs them."
+		},
+		{
+			"layer": "learning_constitution",
+			"failure_pattern": "Corrections remain as chat memory or local patches instead of becoming method, gate, regression sample, queue state or closure evidence.",
+			"durable_response": "Route reusable lessons through diagnosis, review, loop, registry, validator and closure surfaces."
+		}
+	],
+	"meta_root_layers": [
+		{
+			"layer": "epistemic_standard",
+			"failure_pattern": "No clear standard for evidence, source fidelity, visual acceptance or accepted quality.",
+			"durable_response": "Add a quality contract, review criterion or acceptance gate before artifact production."
+		},
+		{
+			"layer": "role_architecture",
+			"failure_pattern": "Skills or modules overlap, or data/control planes are blurred.",
+			"durable_response": "Split ownership and route fields, files, views or workflows to the correct layer."
+		},
+		{
+			"layer": "agent_operating_mode",
+			"failure_pattern": "The agent optimizes for immediate progress, patches locally or acts before diagnosis.",
+			"durable_response": "Add a diagnosis-first gate, handoff boundary or self-audit trigger."
+		},
+		{
+			"layer": "evaluation_design",
+			"failure_pattern": "Machine gates check the wrong signal or miss the user-visible failure mode.",
+			"durable_response": "Add or recalibrate validators, review gates, screenshot evidence, regression checks or closure reports."
+		},
+		{
+			"layer": "observability",
+			"failure_pattern": "Reports do not show the state needed to diagnose the failure.",
+			"durable_response": "Add state snapshots, provenance, machine-readable reports, route surfaces or visual projections."
+		},
+		{
+			"layer": "runtime_constraint",
+			"failure_pattern": "Encoding, paths, shell policy, tool limits or local environment pressure distort behavior.",
+			"durable_response": "Fix shared runtime routes or make the limitation explicit in the validator, route or tool map."
+		}
+	],
+	"symptom_to_owner": [
+		{
+			"symptom": "User says the diagnosis was shallow or missed the higher-layer problem.",
+			"likely_owner": [
+				"diagnostic-system",
+				"review-system"
+			],
+			"repair_direction": "Open diagnostic_self_audit, update the layer matrix or self-audit policy, then re-run affected validation."
+		},
+		{
+			"symptom": "A Canvas graph looks wrong after registry or policy changed.",
+			"likely_owner": [
+				"architecture-views",
+				"canvas-system",
+				"diagnostic-system"
+			],
+			"repair_direction": "Update the visual projection and support bindings, then run visual and screenshot audits."
+		},
+		{
+			"symptom": "A route, information-map entry or module closure is stale.",
+			"likely_owner": [
+				"route-registry",
+				"system-information-map",
+				"system-closure"
+			],
+			"repair_direction": "Repair the owning machine truth first, then sync docs, Canvas and validators."
+		},
+		{
+			"symptom": "A new module or subsystem ignores old content.",
+			"likely_owner": [
+				"system-structure-governance",
+				"module-governance",
+				"diagnostic-system"
+			],
+			"repair_direction": "Run legacy asset audit and record adopt, migrate, deprecate, archive, exempt or queue actions."
+		},
+		{
+			"symptom": "Validation passes but the user-visible experience is still wrong.",
+			"likely_owner": [
+				"review-system",
+				"diagnostic-system",
+				"validation"
+			],
+			"repair_direction": "Treat the validation as incomplete evidence, add rendered or user-visible acceptance evidence, and diagnose the gate."
+		},
+		{
+			"symptom": "A repeated issue produces local fixes without a durable improvement path.",
+			"likely_owner": [
+				"diagnostic-system",
+				"loop-orchestration",
+				"review-system"
+			],
+			"repair_direction": "Open the failure-learning loop and create postmortem, proposal, regression guard and promotion decision objects when the risk warrants it."
+		}
+	],
+	"repair_classification": {
+		"local_repair_allowed_when": [
+			"The defect is confined to one artifact.",
+			"No reusable rule, route, schema, registry, validator, review gate or visual projection is missing.",
+			"Downstream consumers cannot silently reuse the faulty pattern.",
+			"The final response names the repair as local."
+		],
+		"system_upgrade_required_when": [
+			"The defect can recur across views, modules, routes, schemas, workflows, sources, indexes, agents or future projects.",
+			"A validator, review gate, route, schema, registry, Canvas policy or closure map allowed the defect.",
+			"User correction concerns boundary, ownership, method, trust or reliability.",
+			"A local patch would be invisible to future agents."
+		],
+		"blocked_investigation_required_when": [
+			"The owner layer cannot be identified from available evidence.",
+			"Fixing now would require changing a sibling module without reading it.",
+			"The proposed repair would mix human explanation with machine truth.",
+			"Required source evidence or local context is missing."
+		]
+	},
+	"closure_questions": [
+		"What changed so the next same-class task follows the new method?",
+		"Which owner layer now contains the rule or positive model?",
+		"Which report, validator, screenshot, review record or closure proof shows this is not hand-patched?",
+		"Which same-class assets and sibling surfaces were checked?",
+		"Which downstream consumers were repaired or explicitly unaffected?",
+		"Does the failure need a learning-loop postmortem or improvement proposal beyond the issue queue?"
+	]
+}

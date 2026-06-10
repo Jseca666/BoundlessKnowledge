@@ -1,0 +1,481 @@
+{
+	"id": "diagnostic-system",
+	"version": "1.1.0",
+	"updated": "2026-06-10",
+	"role": "system-diagnosis-and-repair-routing",
+	"purpose": "Provide a reusable diagnosis module for knowledge-base system issues before repair or architecture change.",
+	"borrowed_pattern": {
+		"reference_project": "C:/Users/dzw/Desktop/or",
+		"reference_files": [
+			"C:/Users/dzw/Desktop/or/.agents/skills/research-issue-diagnosis/SKILL.md",
+			"C:/Users/dzw/Desktop/or/.agents/skills/research-process-capture/SKILL.md",
+			"C:/Users/dzw/Desktop/or/projects/cc-multi-uav-powerline-inspection/09_governance/system_issue_repair_loop.md",
+			"C:/Users/dzw/Desktop/or/.agents/skills/research-issue-diagnosis/references/layer-diagnosis-matrix.md",
+			"C:/Users/dzw/Desktop/or/projects/cc-multi-uav-powerline-inspection/00_inbox/system_issue_repair_queue.json",
+			"C:/Users/dzw/Desktop/or/docs/p3-self-evolution-system-design.md",
+			"C:/Users/dzw/Desktop/or/services/gateway/app/services/p3_failure_loop.py",
+			"C:/Users/dzw/Desktop/or/database/sqlite_migrations/0009_local_self_evolution_tables.up.sql"
+		],
+		"use_boundary": "Reference only. This knowledge-base module extracts transferable diagnostic and failure-learning methods, not OR project data, database requirements, research-domain assumptions or automatic self-modification behavior."
+	},
+	"principle_bridge": [
+		"diagnose-before-fixing",
+		"coordinated-system-upgrade",
+		"new-system-modules-inherit-legacy-responsibility",
+		"information-map-and-machine-friendly-flow",
+		"diagnostic-upgrade-orchestration",
+		"positive-model-before-constraints",
+		"diagnostic-self-accountability",
+		"same-class-impact-scan",
+		"incident-root-problem-separation",
+		"layer-diagnosis-matrix",
+		"controlled-failure-learning-loop",
+		"postmortem-proposal-regression-promotion",
+		"human-approved-evolution"
+	],
+	"upgrade_orchestration": {
+		"role": "higher-level capability that links diagnosis with coordinated system updates",
+		"trigger": "When repair_class is system_upgrade, diagnosis must drive the update instead of merely describing the root cause.",
+		"required_outputs": [
+			"affected_surfaces",
+			"generalization_scan",
+			"policy_or_registry_updates",
+			"existing_asset_migrations",
+			"legacy_asset_audit",
+			"validation_gate_updates",
+			"validation_reports",
+			"diagnosis_acceptance",
+			"diagnostic_self_audit when user correction reveals missed diagnosis, wrong owner layer, incomplete affected surface or false closure claim"
+		],
+		"rule": "A system_upgrade is not accepted until the observed instance, failure class, same-class sibling surfaces, governing rule and existing governed assets have been checked and either repaired, proven unaffected, adopted, migrated, deprecated, archived, exempted with reason, or queued with explicit status.",
+		"handoff": "The diagnostic module identifies the owning repair layers and required update surfaces; each owning module performs the concrete repair; diagnostics then performs acceptance against the original failure packet."
+	},
+	"trigger_when": [
+		"用户指出系统行为、画布、路由、分类、loop、schema、工具或索引不符合预期",
+		"出现旧图当新图、局部修复冒充系统升级、机器登记与人读说明不一致",
+		"校验通过但用户真实问题没有被解决",
+		"需要判断一个问题应该局部修、系统升级、归档旧版本还是继续调查",
+		"任何修复会影响 route、information map、schema、dataflow、gate、workflow、tool map、memory、版本记录或 Canvas",
+		"事故表现、局部现象或用户截图可能被误当作问题本身，而不是作为根因诊断的证据入口。",
+		"Canvas visual acceptance needs screenshot-level evidence, not only JSON validation or geometry inference."
+	],
+	"responsibility_boundary": {
+		"owns": [
+			"failure packet construction",
+			"bottom-up evidence tracing",
+			"upper-principle tracing",
+			"repair-layer classification",
+			"repair-class decision",
+			"diagnosis acceptance",
+			"recurring issue queue contract"
+		],
+		"does_not_own": [
+			"performing another module's concrete repair",
+			"domain taxonomy design itself",
+			"Canvas layout design itself",
+			"knowledge entry extraction itself",
+			"tool runtime implementation itself"
+		],
+		"handoff_rule": "After diagnosis, repair happens in the smallest durable owning layer. The diagnostic module returns after repair to run diagnosis acceptance."
+	},
+	"core_workflow": [
+		{
+			"step": "freeze-failing-path",
+			"output": "failure_packet",
+			"rule": "Stop downstream claims until the failing path, observed symptom, current file/view/command and immediate inputs are named."
+		},
+		{
+			"step": "name-symptom",
+			"output": "plain_symptom",
+			"rule": "Describe what failed in operational language, not as an abstract theory first."
+		},
+		{
+			"step": "separate-incident-and-root-problem",
+			"output": "incident_manifestation + root_problem + system_regulation_target",
+			"rule": "Treat the incident as evidence, not the problem itself. incident_manifestation names the observed failure surface; root_problem names the recurring mechanism or missing system capability; system_regulation_target names the rule, model, schema, route, gate or workflow surface that must be adjusted."
+		},
+		{
+			"step": "trace-lower-evidence",
+			"output": "lower_evidence_track",
+			"rule": "Climb from the observed surface to producer, source, registry, gate, route and contract until the earliest recurrence-preventing layer is found."
+		},
+		{
+			"step": "trace-upper-principle",
+			"output": "upper_principle_track",
+			"rule": "In parallel, check whether the lower evidence exposes a missing principle, weak authority boundary, fail-open gate or local-patch mindset."
+		},
+		{
+			"step": "identify-failed-mindset",
+			"output": "failed_mindset",
+			"rule": "Name the shortcut that produced the wrong move, such as artifact-only thinking, stale state trust, route skipping or gate-only confidence."
+		},
+		{
+			"step": "classify-owner",
+			"output": "owning_repair_layer",
+			"rule": "Choose the module, registry, schema, script, Canvas, workflow, loop, index or documentation layer that must change to prevent recurrence."
+		},
+		{
+			"step": "decide-repair-class",
+			"output": "repair_class",
+			"rule": "Classify as local_repair, system_upgrade or blocked_investigation. Local repair is allowed only when recurrence risk is genuinely low."
+		},
+		{
+			"step": "plan-coordinated-upgrade",
+			"output": "affected_surfaces",
+			"rule": "If repair_class is system_upgrade, enumerate every governed surface that must be updated or reviewed, including existing assets controlled by the new rule."
+		},
+		{
+			"step": "scan-same-class-and-sibling-surfaces",
+			"output": "generalization_scan",
+			"rule": "For system_upgrade or repeated user correction, identify the failure class from lower evidence, then scan same-class assets, sibling modules, peer views, related validators, routes, registries and review criteria before deciding the repair is complete."
+		},
+		{
+			"step": "design-positive-model-repair",
+			"output": "positive_model_repair",
+			"rule": "Design the repair as a positive model improvement in the owning layer first: clarify boundary, route, registry, schema, dataflow, lifecycle, state or generator before adding constraints."
+		},
+		{
+			"step": "decide-constraint-need",
+			"output": "constraint_decision",
+			"rule": "Decide whether a negative constraint or hard validation gate is necessary. Use it only for durable invariants, high recurrence risk or machine-truth corruption; otherwise record why the positive model is enough."
+		},
+		{
+			"step": "write-before-editing",
+			"output": "diagnosis_record",
+			"rule": "Record symptom, evidence tracks, root cause, owner, positive_model_repair, constraint_decision and affected surfaces before durable edits. Add forbidden_pattern and quality_gate only when the constraint decision says a guardrail is needed."
+		},
+		{
+			"step": "repair-at-owner-layer",
+			"output": "capture_paths",
+			"rule": "Patch the smallest durable layer with the widest reuse benefit; update all affected registry and machine surfaces."
+		},
+		{
+			"step": "migrate-governed-assets",
+			"output": "existing_asset_migrations",
+			"rule": "Apply the upgraded rule to current governed assets. When a new system module is introduced, it must inherit responsibility for existing assets in scope: adopt, migrate, deprecate, archive, exempt with reason, or queue follow-up items."
+		},
+		{
+			"step": "upgrade-quality-gate",
+			"output": "validation_gate_updates",
+			"rule": "When the issue can recur, update validation or audit gates so policy-only repairs cannot silently pass."
+		},
+		{
+			"step": "sync-visual-projection",
+			"output": "visual_projection_review",
+			"rule": "For a system_upgrade, check whether the owning module has dedicated_required or shared_required Canvas coverage. Update the corresponding Canvas view when the upgrade changes the module structure, workflow, contract or quality gate; otherwise record why no visual change is needed."
+		},
+		{
+			"step": "validate",
+			"output": "validation",
+			"rule": "Run the relevant system, Canvas, index, KB or module-specific validator."
+		},
+		{
+			"step": "diagnosis-accept",
+			"output": "diagnosis_acceptance",
+			"rule": "Compare the completed repair against the original diagnosis, not only a passing command."
+		},
+		{
+			"step": "audit-diagnostic-performance",
+			"output": "diagnostic_self_audit",
+			"rule": "When a user correction, repeated defect, missed layer, incomplete affected surface list or false closure claim shows the diagnosis itself failed, diagnose the diagnostic process as an owning repair layer before closing the issue."
+		},
+		{
+			"step": "decide-failure-learning-loop",
+			"output": "failure_learning_decision",
+			"rule": "After diagnosis acceptance, decide whether the issue should open the controlled failure-learning loop. Use not_needed, deferred or opened with evidence and risk reason."
+		},
+		{
+			"step": "open-controlled-learning-loop",
+			"output": "postmortem_or_proposal_refs",
+			"rule": "For repeated or high-risk failure classes, create or queue a postmortem and improvement proposal with regression guard and promotion decision requirements. Do not auto-promote rules or memory."
+		},
+		{
+			"step": "surface-diagnosis-summary",
+			"output": "user_facing_diagnosis_summary",
+			"rule": "When a non-trivial issue is diagnosed or captured, the final response should surface the issue_id or queue status plus a short diagnosis summary: symptom, owning repair layer, positive_model_repair, constraint_decision and validation. The summary is a pointer to machine truth, not a replacement for it."
+		}
+	],
+	"issue_record_contract": {
+		"schema": "schemas/diagnostic-issue.schema.json",
+		"queue": "system/diagnostics/issue-repair-queue.json",
+		"required_fields": [
+			"issue_id",
+			"title",
+			"status",
+			"repair_class",
+			"failure_packet",
+			"lower_evidence_track",
+			"upper_principle_track",
+			"failed_mindset",
+			"immediate_root_cause",
+			"owning_repair_layer",
+			"positive_model_repair",
+			"constraint_decision",
+			"affected_surfaces",
+			"generalization_scan",
+			"system_regulation_target",
+			"root_problem",
+			"incident_manifestation",
+			"capture_paths",
+			"validation",
+			"diagnosis_acceptance"
+		],
+		"optional_legacy_or_guardrail_fields": [
+			"positive_rule",
+			"forbidden_pattern",
+			"quality_gate"
+		],
+		"constraint_field_rule": "forbidden_pattern and quality_gate are optional by default and required only when constraint_decision states that a guardrail or hard validation gate is needed.",
+		"generalization_scan_rule": "Captured system_upgrade issues must include generalization_scan after the same-class impact scan contract becomes active. Historical records before the effective issue may remain as legacy records, but new records must not close by repairing only the user-named artifact.",
+		"optional_learning_fields": [
+			"failure_learning_decision",
+			"failure_postmortem_ref",
+			"evolution_proposal_ref",
+			"regression_guard_ref",
+			"promotion_decision_ref"
+		],
+		"failure_learning_rule": "If failure_learning_decision is opened, the record or linked queue must identify postmortem/proposal/guard/promotion references. If deferred or not_needed, record a reason."
+	},
+	"repair_layers": [
+		"development-principles",
+		"route-registry",
+		"information-map",
+		"module-governance",
+		"canvas-system",
+		"canvas-registry",
+		"canvas-view-graph",
+		"domain-taxonomy",
+		"loop-orchestration",
+		"artifact-form-policy",
+		"tool-map",
+		"schema",
+		"workflow",
+		"index",
+		"script",
+		"human-doc",
+		"visual-coverage-map",
+		"diagnostic-system",
+		"review-system",
+		"system-structure-governance",
+		"diagnostic-layer-matrix",
+		"failure-learning-loop",
+		"git-governance"
+	],
+	"repair_classes": [
+		{
+			"id": "local_repair",
+			"rule": "A one-off correction that has low recurrence risk and no stable route, schema, gate or registry impact."
+		},
+		{
+			"id": "system_upgrade",
+			"rule": "A durable system behavior change that affects future tasks, routes, schemas, gates, workflows, tools, indexes or Canvas views."
+		},
+		{
+			"id": "blocked_investigation",
+			"rule": "Evidence is insufficient or external state is unavailable; record the missing evidence and do not claim repair."
+		}
+	],
+	"false_system_upgrade_test": [
+		"Would the same issue recur if this exact artifact disappeared?",
+		"Did the repair change only a generated or local file?",
+		"Can a future agent find the method without this chat?",
+		"Is the owning layer changed, not only the symptom surface?",
+		"Is there a machine or human quality gate that detects recurrence?",
+		"Did diagnosis acceptance check the repair against the original diagnosis?",
+		"Have same-class assets and sibling modules been scanned, not only the named artifact?",
+		"Could the same failure class appear in another Canvas view, route, registry, schema, validator, workflow, docs map or module boundary?"
+	],
+	"quality_gates": [
+		"Every system issue diagnosis must start from a failure packet.",
+		"Every system upgrade must name affected surfaces before editing.",
+		"Every captured recurring issue must include positive_model_repair, constraint_decision and diagnosis_acceptance. forbidden_pattern and quality_gate are required only when constraint_decision says a guardrail is needed.",
+		"Markdown explanations cannot close a diagnostic issue unless the required machine registry or queue state is also updated.",
+		"A passing validation command is evidence, not diagnosis acceptance by itself.",
+		"For system_upgrade repairs, diagnosis acceptance must prove the governing rule, affected existing assets and recurrence gate were all handled.",
+		"A recurring visual blind spot is not closed until system/visual-coverage-map.json records required/shared/deferred/not_applicable decisions and validate-system enforces those decisions.",
+		"System upgrades must prefer positive model repair over accumulating negative constraints. New forbidden patterns or validators must protect durable invariants and should consolidate older rules when possible.",
+		"A completed non-trivial diagnosis should be visible to the user through a concise final-response summary that names the captured issue_id or explicitly says why no queue record was needed.",
+		"System upgrades that change a module structure, workflow, contract or quality gate must review that module's visual projection and update the required/shared Canvas view or record why no visual change is needed.",
+		"A new or upgraded system module is not accepted until old governed content in its responsibility boundary has been audited and given an explicit owner action.",
+		"A diagnosis cannot close a new or upgraded stable system module as active/effective until system-closure-map activation_proof exists and references legacy asset audit plus validation evidence.",
+		"When a user correction shows a missed or shallow diagnosis, diagnostics must create or update a diagnostic self-audit record before claiming closure.",
+		"Captured issues whose owning_repair_layer includes diagnostic-system must include diagnostic_self_audit with trigger, missed pattern, missed layer, corrective contract and recurrence gate.",
+		"Every captured system_upgrade diagnosis after the same-class impact scan contract becomes active must include generalization_scan: observed_instance, failure_class, same_class_assets_checked, sibling_surfaces_checked, affected_modules, exemptions and recurrence_gate.",
+		"A repair is not accepted when it fixes only the user-named artifact while leaving same-class or sibling surfaces unexamined.",
+		"A captured system_upgrade after the incident/root-problem separation contract becomes active must include incident_manifestation, root_problem and system_regulation_target.",
+		"A forbidden_pattern, quality_gate or validator update must protect root_problem.recurrence_mechanism or system_regulation_target, not merely the observed incident surface.",
+		"When validation passes but the user-visible Canvas, structure, route or workflow still looks wrong, diagnostics must treat validation as incomplete evidence and open or update diagnostic_self_audit before claiming closure.",
+		"When Canvas visual defects are reported or visual rules are upgraded, diagnosis acceptance must check whether screenshot-level evidence exists or explicitly record why it is unavailable.",
+		"Diagnostics must use the layer matrix when owner layer is ambiguous or when a symptom could be produced by multiple upstream surfaces.",
+		"After diagnosis_acceptance for a non-trivial system_upgrade, diagnostics must decide whether the controlled failure-learning loop is opened, deferred or not needed.",
+		"The failure-learning loop may create postmortem/proposal/guard/promotion objects, but it must not auto-promote rules, durable memory or external actions without the required gates and human approval."
+	],
+	"storage_policy": {
+		"agent_entry": [
+			".agents/skills/diagnostic-system/SKILL.md",
+			".agents/skills/diagnostic-system/agents/openai.yaml"
+		],
+		"machine_truth": [
+			"system/diagnostics/diagnostic-system.json",
+			"system/diagnostics/issue-repair-queue.json",
+			"schemas/diagnostic-issue.schema.json",
+			"system/diagnostics/diagnostic-layer-matrix.json",
+			"system/diagnostics/failure-learning-loop.json"
+		],
+		"human_explanation": [
+			"docs/diagnostic-system.md"
+		],
+		"visual_projection": [
+			"30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas"
+		],
+		"validation": [
+			"scripts/validate-diagnostics.ps1",
+			"scripts/validate-system.ps1",
+			"scripts/audit-canvas-screenshot.ps1",
+			"scripts/validate-git-governance.ps1"
+		]
+	},
+	"repair_design_policy": {
+		"id": "positive-model-before-negative-constraint",
+		"rule": "After diagnosing the owner layer, design the repair as a positive model improvement first. Use negative constraints only when the issue is high-risk, easy to repeat, and not adequately prevented by the positive model alone.",
+		"preferred_repairs": [
+			"clarify module boundary or ownership",
+			"improve machine-readable registry or route",
+			"normalize dataflow, state model or lifecycle status",
+			"improve generation or placement workflow",
+			"merge or simplify existing rules"
+		],
+		"constraint_allowed_when": [
+			"the failure can recur silently",
+			"the failure would corrupt machine truth, routing, closure, security, visual trust or generated indexes",
+			"the validator can check a durable invariant rather than a temporary preference",
+			"the new gate replaces or consolidates weaker old rules when possible"
+		],
+		"required_rule_review": [
+			"Can this be solved by a better positive model?",
+			"Does this new negative rule protect a real invariant?",
+			"Can any old rule be merged, weakened or removed?",
+			"Will future agents understand the rule from machine truth instead of chat memory?"
+		]
+	},
+	"self_audit_policy": {
+		"id": "diagnostic-self-accountability",
+		"rule": "The diagnostic module is inside the system it diagnoses. If the user exposes a missed root cause, shallow diagnosis, wrong owner layer, missing affected surface or premature closure, diagnostics must diagnose its own failure and update its contract or gates when recurrence risk is high.",
+		"trigger_when": [
+			"user says the diagnosis was wrong, shallow, missed, or the diagnostic module failed",
+			"user correction reveals a higher-layer cause after diagnostics claimed closure",
+			"the same class of issue is repaired more than once without a generalized gate",
+			"validation passed but user-visible structure, route, visual projection or legacy responsibility remains wrong",
+			"user classifies a just-repaired user-visible Canvas, structure or route problem as a serious system problem"
+		],
+		"required_outputs": [
+			"diagnostic_self_audit.trigger",
+			"diagnostic_self_audit.missed_issue_pattern",
+			"diagnostic_self_audit.missed_layer",
+			"diagnostic_self_audit.corrective_contract",
+			"diagnostic_self_audit.recurrence_gate"
+		],
+		"acceptance_rule": "A diagnostic self-failure is not accepted by fixing only the target artifact; acceptance requires naming why diagnostics missed it and adding a durable contract, review criterion, route gate or validator when recurrence risk is high.",
+		"validation": [
+			"scripts/validate-diagnostics.ps1",
+			"scripts/audit-canvas-screenshot.ps1"
+		]
+	},
+	"generalization_scan_policy": {
+		"id": "same-class-impact-scan",
+		"rule": "Start bottom-up from the observed failing instance, then generalize only after the failure class is known: scan same-class assets, sibling modules, peer views, related routes, schemas, validators, workflows, docs maps and visual projections before closure.",
+		"trigger_when": [
+			"repair_class is system_upgrade",
+			"the user says the issue is broader than the named subsystem or artifact",
+			"two or more similar defects appear across Canvas, route, registry, schema, workflow, tool, docs or module boundary surfaces",
+			"a new or upgraded module changes ownership, routing, closure, visual projection or validation behavior"
+		],
+		"required_outputs": [
+			"generalization_scan.observed_instance",
+			"generalization_scan.failure_class",
+			"generalization_scan.same_class_assets_checked",
+			"generalization_scan.sibling_surfaces_checked",
+			"generalization_scan.affected_modules",
+			"generalization_scan.exemptions",
+			"generalization_scan.recurrence_gate"
+		],
+		"acceptance_rule": "Closure requires proof that the same failure class was scanned across relevant siblings and either repaired, marked unaffected with evidence, explicitly exempted with reason, or queued for follow-up.",
+		"validation": [
+			"scripts/validate-diagnostics.ps1",
+			"scripts/validate-system.ps1",
+			"scripts/validate-reviews.ps1"
+		]
+	},
+	"root_problem_policy": {
+		"id": "incident-root-problem-separation",
+		"rule": "An accident or visible symptom is evidence of a problem, not the problem itself. Diagnosis must separate the observed incident from the deeper root problem and name the system regulation target before repair or constraint design.",
+		"trigger_when": [
+			"repair_class is system_upgrade",
+			"the proposed repair adds or changes a rule, validator, schema, route, workflow, Canvas policy or module boundary",
+			"the user points out that a fix only handles a specific case, screenshot, file, graph or surface behavior",
+			"the same visible failure could be produced by multiple deeper mechanisms"
+		],
+		"required_outputs": [
+			"incident_manifestation.observed_incident",
+			"incident_manifestation.evidence_surface",
+			"incident_manifestation.why_it_is_not_root_problem",
+			"root_problem.problem_statement",
+			"root_problem.recurrence_mechanism",
+			"root_problem.owning_system_model",
+			"system_regulation_target.target_surface",
+			"system_regulation_target.update_mode",
+			"system_regulation_target.acceptance_gate"
+		],
+		"acceptance_rule": "A system_upgrade diagnosis is not accepted when the root_problem merely restates the incident. Acceptance requires a recurring mechanism, owning system model and regulation target that can prevent same-class recurrence.",
+		"validation": [
+			"scripts/validate-diagnostics.ps1",
+			"scripts/validate-system.ps1",
+			"scripts/validate-reviews.ps1"
+		]
+	},
+	"method_surfaces": {
+		"id": "diagnostic-method-surfaces",
+		"rule": "Keep AGENTS and SKILL entrypoints thin. Detailed diagnostic method lives in routed machine-readable surfaces.",
+		"surfaces": [
+			{
+				"id": "diagnostic-system",
+				"path": "system/diagnostics/diagnostic-system.json",
+				"role": "thin controller, workflow and policy index"
+			},
+			{
+				"id": "diagnostic-layer-matrix",
+				"path": "system/diagnostics/diagnostic-layer-matrix.json",
+				"role": "bottom-up layer diagnosis matrix adapted from OR"
+			},
+			{
+				"id": "failure-learning-loop",
+				"path": "system/diagnostics/failure-learning-loop.json",
+				"role": "controlled postmortem, proposal, regression guard and promotion loop adapted from OR"
+			},
+			{
+				"id": "issue-repair-queue",
+				"path": "system/diagnostics/issue-repair-queue.json",
+				"role": "durable issue records and diagnosis acceptance evidence"
+			}
+		]
+	},
+	"failure_learning_policy": {
+		"id": "controlled-failure-learning-loop",
+		"machine_truth": "system/diagnostics/failure-learning-loop.json",
+		"rule": "A captured diagnosis can be closed by repair acceptance, but repeated or high-impact failure classes must also decide whether to open a controlled learning loop: postmortem -> proposal -> sandbox/dry-run -> regression guard -> promotion decision -> memory or rule capture.",
+		"open_when": [
+			"same failure class recurs after a captured repair",
+			"system_upgrade has high or critical recurrence risk",
+			"validator or review gate falsely passed a reusable defect",
+			"user correction reveals diagnostic self-audit or wrong owner layer",
+			"proposed repair changes prompts, routes, schemas, validators, workflow definitions, Canvas policies, source-quality gates or memory policy"
+		],
+		"not_for": [
+			"automatic self-modification",
+			"direct durable memory writeback",
+			"external publishing or remote actions",
+			"rewriting source truth or historical issue records"
+		],
+		"required_decision": "New non-trivial captured system_upgrade issues should state whether failure_learning_loop is opened, deferred or not_needed, with reason."
+	}
+}

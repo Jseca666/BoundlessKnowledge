@@ -1,0 +1,357 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"text": "# Canvas 目录布局\n\n文件夹先表达读图顺序，再表达模块身份：入口图 -> 系统总览 -> 子系统下钻 -> 知识分类、工作流、项目图。",
+			"x": -920,
+			"y": -720,
+			"width": 1840,
+			"height": 120,
+			"color": "6"
+		},
+		{
+			"id": "navigation-panel",
+			"type": "text",
+			"text": "# 导航\n\n返回父级 Canvas 子系统图。",
+			"x": 1140,
+			"y": -700,
+			"width": 420,
+			"height": 110,
+			"color": "6"
+		},
+		{
+			"id": "parent-canvas-system-canvas",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+			"x": 1490,
+			"y": -540,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "root",
+			"type": "text",
+			"text": "# 30-maps/canvas/\n\n只放 README 和编号层级目录。\n\n正式图必须进入明确目录并登记。",
+			"x": -260,
+			"y": -540,
+			"width": 520,
+			"height": 130,
+			"color": "6"
+		},
+		{
+			"id": "stable-band",
+			"type": "text",
+			"text": "# 稳定视图目录\n\ncurrent / active 图按阅读层级、系统边界、知识边界和使用场景放置。",
+			"x": -920,
+			"y": -340,
+			"width": 1840,
+			"height": 80,
+			"color": "3"
+		},
+		{
+			"id": "entry",
+			"type": "text",
+			"text": "# 00-entry/\n\n最高层视觉入口。\n\n先从这里打开全局导航。",
+			"x": -920,
+			"y": -210,
+			"width": 360,
+			"height": 140,
+			"color": "6"
+		},
+		{
+			"id": "system-root",
+			"type": "text",
+			"text": "# 10-system/\n\n系统可视化总目录。\n\n不直接放零散模块图。",
+			"x": -500,
+			"y": -210,
+			"width": 360,
+			"height": 140,
+			"color": "6"
+		},
+		{
+			"id": "knowledge-root",
+			"type": "text",
+			"text": "# 20-knowledge/\n\n知识内容面可视化。\n\n领域、主题、知识地图继续下钻。",
+			"x": -80,
+			"y": -210,
+			"width": 360,
+			"height": 140,
+			"color": "3"
+		},
+		{
+			"id": "workflow-project",
+			"type": "text",
+			"text": "# 30-workflow/ + 40-project/\n\n操作流程和项目上下文。\n\n按 workflow 或 project 继续建子目录。",
+			"x": 340,
+			"y": -210,
+			"width": 360,
+			"height": 140,
+			"color": "2"
+		},
+		{
+			"id": "system-overview",
+			"type": "text",
+			"text": "# 10-system/00-overview/\n\n系统总览层。\n\n放知识库系统架构和顶层数据流。",
+			"x": -700,
+			"y": 20,
+			"width": 360,
+			"height": 140,
+			"color": "6"
+		},
+		{
+			"id": "system-subsystems",
+			"type": "text",
+			"text": "# 10-system/10-subsystems/\n\n系统子模块下钻层。\n\nskill、schema、tool、loop、diagnostic 等继续分目录。",
+			"x": -280,
+			"y": 20,
+			"width": 360,
+			"height": 140,
+			"color": "5"
+		},
+		{
+			"id": "domain-taxonomy",
+			"type": "text",
+			"text": "# 20-knowledge/10-domain-taxonomy/\n\n领域分类体系。\n\n一级、二级、三级 taxonomy 图从这里展开。",
+			"x": 140,
+			"y": 20,
+			"width": 360,
+			"height": 140,
+			"color": "3"
+		},
+		{
+			"id": "canvas-system",
+			"type": "text",
+			"text": "# .../canvas-system/\n\nCanvas 子系统架构、目录布局、视觉治理。",
+			"x": -700,
+			"y": 250,
+			"width": 360,
+			"height": 130,
+			"color": "5"
+		},
+		{
+			"id": "diagnostic-system",
+			"type": "text",
+			"text": "# .../diagnostic-system/\n\n诊断、修复路由、failure packet、校验闭环。",
+			"x": -280,
+			"y": 250,
+			"width": 360,
+			"height": 130,
+			"color": "1"
+		},
+		{
+			"id": "system-closure",
+			"type": "text",
+			"text": "# .../system-closure/\n\n模块覆盖、成熟度、缺口、闭环校验。",
+			"x": 140,
+			"y": 250,
+			"width": 360,
+			"height": 130,
+			"color": "4"
+		},
+		{
+			"id": "lifecycle-band",
+			"type": "text",
+			"text": "# 生命周期目录\n\n未稳定先进 drafts；被替代或历史追溯进 archive。",
+			"x": -920,
+			"y": 520,
+			"width": 1840,
+			"height": 80,
+			"color": "5"
+		},
+		{
+			"id": "drafts",
+			"type": "text",
+			"text": "# 80-drafts/\n\n临时脑图、导入图、边界未确认的图。",
+			"x": -300,
+			"y": 650,
+			"width": 360,
+			"height": 120,
+			"color": "5"
+		},
+		{
+			"id": "archive",
+			"type": "text",
+			"text": "# 90-archive/\n\nsuperseded、legacy-draft、archived 图。",
+			"x": 140,
+			"y": 650,
+			"width": 360,
+			"height": 120,
+			"color": "1"
+		},
+		{
+			"id": "registry-file",
+			"type": "file",
+			"file": "system/canvas-registry.json",
+			"x": -436,
+			"y": 880,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "planning-file",
+			"type": "file",
+			"file": "docs/canvas/file-placement.md",
+			"x": 104,
+			"y": 880,
+			"width": 64,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "validate-file",
+			"type": "file",
+			"file": "scripts/validate-canvas.ps1",
+			"x": 644,
+			"y": 880,
+			"width": 64,
+			"height": 48,
+			"color": "1"
+		},
+		{
+			"id": "nav-label-parent-canvas-system-canvas",
+			"type": "text",
+			"text": "返回：Canvas 子系统",
+			"x": 1140,
+			"y": -540,
+			"width": 330,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "bridge-anchor-bridge-parent-canvas",
+			"type": "text",
+			"text": "Canvas 目录",
+			"x": 930,
+			"y": -540,
+			"width": 110,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "file-label-registry-file",
+			"type": "text",
+			"x": -720,
+			"y": 850,
+			"width": 360,
+			"height": 90,
+			"color": "5",
+			"text": "图登记\ncurrent、路径、导航"
+		},
+		{
+			"id": "file-label-planning-file",
+			"type": "text",
+			"x": -180,
+			"y": 850,
+			"width": 360,
+			"height": 90,
+			"color": "4",
+			"text": "目录规则\n文件放置边界"
+		},
+		{
+			"id": "file-label-validate-file",
+			"type": "text",
+			"x": 360,
+			"y": 850,
+			"width": 360,
+			"height": 90,
+			"color": "1",
+			"text": "校验脚本\n登记与结构"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构.",
+			"x": 1140,
+			"y": -447,
+			"width": 420,
+			"height": 130,
+			"color": "6"
+		}
+	],
+	"edges": [
+		{
+			"id": "e2",
+			"fromNode": "root",
+			"fromSide": "bottom",
+			"toNode": "stable-band",
+			"toSide": "top",
+			"color": "3"
+		},
+		{
+			"id": "e7",
+			"fromNode": "system-root",
+			"fromSide": "bottom",
+			"toNode": "system-overview",
+			"toSide": "top",
+			"color": "6"
+		},
+		{
+			"id": "e8",
+			"fromNode": "system-root",
+			"fromSide": "bottom",
+			"toNode": "system-subsystems",
+			"toSide": "top",
+			"color": "5"
+		},
+		{
+			"id": "e9",
+			"fromNode": "knowledge-root",
+			"fromSide": "bottom",
+			"toNode": "domain-taxonomy",
+			"toSide": "top",
+			"color": "3"
+		},
+		{
+			"id": "e10",
+			"fromNode": "system-subsystems",
+			"fromSide": "bottom",
+			"toNode": "canvas-system",
+			"toSide": "top",
+			"color": "5"
+		},
+		{
+			"id": "e11",
+			"fromNode": "system-subsystems",
+			"fromSide": "bottom",
+			"toNode": "diagnostic-system",
+			"toSide": "top",
+			"color": "1"
+		},
+		{
+			"id": "e12",
+			"fromNode": "system-subsystems",
+			"fromSide": "bottom",
+			"toNode": "system-closure",
+			"toSide": "top",
+			"color": "4"
+		},
+		{
+			"id": "e14",
+			"fromNode": "lifecycle-band",
+			"fromSide": "bottom",
+			"toNode": "drafts",
+			"toSide": "top",
+			"color": "5"
+		},
+		{
+			"id": "e15",
+			"fromNode": "lifecycle-band",
+			"fromSide": "bottom",
+			"toNode": "archive",
+			"toSide": "top",
+			"color": "1"
+		},
+		{
+			"id": "bridge-edge-bridge-parent-canvas",
+			"fromNode": "nav-label-parent-canvas-system-canvas",
+			"fromSide": "left",
+			"toNode": "bridge-anchor-bridge-parent-canvas",
+			"toSide": "right",
+			"color": "5",
+			"label": "对应："
+		}
+	]
+}

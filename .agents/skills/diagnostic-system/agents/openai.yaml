@@ -1,0 +1,4 @@
+interface:
+  display_name: "Diagnostic System"
+  short_description: "Route root-cause diagnosis through the knowledge-base diagnostic module."
+  default_prompt: "Use $diagnostic-system when a knowledge-base issue, local repair, system upgrade, route/schema/tool/Canvas mismatch, or root-cause question needs diagnosis before repair."

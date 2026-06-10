@@ -1,0 +1,3067 @@
+{
+	"id": "canvas-registry",
+	"version": "1.12.0",
+	"updated": "2026-06-10",
+	"scope": "canvas-view-registry",
+	"rule": "Canvas files are visual navigation and design artifacts. They must be registered here before being treated as current system knowledge.",
+	"current_view": "kb-navigation-index",
+	"registry_policy": {
+		"machine_truth": "system/canvas-registry.json",
+		"machine_view_graph": "system/canvas-view-graph.json",
+		"system_architecture": "system/canvas-system.json",
+		"human_guide": "docs/canvas/README.md",
+		"markdown_role": "Markdown may explain canvas purpose and usage, but registry fields decide status, current view, layer and canonical path.",
+		"root_rule": "Do not keep .canvas files directly under 30-maps/canvas/. Root is only for README and numbered layer directories.",
+		"registration_required": true
+	},
+	"data_separation_policy": {
+		"rule": "Canvas-related data is split by consumer. Machine agents read registries and canvas-view-graph; humans read Obsidian .canvas files and Markdown guides.",
+		"machine_readable": [
+			{
+				"path": "system/canvas-registry.json",
+				"role": "canonical registry for view status, paths, source binding, storage rules and lifecycle"
+			},
+			{
+				"path": "system/canvas-view-graph.json",
+				"role": "layout-free navigation graph for agents, parent-child traversal and view lookup"
+			},
+			{
+				"path": "system/canvas-system.json",
+				"role": "Canvas subsystem policy and quality gates"
+			},
+			{
+				"path": "system/canvas-docs-map.json",
+				"role": "Canvas subsystem documentation map and human-doc boundary registry"
+			},
+			{
+				"path": "system/visual-coverage-map.json",
+				"role": "visual coverage decisions for required, shared, deferred and not-applicable Canvas projection coverage"
+			},
+			{
+				"path": "system/module-layer-model.json",
+				"role": "canonical module owner_layer and module_kind model consumed by entry and system overview views"
+			},
+			{
+				"path": "system/project-ontology.json",
+				"role": "Root identity contract for the knowledge engineering system and Codex workflow roles"
+			},
+			{
+				"path": "system/reviews/canvas-screenshots/latest-report.json",
+				"role": "generated screenshot-level review evidence for current/active Canvas views; evidence only, not Canvas machine truth"
+			}
+		],
+		"human_readable": [
+			{
+				"path": "30-maps/canvas/**/*.canvas",
+				"role": "Obsidian visual layout, navigation and discussion surface"
+			},
+			{
+				"path": "docs/canvas/*.md",
+				"role": "routed human explanation, audit notes and operating guidance"
+			},
+			{
+				"path": "30-maps/canvas/README.md",
+				"role": "local folder guide for Obsidian users"
+			}
+		],
+		"boundary_rule": "Do not infer machine truth from Canvas coordinates, text card wording or visual grouping. Promote durable relationships into canvas-registry and canvas-view-graph."
+	},
+	"navigation_policy": {
+		"rule": "Canvas files form a navigable view graph, not a flat folder of diagrams.",
+		"level_rule": "Higher-level views summarize modules and expose file-node links to lower-level views. L0 entry points to L1 trunks; L2 system-subsystem views must use the L1 system overview as their canonical parent. L0 may keep L2 shortcut buttons, but those shortcuts are not parent/child truth.",
+		"obsidian_mechanism": "Use Canvas file nodes pointing to .canvas, Markdown, JSON, schema or script files. Text nodes may explain the link, but file nodes are the primary Obsidian navigation affordance.",
+		"relationship_fields": [
+			"parent_views",
+			"child_views",
+			"related_views",
+			"navigation_nodes"
+		],
+		"reciprocity_rule": "If view A lists view B in child_views, view B must list view A in parent_views. Related views should be reciprocal when they are stable peer navigation links.",
+		"l0_parentage_rule": "A current or active L0 navigation index should list only L1 trunk views in child_views. L2 system-subsystem shortcuts may appear in navigation_nodes, but their parent_views must point to the L1 system overview.",
+		"history": [
+			{
+				"id": "entry-parentage-audit-20260607",
+				"changed": [
+					"kb-navigation-index",
+					"system-subsystem parent_views",
+					"system overview child_views"
+				],
+				"result": "Corrected L0 entry and view graph so Canvas, diagnostic, review, closure and structure-governance maps are L2 system-subsystem views under the L1 system overview instead of peers of the system overview."
+			}
+		]
+	},
+	"archive_policy": {
+		"rule": "Archived or legacy Canvas views may preserve historical layout, but they must not look like current architecture truth.",
+		"visual_requirement": "A visible legacy Canvas kept under 30-maps/canvas/90-archive/ must show an archive-status note and provide a compact right-side navigation button to its replaced_by current view when replaced_by is declared.",
+		"validation_gate": "scripts/validate-canvas.ps1 checks archive-status-note, replaced_by, replacement navigation node and replacement label for registered legacy/archive views."
+	},
+	"view_boundary_policy": {
+		"rule": "Canvas view classification is as important as Canvas file placement. A file path decides storage ownership; view_level, view_category, primary_subject and boundary decide what the graph may express.",
+		"required_for_status": [
+			"current",
+			"active"
+		],
+		"required_fields": [
+			"view_level",
+			"view_category",
+			"primary_subject",
+			"boundary",
+			"not_for"
+		],
+		"view_levels": [
+			{
+				"level": "L0",
+				"meaning": "Navigation entry; only decides where to go."
+			},
+			{
+				"level": "L1",
+				"meaning": "Overview; shows major modules, domains or top-level structure."
+			},
+			{
+				"level": "L2",
+				"meaning": "Module or subsystem architecture; shows one stable unit's internal parts and interfaces."
+			},
+			{
+				"level": "L3",
+				"meaning": "Workflow or dataflow; shows execution order, state transitions and gates."
+			},
+			{
+				"level": "L4",
+				"meaning": "Contract, state or placement boundary; shows schemas, registries, directories or machine contracts."
+			}
+		],
+		"view_categories": [
+			"navigation",
+			"system-overview",
+			"module-architecture",
+			"directory-boundary",
+			"workflow",
+			"dataflow",
+			"taxonomy",
+			"knowledge-map",
+			"skill",
+			"schema",
+			"tool",
+			"loop",
+			"diagnostic",
+			"project-context",
+			"archive"
+		],
+		"boundary_rule": "A current or active view has one primary subject. Related material should be linked as child_views, related_views, source_of_truth or right-side navigation instead of being merged into the main graph."
+	},
+	"visual_quality_policy": {
+		"rule": "Current and active Canvas views should be visually scannable before they are detailed.",
+		"zones": [
+			"title",
+			"primary_path",
+			"drilldown_or_return",
+			"supporting_status",
+			"machine_truth"
+		],
+		"global_navigation_layout": {
+			"id": "main-structure-left-navigation-right",
+			"applies_to_status": [
+				"current",
+				"active"
+			],
+			"applies_to": "All non-navigation structural views, including system, module, workflow, dataflow, skill, schema, tool, loop, diagnostic, knowledge and project views.",
+			"main_area": "Keep the primary structure, workflow, taxonomy, state transition, knowledge structure, project context or dataflow in the left/main area.",
+			"navigation_area": "Place parent, child and related-view navigation targets in a clearly separated right-side vertical navigation panel whenever navigation is present. In structural views, file nodes should be compact click buttons while nav-label-* text carries the destination meaning.",
+			"gutter_rule": "Leave a clear whitespace gutter between the main content right edge and the right-side navigation labels. Target about 220px and do not let current or active structural views fall below 200px.",
+			"edge_rule": "Navigation edges stay inside the right-side navigation panel or connect only at the panel boundary; they must not cross the main structure.",
+			"validation_gate": "scripts/validate-canvas.ps1 checks that registered navigation nodes for current or active non-navigation structural views sit to the right of the main structure; scripts/audit-canvas-visual.ps1 checks scanability issues such as empty cards, node overlap, oversized navigation file nodes, cramped main-to-navigation gutters and overly long lines."
+		},
+		"navigation_index_layout": {
+			"id": "layer-aware-current-view-route-map",
+			"applies_to_status": [
+				"current",
+				"active"
+			],
+			"applies_to": "L0 visual-navigation-index views.",
+			"rule": "The entry canvas is a pure jump surface and must read as a layer-aware route map. It groups destinations by registered view_level, layer and primary_subject, not by vague mental buckets that mix system overview, knowledge content, visualization subsystem and governance modules.",
+			"visual_form": "Preferred form: title/scope band, one row per ownership layer, nav-label-* cards carrying destination meaning plus target view_level, and compact file nodes used only as Obsidian click buttons. The entry should reveal whether a target is L1 overview, L1 knowledge content or L2 subsystem before the user opens it.",
+			"forbidden": "Do not place machine truth JSON, Markdown, scripts, future placeholders or architecture/dataflow relationships on the L0 entry canvas. Do not group destinations by subjective labels that hide registered layer ownership.",
+			"validation_gate": "scripts/validate-canvas.ps1 checks navigation views for non-canvas file nodes, unregistered canvas file nodes, missing destination label nodes, target view_level missing from L0 nav labels and non-navigation edges. Layer grouping remains a visual review criterion because it requires content judgment."
+		},
+		"context_bridge_layout": {
+			"id": "navigation-to-main-content-context-bridge",
+			"applies_to_status": [
+				"current",
+				"active"
+			],
+			"applies_to": "Non-navigation views with a separated navigation panel.",
+			"rule": "Right-side navigation should correspond to current-view content through a single-interpretation language: one nav-label-* text node explains the target, one compact file button provides the click target, and one bridge-* line connects the label to the corresponding content module.",
+			"visual_form": "Direct nav-label-* to content-node bridge lines. The user should perceive one explanation and one line, not a duplicate label in the navigation panel plus another content marker in the main body.",
+			"forbidden": "Do not use bridge edges as dataflow, workflow order, dependency, registry truth or source binding edges. Do not use them inside L0 navigation-index views. Do not duplicate a navigation explanation with both bridge-anchor-* and content-marker-* when one direct line is readable.",
+			"validation_gate": "validate-canvas checks bridge edge semantics; audit-canvas-visual checks crossings, oversized navigation buttons, excessive direct-line length and route-card clutter."
+		},
+		"layout_rules": [
+			"Use one dominant reading direction per view.",
+			"Keep the main path separate from machine truth file nodes.",
+			"Put drilldown file nodes near the module they expand.",
+			"Put parent-return file nodes near the top-left or top band.",
+			"Avoid using many long diagonal edges for static reference files.",
+			"Prefer summary cards plus file nodes over many dense detail cards in a single view.",
+			"For every current or active non-navigation structural view, keep navigation lines out of the main structure, workflow, taxonomy, state transition, knowledge structure, project context and dataflow path; place navigation in a clearly separated right-side vertical panel when navigation is present.",
+			"For every current or active L0 navigation view, keep the canvas as a pure jump list: no machine truth file nodes, no future placeholder targets, no edges that do not connect to registered navigation file nodes, and every navigation node must have a visible Chinese destination label.",
+			"For every current or active L0 navigation view, present destinations as a layer-aware route map: visible sections should follow registered view_level, layer and primary_subject, such as system overview, knowledge content, visual subsystem and governance loop.",
+			"For every current or active view, any visible file node that points to another registered Canvas view must be listed in navigation_nodes and paired with a visible human-readable destination label.",
+			"For every current or active view, any visible non-navigation support file should use file-label-* as the readable card and keep the actual file node as a compact embedded click button; file names alone are not role explanations.",
+			"For every current or active non-navigation structural view, keep registered navigation file nodes as compact click buttons; do not let Obsidian preview cards become the information surface.",
+			"For every current or active non-navigation structural view, keep a clear main-to-navigation gutter: target about 220px and do not fall below 200px.",
+			"Use bridge-* context edges as one direct nav-label-to-content interpretation line when a navigation item should point to a current-content node.",
+			"Run scripts/audit-canvas-visual.ps1 after visual edits to catch empty cards, overlaps, cramped anchors and long lines before treating a current or active view as visually accepted.",
+			"Treat lines as first-class layout objects; a line that crosses unrelated cards, labels, file nodes or section bands fails visual acceptance.",
+			"Prefer fewer high-signal edges. Remove navigation-chain, machine-truth reference or section fan-out lines when labels and grouping are clearer.",
+			"Run scripts/audit-canvas-visual.ps1 -Strict after line routing changes and fix every warning before accepting current/active views.",
+			"Right-side navigation should not duplicate the same explanation in both the nav panel and the main body. Prefer one direct nav-label-to-content line.",
+			"Use context-route-* segments only as explicit visual exceptions; the default navigation-to-content form is one interpretation label and one direct bridge line.",
+			"context-route helper nodes and content-marker-* duplicates must be rare enough that the canvas never reads as a wiring diagram or a double-labeled interface.",
+			"For every current or active L0 navigation view, each nav-label-* must expose the target view_level, such as L1 or L2, so hierarchy is visible before opening the child Canvas.",
+			"For every current or active L0 navigation view, do not promote a single knowledge-content subsystem such as taxonomy classification as a peer of the system overview; route users through the system overview unless the target is registered as a full L1 trunk covering multiple modules."
+		],
+		"latest_audit": {
+			"date": "2026-06-06",
+			"scope": [
+				"kb-navigation-index",
+				"knowledge-base-system-architecture-map",
+				"diagnostic-system-architecture-map",
+				"domain-taxonomy-overview-map",
+				"canvas-system-architecture-map",
+				"canvas-directory-layout-map",
+				"system-closure-architecture-map"
+			],
+			"result": "Promoted the left main-structure / right navigation-panel pattern from a single-view adjustment to a global rule for all current or active non-navigation structural Canvas views, added the pure L0 navigation-index rule, migrated existing current views, and added layout-aware and navigation-node validation gates."
+		},
+		"edge_routing_layout": {
+			"id": "clear-line-routing",
+			"applies_to_status": [
+				"current",
+				"active"
+			],
+			"applies_to": "All Canvas views treated as reliable human visual surfaces.",
+			"rule": "Every line must earn its space. Keep semantic flow lines readable, avoid crossings through non-endpoint nodes, and use one clear interpretation label instead of duplicate labels or routed reference wiring whenever the relationship is navigational rather than systemic.",
+			"hard_forbidden": [
+				"edge crosses an unrelated card, label, file node, section band or machine-truth band",
+				"navigation chain line crosses nav-label-*",
+				"long bridge line crosses main content instead of staying in an open reading corridor",
+				"navigation-to-content route spine visually competing with the primary system dataflow"
+			],
+			"preferred_forms": [
+				"left-to-right primary flow",
+				"short vertical parent-child links with clear whitespace",
+				"direct nav-label-* to content-node bridge lines",
+				"grouping by spatial proximity and color instead of dense arrows"
+			],
+			"validation_gate": "scripts/audit-canvas-visual.ps1 checks line-node intersections, bridge length and long diagonal warnings; use -Strict for visual acceptance."
+		},
+		"latest_line_routing_audit": {
+			"date": "2026-06-06",
+			"scope": [
+				"kb-navigation-index",
+				"knowledge-base-system-architecture-map",
+				"domain-taxonomy-overview-map",
+				"canvas-system-architecture-map",
+				"canvas-directory-layout-map",
+				"diagnostic-system-architecture-map",
+				"system-closure-architecture-map"
+			],
+			"result": "Added geometry-based edge obstruction checks, removed low-value lines that crossed labels, bands or cards, and kept only primary flow and short bridge/context edges in current views."
+		},
+		"latest_nav_to_content_routing_audit": {
+			"date": "2026-06-06",
+			"scope": [
+				"knowledge-base-system-architecture-map"
+			],
+			"result": "Replaced duplicate bridge-anchor/content-marker navigation correspondence with one direct nav-label-to-content bridge line per related target in the system overview canvas."
+		},
+		"latest_nav_button_compaction_audit": {
+			"date": "2026-06-06",
+			"scope": [
+				"knowledge-base-system-architecture-map",
+				"domain-taxonomy-overview-map",
+				"canvas-system-architecture-map",
+				"canvas-directory-layout-map",
+				"diagnostic-system-architecture-map",
+				"system-closure-architecture-map"
+			],
+			"result": "Shrank right-side navigation file nodes in structural views into compact click buttons. Destination meaning lives in nav-label-* text, and current-content correspondence now defaults to a direct nav-label-to-content bridge line."
+		},
+		"latest_navigation_gutter_audit": {
+			"date": "2026-06-06",
+			"scope": [
+				"knowledge-base-system-architecture-map",
+				"domain-taxonomy-overview-map",
+				"canvas-system-architecture-map",
+				"canvas-directory-layout-map",
+				"diagnostic-system-architecture-map",
+				"system-closure-architecture-map"
+			],
+			"result": "Expanded the whitespace gutter between the main content and right-side navigation labels across current structural views, targeting about 220px and adding a strict visual-audit warning below 200px."
+		},
+		"latest_archive_retirement_audit": {
+			"date": "2026-06-06",
+			"scope": [
+				"knowledge-base-system-detailed-draft"
+			],
+			"result": "Marked the visible legacy system-architecture draft as visually retired, added an archive-status note, added a compact right-side replacement navigation button to the current system architecture view, and upgraded validate-canvas to check archive/replaced_by hygiene."
+		},
+		"latest_domain_taxonomy_level3_visualization_audit": {
+			"date": "2026-06-06",
+			"scope": [
+				"domain-taxonomy-overview-map",
+				"domain-taxonomy-level-3-matrix-map"
+			],
+			"result": "Added an active level-3 taxonomy matrix Canvas view generated from the taxonomy registry, linked it as a child drilldown from the domain taxonomy overview, and registered navigation nodes in the Canvas view graph."
+		},
+		"latest_diagnostic_contract_visual_sync_audit": {
+			"date": "2026-06-07",
+			"scope": [
+				"diagnostic-system-architecture-map"
+			],
+			"result": "Updated the diagnostic subsystem Canvas after the diagnostic record contract changed from positive_rule/forbidden_pattern/quality_gate to positive_model_repair/constraint_decision, and added visual projection sync as a visible system-upgrade step."
+		},
+		"latest_review_system_visualization_audit": {
+			"date": "2026-06-07",
+			"scope": [
+				"review-system-architecture-map",
+				"kb-navigation-index",
+				"knowledge-base-system-architecture-map",
+				"diagnostic-system-architecture-map"
+			],
+			"result": "Added a dedicated review-system Canvas view, connected it from the navigation index and system overview, and added reciprocal diagnostic navigation for review-to-diagnostics handoff."
+		},
+		"latest_text_integrity_repair": {
+			"date": "2026-06-07",
+			"scope": [
+				"canvas-system-architecture-map",
+				"system-closure-architecture-map",
+				"domain-taxonomy-overview-map",
+				"domain-taxonomy-level-3-matrix-map",
+				"development-principles",
+				"canvas-registry"
+			],
+			"result": "Repaired literal question-mark placeholder corruption in Canvas text nodes and key registry fields; added a text-integrity validation gate so corrupted Chinese placeholders cannot silently pass."
+		},
+		"latest_edge_label_clearance_audit": {
+			"date": "2026-06-07",
+			"scope": [
+				"diagnostic-system-architecture-map",
+				"system-closure-architecture-map",
+				"review-system-architecture-map"
+			],
+			"result": "Added edge-label-clearance checks to the strict Canvas visual audit and expanded affected current subsystem views so flow labels no longer collide with adjacent cards."
+		},
+		"latest_primary_flow_unlabeled_audit": {
+			"date": "2026-06-07",
+			"scope": [
+				"current and active Canvas views"
+			],
+			"result": "Removed non-bridge primary-flow edge labels from current and active Canvas views after Obsidian rendering still hid labels between adjacent cards. Primary flow semantics now live in numbered cards, section titles and spatial order; bridge labels remain for navigation-to-content interpretation."
+		},
+		"latest_entry_navigation_aesthetic_refresh": {
+			"date": "2026-06-07",
+			"scope": [
+				"kb-navigation-index"
+			],
+			"result": "Refreshed the L0 entry canvas from large file-preview blocks into compact nav-label-* cards and small Obsidian click buttons. Later layer-ownership audit upgraded the grouping model from visual destination selector to layer-aware route map."
+		},
+		"latest_support_file_label_audit": {
+			"date": "2026-06-07",
+			"scope": [
+				"current and active Canvas views"
+			],
+			"result": "Converted non-navigation support files across current and active Canvas views into integrated file-label-* readable cards with compact embedded file click buttons. File names alone are no longer accepted as the human-readable explanation layer in strict visual audit."
+		},
+		"latest_entry_navigation_layer_ownership_audit": {
+			"date": "2026-06-07",
+			"scope": [
+				"kb-navigation-index"
+			],
+			"result": "Reworked the L0 entry canvas from subjective two-column grouping into a layer-aware route map. Destinations now expose L1/L2 and their ownership layer: system overview, knowledge content, Canvas subsystem and governance loop."
+		},
+		"latest_system_module_layer_model_audit": {
+			"date": "2026-06-07",
+			"scope": [
+				"kb-navigation-index",
+				"knowledge-base-system-architecture-map"
+			],
+			"result": "Diagnosed entry-layer confusion as missing canonical module-layer model. Added system/module-layer-model.json and projected it into the entry and system overview machine-truth surfaces."
+		},
+		"color_semantics_layout": {
+			"id": "view-scoped-color-semantics-v1",
+			"applies_to_status": [
+				"current",
+				"active"
+			],
+			"rule": "Every current or active view declares a palette in color_semantics and displays a visible color-legend node. Palette interpretation is scoped by view category.",
+			"visual_form": "Keep the legend compact and outside the primary workflow/dataflow path. In structural views, place it near the separated right-side navigation or another non-primary auxiliary zone.",
+			"validation_gate": "validate-canvas checks palette declaration and color membership; audit-canvas-visual checks that the legend is not too small."
+		},
+		"latest_color_semantics_reference_audit": {
+			"date": "2026-06-08",
+			"trigger": "User pointed to the OR project Canvas system as a useful reference for differentiated block colors and upper/lower guide lines.",
+			"result": "Adopted method-level color semantics: view-scoped palettes, visible legends, registry color_semantics per current/active view, and validation/audit gates."
+		}
+	},
+	"storage_layout": [
+		{
+			"id": "entry",
+			"path": "30-maps/canvas/00-entry/",
+			"layer": "entry",
+			"use_for": "Top-level navigation canvases that act as the Obsidian entrypoint into the visual knowledge-base system.",
+			"not_for": "Subsystem details, domain details, project-local diagrams, drafts or archived diagrams.",
+			"naming": "kb-{topic}-overview.canvas",
+			"filename_prefix": "kb-",
+			"allowed_view_types": [
+				"visual-navigation-index"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "system-kb-system",
+			"path": "30-maps/canvas/10-system/00-overview/",
+			"layer": "system-overview",
+			"use_for": "Knowledge-base operating system overview, major module relations and top-level system dataflow views.",
+			"not_for": "Top-level navigation, Canvas subsystem rules, domain taxonomy or project-local diagrams.",
+			"naming": "kb-system-{view}.canvas",
+			"filename_prefix": "kb-system-",
+			"allowed_view_types": [
+				"system-architecture-map"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "system-generic-subsystems",
+			"path": "30-maps/canvas/10-system/10-subsystems/",
+			"layer": "system-subsystem",
+			"use_for": "Future system-submodule visual architecture views, including module internals, skills, schemas, tools, loops, dataflow and system contracts.",
+			"not_for": "Top-level navigation, knowledge-content taxonomy, project-specific maps, drafts or archive.",
+			"naming": "{subsystem}/{subsystem}-{view}.canvas",
+			"filename_prefix": "",
+			"allowed_view_types": [
+				"module-architecture-map",
+				"module-internal-structure-map",
+				"system-dataflow-map",
+				"skill-architecture-map",
+				"schema-contract-map",
+				"tool-runtime-map",
+				"loop-state-map",
+				"diagnostic-repair-map"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"draft",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "system-canvas-system",
+			"path": "30-maps/canvas/10-system/10-subsystems/canvas-system/",
+			"layer": "system-subsystem",
+			"use_for": "Canvas subsystem architecture, Canvas placement rules and visual-view governance diagrams.",
+			"not_for": "Top-level entry views, domain taxonomy, business-domain knowledge maps or project diagrams.",
+			"naming": "canvas-{topic}-{view}.canvas",
+			"filename_prefix": "canvas-",
+			"allowed_view_types": [
+				"canvas-system-map",
+				"canvas-directory-layout-map"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "system-diagnostic-system",
+			"path": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/",
+			"layer": "system-subsystem",
+			"use_for": "Diagnosis and system-repair routing views for knowledge-base system issues.",
+			"not_for": "Domain knowledge diagnosis, business-domain reasoning, project-specific incident boards or draft brainstorming.",
+			"naming": "diagnostic-system-{view}.canvas",
+			"filename_prefix": "diagnostic-system-",
+			"allowed_view_types": [
+				"diagnostic-system-map"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "system-closure",
+			"path": "30-maps/canvas/10-system/10-subsystems/system-closure/",
+			"layer": "system-subsystem",
+			"use_for": "System closure module views covering module coverage, maturity facets, known gaps, visual projection and validation closure.",
+			"not_for": "Top-level system overview, Canvas subsystem governance, domain taxonomy, workflow-only diagrams or project-local closure notes.",
+			"naming": "system-closure-{view}.canvas",
+			"filename_prefix": "system-closure-",
+			"allowed_view_types": [
+				"module-architecture-map",
+				"diagnostic-repair-map"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "knowledge-domain-taxonomy",
+			"path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/",
+			"layer": "knowledge-content",
+			"use_for": "Domain taxonomy visualizations and future drilldown maps for level-1, level-2 and level-3 knowledge classification.",
+			"not_for": "System architecture, Canvas subsystem rules, workflow execution diagrams or project-local reasoning.",
+			"naming": "domain-taxonomy-{view}.canvas or domain-{domain-code}-{view}.canvas",
+			"filename_prefix": "domain-",
+			"allowed_view_types": [
+				"domain-taxonomy-map",
+				"domain-knowledge-map",
+				"cross-domain-map"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"draft",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "workflow",
+			"path": "30-maps/canvas/30-workflow/",
+			"layer": "workflow",
+			"use_for": "Ingestion, retrieval, Codex context-pack, quality gate and maintenance workflow diagrams.",
+			"not_for": "Static domain taxonomy, Canvas subsystem governance or project-specific architecture diagrams.",
+			"naming": "{workflow-name}/{workflow-name}-{view}.canvas",
+			"filename_prefix": "",
+			"allowed_view_types": [
+				"workflow-map",
+				"ingestion-flow-map",
+				"retrieval-flow-map",
+				"quality-gate-map",
+				"codex-workflow-map"
+			],
+			"allowed_status": [
+				"current",
+				"active",
+				"draft",
+				"superseded"
+			],
+			"registration_policy": "required"
+		},
+		{
+			"id": "project",
+			"path": "30-maps/canvas/40-project/",
+			"layer": "project",
+			"use_for": "Project-specific architecture or reasoning canvases that are useful to this knowledge base but not global system truth.",
+			"not_for": "Global knowledge-base system truth or reusable workflow truth.",
+			"naming": "{project-name}/{project-name}-{view}.canvas",
+			"filename_prefix": "",
+			"allowed_view_types": [
+				"project-context-map",
+				"project-architecture-map",
+				"project-workflow-map"
+			],
+			"allowed_status": [
+				"active",
+				"draft",
+				"superseded",
+				"archived"
+			],
+			"registration_policy": "required-when-reused"
+		},
+		{
+			"id": "drafts",
+			"path": "30-maps/canvas/80-drafts/",
+			"layer": "draft",
+			"use_for": "Unsettled sketches, imported canvases, user brainstorming boards and canvases not yet promoted to a canonical view.",
+			"not_for": "Current or trusted architecture entrypoints.",
+			"naming": "draft-{topic}-{yyyymmdd}.canvas",
+			"filename_prefix": "draft-",
+			"allowed_view_types": [
+				"draft-map"
+			],
+			"allowed_status": [
+				"draft"
+			],
+			"registration_policy": "optional"
+		},
+		{
+			"id": "archive",
+			"path": "30-maps/canvas/90-archive/",
+			"layer": "archive",
+			"use_for": "Superseded or historical canvases kept for traceability.",
+			"not_for": "Current entrypoints or active maintained views.",
+			"naming": "{original-name}-{yyyymmdd}.canvas",
+			"filename_prefix": "",
+			"allowed_view_types": [
+				"system-architecture-detailed-draft",
+				"archived-map"
+			],
+			"allowed_status": [
+				"legacy-draft",
+				"superseded",
+				"archived"
+			],
+			"registration_policy": "required"
+		}
+	],
+	"status_values": [
+		{
+			"status": "current",
+			"meaning": "Default trusted canvas for a specific view family. At most one current view per view_family."
+		},
+		{
+			"status": "active",
+			"meaning": "Useful and maintained, but not the default entry view."
+		},
+		{
+			"status": "draft",
+			"meaning": "Unsettled sketch; must not be used as truth without user confirmation."
+		},
+		{
+			"status": "legacy-draft",
+			"meaning": "Old draft preserved for reference. Do not answer current architecture questions from it unless explicitly requested."
+		},
+		{
+			"status": "superseded",
+			"meaning": "Replaced by a newer view."
+		},
+		{
+			"status": "archived",
+			"meaning": "Historical record only."
+		}
+	],
+	"view_type_rules": [
+		{
+			"view_type": "visual-navigation-index",
+			"default_dir": "30-maps/canvas/00-entry/",
+			"source_of_truth": [
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"system/canvas-system.json",
+				"30-maps/canvas/README.md"
+			]
+		},
+		{
+			"view_type": "system-architecture-map",
+			"default_dir": "30-maps/canvas/10-system/00-overview/",
+			"source_of_truth": [
+				"system/canvas-system.json",
+				"system/information-map.json",
+				"system/route-registry.json",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json"
+			]
+		},
+		{
+			"view_type": "canvas-system-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/canvas-system/",
+			"source_of_truth": [
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-docs-map.json",
+				"docs/canvas/architecture.md",
+				"docs/canvas/file-placement.md",
+				"docs/canvas/view-boundaries.md",
+				"scripts/validate-canvas.ps1"
+			]
+		},
+		{
+			"view_type": "canvas-directory-layout-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/canvas-system/",
+			"source_of_truth": [
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-docs-map.json",
+				"docs/canvas/file-placement.md",
+				"scripts/validate-canvas.ps1"
+			]
+		},
+		{
+			"view_type": "module-architecture-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				"system/information-map.json",
+				"system/route-registry.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "module-internal-structure-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				"system/information-map.json",
+				"system/route-registry.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "system-dataflow-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				"system/information-map.json",
+				"system/route-registry.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "skill-architecture-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				".agents/skills/",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "schema-contract-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				"schemas/",
+				"system/information-map.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "tool-runtime-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				"system/tool-map.json",
+				"scripts/",
+				"system/artifact-form-policy.json",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "loop-state-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				"system/loop-registry.json",
+				"system/loops/",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "diagnostic-repair-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/",
+			"source_of_truth": [
+				"system/diagnostics/",
+				"schemas/diagnostic-issue.schema.json",
+				"scripts/validate-diagnostics.ps1",
+				"system/canvas-system.json",
+				"system/canvas-registry.json"
+			]
+		},
+		{
+			"view_type": "diagnostic-system-map",
+			"default_dir": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/",
+			"source_of_truth": [
+				".agents/skills/diagnostic-system/SKILL.md",
+				"system/diagnostics/diagnostic-system.json",
+				"system/diagnostics/issue-repair-queue.json",
+				"schemas/diagnostic-issue.schema.json",
+				"docs/diagnostic-system.md",
+				"scripts/validate-diagnostics.ps1"
+			]
+		},
+		{
+			"view_type": "domain-taxonomy-map",
+			"default_dir": "30-maps/canvas/20-knowledge/10-domain-taxonomy/",
+			"source_of_truth": [
+				"30-maps/domains/domain-taxonomy.docs.json",
+				"30-maps/domains/domain-taxonomy.registry.json",
+				"30-maps/domains/domain-taxonomy-baseline.md",
+				"30-maps/domains/domain-taxonomy-overview.md",
+				"30-maps/domains/domain-taxonomy-routing-guide.md"
+			]
+		},
+		{
+			"view_type": "workflow-map",
+			"default_dir": "30-maps/canvas/30-workflow/",
+			"source_of_truth": [
+				"50-workflows/",
+				"system/route-registry.json"
+			]
+		},
+		{
+			"view_type": "project-context-map",
+			"default_dir": "30-maps/canvas/40-project/",
+			"source_of_truth": [
+				"50-workflows/",
+				"70-indexes/catalog.json"
+			]
+		}
+	],
+	"creation_workflow": [
+		"Decide whether the canvas is entry, system submodule, knowledge map, workflow, project, draft or archive.",
+		"Choose the target directory from storage_layout.",
+		"Name the file with lowercase kebab-case and the directory naming rule.",
+		"Add a registry entry with id, path, status, view_family, view_type, layer, purpose, use_when and source_of_truth.",
+		"If promoting a new current view, mark the old current view in the same view_family as superseded or legacy-draft.",
+		"Run scripts/validate-system.ps1 and parse the canvas JSON.",
+		"Before promoting a stable structural view, update system/visual-coverage-map.json when the view satisfies a required or shared module coverage decision."
+	],
+	"placement_exceptions": [],
+	"views": [
+		{
+			"id": "canvas-system-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+			"status": "current",
+			"view_family": "canvas-system-architecture",
+			"view_type": "canvas-system-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "module-architecture",
+			"primary_subject": "Canvas subsystem as the visual architecture operating layer",
+			"boundary": "Explains Canvas subsystem responsibilities, machine truth, view families, sync triggers, quality gates and navigation to lower Canvas governance views.",
+			"not_for": [
+				"Top-level knowledge-base system dataflow",
+				"Detailed domain taxonomy",
+				"Project-specific context",
+				"Every concrete Canvas file's internal layout"
+			],
+			"purpose": "Current architecture view for the Canvas subsystem as the knowledge-base visual projection layer.",
+			"source_of_truth": [
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-docs-map.json",
+				"docs/canvas/architecture.md",
+				"docs/canvas/file-placement.md",
+				"docs/canvas/view-boundaries.md",
+				"scripts/validate-canvas.ps1",
+				"system/visual-coverage-map.json"
+			],
+			"use_when": [
+				"用户讨论 Canvas 系统自身",
+				"用户讨论 Canvas 文件很多以后如何管理",
+				"用户讨论架构图与知识库系统可视化如何同步",
+				"需要判断新 Canvas 应该放在哪里或如何登记"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [
+				"canvas-directory-layout-map"
+			],
+			"related_views": [
+				"diagnostic-system-architecture-map",
+				"system-closure-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "directory-layout-canvas-file",
+					"target_view": "canvas-directory-layout-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "system-closure-canvas-file",
+					"target_view": "system-closure-architecture-map",
+					"direction": "side"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-canvas-system-to-registry",
+					"from_node": "file-label-canvas-system-file",
+					"to_node": "file-label-canvas-registry-file",
+					"label": "policy defines registry"
+				},
+				{
+					"relation_id": "rel-canvas-registry-to-view-graph",
+					"from_node": "file-label-canvas-registry-file",
+					"to_node": "file-label-view-graph-file",
+					"label": "registry projects graph"
+				},
+				{
+					"relation_id": "rel-canvas-policy-to-docs",
+					"from_node": "file-label-canvas-system-file",
+					"to_node": "file-label-planning-file",
+					"label": "policy routes placement docs"
+				},
+				{
+					"relation_id": "rel-canvas-registry-to-validator",
+					"from_node": "file-label-canvas-registry-file",
+					"to_node": "file-label-validate-file",
+					"label": "registry checked by validator"
+				},
+				{
+					"relation_id": "rel-coverage-to-visual-decision",
+					"from_node": "file-label-visual-coverage-map-file",
+					"to_node": "file-label-canvas-system-file",
+					"label": "coverage follows policy"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-canvas-system-policy",
+					"support_node": "file-label-canvas-system-file",
+					"target_node": "canvas-policy",
+					"label": "defines visual grammar"
+				},
+				{
+					"binding_id": "bind-canvas-registry-node",
+					"support_node": "file-label-canvas-registry-file",
+					"target_node": "registry",
+					"label": "registers current views"
+				},
+				{
+					"binding_id": "bind-view-graph-node",
+					"support_node": "file-label-view-graph-file",
+					"target_node": "view-graph",
+					"label": "stores layout-free traversal"
+				},
+				{
+					"binding_id": "bind-planning-directory",
+					"support_node": "file-label-planning-file",
+					"target_node": "view-kind-band",
+					"label": "explains placement boundary"
+				},
+				{
+					"binding_id": "bind-guide-consumption",
+					"support_node": "file-label-guide-file",
+					"target_node": "consumption",
+					"label": "human reading guide"
+				},
+				{
+					"binding_id": "bind-validate-registry",
+					"support_node": "file-label-validate-file",
+					"target_node": "registry",
+					"label": "checks registry and canvas files"
+				},
+				{
+					"binding_id": "bind-coverage-visual-decision",
+					"support_node": "file-label-visual-coverage-map-file",
+					"target_node": "visual-decision",
+					"label": "decides required views"
+				},
+				{
+					"binding_id": "bind-canvas-system-support-semantics",
+					"support_node": "file-label-canvas-system-file",
+					"target_node": "support-semantics",
+					"label": "defines support semantics policy"
+				},
+				{
+					"binding_id": "bind-canvas-registry-support-semantics",
+					"support_node": "file-label-canvas-registry-file",
+					"target_node": "support-semantics",
+					"label": "stores support bindings and relations"
+				}
+			]
+		},
+		{
+			"id": "canvas-directory-layout-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-directory-layout.canvas",
+			"status": "current",
+			"view_family": "canvas-directory-layout",
+			"view_type": "canvas-directory-layout-map",
+			"layer": "system-subsystem",
+			"view_level": "L4",
+			"view_category": "directory-boundary",
+			"primary_subject": "Canvas file placement, reading order and lifecycle boundaries",
+			"boundary": "Explains where Canvas files belong, how directory hierarchy encodes reading order, how lifecycle directories differ and how placement is governed.",
+			"not_for": [
+				"Full Canvas subsystem behavior",
+				"Knowledge-domain taxonomy details",
+				"Workflow execution details",
+				"Project architecture"
+			],
+			"purpose": "Visual directory boundary map for Canvas file placement, reading-order hierarchy, naming and lifecycle separation.",
+			"source_of_truth": [
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-docs-map.json",
+				"docs/canvas/file-placement.md",
+				"scripts/validate-canvas.ps1"
+			],
+			"use_when": [
+				"用户讨论不同 Canvas 文件目录如何区分",
+				"需要判断新 Canvas 应放入哪个目录",
+				"需要解释 entry、system overview、system subsystem drilldown、knowledge taxonomy、workflow、project、drafts、archive 的边界"
+			],
+			"parent_views": [
+				"canvas-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-canvas-system-canvas",
+					"target_view": "canvas-system-architecture-map",
+					"direction": "up"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-directory-registry-to-planning",
+					"from_node": "file-label-registry-file",
+					"to_node": "file-label-planning-file",
+					"label": "registry path follows placement rule"
+				},
+				{
+					"relation_id": "rel-directory-planning-to-validator",
+					"from_node": "file-label-planning-file",
+					"to_node": "file-label-validate-file",
+					"label": "placement rule checked by validator"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-registry-stable-band",
+					"support_node": "file-label-registry-file",
+					"target_node": "stable-band",
+					"label": "registers current paths"
+				},
+				{
+					"binding_id": "bind-planning-lifecycle-band",
+					"support_node": "file-label-planning-file",
+					"target_node": "lifecycle-band",
+					"label": "defines storage boundary"
+				},
+				{
+					"binding_id": "bind-validate-stable-band",
+					"support_node": "file-label-validate-file",
+					"target_node": "stable-band",
+					"label": "checks placement and links"
+				}
+			]
+		},
+		{
+			"id": "kb-navigation-index",
+			"path": "30-maps/canvas/00-entry/kb-navigation-index.canvas",
+			"status": "current",
+			"view_family": "visual-navigation",
+			"view_type": "visual-navigation-index",
+			"layer": "entry",
+			"view_level": "L0",
+			"view_category": "navigation",
+			"primary_subject": "Knowledge engineering system visual entrypoint",
+			"boundary": "L0 navigation into the knowledge engineering system; it exposes root positioning and routes to L1 system overview before any subsystem or knowledge-content view.",
+			"not_for": [
+				"System dataflow",
+				"Module internals",
+				"Domain taxonomy details",
+				"Workflow execution"
+			],
+			"purpose": "Current top-level visual navigation index for Obsidian users. It routes first to the L1 system overview; system agents and submodules may appear as shortcuts, while classification stays under the system/knowledge-content path.",
+			"source_of_truth": [
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"system/canvas-system.json",
+				"30-maps/canvas/README.md",
+				"system/module-layer-model.json",
+				"system/project-ontology.json"
+			],
+			"use_when": [
+				"用户打开 Obsidian 后需要进入系统总览",
+				"需要从入口看到系统相关 agent、治理模块或子系统快捷入口",
+				"需要避免把分类、单个 workflow 或局部模块误认为和系统总览并列",
+				"需要避免导航线和架构数据流线混在一张图里"
+			],
+			"parent_views": [],
+			"child_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"related_views": [],
+			"navigation_nodes": [
+				{
+					"node_id": "kb-system-architecture-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "canvas-system-canvas-file",
+					"target_view": "canvas-system-architecture-map",
+					"direction": "shortcut"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "shortcut"
+				},
+				{
+					"node_id": "system-closure-canvas-file",
+					"target_view": "system-closure-architecture-map",
+					"direction": "shortcut"
+				},
+				{
+					"node_id": "review-system-canvas-file",
+					"target_view": "review-system-architecture-map",
+					"direction": "shortcut"
+				},
+				{
+					"node_id": "system-structure-governance-canvas-file",
+					"target_view": "system-structure-governance-architecture-map",
+					"direction": "shortcut"
+				},
+				{
+					"node_id": "system-information-map-canvas-file",
+					"target_view": "system-information-map-architecture-map",
+					"direction": "shortcut"
+				},
+				{
+					"node_id": "loop-orchestration-canvas-file",
+					"target_view": "loop-orchestration-architecture-map",
+					"direction": "shortcut"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "navigation_layer_palette_v1",
+				"semantic_mode": "navigation_layer_route_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish root/L1 entry, nested system-drilldown shortcuts and diagnostic/risk shortcuts. They do not express architecture dataflow."
+			}
+		},
+		{
+			"id": "knowledge-base-system-architecture-map",
+			"path": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+			"status": "current",
+			"view_family": "knowledge-base-system-architecture",
+			"view_type": "system-architecture-map",
+			"layer": "system-overview",
+			"view_level": "L1",
+			"view_category": "system-overview",
+			"primary_subject": "Knowledge engineering system architecture overview",
+			"boundary": "Shows 无界知识 as a knowledge engineering system: root identity, main knowledge lifecycle, system modules, governance feedback, machine truth and Canvas navigation. It does not make domain taxonomy or business-domain architecture the root.",
+			"not_for": [
+				"Detailed Canvas subsystem governance",
+				"Full domain taxonomy hierarchy",
+				"Individual workflow execution details",
+				"Project-specific context"
+			],
+			"purpose": "Current system overview for the knowledge engineering system, with shared project-ontology visual coverage.",
+			"source_of_truth": [
+				"system/information-map.json",
+				"system/information-map-manifest.json",
+				"system/route-registry.json",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"30-maps/domains/domain-taxonomy.registry.json",
+				"system/loops/taxonomy-refinement/state.json",
+				"system/visual-coverage-map.json",
+				"system/module-layer-model.json",
+				"system/system-structure-governance.json",
+				"system/module-relationship-map.json",
+				"system/project-ontology.json",
+				"system/knowledge-ingestion-system.json",
+				"system/git-governance-system.json",
+				"system/git-governance-docs-map.json"
+			],
+			"use_when": [
+				"用户讨论当前知识库系统架构图",
+				"用户讨论捕获、分类、提炼、索引和 Codex 消费的数据流",
+				"需要先确认系统模块和数据流方向",
+				"需要理解无界知识作为知识工程系统的整体定位和 Codex 工作流角色"
+			],
+			"parent_views": [
+				"kb-navigation-index"
+			],
+			"child_views": [
+				"canvas-system-architecture-map",
+				"system-structure-governance-architecture-map",
+				"system-information-map-architecture-map",
+				"diagnostic-system-architecture-map",
+				"system-closure-architecture-map",
+				"review-system-architecture-map",
+				"loop-orchestration-architecture-map",
+				"domain-taxonomy-overview-map",
+				"knowledge-ingestion-architecture-map",
+				"git-governance-architecture-map"
+			],
+			"related_views": [
+				"canvas-directory-layout-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "back-to-navigation-index",
+					"target_view": "kb-navigation-index",
+					"direction": "up"
+				},
+				{
+					"node_id": "domain-taxonomy-canvas-file",
+					"target_view": "domain-taxonomy-overview-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "canvas-system-canvas-file",
+					"target_view": "canvas-system-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "canvas-directory-layout-canvas-file",
+					"target_view": "canvas-directory-layout-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "system-closure-canvas-file",
+					"target_view": "system-closure-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "review-system-canvas-file",
+					"target_view": "review-system-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "system-structure-governance-canvas-file",
+					"target_view": "system-structure-governance-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "system-information-map-canvas-file",
+					"target_view": "system-information-map-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "loop-orchestration-canvas-file",
+					"target_view": "loop-orchestration-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "knowledge-ingestion-canvas-file",
+					"target_view": "knowledge-ingestion-architecture-map",
+					"direction": "down"
+				},
+				{
+					"node_id": "git-governance-canvas-file",
+					"target_view": "git-governance-architecture-map",
+					"direction": "down"
+				}
+			],
+			"supersedes": [
+				"knowledge-base-system-detailed-draft"
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-project-ontology-to-information-map",
+					"from_node": "file-label-project-ontology-file",
+					"to_node": "file-label-information-map-file",
+					"label": "root identity frames system map"
+				},
+				{
+					"relation_id": "rel-information-map-to-route-registry",
+					"from_node": "file-label-information-map-file",
+					"to_node": "file-label-route-registry-file",
+					"label": "module map feeds routing"
+				},
+				{
+					"relation_id": "rel-module-layer-to-route-registry",
+					"from_node": "file-label-module-layer-model-file",
+					"to_node": "file-label-route-registry-file",
+					"label": "layer model constrains routes"
+				},
+				{
+					"relation_id": "rel-taxonomy-to-loop-state",
+					"from_node": "file-label-taxonomy-registry-file",
+					"to_node": "file-label-loop-state-file",
+					"label": "taxonomy state is loop managed"
+				},
+				{
+					"relation_id": "rel-catalog-to-workflow",
+					"from_node": "file-label-catalog-file",
+					"to_node": "file-label-workflow-file",
+					"label": "index feeds Codex context"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-project-ontology-title",
+					"support_node": "file-label-project-ontology-file",
+					"target_node": "title",
+					"label": "defines root identity"
+				},
+				{
+					"binding_id": "bind-information-map-capture",
+					"support_node": "file-label-information-map-file",
+					"target_node": "stage-capture",
+					"label": "maps module boundaries"
+				},
+				{
+					"binding_id": "bind-route-registry-codex",
+					"support_node": "file-label-route-registry-file",
+					"target_node": "stage-codex",
+					"label": "routes task entry"
+				},
+				{
+					"binding_id": "bind-module-layer-structure-status",
+					"support_node": "file-label-module-layer-model-file",
+					"target_node": "structure-status",
+					"label": "owns module layer snapshot"
+				},
+				{
+					"binding_id": "bind-taxonomy-registry-domain",
+					"support_node": "file-label-taxonomy-registry-file",
+					"target_node": "stage-domain",
+					"label": "owns classification truth"
+				},
+				{
+					"binding_id": "bind-loop-state-loop-status",
+					"support_node": "file-label-loop-state-file",
+					"target_node": "loop-status",
+					"label": "tracks taxonomy loop state"
+				},
+				{
+					"binding_id": "bind-catalog-index",
+					"support_node": "file-label-catalog-file",
+					"target_node": "stage-index",
+					"label": "indexes retrievable items"
+				},
+				{
+					"binding_id": "bind-workflow-codex",
+					"support_node": "file-label-workflow-file",
+					"target_node": "stage-codex",
+					"label": "feeds Codex consumption"
+				}
+			]
+		},
+		{
+			"id": "diagnostic-system-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+			"status": "current",
+			"view_family": "diagnostic-system-architecture",
+			"view_type": "diagnostic-system-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "diagnostic",
+			"primary_subject": "Diagnosis and system-repair routing module",
+			"boundary": "Explains the diagnostic workflow, layer diagnosis matrix, controlled failure-learning loop, repair-layer classification, positive_model_repair and constraint_decision record contract, optional guardrail fields, issue queue, validation, visual projection sync and diagnosis acceptance.",
+			"not_for": [
+				"Performing another module's concrete repair",
+				"Domain taxonomy design",
+				"General Canvas placement rules",
+				"Project-specific incident boards"
+			],
+			"purpose": "Current architecture view for the diagnosis and system-repair routing module, including the positive-model-first diagnostic contract.",
+			"source_of_truth": [
+				".agents/skills/diagnostic-system/SKILL.md",
+				"system/diagnostics/diagnostic-system.json",
+				"system/diagnostics/issue-repair-queue.json",
+				"schemas/diagnostic-issue.schema.json",
+				"docs/diagnostic-system.md",
+				"scripts/validate-diagnostics.ps1",
+				"system/diagnostics/diagnostic-layer-matrix.json",
+				"system/diagnostics/failure-learning-loop.json"
+			],
+			"use_when": [
+				"用户要求诊断问题原因",
+				"需要判断问题属于哪个系统层",
+				"需要区分局部修复和系统升级",
+				"需要把 recurring issue 登记进机器队列",
+				"需要确认修复后是否完成 diagnosis acceptance"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"canvas-system-architecture-map",
+				"system-closure-architecture-map",
+				"review-system-architecture-map",
+				"knowledge-ingestion-architecture-map",
+				"git-governance-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "canvas-system-canvas-file",
+					"target_view": "canvas-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "system-closure-canvas-file",
+					"target_view": "system-closure-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "review-system-canvas-file",
+					"target_view": "review-system-architecture-map",
+					"direction": "side"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-diagnostic-system-to-schema",
+					"from_node": "file-label-diagnostic-system-file",
+					"to_node": "file-label-diagnostic-schema-file",
+					"label": "protocol uses record schema"
+				},
+				{
+					"relation_id": "rel-diagnostic-system-to-queue",
+					"from_node": "file-label-diagnostic-system-file",
+					"to_node": "file-label-diagnostic-queue-file",
+					"label": "protocol writes queue"
+				},
+				{
+					"relation_id": "rel-diagnostic-queue-to-validator",
+					"from_node": "file-label-diagnostic-queue-file",
+					"to_node": "file-label-diagnostic-validator-file",
+					"label": "queue checked by validator"
+				},
+				{
+					"relation_id": "rel-diagnostic-skill-to-system",
+					"from_node": "file-label-diagnostic-skill-file",
+					"to_node": "file-label-diagnostic-system-file",
+					"label": "thin skill routes to protocol"
+				},
+				{
+					"relation_id": "rel-diagnostic-doc-to-system",
+					"from_node": "file-label-diagnostic-doc-file",
+					"to_node": "file-label-diagnostic-system-file",
+					"label": "docs explain protocol"
+				},
+				{
+					"relation_id": "rel-diagnostic-system-to-layer-matrix",
+					"from_node": "file-label-diagnostic-system-file",
+					"to_node": "file-label-layer-matrix-file",
+					"label": "protocol uses layer matrix"
+				},
+				{
+					"relation_id": "rel-diagnostic-system-to-failure-learning-loop",
+					"from_node": "file-label-diagnostic-system-file",
+					"to_node": "file-label-failure-learning-loop-file",
+					"label": "protocol opens learning loop"
+				},
+				{
+					"relation_id": "rel-failure-learning-loop-to-queue",
+					"from_node": "file-label-failure-learning-loop-file",
+					"to_node": "file-label-diagnostic-queue-file",
+					"label": "learning loop reads issue queue"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-diagnostic-system-positive-model",
+					"support_node": "file-label-diagnostic-system-file",
+					"target_node": "positive-model-repair",
+					"label": "defines diagnosis workflow"
+				},
+				{
+					"binding_id": "bind-diagnostic-queue-acceptance",
+					"support_node": "file-label-diagnostic-queue-file",
+					"target_node": "acceptance",
+					"label": "stores issue and acceptance"
+				},
+				{
+					"binding_id": "bind-diagnostic-schema-contract",
+					"support_node": "file-label-diagnostic-schema-file",
+					"target_node": "required-contract",
+					"label": "defines required fields"
+				},
+				{
+					"binding_id": "bind-diagnostic-validator-validation",
+					"support_node": "file-label-diagnostic-validator-file",
+					"target_node": "validation",
+					"label": "checks records"
+				},
+				{
+					"binding_id": "bind-diagnostic-skill-failure-packet",
+					"support_node": "file-label-diagnostic-skill-file",
+					"target_node": "failure-packet",
+					"label": "thin entry starts diagnosis"
+				},
+				{
+					"binding_id": "bind-diagnostic-doc-scope",
+					"support_node": "file-label-diagnostic-doc-file",
+					"target_node": "scope-note",
+					"label": "human explanation only"
+				},
+				{
+					"binding_id": "bind-layer-matrix-owner-class",
+					"support_node": "file-label-layer-matrix-file",
+					"target_node": "owner-and-class",
+					"label": "guides owner layer decision"
+				},
+				{
+					"binding_id": "bind-layer-matrix-evidence-tracks",
+					"support_node": "file-label-layer-matrix-file",
+					"target_node": "evidence-tracks",
+					"label": "guides lower and upper traces"
+				},
+				{
+					"binding_id": "bind-failure-learning-loop-node",
+					"support_node": "file-label-failure-learning-loop-file",
+					"target_node": "failure-learning-loop",
+					"label": "defines postmortem proposal guard promotion loop"
+				}
+			]
+		},
+		{
+			"id": "system-closure-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
+			"status": "current",
+			"view_family": "system-closure-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "module-architecture",
+			"primary_subject": "System closure matrix and module maturity audit",
+			"boundary": "Shows how the system-closure module audits module coverage, closure facets, known gaps, visual projection and validation gates.",
+			"not_for": [
+				"Replacing system/system-closure-map.json",
+				"Full knowledge-base dataflow",
+				"Detailed domain taxonomy",
+				"Concrete repair execution"
+			],
+			"purpose": "Current visual architecture view for the system closure matrix and cross-module closure audit.",
+			"source_of_truth": [
+				"system/system-closure-map.json",
+				"docs/system-closure.md",
+				"system/information-map.json",
+				"system/route-registry.json",
+				"system/module-governance-policy.json",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"scripts/validate-system.ps1",
+				"system/visual-coverage-map.json"
+			],
+			"use_when": [
+				"用户询问模块是否完成闭环",
+				"需要查看每个模块的 route、truth、validation、docs、visual、diagnostics 和 lifecycle 状态",
+				"新增模块后需要确认闭环总表是否覆盖",
+				"需要把系统治理缺口从 JSON 投影成可视化结构"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"diagnostic-system-architecture-map",
+				"canvas-system-architecture-map",
+				"git-governance-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "canvas-system-canvas-file",
+					"target_view": "canvas-system-architecture-map",
+					"direction": "side"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-closure-map-to-information-map",
+					"from_node": "file-label-system-closure-map-file",
+					"to_node": "file-label-information-map-file",
+					"label": "closure reads module map"
+				},
+				{
+					"relation_id": "rel-information-map-to-route-registry",
+					"from_node": "file-label-information-map-file",
+					"to_node": "file-label-route-registry-file",
+					"label": "routes are closure surface"
+				},
+				{
+					"relation_id": "rel-module-governance-to-closure-map",
+					"from_node": "file-label-module-governance-file",
+					"to_node": "file-label-system-closure-map-file",
+					"label": "policy defines maturity facets"
+				},
+				{
+					"relation_id": "rel-visual-coverage-to-closure-map",
+					"from_node": "file-label-visual-coverage-map-file",
+					"to_node": "file-label-system-closure-map-file",
+					"label": "visual coverage feeds closure"
+				},
+				{
+					"relation_id": "rel-validate-system-to-closure-map",
+					"from_node": "file-label-validate-system-file",
+					"to_node": "file-label-system-closure-map-file",
+					"label": "validator checks closure"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-closure-map-node",
+					"support_node": "file-label-system-closure-map-file",
+					"target_node": "closure-map",
+					"label": "owns closure matrix"
+				},
+				{
+					"binding_id": "bind-information-map-node",
+					"support_node": "file-label-information-map-file",
+					"target_node": "information-map",
+					"label": "feeds module list"
+				},
+				{
+					"binding_id": "bind-route-registry-trigger",
+					"support_node": "file-label-route-registry-file",
+					"target_node": "trigger",
+					"label": "task routes are checked"
+				},
+				{
+					"binding_id": "bind-module-governance-gap-check",
+					"support_node": "file-label-module-governance-file",
+					"target_node": "gap-check",
+					"label": "defines closure expectations"
+				},
+				{
+					"binding_id": "bind-validate-system-validator",
+					"support_node": "file-label-validate-system-file",
+					"target_node": "validator",
+					"label": "checks closure state"
+				},
+				{
+					"binding_id": "bind-system-closure-doc-scope",
+					"support_node": "file-label-system-closure-doc-file",
+					"target_node": "scope-note",
+					"label": "human explanation only"
+				},
+				{
+					"binding_id": "bind-visual-coverage-trigger",
+					"support_node": "file-label-visual-coverage-map-file",
+					"target_node": "visual-trigger",
+					"label": "detects visual blind spots"
+				}
+			]
+		},
+		{
+			"id": "domain-taxonomy-overview-map",
+			"path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
+			"status": "current",
+			"view_family": "domain-taxonomy-visualization",
+			"view_type": "domain-taxonomy-map",
+			"layer": "knowledge-content",
+			"view_level": "L2",
+			"view_category": "taxonomy",
+			"primary_subject": "Knowledge-domain taxonomy overview",
+			"boundary": "Shows the knowledge-content classification subsystem under the knowledge-base system; it does not define the system top level, agent topology, runtime behavior or Canvas governance.",
+			"not_for": [
+				"System architecture dataflow",
+				"Canvas subsystem governance",
+				"Workflow execution",
+				"Project-specific context"
+			],
+			"purpose": "Current visual hierarchy map for knowledge-domain taxonomy as one child part of the knowledge-base system.",
+			"source_of_truth": [
+				"30-maps/domains/domain-taxonomy.docs.json",
+				"30-maps/domains/domain-taxonomy.registry.json",
+				"30-maps/domains/domain-taxonomy-baseline.md",
+				"30-maps/domains/domain-taxonomy-overview.md",
+				"30-maps/domains/domain-taxonomy-routing-guide.md",
+				"60-evals/taxonomy-routing-audit.md"
+			],
+			"use_when": [
+				"用户已经从系统总览进入知识内容分类",
+				"用户需要确认一级、二级、三级分类的视觉入口",
+				"用户需要从分类图下钻到完整三级矩阵",
+				"需要从分类图返回系统总览"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [
+				"domain-taxonomy-level-3-matrix-map"
+			],
+			"related_views": [
+				"knowledge-ingestion-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "level3-matrix-canvas-file",
+					"target_view": "domain-taxonomy-level-3-matrix-map",
+					"direction": "down"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "taxonomy_domain_palette_v1",
+				"semantic_mode": "taxonomy_domain_family_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish knowledge-domain families inside taxonomy views. They must not be read as system status or workflow state."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-taxonomy-registry-to-routing-guide",
+					"from_node": "file-label-taxonomy-registry-file",
+					"to_node": "file-label-routing-guide-file",
+					"label": "taxonomy drives routing"
+				},
+				{
+					"relation_id": "rel-taxonomy-registry-to-overview",
+					"from_node": "file-label-taxonomy-registry-file",
+					"to_node": "file-label-taxonomy-overview-file",
+					"label": "overview explains registry"
+				},
+				{
+					"relation_id": "rel-routing-guide-to-audit",
+					"from_node": "file-label-routing-guide-file",
+					"to_node": "file-label-taxonomy-audit-file",
+					"label": "routing quality audited"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-taxonomy-registry-summary",
+					"support_node": "file-label-taxonomy-registry-file",
+					"target_node": "taxonomy-summary",
+					"label": "owns taxonomy truth"
+				},
+				{
+					"binding_id": "bind-routing-guide-level3-rule",
+					"support_node": "file-label-routing-guide-file",
+					"target_node": "level3-rule",
+					"label": "explains classification route"
+				},
+				{
+					"binding_id": "bind-taxonomy-overview-summary",
+					"support_node": "file-label-taxonomy-overview-file",
+					"target_node": "taxonomy-summary",
+					"label": "human summary"
+				},
+				{
+					"binding_id": "bind-taxonomy-audit-future-drilldown",
+					"support_node": "file-label-taxonomy-audit-file",
+					"target_node": "future-drilldown",
+					"label": "records routing quality"
+				}
+			]
+		},
+		{
+			"id": "domain-taxonomy-level-3-matrix-map",
+			"path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas",
+			"status": "active",
+			"view_family": "domain-taxonomy-visualization",
+			"view_type": "domain-taxonomy-map",
+			"layer": "knowledge-content",
+			"view_level": "L3",
+			"view_category": "taxonomy",
+			"primary_subject": "Full level-2 and level-3 knowledge-domain taxonomy matrix",
+			"boundary": "Shows the complete 45 level-2 groups and 450 level-3 taxonomy categories for browsing and routing inspection; registry JSON remains the classification truth.",
+			"not_for": [
+				"Changing canonical taxonomy truth",
+				"System runtime architecture",
+				"Canvas subsystem governance",
+				"Project-specific classification decisions"
+			],
+			"purpose": "Active drilldown view for the complete three-level domain taxonomy matrix under the domain taxonomy overview.",
+			"source_of_truth": [
+				"30-maps/domains/domain-taxonomy.docs.json",
+				"30-maps/domains/domain-taxonomy.registry.json",
+				"30-maps/domains/domain-taxonomy-overview.md",
+				"30-maps/domains/domain-taxonomy-routing-guide.md",
+				"60-evals/taxonomy-routing-audit.md"
+			],
+			"use_when": [
+				"需要浏览完整三级分类矩阵",
+				"需要为知识条目选择 primary_level_3",
+				"需要检查二级群下的三级方向簇",
+				"需要从分类总览下钻到完整矩阵"
+			],
+			"parent_views": [
+				"domain-taxonomy-overview-map"
+			],
+			"child_views": [],
+			"related_views": [],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-domain-taxonomy-overview-canvas-file",
+					"target_view": "domain-taxonomy-overview-map",
+					"direction": "up"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "taxonomy_domain_palette_v1",
+				"semantic_mode": "taxonomy_domain_family_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish knowledge-domain families inside taxonomy views. They must not be read as system status or workflow state."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-taxonomy-registry-to-overview",
+					"from_node": "file-label-taxonomy-registry-file",
+					"to_node": "file-label-taxonomy-overview-md-file",
+					"label": "registry summarized by overview"
+				},
+				{
+					"relation_id": "rel-taxonomy-registry-to-routing-guide",
+					"from_node": "file-label-taxonomy-registry-file",
+					"to_node": "file-label-taxonomy-routing-guide-file",
+					"label": "registry drives routing"
+				},
+				{
+					"relation_id": "rel-routing-guide-to-audit",
+					"from_node": "file-label-taxonomy-routing-guide-file",
+					"to_node": "file-label-taxonomy-audit-file",
+					"label": "routing choices audited"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-taxonomy-registry-matrix-scope",
+					"support_node": "file-label-taxonomy-registry-file",
+					"target_node": "matrix-scope-note",
+					"label": "owns level-3 matrix truth"
+				},
+				{
+					"binding_id": "bind-taxonomy-overview-matrix-scope",
+					"support_node": "file-label-taxonomy-overview-md-file",
+					"target_node": "matrix-scope-note",
+					"label": "explains matrix boundary"
+				},
+				{
+					"binding_id": "bind-taxonomy-routing-guide-matrix-scope",
+					"support_node": "file-label-taxonomy-routing-guide-file",
+					"target_node": "matrix-scope-note",
+					"label": "explains primary and related use"
+				},
+				{
+					"binding_id": "bind-taxonomy-audit-matrix-scope",
+					"support_node": "file-label-taxonomy-audit-file",
+					"target_node": "matrix-scope-note",
+					"label": "checks routing quality"
+				}
+			]
+		},
+		{
+			"id": "knowledge-base-system-detailed-draft",
+			"path": "30-maps/canvas/90-archive/knowledge-base-architecture-detailed-draft-20260605.canvas",
+			"status": "legacy-draft",
+			"view_family": "knowledge-base-system-architecture",
+			"view_type": "system-architecture-detailed-draft",
+			"layer": "archive",
+			"purpose": "Early detailed draft kept for reference only.",
+			"archive_status": "visually-retired",
+			"source_of_truth": [
+				"system/information-map.json",
+				"system/route-registry.json"
+			],
+			"use_when": [
+				"用户明确点名该文件",
+				"需要迁移旧图中的细节到当前视图"
+			],
+			"replaced_by": "knowledge-base-system-architecture-map",
+			"navigation_nodes": [
+				{
+					"node_id": "current-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "replacement"
+				}
+			]
+		},
+		{
+			"id": "review-system-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+			"status": "current",
+			"view_family": "review-system-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "module-architecture",
+			"primary_subject": "Review system for system and external knowledge quality inspection",
+			"boundary": "Explains review classes, criteria selection, finding classification, review record contract and handoff boundaries to diagnostics, evals, taxonomy loop and knowledge workflows.",
+			"not_for": [
+				"Root-cause diagnosis after a confirmed defect",
+				"Concrete repair execution",
+				"Domain taxonomy design itself",
+				"Replacing external source evidence"
+			],
+			"purpose": "Current architecture view for the standalone review module, including system-internal review and external-knowledge review boundaries.",
+			"source_of_truth": [
+				".agents/skills/review-system/SKILL.md",
+				"system/reviews/review-system.json",
+				"system/reviews/review-queue.json",
+				"system/reviews/review-docs-map.json",
+				"schemas/review-record.schema.json",
+				"docs/review/README.md",
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"scripts/validate-reviews.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			],
+			"use_when": [
+				"用户要求审查系统内部结构",
+				"用户要求审查外部知识、来源、论文、网页或 GitHub 主题",
+				"需要区分审查、诊断、校验和验收",
+				"需要把审查发现交给 diagnostics、evals、taxonomy loop 或知识工作流"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"diagnostic-system-architecture-map",
+				"knowledge-ingestion-architecture-map",
+				"git-governance-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "side"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-review-system-to-queue",
+					"from_node": "file-label-review-system-file",
+					"to_node": "file-label-review-queue-file",
+					"label": "protocol writes queue"
+				},
+				{
+					"relation_id": "rel-review-system-to-docs-map",
+					"from_node": "file-label-review-system-file",
+					"to_node": "file-label-review-docs-map-file",
+					"label": "protocol routes docs"
+				},
+				{
+					"relation_id": "rel-review-system-to-schema",
+					"from_node": "file-label-review-system-file",
+					"to_node": "file-label-review-schema-file",
+					"label": "records use schema"
+				},
+				{
+					"relation_id": "rel-review-schema-to-validator",
+					"from_node": "file-label-review-schema-file",
+					"to_node": "file-label-review-validator-file",
+					"label": "schema checked by validator"
+				},
+				{
+					"relation_id": "rel-screenshot-audit-to-review-system",
+					"from_node": "file-label-screenshot-audit-file",
+					"to_node": "file-label-review-system-file",
+					"label": "screenshot evidence feeds review"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-review-system-criteria-router",
+					"support_node": "file-label-review-system-file",
+					"target_node": "criteria-router",
+					"label": "defines review workflow"
+				},
+				{
+					"binding_id": "bind-review-queue-finding",
+					"support_node": "file-label-review-queue-file",
+					"target_node": "finding-classification",
+					"label": "stores findings"
+				},
+				{
+					"binding_id": "bind-review-docs-map-scope",
+					"support_node": "file-label-review-docs-map-file",
+					"target_node": "scope-note",
+					"label": "routes human docs"
+				},
+				{
+					"binding_id": "bind-review-schema-contract",
+					"support_node": "file-label-review-schema-file",
+					"target_node": "record-contract",
+					"label": "defines review record"
+				},
+				{
+					"binding_id": "bind-review-validator-contract",
+					"support_node": "file-label-review-validator-file",
+					"target_node": "record-contract",
+					"label": "checks review records"
+				},
+				{
+					"binding_id": "bind-review-skill-scope",
+					"support_node": "file-label-review-skill-file",
+					"target_node": "review-scope",
+					"label": "thin entry starts review"
+				},
+				{
+					"binding_id": "bind-review-doc-scope",
+					"support_node": "file-label-review-doc-file",
+					"target_node": "scope-note",
+					"label": "human explanation only"
+				},
+				{
+					"binding_id": "bind-screenshot-audit-visual-evidence",
+					"support_node": "file-label-screenshot-audit-file",
+					"target_node": "visual-evidence",
+					"label": "provides PNG evidence"
+				}
+			]
+		},
+		{
+			"id": "system-structure-governance-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas",
+			"status": "current",
+			"view_family": "system-structure-governance-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "module-architecture",
+			"primary_subject": "System module topology, relationship and branch-decision governance",
+			"boundary": "Explains how new stable modules are assigned to existing modules, child modules, peer modules or new branches, and how module relationships synchronize back into system registries.",
+			"not_for": [
+				"External knowledge domain taxonomy content",
+				"Concrete Canvas layout aesthetics",
+				"Root-cause diagnostic repair execution",
+				"Implementation details inside another module"
+			],
+			"purpose": "Dedicated architecture view for the system-structure-governance module.",
+			"source_of_truth": [
+				"system/system-structure-governance.json",
+				"system/module-relationship-map.json",
+				"system/module-layer-model.json",
+				"system/information-map.json",
+				"system/module-governance-policy.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"scripts/validate-system.ps1"
+			],
+			"use_when": [
+				"用户讨论系统内部模块分层不合理",
+				"需要判断新模块归入现有模块还是新建分支",
+				"需要维护模块之间的关系拓扑",
+				"需要检查 module-layer-model 是否只是派生快照"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-structure-governance-to-relationship-map",
+					"from_node": "file-label-system-structure-governance-file",
+					"to_node": "file-label-module-relationship-map-file",
+					"label": "policy produces topology"
+				},
+				{
+					"relation_id": "rel-relationship-map-to-layer-model",
+					"from_node": "file-label-module-relationship-map-file",
+					"to_node": "file-label-module-layer-model-file",
+					"label": "topology derives layers"
+				},
+				{
+					"relation_id": "rel-information-map-to-relationship-map",
+					"from_node": "file-label-information-map-file",
+					"to_node": "file-label-module-relationship-map-file",
+					"label": "module facts feed topology"
+				},
+				{
+					"relation_id": "rel-layer-model-to-closure-map",
+					"from_node": "file-label-module-layer-model-file",
+					"to_node": "file-label-system-closure-map-file",
+					"label": "layers feed activation closure"
+				},
+				{
+					"relation_id": "rel-validate-system-to-closure-map",
+					"from_node": "file-label-validate-system-file",
+					"to_node": "file-label-system-closure-map-file",
+					"label": "validator checks topology closure"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-structure-governance-decision",
+					"support_node": "file-label-system-structure-governance-file",
+					"target_node": "stage-decision",
+					"label": "defines branch decisions"
+				},
+				{
+					"binding_id": "bind-relationship-map-topology",
+					"support_node": "file-label-module-relationship-map-file",
+					"target_node": "stage-topology",
+					"label": "owns topology"
+				},
+				{
+					"binding_id": "bind-layer-model-sync",
+					"support_node": "file-label-module-layer-model-file",
+					"target_node": "stage-sync",
+					"label": "stores layer snapshot"
+				},
+				{
+					"binding_id": "bind-information-map-evidence",
+					"support_node": "file-label-information-map-file",
+					"target_node": "stage-evidence",
+					"label": "provides module evidence"
+				},
+				{
+					"binding_id": "bind-closure-map-sync",
+					"support_node": "file-label-system-closure-map-file",
+					"target_node": "stage-sync",
+					"label": "records activation readiness"
+				},
+				{
+					"binding_id": "bind-validate-system-sync",
+					"support_node": "file-label-validate-system-file",
+					"target_node": "stage-sync",
+					"label": "checks topology consistency"
+				}
+			]
+		},
+		{
+			"id": "system-information-map-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
+			"status": "current",
+			"view_family": "system-information-map-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "module-architecture",
+			"primary_subject": "Machine-readable system information map and reference-surface lookup",
+			"boundary": "Explains how the information-map module owns the root system map, manifest, shards, schemas, reference-surface lookup and validation; it does not decide module topology or Canvas layout.",
+			"not_for": [
+				"System module topology decisions",
+				"Canvas coordinate/layout policy",
+				"Concrete diagnostic repair execution",
+				"External knowledge domain taxonomy"
+			],
+			"purpose": "Dedicated architecture view for the system-information-map module.",
+			"source_of_truth": [
+				"system/information-map.json",
+				"system/information-map-manifest.json",
+				"system/information-map-shards/information-map-core-refs.json",
+				"system/information-map-shards/information-map-governance-refs.json",
+				"schemas/information-map.schema.json",
+				"schemas/information-map-manifest.schema.json",
+				"schemas/information-map-shard.schema.json",
+				"system/route-registry.json",
+				"system/module-layer-model.json",
+				"system/module-relationship-map.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"scripts/validate-system.ps1"
+			],
+			"use_when": [
+				"需要快速找到系统模块、真相文件、数据流、入口或引用面",
+				"需要判断 information-map、manifest、shard 或 schema 如何同步",
+				"需要维护信息地图模块自己的闭环和可视化覆盖"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish system roles such as machine truth, governance method, knowledge content, sources, handoff and diagnostic risk."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-manifest-to-root-map",
+					"from_node": "file-label-manifest-file",
+					"to_node": "file-label-root-map-file",
+					"label": "manifest routes root map"
+				},
+				{
+					"relation_id": "rel-root-map-to-core-shard",
+					"from_node": "file-label-root-map-file",
+					"to_node": "file-label-core-shard-file",
+					"label": "root map split into shards"
+				},
+				{
+					"relation_id": "rel-core-shard-to-governance-shard",
+					"from_node": "file-label-core-shard-file",
+					"to_node": "file-label-governance-shard-file",
+					"label": "shards partition references"
+				},
+				{
+					"relation_id": "rel-schema-to-validator",
+					"from_node": "file-label-schema-file",
+					"to_node": "file-label-validator-file",
+					"label": "schema checked by validator"
+				},
+				{
+					"relation_id": "rel-doc-to-root-map",
+					"from_node": "file-label-doc-file",
+					"to_node": "file-label-root-map-file",
+					"label": "docs explain map"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-manifest-stage",
+					"support_node": "file-label-manifest-file",
+					"target_node": "stage-manifest",
+					"label": "lightweight entry"
+				},
+				{
+					"binding_id": "bind-root-map-stage",
+					"support_node": "file-label-root-map-file",
+					"target_node": "stage-full-map",
+					"label": "full system dictionary"
+				},
+				{
+					"binding_id": "bind-core-shard-stage",
+					"support_node": "file-label-core-shard-file",
+					"target_node": "stage-shard",
+					"label": "core references shard"
+				},
+				{
+					"binding_id": "bind-governance-shard-stage",
+					"support_node": "file-label-governance-shard-file",
+					"target_node": "stage-shard",
+					"label": "governance references shard"
+				},
+				{
+					"binding_id": "bind-schema-stage",
+					"support_node": "file-label-schema-file",
+					"target_node": "stage-shard",
+					"label": "defines map contract"
+				},
+				{
+					"binding_id": "bind-validator-sync",
+					"support_node": "file-label-validator-file",
+					"target_node": "stage-sync",
+					"label": "checks manifest and shards"
+				},
+				{
+					"binding_id": "bind-doc-scope",
+					"support_node": "file-label-doc-file",
+					"target_node": "scope-note",
+					"label": "human explanation only"
+				}
+			]
+		},
+		{
+			"id": "loop-orchestration-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
+			"status": "current",
+			"view_family": "loop-orchestration-architecture",
+			"view_type": "loop-state-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "loop",
+			"primary_subject": "System-level loop orchestration, durable loop state and managed loop lifecycle",
+			"boundary": "Explains loop-orchestration as a system module: registry, queue/state/runner contract, handoff intake, managed loops and current taxonomy-refinement adoption. It does not replace domain taxonomy truth or implement an unattended scheduler.",
+			"not_for": [
+				"Full domain taxonomy hierarchy",
+				"Concrete taxonomy level-3 content",
+				"Root-cause diagnostic workflow details",
+				"Canvas layout governance details"
+			],
+			"purpose": "Current architecture view for the standalone loop orchestration module.",
+			"source_of_truth": [
+				"system/loop-registry.json",
+				"system/loops/",
+				"system/loops/taxonomy-refinement/loop.json",
+				"system/loops/taxonomy-refinement/queue.json",
+				"system/loops/taxonomy-refinement/state.json",
+				"system/loops/taxonomy-refinement/runner-contract.json",
+				"docs/loop-orchestration.md",
+				"system/module-layer-model.json",
+				"system/module-relationship-map.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"scripts/loop-status.ps1"
+			],
+			"use_when": [
+				"用户讨论 loop 模块、持续循环、逐项打磨或 run-one 机制",
+				"需要判断一个新循环归属现有 loop-orchestration 还是创建新分支",
+				"需要查看 taxonomy-refinement 作为历史 loop 被谁接管",
+				"需要从 review 或 diagnostics handoff 到持续改进循环"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"knowledge-ingestion-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-architecture-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "domain-taxonomy-canvas-file",
+					"target_view": "domain-taxonomy-overview-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "review-system-canvas-file",
+					"target_view": "review-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "system-closure-canvas-file",
+					"target_view": "system-closure-architecture-map",
+					"direction": "side"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "loop_state_palette_v1",
+				"semantic_mode": "loop_state_and_runtime_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish loop runtime state, managed loop selection, diagnostic trigger, state update and machine truth in the loop view."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-loop-registry-to-loop-json",
+					"from_node": "file-label-loop-registry-file",
+					"to_node": "file-label-loop-json-file",
+					"label": "registry points to loop protocol"
+				},
+				{
+					"relation_id": "rel-loop-json-to-queue",
+					"from_node": "file-label-loop-json-file",
+					"to_node": "file-label-queue-file",
+					"label": "protocol produces queue"
+				},
+				{
+					"relation_id": "rel-queue-to-state",
+					"from_node": "file-label-queue-file",
+					"to_node": "file-label-state-file",
+					"label": "queue updates state"
+				},
+				{
+					"relation_id": "rel-state-to-runner-contract",
+					"from_node": "file-label-state-file",
+					"to_node": "file-label-runner-contract-file",
+					"label": "state consumed by runner"
+				},
+				{
+					"relation_id": "rel-runner-contract-to-loop-status-tool",
+					"from_node": "file-label-runner-contract-file",
+					"to_node": "file-label-loop-status-tool",
+					"label": "tool reads runner state contract"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-loop-registry-status",
+					"support_node": "file-label-loop-registry-file",
+					"target_node": "registry-status",
+					"label": "owns loop entry"
+				},
+				{
+					"binding_id": "bind-loop-json-selection",
+					"support_node": "file-label-loop-json-file",
+					"target_node": "loop-selection",
+					"label": "defines managed loop"
+				},
+				{
+					"binding_id": "bind-queue-run-unit",
+					"support_node": "file-label-queue-file",
+					"target_node": "run-unit",
+					"label": "queues next units"
+				},
+				{
+					"binding_id": "bind-state-update",
+					"support_node": "file-label-state-file",
+					"target_node": "state-update",
+					"label": "tracks progress"
+				},
+				{
+					"binding_id": "bind-runner-contract-run-unit",
+					"support_node": "file-label-runner-contract-file",
+					"target_node": "run-unit",
+					"label": "defines run record"
+				},
+				{
+					"binding_id": "bind-loop-doc-scope",
+					"support_node": "file-label-loop-doc-file",
+					"target_node": "scope-note",
+					"label": "human explanation only"
+				},
+				{
+					"binding_id": "bind-loop-status-tool-registry",
+					"support_node": "file-label-loop-status-tool",
+					"target_node": "registry-status",
+					"label": "reports loop status"
+				}
+			]
+		},
+		{
+			"id": "knowledge-ingestion-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+			"status": "current",
+			"view_family": "knowledge-ingestion-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "module-architecture",
+			"primary_subject": "Knowledge ingestion subsystem as the governed entry path for external and personal knowledge",
+			"boundary": "Explains intake modes, source registration governance, source quality gates, domain routing handoff, legacy asset adoption, validation and navigation for knowledge entering the system.",
+			"not_for": [
+				"Specific source record content",
+				"Full domain taxonomy tree",
+				"Atomic note writing guide",
+				"Automatic web crawler implementation",
+				"Canvas layout policy"
+			],
+			"purpose": "Current architecture view for the knowledge ingestion subsystem.",
+			"source_of_truth": [
+				"system/knowledge-ingestion-system.json",
+				"system/knowledge-ingestion-docs-map.json",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/module-relationship-map.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"docs/ingestion-workflow.md",
+				"docs/source-quality.md"
+			],
+			"use_when": [
+				"用户讨论知识如何进入知识库",
+				"用户讨论论文、GitHub、网页或个人草稿如何登记",
+				"需要判断新来源类型、模板、质量门或摄入交接是否应该新增",
+				"需要解释 inbox/source-registry/domain/review/diagnostics/loop 之间的进入链路"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"domain-taxonomy-overview-map",
+				"review-system-architecture-map",
+				"diagnostic-system-architecture-map",
+				"loop-orchestration-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "domain-taxonomy-canvas-file",
+					"target_view": "domain-taxonomy-overview-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "review-system-canvas-file",
+					"target_view": "review-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "loop-orchestration-canvas-file",
+					"target_view": "loop-orchestration-architecture-map",
+					"direction": "side"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish source/input, knowledge content, governance, handoff, diagnostic risk and machine truth surfaces."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-ki-system-to-docs-map",
+					"from_node": "file-label-ki-system-file",
+					"to_node": "file-label-ki-docs-map-file",
+					"label": "system truth routes docs"
+				},
+				{
+					"relation_id": "rel-ki-system-to-ingestion-workflow",
+					"from_node": "file-label-ki-system-file",
+					"to_node": "file-label-ingestion-workflow-file",
+					"label": "system truth owns workflow"
+				},
+				{
+					"relation_id": "rel-source-quality-to-ingestion-workflow",
+					"from_node": "file-label-source-quality-file",
+					"to_node": "file-label-ingestion-workflow-file",
+					"label": "quality gates constrain workflow"
+				},
+				{
+					"relation_id": "rel-route-to-ki-system",
+					"from_node": "file-label-route-file",
+					"to_node": "file-label-ki-system-file",
+					"label": "route activates subsystem"
+				},
+				{
+					"relation_id": "rel-closure-to-ki-system",
+					"from_node": "file-label-closure-file",
+					"to_node": "file-label-ki-system-file",
+					"label": "closure proves activation"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-ki-system-status",
+					"support_node": "file-label-ki-system-file",
+					"target_node": "status-band",
+					"label": "owns subsystem contract"
+				},
+				{
+					"binding_id": "bind-ki-docs-map-legacy",
+					"support_node": "file-label-ki-docs-map-file",
+					"target_node": "legacy-adoption",
+					"label": "routes adopted docs"
+				},
+				{
+					"binding_id": "bind-ingestion-workflow-capture",
+					"support_node": "file-label-ingestion-workflow-file",
+					"target_node": "capture-entry",
+					"label": "explains intake flow"
+				},
+				{
+					"binding_id": "bind-source-quality-precheck",
+					"support_node": "file-label-source-quality-file",
+					"target_node": "quality-precheck",
+					"label": "defines precheck"
+				},
+				{
+					"binding_id": "bind-route-domain-routing",
+					"support_node": "file-label-route-file",
+					"target_node": "domain-routing",
+					"label": "routes ingestion tasks"
+				},
+				{
+					"binding_id": "bind-closure-future-extension",
+					"support_node": "file-label-closure-file",
+					"target_node": "future-extension",
+					"label": "records activation and gaps"
+				}
+			]
+		},
+		{
+			"id": "git-governance-architecture-map",
+			"path": "30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
+			"status": "current",
+			"view_family": "git-governance-architecture",
+			"view_type": "module-architecture-map",
+			"layer": "system-subsystem",
+			"view_level": "L2",
+			"view_category": "module-architecture",
+			"primary_subject": "Git version-control governance subsystem for this knowledge engineering project",
+			"boundary": "Explains local Git state, remote origin boundary, precommit validation, sensitive-surface review, remote-action gate, review and diagnostic handoffs for version governance.",
+			"not_for": [
+				"Remote GitHub publishing without approval",
+				"Credential management",
+				"Replacing review-system publication review",
+				"Replacing diagnostics root-cause repair",
+				"Teaching general Git basics"
+			],
+			"purpose": "Current architecture view for the Git governance subsystem.",
+			"source_of_truth": [
+				"system/git-governance-system.json",
+				"system/git-governance-docs-map.json",
+				"system/route-registry.json",
+				"system/information-map.json",
+				"system/module-relationship-map.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"system/tool-map.json",
+				"docs/git-governance/README.md",
+				"docs/technical/github-readiness.md",
+				".gitignore",
+				"scripts/validate-git-governance.ps1",
+				"scripts/git-governance-status.ps1",
+				".gitattributes"
+			],
+			"use_when": [
+				"用户讨论 Git、GitHub、版本控制、提交、远端 origin、push、发布或公开仓库",
+				"需要判断本地提交计划、敏感边界、远端授权边界或发布前校验",
+				"需要从系统总览下钻到 Git 版本治理子系统",
+				"需要把 Git 状态问题交给 review-system 或 diagnostics"
+			],
+			"parent_views": [
+				"knowledge-base-system-architecture-map"
+			],
+			"child_views": [],
+			"related_views": [
+				"review-system-architecture-map",
+				"diagnostic-system-architecture-map",
+				"system-closure-architecture-map"
+			],
+			"navigation_nodes": [
+				{
+					"node_id": "parent-kb-system-canvas-file",
+					"target_view": "knowledge-base-system-architecture-map",
+					"direction": "up"
+				},
+				{
+					"node_id": "review-system-canvas-file",
+					"target_view": "review-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "diagnostic-system-canvas-file",
+					"target_view": "diagnostic-system-architecture-map",
+					"direction": "side"
+				},
+				{
+					"node_id": "system-closure-canvas-file",
+					"target_view": "system-closure-architecture-map",
+					"direction": "side"
+				}
+			],
+			"color_semantics": {
+				"palette_id": "system_role_palette_v1",
+				"semantic_mode": "system_role_and_governance_colors",
+				"visible_legend_node": "color-legend",
+				"color_usage_note": "Colors distinguish machine truth, governance/review, risk boundary, status output and remote-action handoff in the Git governance view."
+			},
+			"support_relations": [
+				{
+					"relation_id": "rel-git-system-to-docs-map",
+					"from_node": "file-label-git-system-file",
+					"to_node": "file-label-git-docs-map-file",
+					"label": "system truth routes docs"
+				},
+				{
+					"relation_id": "rel-git-system-to-validator",
+					"from_node": "file-label-git-system-file",
+					"to_node": "file-label-validate-git-file",
+					"label": "system truth defines validation"
+				},
+				{
+					"relation_id": "rel-validator-to-status-tool",
+					"from_node": "file-label-validate-git-file",
+					"to_node": "file-label-git-status-tool-file",
+					"label": "validation complements status snapshot"
+				},
+				{
+					"relation_id": "rel-gitignore-to-system",
+					"from_node": "file-label-gitignore-file",
+					"to_node": "file-label-git-system-file",
+					"label": "ignore boundary governed by system truth"
+				},
+				{
+					"relation_id": "rel-readme-to-readiness",
+					"from_node": "file-label-git-readme-file",
+					"to_node": "file-label-github-readiness-file",
+					"label": "thin entry points to publication checklist"
+				}
+			],
+			"support_bindings": [
+				{
+					"binding_id": "bind-git-system-local-state",
+					"support_node": "file-label-git-system-file",
+					"target_node": "local-repo-state",
+					"label": "owns repository contract"
+				},
+				{
+					"binding_id": "bind-git-docs-map-commit-plan",
+					"support_node": "file-label-git-docs-map-file",
+					"target_node": "commit-plan",
+					"label": "routes human docs"
+				},
+				{
+					"binding_id": "bind-validate-git-precommit",
+					"support_node": "file-label-validate-git-file",
+					"target_node": "precommit-validation",
+					"label": "guards precommit validation"
+				},
+				{
+					"binding_id": "bind-status-tool-output",
+					"support_node": "file-label-git-status-tool-file",
+					"target_node": "status-output",
+					"label": "outputs status snapshot"
+				},
+				{
+					"binding_id": "bind-gitignore-sensitive-boundary",
+					"support_node": "file-label-gitignore-file",
+					"target_node": "sensitive-boundary",
+					"label": "protects private surfaces"
+				},
+				{
+					"binding_id": "bind-git-readme-scope",
+					"support_node": "file-label-git-readme-file",
+					"target_node": "scope-note",
+					"label": "human entrypoint"
+				},
+				{
+					"binding_id": "bind-github-readiness-publication-review",
+					"support_node": "file-label-github-readiness-file",
+					"target_node": "publication-review",
+					"label": "publication checklist"
+				}
+			]
+		}
+	],
+	"knowledge_engineering_system_positioning": {
+		"rule": "System architecture canvases describe the knowledge engineering system itself. Business-domain knowledge can appear as external knowledge content, but business is not the root project ontology.",
+		"project_ontology_ref": "system/project-ontology.json",
+		"visual_projection_refs": [
+			"30-maps/canvas/00-entry/kb-navigation-index.canvas",
+			"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		]
+	},
+	"color_semantics_policy": {
+		"id": "view-scoped-color-semantics-v1",
+		"status": "current",
+		"reference_origin": "C:/Users/dzw/Desktop/or/projects/cc-multi-uav-powerline-inspection Canvas subsystem, adapted as method only.",
+		"rule": "Color is a governed visual review language, not decoration. Current and active Canvas views must declare a view-scoped color_semantics contract and render a visible color-legend node.",
+		"required_for_status": [
+			"current",
+			"active"
+		],
+		"required_fields": [
+			"palette_id",
+			"semantic_mode",
+			"visible_legend_node"
+		],
+		"view_scoped_palette_rule": "Palette meaning follows the view category: system/module/workflow views use system-role colors; taxonomy views use domain-family colors; loop views may use loop-state colors. Do not infer system truth from .canvas colors.",
+		"palettes": [
+			{
+				"palette_id": "system_role_palette_v1",
+				"applies_to_view_categories": [
+					"system-overview",
+					"module-architecture",
+					"directory-boundary",
+					"diagnostic",
+					"review",
+					"schema",
+					"tool",
+					"workflow",
+					"dataflow"
+				],
+				"roles": [
+					{
+						"color": "1",
+						"role": "risk_diagnostic_or_blocker",
+						"label": "风险/诊断/阻断",
+						"allowed_content": "Diagnostic surfaces, repair loops, blockers, warnings or handoff risks."
+					},
+					{
+						"color": "2",
+						"role": "workflow_output_or_handoff",
+						"label": "工作流输出/交接",
+						"allowed_content": "Codex consumption, downstream workflow, handoff or acceptance boundary."
+					},
+					{
+						"color": "3",
+						"role": "knowledge_content_or_model_layer",
+						"label": "知识内容/模型层",
+						"allowed_content": "Knowledge routing, taxonomy, model/semantic layer, derived map or classification content."
+					},
+					{
+						"color": "4",
+						"role": "source_input_or_boundary_material",
+						"label": "来源/输入/边界",
+						"allowed_content": "Capture, source, input, directory placement, boundary files or supporting docs."
+					},
+					{
+						"color": "5",
+						"role": "system_governance_method_or_review",
+						"label": "系统治理/方法/审查",
+						"allowed_content": "Canvas policy, registry, governance method, review, loop or closure method."
+					},
+					{
+						"color": "6",
+						"role": "machine_truth_registry_or_root",
+						"label": "机器真相/registry/根结构",
+						"allowed_content": "Root title, information map, registry, schema, machine truth band or authoritative support file."
+					}
+				],
+				"allowed_colors": [
+					"1",
+					"2",
+					"3",
+					"4",
+					"5",
+					"6"
+				],
+				"required_legend_fragments": [
+					"颜色图例",
+					"机器真相",
+					"治理"
+				]
+			},
+			{
+				"palette_id": "navigation_layer_palette_v1",
+				"applies_to_view_categories": [
+					"navigation"
+				],
+				"roles": [
+					{
+						"color": "6",
+						"role": "l1_or_root_entry",
+						"label": "L1/根入口",
+						"allowed_content": "System overview, root entry and machine-route cards."
+					},
+					{
+						"color": "5",
+						"role": "system_drilldown_shortcut",
+						"label": "L2 系统下钻快捷入口",
+						"allowed_content": "L2 system-subsystem shortcuts nested under the system overview route."
+					},
+					{
+						"color": "1",
+						"role": "diagnostic_or_risk_shortcut",
+						"label": "诊断/风险入口",
+						"allowed_content": "Diagnostic or repair-oriented shortcuts."
+					}
+				],
+				"allowed_colors": [
+					"1",
+					"5",
+					"6"
+				],
+				"required_legend_fragments": [
+					"颜色图例",
+					"L1",
+					"L2"
+				]
+			},
+			{
+				"palette_id": "taxonomy_domain_palette_v1",
+				"applies_to_view_categories": [
+					"taxonomy"
+				],
+				"roles": [
+					{
+						"color": "3",
+						"role": "formal_and_natural_sciences",
+						"label": "形式与自然科学",
+						"allowed_content": "Formal and natural science taxonomy family or taxonomy registry support."
+					},
+					{
+						"color": "2",
+						"role": "engineering_and_technology",
+						"label": "工程与技术科学",
+						"allowed_content": "Engineering and technology taxonomy family."
+					},
+					{
+						"color": "4",
+						"role": "medicine_health_and_routing",
+						"label": "医学健康/路由说明",
+						"allowed_content": "Medicine/health family or routing-guide support."
+					},
+					{
+						"color": "5",
+						"role": "agriculture_ecology_resources",
+						"label": "农业生态资源",
+						"allowed_content": "Agriculture, ecology and resource taxonomy family or future drilldown note."
+					},
+					{
+						"color": "6",
+						"role": "social_sciences_or_navigation",
+						"label": "社会科学/导航",
+						"allowed_content": "Social science family, navigation panel or return path."
+					},
+					{
+						"color": "1",
+						"role": "humanities_arts_or_audit",
+						"label": "人文艺术/审查",
+						"allowed_content": "Humanities/art family or taxonomy audit surface."
+					}
+				],
+				"allowed_colors": [
+					"1",
+					"2",
+					"3",
+					"4",
+					"5",
+					"6"
+				],
+				"required_legend_fragments": [
+					"颜色图例",
+					"一级知识领域",
+					"系统状态"
+				]
+			},
+			{
+				"palette_id": "loop_state_palette_v1",
+				"applies_to_view_categories": [
+					"loop"
+				],
+				"roles": [
+					{
+						"color": "6",
+						"role": "root_and_machine_truth",
+						"label": "根结构/机器真相",
+						"allowed_content": "Title, status band, closure proof, machine-truth band and parent navigation."
+					},
+					{
+						"color": "5",
+						"role": "loop_runtime_surface",
+						"label": "loop 运行面",
+						"allowed_content": "Loop registry, run unit, handoff boundary, operational state and loop-related navigation."
+					},
+					{
+						"color": "3",
+						"role": "selection_or_managed_taxonomy_loop",
+						"label": "选择/分类 loop",
+						"allowed_content": "Loop selection and managed taxonomy-refinement loop."
+					},
+					{
+						"color": "4",
+						"role": "state_update_or_future_intake",
+						"label": "状态更新/未来接入",
+						"allowed_content": "State update, runner contract or future loop intake."
+					},
+					{
+						"color": "1",
+						"role": "diagnostic_trigger",
+						"label": "诊断触发",
+						"allowed_content": "Diagnostic trigger or repair-facing navigation."
+					},
+					{
+						"color": "2",
+						"role": "handoff_gate",
+						"label": "handoff gate",
+						"allowed_content": "Gate or handoff boundary."
+					}
+				],
+				"allowed_colors": [
+					"1",
+					"2",
+					"3",
+					"4",
+					"5",
+					"6"
+				],
+				"required_legend_fragments": [
+					"颜色图例",
+					"loop",
+					"机器真相"
+				]
+			}
+		],
+		"layer_guide_semantics": {
+			"rule": "Use navigation_nodes, canvas-view-graph parent/child edges, and sparse bridge-* correspondence lines to show up/down or related-view guidance. These guide lines do not replace dataflow or workflow edges.",
+			"preferred_visual_form": "A compact file button, one nav-label-* explanation and at most one bridge-* line to the corresponding current-view content node.",
+			"forbidden_interpretation": "Do not treat right-side navigation colors or bridge lines as source truth, execution order, dependency truth or taxonomy classification."
+		},
+		"validation_gate": "scripts/validate-canvas.ps1 checks color_semantics, palette membership, visible legend nodes and stable color token compatibility; scripts/audit-canvas-visual.ps1 checks color legend readability.",
+		"stable_color_token_rule": "Current and active Canvas palettes must use Obsidian-compatible preset color tokens 1-6 or hex #RRGGBB. Plain named colors such as cyan, purple, red, yellow, green or orange are not accepted as governed palette tokens.",
+		"latest_token_compatibility_repair": {
+			"date": "2026-06-09",
+			"scope": [
+				"loop-orchestration-architecture-map",
+				"knowledge-base-system-architecture-map",
+				"system_role_palette_v1",
+				"loop_state_palette_v1"
+			],
+			"result": "Replaced named color tokens with Obsidian preset tokens 1-6 and upgraded validate-canvas so palette roles, allowed colors, nodes and edges reject unstable named colors."
+		}
+	},
+	"support_semantics_policy": {
+		"id": "registry-first-support-relations",
+		"status": "active",
+		"adopted_from": "OR project canvas registry method, adapted for this knowledge-engineering system",
+		"rule": "In current or active non-navigation Canvas views, every non-navigation support file label is a machine-readable support object. It must bind upward to the workflow, gate, status, boundary or module node it supports. Relationships among support files live in support_relations. Visible Canvas edges are optional and only referenced through visual_edge_id when deliberately drawn.",
+		"fields": {
+			"support_bindings": "Per-view bindings from file-label-* support nodes to upper Canvas content nodes.",
+			"support_relations": "Per-view relationships among file-label-* support nodes, used for machine interpretation without adding visual clutter.",
+			"visual_edge_id": "Optional pointer to a visible edge in the .canvas file when the relation is intentionally drawn."
+		},
+		"visual_rule": "Do not draw dense reference wiring by default. The registry owns support semantics; the Canvas surface stays readable.",
+		"validation_gate": [
+			"scripts/validate-canvas.ps1",
+			"scripts/audit-canvas-visual.ps1 -Strict"
+		]
+	}
+}

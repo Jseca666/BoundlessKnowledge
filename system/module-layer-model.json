@@ -1,0 +1,359 @@
+{
+	"id": "module-layer-model",
+	"version": "0.7.0",
+	"updated": "2026-06-10",
+	"role": "derived-module-layer-assignment-snapshot",
+	"purpose": "Provide the derived owner_layer/module_kind snapshot produced by system-structure-governance so information-map, closure map and Canvas entry views stay aligned without treating this file as the full topology brain.",
+	"axes": [
+		{
+			"id": "owner_layer",
+			"rule": "Functional system responsibility. This snapshot is derived from system-structure-governance and must be consistent across information-map, module-relationship-map and system-closure-map."
+		},
+		{
+			"id": "module_kind",
+			"rule": "The module role inside its owner_layer, used for review and future split/merge decisions."
+		},
+		{
+			"id": "lifecycle_status",
+			"rule": "Current, partial, draft, archived or temporary state. Lifecycle is not the same axis as owner_layer."
+		},
+		{
+			"id": "canvas_view_level",
+			"rule": "Canvas zoom level such as L0/L1/L2/L3/L4. It describes a view, not the module owner layer."
+		},
+		{
+			"id": "storage_path",
+			"rule": "Filesystem placement. Paths help find files, but path names alone do not decide module ownership."
+		}
+	],
+	"layers": [
+		{
+			"id": "knowledge-content",
+			"order": 10,
+			"name": "知识内容层",
+			"purpose": "承载外部世界知识的进入、来源、分类、原子化、综合与质量评估。",
+			"owns_modules": [
+				"inbox",
+				"source-registry",
+				"domain-maps",
+				"atomic-knowledge",
+				"synthesis",
+				"evals"
+			],
+			"not_for": [
+				"系统自身治理规则",
+				"本地工具运行时",
+				"Canvas 可视化系统自身",
+				"项目消费包作为执行入口"
+			],
+			"truth_policy": "Knowledge content must remain source-traceable and indexable; taxonomy registry decides classification truth."
+		},
+		{
+			"id": "system-governance",
+			"order": 20,
+			"name": "系统治理层",
+			"purpose": "治理知识工程系统自身如何扩展、审查、诊断、闭环、运维、结构归属、项目根定位和持续改进。",
+			"owns_modules": [
+				"module-governance",
+				"system-structure-governance",
+				"system-information-map",
+				"system-closure",
+				"technical-documentation",
+				"diagnostics",
+				"artifact-form-decision",
+				"loop-orchestration",
+				"review-system",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"not_for": [
+				"外部知识学科分类",
+				"Canvas 图坐标细节",
+				"本地脚本实现细节",
+				"项目专用 context pack 内容"
+			],
+			"truth_policy": "Governance truth lives in JSON registries, queues, policies, topology maps and docs maps; Markdown is explanatory."
+		},
+		{
+			"id": "machine-infrastructure",
+			"order": 30,
+			"name": "机器基础设施层",
+			"purpose": "提供 schema、索引、脚本、工具和本地运行时，让系统行为可生成、可校验、可检索。",
+			"owns_modules": [
+				"indexes",
+				"schemas",
+				"tools"
+			],
+			"not_for": [
+				"定义外部知识分类本身",
+				"决定治理原则",
+				"承载人类视觉导航"
+			],
+			"truth_policy": "Contracts, generated indexes and tool maps must be machine-readable and validated by scripts."
+		},
+		{
+			"id": "visual-projection",
+			"order": 40,
+			"name": "视觉投影层",
+			"purpose": "把系统结构、模块边界、workflow、dataflow、schema、tool、loop、diagnostic 和知识结构投影成 Canvas。",
+			"owns_modules": [
+				"architecture-views"
+			],
+			"not_for": [
+				"替代机器真相",
+				"决定知识分类真相",
+				"承载未登记的架构事实"
+			],
+			"truth_policy": "Canvas is the visual shadow; registry and view graph decide trust, status and navigation."
+		},
+		{
+			"id": "project-consumption",
+			"order": 50,
+			"name": "Codex 工作流运行与项目调用层",
+			"purpose": "把知识工程系统能力包装为 Codex 可运行的 context pack、工作流、项目入口，并接收项目复盘回流；它不是业务本体，而是系统运行闭环的一部分。",
+			"owns_modules": [
+				"workflows"
+			],
+			"not_for": [
+				"重新定义全局知识分类",
+				"替代系统治理或诊断",
+				"复制大块知识内容"
+			],
+			"truth_policy": "Project-facing packs reference project ontology, catalog, routes and source-backed knowledge rather than becoming a second knowledge base."
+		},
+		{
+			"id": "temporary-and-archive",
+			"order": 90,
+			"name": "临时与归档层",
+			"purpose": "表示生命周期状态：暂存、草稿、历史版本和归档。它不是稳定模块的 owner_layer。",
+			"owns_modules": [],
+			"not_for": [
+				"current 稳定模块归属",
+				"系统默认入口",
+				"机器真相来源"
+			],
+			"truth_policy": "Temporary and archive assets can preserve evidence, but current ownership must point to one of the functional layers."
+		}
+	],
+	"module_assignments": [
+		{
+			"module_id": "inbox",
+			"owner_layer": "knowledge-content",
+			"module_kind": "capture-buffer",
+			"reason": "原始输入属于知识生命周期入口；temporary 是生命周期角色，不是 owner_layer。",
+			"cross_cutting_roles": [
+				"temporary-lifecycle"
+			]
+		},
+		{
+			"module_id": "source-registry",
+			"owner_layer": "knowledge-content",
+			"module_kind": "source-registration",
+			"reason": "记录外部知识来源事实与质量，是知识内容生命周期的一部分。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "project-ontology",
+			"owner_layer": "system-governance",
+			"module_kind": "root-identity-contract",
+			"reason": "定义无界知识作为知识工程系统的根定位和 Codex 工作流双重角色，是所有模块分层与系统/知识关系判断的上游锚点。",
+			"cross_cutting_roles": [
+				"root-positioning",
+				"knowledge-engineering-lifecycle",
+				"codex-workflow-role-boundary"
+			]
+		},
+		{
+			"module_id": "domain-maps",
+			"owner_layer": "knowledge-content",
+			"module_kind": "taxonomy-routing",
+			"reason": "维护外部世界知识分类和 primary_level_3 路由。",
+			"cross_cutting_roles": [
+				"visualized-dedicated"
+			]
+		},
+		{
+			"module_id": "atomic-knowledge",
+			"owner_layer": "knowledge-content",
+			"module_kind": "atomic-note-store",
+			"reason": "保存可追溯的概念、判断、方法和风险。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "synthesis",
+			"owner_layer": "knowledge-content",
+			"module_kind": "synthesis-output",
+			"reason": "多来源综合判断仍属于知识内容产物。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "evals",
+			"owner_layer": "knowledge-content",
+			"module_kind": "knowledge-quality-eval",
+			"reason": "当前评估主要衡量检索、分类和知识质量，归知识内容层；自动评估基础设施成熟后可拆分。",
+			"cross_cutting_roles": [
+				"quality-role"
+			]
+		},
+		{
+			"module_id": "module-governance",
+			"owner_layer": "system-governance",
+			"module_kind": "module-boundary-governance",
+			"reason": "决定新增模块、目录、文档、Canvas、工具和校验如何登记与闭环。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "system-closure",
+			"owner_layer": "system-governance",
+			"module_kind": "closure-matrix",
+			"reason": "审计系统模块是否具备路由、真相、校验、文档、视觉和生命周期闭环。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "technical-documentation",
+			"owner_layer": "system-governance",
+			"module_kind": "technical-ops-docs",
+			"reason": "维护运维、排障、验证和 GitHub 发布准备，是系统自身治理表面。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "diagnostics",
+			"owner_layer": "system-governance",
+			"module_kind": "repair-routing",
+			"reason": "负责问题归因、责任层判断、系统升级协调和验收。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "artifact-form-decision",
+			"owner_layer": "system-governance",
+			"module_kind": "artifact-form-governance",
+			"reason": "决定新增服务、脚本、工具、索引、schema 和文档的留存形式。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "loop-orchestration",
+			"owner_layer": "system-governance",
+			"module_kind": "cross-module-loop-orchestration",
+			"reason": "登记并治理稳定循环的生命周期、队列、状态、runner 契约、历史 loop 接管和多模块 handoff；单个 loop 可服务具体模块，但 loop 机制本身属于系统治理层。",
+			"cross_cutting_roles": [
+				"cross-module-control",
+				"continuous-improvement",
+				"handoff-intake",
+				"legacy-loop-adoption"
+			]
+		},
+		{
+			"module_id": "review-system",
+			"owner_layer": "system-governance",
+			"module_kind": "quality-review",
+			"reason": "上游审查系统负责系统、外部知识和视觉审查，并把确认缺陷交给下游处理。",
+			"cross_cutting_roles": []
+		},
+		{
+			"module_id": "indexes",
+			"owner_layer": "machine-infrastructure",
+			"module_kind": "retrieval-index",
+			"reason": "机器索引是知识可检索的基础设施，不是外部知识内容本身，也不等同治理策略。",
+			"cross_cutting_roles": [
+				"generated-artifact"
+			]
+		},
+		{
+			"module_id": "schemas",
+			"owner_layer": "machine-infrastructure",
+			"module_kind": "data-contract",
+			"reason": "schema 是机器可读契约层，约束知识条目、诊断记录、审查记录等结构。",
+			"cross_cutting_roles": [
+				"contract"
+			]
+		},
+		{
+			"module_id": "tools",
+			"owner_layer": "machine-infrastructure",
+			"module_kind": "local-tool-runtime",
+			"reason": "脚本和工具负责生成、校验、索引和本地运行，是机器执行基础设施。",
+			"cross_cutting_roles": [
+				"runtime"
+			]
+		},
+		{
+			"module_id": "architecture-views",
+			"owner_layer": "visual-projection",
+			"module_kind": "visual-shadow-system",
+			"reason": "Canvas 系统是文件系统、路由、模块、workflow、diagnostics 和知识结构的可视化影子。",
+			"cross_cutting_roles": [
+				"cross-cutting-visual"
+			]
+		},
+		{
+			"module_id": "workflows",
+			"owner_layer": "project-consumption",
+			"module_kind": "codex-consumption",
+			"reason": "把知识工程系统能力转成 Codex 可调用的 context pack、项目入口和回流流程；同时承接系统运行闭环中的可复用工作流。",
+			"cross_cutting_roles": [
+				"project-facing"
+			]
+		},
+		{
+			"module_id": "system-structure-governance",
+			"owner_layer": "system-governance",
+			"module_kind": "module-topology-governance",
+			"reason": "负责系统内部模块拓扑、关系类型、分支归属和新模块接入判断；module-layer-model 是它的派生快照，不再独自承担专业判断。",
+			"cross_cutting_roles": [
+				"module-relationship-topology",
+				"branch-decision"
+			]
+		},
+		{
+			"module_id": "system-information-map",
+			"owner_layer": "system-governance",
+			"module_kind": "system-dictionary-map",
+			"reason": "信息地图维护系统模块、引用面、数据流和入口的机器可读字典；属于系统自身治理，不是外部知识分类、Canvas 布局或脚本实现。",
+			"cross_cutting_roles": [
+				"machine-navigation",
+				"reference-surface-index"
+			]
+		},
+		{
+			"module_id": "knowledge-ingestion",
+			"owner_layer": "system-governance",
+			"module_kind": "knowledge-ingestion-subsystem",
+			"reason": "知识摄入子系统治理知识进入链路、质量门和交接契约；具体来源记录和原子知识仍归知识内容层。",
+			"cross_cutting_roles": [
+				"knowledge-entry-governance",
+				"source-quality-gate",
+				"cross-module-handoff"
+			]
+		},
+		{
+			"module_id": "git-governance",
+			"owner_layer": "system-governance",
+			"module_kind": "version-control-governance",
+			"reason": "Git 版本治理影响所有系统和知识资产的提交、远端、发布和恢复边界，属于系统治理层。",
+			"cross_cutting_roles": [
+				"version-control",
+				"github-remote",
+				"release-readiness",
+				"approval-boundary"
+			]
+		}
+	],
+	"boundary_rules": [
+		"A stable information-map module must have exactly one owner_layer in this model.",
+		"system/system-closure-map.json owner_layer must match this model for every module.",
+		"Canvas view_level is a visual zoom level and must not be used as module owner_layer.",
+		"Filesystem path is storage evidence, not ownership truth; owner_layer is decided here.",
+		"temporary-and-archive is a lifecycle layer. Current stable modules should not use it as owner_layer unless explicitly archived or draft-only.",
+		"Cross-cutting modules such as Canvas, diagnostics and review should own one functional layer and list cross_cutting_roles instead of being duplicated across layers.",
+		"New stable module placement must be decided by system-structure-governance before this snapshot is updated."
+	],
+	"validation": [
+		"scripts/validate-system.ps1"
+	],
+	"owner_module": "system-structure-governance",
+	"derived_from": [
+		"system/system-structure-governance.json",
+		"system/module-relationship-map.json"
+	]
+}

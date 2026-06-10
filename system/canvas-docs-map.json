@@ -1,0 +1,130 @@
+{
+	"id": "canvas-docs-map",
+	"version": "0.2.0",
+	"updated": "2026-06-06",
+	"role": "machine-readable-documentation-map-for-canvas-subsystem",
+	"purpose": "Keep Canvas subsystem documentation thin, routed and split by boundary so no single Markdown file becomes a mixed rule dump.",
+	"principle": "Canvas documentation follows the root AGENTS.md pattern: the baseline document is a thin entrypoint, machine-readable JSON files remain the system truth, and detailed human explanations are routed through this docs map.",
+	"baseline_doc": {
+		"path": "docs/canvas/README.md",
+		"role": "thin human entrypoint for the Canvas subsystem",
+		"not_for": [
+			"Full Canvas architecture rules",
+			"All placement rules",
+			"All visual audit notes",
+			"Machine truth"
+		]
+	},
+	"machine_truth": [
+		{
+			"path": "system/canvas-system.json",
+			"role": "Canvas subsystem policy, responsibilities, view levels, layout protocol and quality gates"
+		},
+		{
+			"path": "system/canvas-registry.json",
+			"role": "Canonical Canvas view registry, storage layout, view boundaries, status and source binding"
+		},
+		{
+			"path": "system/canvas-view-graph.json",
+			"role": "Layout-free machine navigation graph for Canvas views"
+		},
+		{
+			"path": "system/canvas-docs-map.json",
+			"role": "Canonical map for Canvas subsystem documentation boundaries"
+		},
+		{
+			"path": "system/visual-coverage-map.json",
+			"role": "Canonical map for required, shared, deferred and not-applicable visual coverage decisions"
+		}
+	],
+	"doc_routes": [
+		{
+			"id": "entry",
+			"path": "docs/canvas/README.md",
+			"role": "Thin entry and read order",
+			"boundary": "Only explains where to start and which document owns which topic.",
+			"not_for": [
+				"Detailed rules",
+				"Architecture truth",
+				"Validation logic"
+			]
+		},
+		{
+			"id": "architecture",
+			"path": "docs/canvas/architecture.md",
+			"role": "Human explanation of Canvas subsystem architecture",
+			"boundary": "Explains why Canvas exists as a visual architecture operating layer and how it connects to machine truth.",
+			"not_for": [
+				"Directory placement detail",
+				"Full view-boundary rule catalog",
+				"Obsidian user operations"
+			]
+		},
+		{
+			"id": "file-placement",
+			"path": "docs/canvas/file-placement.md",
+			"role": "Human guide for Canvas file creation, directory placement, naming and lifecycle",
+			"boundary": "Explains where Canvas files live and how they are registered.",
+			"not_for": [
+				"Canvas subsystem architecture rationale",
+				"Visual audit history",
+				"Machine view graph truth"
+			]
+		},
+		{
+			"id": "view-boundaries",
+			"path": "docs/canvas/view-boundaries.md",
+			"role": "Human guide for Canvas view level, category, primary subject and not_for boundaries",
+			"boundary": "Explains what a Canvas view is allowed to express.",
+			"not_for": [
+				"Filesystem placement",
+				"Obsidian操作指南",
+				"Validation implementation"
+			]
+		},
+		{
+			"id": "data-separation",
+			"path": "docs/canvas/data-separation.md",
+			"role": "Human guide for machine-readable versus human-readable Canvas data",
+			"boundary": "Explains why .canvas layout data is not machine truth.",
+			"not_for": [
+				"Directory naming",
+				"Visual audit history",
+				"Subsystem architecture overview"
+			]
+		},
+		{
+			"id": "visual-audit",
+			"path": "docs/canvas/visual-audit.md",
+			"role": "Human visual review record and visual quality rationale",
+			"boundary": "Records audit findings and layout improvement decisions.",
+			"not_for": [
+				"Canonical registry truth",
+				"Obsidian user workflow",
+				"General module governance"
+			]
+		},
+		{
+			"id": "obsidian-workflow",
+			"path": "docs/canvas/obsidian-workflow.md",
+			"role": "Human operation guide for opening and browsing Canvas in Obsidian",
+			"boundary": "Explains local Obsidian usage and common viewing issues.",
+			"not_for": [
+				"System behavior truth",
+				"Registry schema",
+				"Canvas placement policy"
+			]
+		}
+	],
+	"split_policy": {
+		"baseline_doc_rule": "The baseline document stays thin. If a rule needs more than a short pointer, move it to the owning doc route and register it here.",
+		"one_primary_topic_rule": "Each Canvas documentation file should have one primary topic and an explicit boundary.",
+		"machine_truth_rule": "Markdown is human explanation. Behavior, routing, status, placement, navigation and validation truth must live in JSON registries or scripts.",
+		"growth_trigger": "When a Canvas documentation topic grows into multiple subtopics, create a new docs/canvas/*.md file and add a doc_routes entry before relying on it."
+	},
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-canvas.ps1",
+		"scripts/audit-canvas-visual.ps1"
+	]
+}

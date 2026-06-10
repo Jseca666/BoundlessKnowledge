@@ -1,0 +1,762 @@
+{
+	"id": "module-relationship-map",
+	"version": "0.8.0",
+	"updated": "2026-06-10",
+	"role": "canonical-system-module-topology",
+	"purpose": "记录系统稳定模块之间的归属、关系、分支和协同边，作为 system-structure-governance 判断新模块归属或新建分支的机器真相。",
+	"owner_module": "system-structure-governance",
+	"source_of_truth": [
+		"system/system-structure-governance.json",
+		"system/information-map.json",
+		"system/module-layer-model.json",
+		"system/system-closure-map.json",
+		"system/project-ontology.json"
+	],
+	"branches": [
+		{
+			"branch_id": "knowledge-content",
+			"name": "知识内容层",
+			"purpose": "承载外部世界知识的进入、来源、分类、原子化、综合与质量评估。",
+			"decision_owner": "system-structure-governance",
+			"module_ids": [
+				"inbox",
+				"source-registry",
+				"domain-maps",
+				"atomic-knowledge",
+				"synthesis",
+				"evals"
+			],
+			"branch_policy": "Knowledge content must remain source-traceable and indexable; taxonomy registry decides classification truth."
+		},
+		{
+			"branch_id": "system-governance",
+			"name": "系统治理层",
+			"purpose": "治理知识工程系统自身如何扩展、审查、诊断、闭环、运维、根定位、结构归属和持续改进。",
+			"decision_owner": "system-structure-governance",
+			"module_ids": [
+				"module-governance",
+				"system-structure-governance",
+				"system-information-map",
+				"system-closure",
+				"technical-documentation",
+				"diagnostics",
+				"artifact-form-decision",
+				"loop-orchestration",
+				"review-system",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"branch_policy": "Governance truth lives in JSON registries, queues, policies, topology maps and docs maps; Markdown is explanatory."
+		},
+		{
+			"branch_id": "machine-infrastructure",
+			"name": "机器基础设施层",
+			"purpose": "提供 schema、索引、脚本、工具和本地运行时，让系统行为可生成、可校验、可检索。",
+			"decision_owner": "system-structure-governance",
+			"module_ids": [
+				"indexes",
+				"schemas",
+				"tools"
+			],
+			"branch_policy": "Contracts, generated indexes and tool maps must be machine-readable and validated by scripts."
+		},
+		{
+			"branch_id": "visual-projection",
+			"name": "视觉投影层",
+			"purpose": "把系统结构、模块边界、workflow、dataflow、schema、tool、loop、diagnostic 和知识结构投影成 Canvas。",
+			"decision_owner": "system-structure-governance",
+			"module_ids": [
+				"architecture-views"
+			],
+			"branch_policy": "Canvas is the visual shadow; registry and view graph decide trust, status and navigation."
+		},
+		{
+			"branch_id": "project-consumption",
+			"name": "Codex 工作流运行与项目调用层",
+			"purpose": "把知识工程系统能力包装为 Codex 可运行的 context pack、工作流、项目入口，并接收项目复盘回流。",
+			"decision_owner": "system-structure-governance",
+			"module_ids": [
+				"workflows"
+			],
+			"branch_policy": "Project-facing packs reference project ontology, catalog, routes and source-backed knowledge rather than becoming a second knowledge base."
+		},
+		{
+			"branch_id": "temporary-and-archive",
+			"name": "临时与归档层",
+			"purpose": "表示生命周期状态：暂存、草稿、历史版本和归档。它不是稳定模块的 owner_layer。",
+			"decision_owner": "system-structure-governance",
+			"module_ids": [],
+			"branch_policy": "Temporary and archive assets can preserve evidence, but current ownership must point to one of the functional layers."
+		}
+	],
+	"modules": [
+		{
+			"module_id": "inbox",
+			"branch_id": "knowledge-content",
+			"module_kind": "capture-buffer",
+			"status": "current",
+			"reason": "未整理材料；不作为可引用知识真相来源"
+		},
+		{
+			"module_id": "source-registry",
+			"branch_id": "knowledge-content",
+			"module_kind": "source-registration",
+			"status": "current",
+			"reason": "记录来源事实、出处、访问时间、可信度、领域候选"
+		},
+		{
+			"module_id": "project-ontology",
+			"branch_id": "system-governance",
+			"module_kind": "root-identity-contract",
+			"status": "current",
+			"reason": "定义项目根定位、知识工程系统身份、知识工程生命周期和 Codex 工作流双重角色。"
+		},
+		{
+			"module_id": "domain-maps",
+			"branch_id": "knowledge-content",
+			"module_kind": "taxonomy-routing",
+			"status": "current",
+			"reason": "维护知识领域门类、三级方向簇、分类路由、关系图和跨领域连接；Markdown 只做人类说明，registry JSON 是分类机器真相来源，domain-taxonomy.docs.json 接管分类子系统的人读文档边界和 loop 资产路由"
+		},
+		{
+			"module_id": "architecture-views",
+			"branch_id": "visual-projection",
+			"module_kind": "visual-shadow-system",
+			"status": "current",
+			"reason": "维护 Canvas 可视化架构系统：视图族、当前图、父子导航网络、机器图数据、人读画布文件、文件放置、图层级、图类别、图边界、Canvas 子系统薄入口文档、专题文档路由、视觉投影关系、模块内部结构、workflow、dataflow、skill、schema、tool、loop、diagnostic、项目上下文、架构同步触发器和校验规则；Canvas 只做视觉入口和设计面，不覆盖机器真相"
+		},
+		{
+			"module_id": "module-governance",
+			"branch_id": "system-governance",
+			"module_kind": "module-boundary-governance",
+			"status": "current",
+			"reason": "定义新增模块、目录、工具、schema、workflow、loop、index、Canvas、子系统文档、子 agent 文档和长期能力的登记契约、存储位置、路由入口、校验要求和生命周期；具体模块拓扑、归属判断和新分支决策由 system-structure-governance 接管；不参与外部知识领域分类。"
+		},
+		{
+			"module_id": "system-structure-governance",
+			"branch_id": "system-governance",
+			"module_kind": "module-topology-governance",
+			"status": "current",
+			"reason": "维护系统模块拓扑、关系类型、分支归属、新模块接入决策、拆分/合并/归档判断；module-layer-model 是它输出的分层快照。它不替代具体模块实现、知识领域分类、Canvas 坐标布局或诊断修复执行。"
+		},
+		{
+			"module_id": "system-information-map",
+			"branch_id": "system-governance",
+			"module_kind": "system-dictionary-map",
+			"status": "current",
+			"reason": "维护系统信息地图、manifest、shard、schema 和引用面索引；它是系统治理层的机器字典模块，不替代结构治理或 Canvas 布局。"
+		},
+		{
+			"module_id": "system-closure",
+			"branch_id": "system-governance",
+			"module_kind": "closure-matrix",
+			"status": "current",
+			"reason": "审计每个稳定模块是否具备入口、机器真相、路由、输入输出、校验、文档边界、可视化、诊断接入和生命周期；只记录跨模块闭环状态和缺口，不替代各模块自身 registry、schema、docs map 或 validator"
+		},
+		{
+			"module_id": "technical-documentation",
+			"branch_id": "system-governance",
+			"module_kind": "technical-ops-docs",
+			"status": "current",
+			"reason": "维护本地设置、日常运维、校验、故障排查、GitHub 发布准备和外部读者上手文档；技术文档只解释运维，不替代 system JSON、schemas 或 scripts 的机器真相"
+		},
+		{
+			"module_id": "diagnostics",
+			"branch_id": "system-governance",
+			"module_kind": "repair-routing",
+			"status": "current",
+			"capability_addendum": "System-upgrade diagnosis includes same-class impact scan: after bottom-up failure-class discovery, diagnostics must scan sibling modules, peer views, related registries, validators, review gates and Canvas projections before closure.",
+			"reason": "在修复前构造 failure packet、下层证据链、上层原则链、责任修复层、修复分类、质量门和 diagnosis acceptance；当问题被判定为 system_upgrade 时，它还负责把诊断、更新原则、受影响面、现有资产迁移、校验门和验收串成上层协同升级能力；它决定问题归属和闭环要求，不替代具体模块执行修复"
+		},
+		{
+			"module_id": "artifact-form-decision",
+			"branch_id": "system-governance",
+			"module_kind": "artifact-form-governance",
+			"status": "current",
+			"reason": "为新增服务、脚本、工具、索引、画布、schema 和文档选择合适留存形式"
+		},
+		{
+			"module_id": "loop-orchestration",
+			"branch_id": "system-governance",
+			"module_kind": "cross-module-loop-orchestration",
+			"status": "current",
+			"reason": "登记并治理所有稳定、可重复、可暂停、可恢复的系统循环；当前接管 taxonomy-refinement，未来 review、diagnostics、knowledge refinement、ops audit 等 durable loop 都先进入该模块判断。"
+		},
+		{
+			"module_id": "atomic-knowledge",
+			"branch_id": "knowledge-content",
+			"module_kind": "atomic-note-store",
+			"status": "current",
+			"reason": "保存可复用的概念、判断、方法、风险；每条必须可追溯"
+		},
+		{
+			"module_id": "synthesis",
+			"branch_id": "knowledge-content",
+			"module_kind": "synthesis-output",
+			"status": "current",
+			"reason": "多来源综合判断、简报、实践手册、决策框架"
+		},
+		{
+			"module_id": "workflows",
+			"branch_id": "project-consumption",
+			"module_kind": "codex-consumption",
+			"status": "current",
+			"reason": "把知识工程系统能力转化为 Codex 可运行的项目上下文包、操作流程和项目回流入口。"
+		},
+		{
+			"module_id": "evals",
+			"branch_id": "knowledge-content",
+			"module_kind": "knowledge-quality-eval",
+			"status": "current",
+			"reason": "检索质量、认知质量、流程有效性测试"
+		},
+		{
+			"module_id": "indexes",
+			"branch_id": "machine-infrastructure",
+			"module_kind": "retrieval-index",
+			"status": "current",
+			"reason": "由脚本生成或维护的机器友好入口"
+		},
+		{
+			"module_id": "schemas",
+			"branch_id": "machine-infrastructure",
+			"module_kind": "data-contract",
+			"status": "current",
+			"reason": "定义条目 metadata 和未来机器数据结构"
+		},
+		{
+			"module_id": "tools",
+			"branch_id": "machine-infrastructure",
+			"module_kind": "local-tool-runtime",
+			"status": "current",
+			"reason": "登记和执行本地工具；脚本不应成为未登记的孤立能力"
+		},
+		{
+			"module_id": "review-system",
+			"branch_id": "system-governance",
+			"module_kind": "quality-review",
+			"status": "current",
+			"reason": "负责系统内部结构审查、外部知识质量审查、视觉审查和发布准备审查；输出 review record、finding 分类、risk assessment 和 handoff_decision。确认缺陷后交给 diagnostics、evals、taxonomy loop 或知识工作流，不替代根因诊断或具体修复。"
+		},
+		{
+			"module_id": "knowledge-ingestion",
+			"branch_id": "system-governance",
+			"module_kind": "knowledge-ingestion-subsystem",
+			"status": "current",
+			"reason": "治理知识进入方式、来源类型、质量门、领域路由交接、旧摄入资产接管和可视化覆盖。"
+		},
+		{
+			"module_id": "git-governance",
+			"branch_id": "system-governance",
+			"module_kind": "version-control-governance",
+			"status": "current",
+			"reason": "治理本地 Git、GitHub remote、提交前校验、敏感信息边界和远端动作授权。"
+		}
+	],
+	"relationships": [
+		{
+			"from": "inbox",
+			"to": "source-registry",
+			"relation": "produces",
+			"reason": "原始输入登记为可追溯 source record。"
+		},
+		{
+			"from": "source-registry",
+			"to": "domain-maps",
+			"relation": "routes_to",
+			"reason": "来源进入知识领域分类和 level_3 路由。"
+		},
+		{
+			"from": "source-registry",
+			"to": "atomic-knowledge",
+			"relation": "produces",
+			"reason": "来源材料被拆成可追溯原子知识。"
+		},
+		{
+			"from": "atomic-knowledge",
+			"to": "synthesis",
+			"relation": "produces",
+			"reason": "原子知识组合为综合产物。"
+		},
+		{
+			"from": "synthesis",
+			"to": "workflows",
+			"relation": "produces",
+			"reason": "综合产物进入 Codex 项目消费工作流。"
+		},
+		{
+			"from": "tools",
+			"to": "indexes",
+			"relation": "supports",
+			"reason": "脚本和工具生成或维护机器索引。"
+		},
+		{
+			"from": "schemas",
+			"to": "tools",
+			"relation": "validates",
+			"reason": "schema 和脚本共同约束机器数据结构。"
+		},
+		{
+			"from": "module-governance",
+			"to": "system-structure-governance",
+			"relation": "invokes",
+			"reason": "新增模块登记前调用结构治理做归属和分支判断。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "module-governance",
+			"relation": "feeds",
+			"reason": "结构治理输出反哺模块登记契约和分层快照。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "system-closure",
+			"relation": "feeds",
+			"reason": "结构变化必须更新闭环矩阵和缺口状态。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "architecture-views",
+			"relation": "projects_visual",
+			"reason": "稳定结构变化必须同步可视化投影。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "review-system",
+			"relation": "feeds",
+			"reason": "审查模块使用结构拓扑判断层级、关系和可视化覆盖是否合理。"
+		},
+		{
+			"from": "review-system",
+			"to": "system-structure-governance",
+			"relation": "audits",
+			"reason": "审查发现结构归属风险时回到结构治理判断。"
+		},
+		{
+			"from": "diagnostics",
+			"to": "system-structure-governance",
+			"relation": "repairs",
+			"reason": "诊断确认结构漂移后由结构治理修正正向拓扑模型。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "diagnostics",
+			"relation": "hands_off_to",
+			"reason": "结构治理发现系统性漂移时交给诊断闭环。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "technical-documentation",
+			"relation": "feeds",
+			"reason": "结构模块和分支变化需要同步运维与发布说明边界。"
+		},
+		{
+			"from": "loop-orchestration",
+			"to": "domain-maps",
+			"relation": "supports",
+			"reason": "loop-orchestration 管理 taxonomy-refinement 这一历史 loop，支持知识领域分类持续打磨；分类真相仍归 domain-maps。"
+		},
+		{
+			"from": "architecture-views",
+			"to": "review-system",
+			"relation": "audits",
+			"reason": "可视化审查检查 Canvas 是否正确投影系统结构。"
+		},
+		{
+			"from": "system-information-map",
+			"to": "module-governance",
+			"relation": "indexes",
+			"reason": "Indexes module-boundary and placement contract refs for machine lookup."
+		},
+		{
+			"from": "system-information-map",
+			"to": "system-structure-governance",
+			"relation": "indexes",
+			"reason": "Indexes topology, layer and branch-decision refs without owning the topology decision."
+		},
+		{
+			"from": "system-information-map",
+			"to": "system-closure",
+			"relation": "indexes",
+			"reason": "Indexes closure and activation refs for module status lookup."
+		},
+		{
+			"from": "system-information-map",
+			"to": "architecture-views",
+			"relation": "feeds",
+			"reason": "Feeds visual projection with registered reference surfaces and view refs."
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "system-information-map",
+			"relation": "feeds",
+			"reason": "Structure decisions synchronize module ownership and topology facts back into the information map."
+		},
+		{
+			"from": "review-system",
+			"to": "loop-orchestration",
+			"relation": "hands_off_to",
+			"reason": "审查发现分类缺口、批量质量问题或可迭代改进对象时，可交给 loop 编排形成持续打磨。"
+		},
+		{
+			"from": "diagnostics",
+			"to": "loop-orchestration",
+			"relation": "invokes",
+			"reason": "诊断确认需要重复修复、重复审计或持续校验时，可要求 loop-orchestration 登记或推进对应 loop。"
+		},
+		{
+			"from": "loop-orchestration",
+			"to": "system-closure",
+			"relation": "feeds",
+			"reason": "loop 模块和各稳定 loop 的闭环、生命周期和 known gaps 需要进入系统闭环总表。"
+		},
+		{
+			"from": "loop-orchestration",
+			"to": "architecture-views",
+			"relation": "projects_visual",
+			"reason": "重要 loop/state/workflow 必须有 dedicated 或 shared visual coverage decision，避免可视化盲区。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "module-governance",
+			"relation": "governs",
+			"reason": "项目根定位约束模块治理如何解释系统、知识内容、Canvas 和 Codex 工作流边界。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "system-structure-governance",
+			"relation": "governs",
+			"reason": "结构治理判断模块归属时必须先遵守知识工程系统根身份。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "system-information-map",
+			"relation": "feeds",
+			"reason": "信息地图把根定位作为机器读取入口和引用面。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "architecture-views",
+			"relation": "projects_visual",
+			"reason": "入口图和系统总览共同投影项目根定位。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "workflows",
+			"relation": "governs",
+			"reason": "Codex 工作流既用于系统搭建维护，也用于知识工程系统运行闭环和项目调用。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "domain-maps",
+			"relation": "governs",
+			"reason": "领域分类是知识内容路由能力，不是项目顶层本体。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "loop-orchestration",
+			"relation": "feeds",
+			"reason": "loop 编排服务知识工程生命周期的持续打磨与回流。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "diagnostics",
+			"relation": "feeds",
+			"reason": "诊断以知识工程系统根定位判断事故属于哪个系统模型。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "review-system",
+			"relation": "feeds",
+			"reason": "审查以知识工程系统根定位区分系统审查、知识审查和视觉审查。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "project-ontology",
+			"relation": "validates",
+			"reason": "结构治理负责把项目根定位接入现有模块拓扑、分层快照和闭环证明。"
+		},
+		{
+			"from": "project-ontology",
+			"to": "knowledge-ingestion",
+			"relation": "governs",
+			"reason": "项目根定位把知识进入、结构化、审查、检索和 Codex 调用作为知识工程生命周期的一部分。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "inbox",
+			"relation": "governs",
+			"reason": "摄入子系统规定原始材料何时进入 inbox、何时直接登记，以及 inbox 不可作为引用真相。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "source-registry",
+			"relation": "governs",
+			"reason": "摄入子系统规定 source record 的来源类型、质量预审、去重和引用方式。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "domain-maps",
+			"relation": "routes_to",
+			"reason": "摄入链路在原子化前必须交给领域分类路由或登记 taxonomy gap。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "review-system",
+			"relation": "hands_off_to",
+			"reason": "来源质量、时效性、证据冲突、版权或高风险内容需要进入审查。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "diagnostics",
+			"relation": "hands_off_to",
+			"reason": "如果进入链路暴露 schema、route、闭环或可视化盲区，交给诊断做系统升级。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "loop-orchestration",
+			"relation": "hands_off_to",
+			"reason": "批量摄入、分类缺口或来源清洗可形成 durable loop。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "atomic-knowledge",
+			"relation": "feeds",
+			"reason": "通过来源质量和领域路由后，材料才进入原子知识提炼。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "indexes",
+			"relation": "feeds",
+			"reason": "摄入改变 source/note/synthesis/workflow 后要求刷新机器索引。"
+		},
+		{
+			"from": "knowledge-ingestion",
+			"to": "architecture-views",
+			"relation": "projects_visual",
+			"reason": "知识摄入作为稳定系统子系统必须有 dedicated Canvas 视觉影子。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "knowledge-ingestion",
+			"relation": "validates",
+			"reason": "结构治理负责确认 knowledge-ingestion 是系统治理层子系统，而不是把 inbox/source 重新归类。"
+		},
+		{
+			"from": "git-governance",
+			"to": "technical-documentation",
+			"relation": "feeds",
+			"reason": "GitHub 发布和版本维护说明由技术文档解释。"
+		},
+		{
+			"from": "git-governance",
+			"to": "review-system",
+			"relation": "hands_off_to",
+			"reason": "提交、公开仓库或发布前需要审查敏感信息和外部读者质量。"
+		},
+		{
+			"from": "git-governance",
+			"to": "diagnostics",
+			"relation": "hands_off_to",
+			"reason": "Git 状态、远端、发布或校验失败属于系统性故障时交给诊断。"
+		},
+		{
+			"from": "git-governance",
+			"to": "tools",
+			"relation": "feeds",
+			"reason": "Git 状态检查和治理校验脚本登记到工具层。"
+		},
+		{
+			"from": "git-governance",
+			"to": "architecture-views",
+			"relation": "projects_visual",
+			"reason": "Git 治理作为稳定系统模块需要 dedicated Canvas 视觉影子。"
+		},
+		{
+			"from": "system-structure-governance",
+			"to": "git-governance",
+			"relation": "validates",
+			"reason": "结构治理确认 Git 治理是系统治理层同级模块，而不是技术文档的局部说明。"
+		}
+	],
+	"branch_decision_policy": {
+		"attach_to_existing_module": "同一责任边界内的文件、脚本、文档、schema、Canvas 或小流程，归入现有模块。",
+		"create_child_module": "同一分支下形成独立机器真相、路由、校验或闭环，但仍被上级模块语义包含。",
+		"create_peer_module": "同一 owner_layer 下责任边界独立，长期消费者和验证生命周期不同。",
+		"create_new_branch": "现有 owner_layer 无法表达，且会发展出多个稳定模块、专属真相、路由、校验和可视化体系。",
+		"defer_as_draft": "目的、边界或消费者不稳定，只进入草稿/临时区，不进入稳定拓扑。",
+		"merge_or_retire": "现有模块被吸收、重复或过期，按迁移记录合并或归档。"
+	},
+	"pending_decisions": [],
+	"validation": [
+		"scripts/validate-system.ps1"
+	],
+	"current_layer_relationship_audit": {
+		"date": "2026-06-10",
+		"status": "closed",
+		"trigger": "Git governance added as a stable system-governance module with local remote origin configured.",
+		"scope": [
+			"system/information-map.json modules",
+			"system/module-layer-model.json owner_layer/module_kind snapshot",
+			"system/module-relationship-map.json branches and relationships",
+			"system/system-closure-map.json module owner_layer and lifecycle",
+			"knowledge ingestion legacy docs/templates/inbox/source surfaces",
+			"Canvas system overview and dedicated ingestion subsystem view"
+		],
+		"method": [
+			"Keep inbox/source-registry in knowledge-content because they store content assets.",
+			"Add knowledge-ingestion to system-governance because it governs entry workflow, quality gates and handoffs.",
+			"Check every new relationship endpoint is a registered module.",
+			"Require activation proof, visual coverage and route synchronization before claiming the subsystem is effective."
+		],
+		"module_coverage": {
+			"information_map_modules": 23,
+			"layer_assignments": 23,
+			"topology_modules": 23,
+			"closure_modules": 23,
+			"audited_modules": 23,
+			"mismatches": []
+		},
+		"layer_alignment": [
+			{
+				"branch_id": "knowledge-content",
+				"module_count": 6,
+				"modules": [
+					"inbox",
+					"source-registry",
+					"domain-maps",
+					"atomic-knowledge",
+					"synthesis",
+					"evals"
+				],
+				"action": "adopt",
+				"audit_result": "accepted as current branch grouping"
+			},
+			{
+				"branch_id": "system-governance",
+				"module_count": 12,
+				"modules": [
+					"module-governance",
+					"system-structure-governance",
+					"system-information-map",
+					"system-closure",
+					"technical-documentation",
+					"diagnostics",
+					"artifact-form-decision",
+					"loop-orchestration",
+					"review-system",
+					"project-ontology",
+					"knowledge-ingestion",
+					"git-governance"
+				],
+				"action": "adopt",
+				"audit_result": "accepted with git-governance added as version-control governance under system-governance"
+			},
+			{
+				"branch_id": "machine-infrastructure",
+				"module_count": 3,
+				"modules": [
+					"indexes",
+					"schemas",
+					"tools"
+				],
+				"action": "adopt",
+				"audit_result": "accepted as current branch grouping"
+			},
+			{
+				"branch_id": "visual-projection",
+				"module_count": 1,
+				"modules": [
+					"architecture-views"
+				],
+				"action": "adopt",
+				"audit_result": "accepted as current branch grouping"
+			},
+			{
+				"branch_id": "project-consumption",
+				"module_count": 1,
+				"modules": [
+					"workflows"
+				],
+				"action": "adopt",
+				"audit_result": "accepted as current branch grouping"
+			},
+			{
+				"branch_id": "temporary-and-archive",
+				"module_count": 0,
+				"modules": [],
+				"action": "adopt",
+				"audit_result": "accepted as current branch grouping"
+			}
+		],
+		"relationship_edge_audit": {
+			"total_edges": 54,
+			"orphan_edges": [],
+			"action": "adopt_current_relationship_edges_with_knowledge_ingestion_handoffs",
+			"result": "relationship_edge_count_matches_current_relationships_after_git_governance_activation"
+		},
+		"legacy_asset_actions": [
+			{
+				"asset": "docs/ingestion-workflow.md",
+				"previous_role": "human workflow note for capture and distillation",
+				"action": "adopt",
+				"new_owner": "knowledge-ingestion",
+				"result": "managed human explanation under knowledge-ingestion-docs-map"
+			},
+			{
+				"asset": "docs/source-quality.md",
+				"previous_role": "standalone source quality guide",
+				"action": "adopt",
+				"new_owner": "knowledge-ingestion",
+				"result": "source quality precheck criteria for ingestion gates"
+			},
+			{
+				"asset": "00-inbox/README.md",
+				"previous_role": "local folder explanation",
+				"action": "adopt",
+				"new_owner": "knowledge-ingestion",
+				"result": "raw capture entry explanation governed by the ingestion subsystem"
+			},
+			{
+				"asset": "templates/",
+				"previous_role": "generic knowledge item templates",
+				"action": "adopt",
+				"new_owner": "knowledge-ingestion",
+				"result": "source-type and downstream output templates selected by ingestion workflow"
+			},
+			{
+				"asset": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas#stage-capture",
+				"previous_role": "system overview stage only",
+				"action": "migrate",
+				"new_owner": "knowledge-ingestion",
+				"result": "overview entry point linking to dedicated knowledge-ingestion subsystem view"
+			}
+		],
+		"acceptance": "Accepted. git-governance is now a system-governance module for local version control, remote origin, validation and approval boundaries; 23 stable modules are covered across information-map, module-layer-model, module-relationship-map and system-closure-map."
+	},
+	"latest_project_ontology_structure_audit": {
+		"date": "2026-06-08",
+		"status": "accepted",
+		"decision": "create_peer_module under system-governance",
+		"reason": "项目根身份不是知识内容分类、业务应用或单个 workflow；它是知识工程系统的上游定位契约，需要被结构治理、信息地图、闭环和 Canvas 共享引用。",
+		"adopted_legacy_assets": [
+			"README.md",
+			"docs/architecture.md",
+			"docs/codex-integration.md",
+			"Canvas entry/system overview wording",
+			"project-consumption layer wording"
+		],
+		"synchronized_surfaces": [
+			"system/project-ontology.json",
+			"system/route-registry.json",
+			"system/information-map.json",
+			"system/module-layer-model.json",
+			"system/module-relationship-map.json",
+			"system/system-closure-map.json",
+			"system/visual-coverage-map.json",
+			"system/canvas-registry.json",
+			"system/canvas-view-graph.json"
+		]
+	}
+}

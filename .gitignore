@@ -1,0 +1,21 @@
+.DS_Store
+Thumbs.db
+
+# Local caches and generated working state
+.cache/
+.tmp/
+tmp/
+
+# Obsidian local UI/session state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Dependency folders if tooling is added later
+node_modules/
+.venv/
+__pycache__/

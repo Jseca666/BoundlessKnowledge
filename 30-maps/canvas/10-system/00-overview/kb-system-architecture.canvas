@@ -1,0 +1,706 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"text": "# 无界知识：知识工程系统架构图\n\n左侧是知识工程生命周期；右侧是纵向导航栏。项目根定位由 project-ontology 接管，导航线不穿插主系统结构。",
+			"x": -1040,
+			"y": -700,
+			"width": 2280,
+			"height": 120,
+			"color": "6"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"text": "# 读图口径\n\n主线从左到右是知识工程生命周期；模块归属看底部派生快照，模块关系和分支判断看系统结构治理；右侧文件节点只用于 Obsidian 跳转。",
+			"x": -1040,
+			"y": -520,
+			"width": 2280,
+			"height": 90,
+			"color": "6"
+		},
+		{
+			"id": "stage-capture",
+			"type": "text",
+			"text": "# 1. 捕获与来源登记\n\n论文、GitHub、网页、草稿先进入 inbox，再形成 source record。\n\n输出：可追溯来源。",
+			"x": -1040,
+			"y": -300,
+			"width": 360,
+			"height": 230,
+			"color": "4"
+		},
+		{
+			"id": "stage-domain",
+			"type": "text",
+			"text": "# 2. 分类路由\n\n领域分类是知识内容路由能力，不是项目顶层本体。\n\n输出：`primary_level_3`。",
+			"x": -560,
+			"y": -300,
+			"width": 360,
+			"height": 230,
+			"color": "3"
+		},
+		{
+			"id": "stage-distill",
+			"type": "text",
+			"text": "# 3. 知识工程提炼\n\n把来源材料拆成概念、判断、方法、模式和风险。\n\n输出：原子知识。",
+			"x": -80,
+			"y": -300,
+			"width": 360,
+			"height": 230,
+			"color": "3"
+		},
+		{
+			"id": "stage-index",
+			"type": "text",
+			"text": "# 4. 存储与索引\n\nGit + Markdown + Canvas + catalog。\n\n后续按压力接 SQLite FTS、向量库或图数据库。",
+			"x": 400,
+			"y": -300,
+			"width": 360,
+			"height": 230,
+			"color": "6"
+		},
+		{
+			"id": "stage-codex",
+			"type": "text",
+			"text": "# 5. Codex 工作流与回流\n\nCodex 工作流既维护系统，也运行检索、项目调用和复盘回流闭环。",
+			"x": 880,
+			"y": -300,
+			"width": 360,
+			"height": 230,
+			"color": "2"
+		},
+		{
+			"id": "right-nav-title",
+			"type": "text",
+			"text": "# 导航栏\n\n只负责跳转，不参与左侧系统数据流。",
+			"x": 1500,
+			"y": -560,
+			"width": 330,
+			"height": 70,
+			"color": "5"
+		},
+		{
+			"id": "back-to-navigation-index",
+			"type": "file",
+			"file": "30-maps/canvas/00-entry/kb-navigation-index.canvas",
+			"x": 1850,
+			"y": -470,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "domain-taxonomy-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
+			"x": 1850,
+			"y": -410,
+			"width": 64,
+			"height": 48,
+			"color": "3"
+		},
+		{
+			"id": "canvas-directory-layout-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-directory-layout.canvas",
+			"x": 1850,
+			"y": 500,
+			"width": 64,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "diagnostic-system-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+			"x": 1850,
+			"y": 100,
+			"width": 64,
+			"height": 48,
+			"color": "1"
+		},
+		{
+			"id": "system-closure-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
+			"x": 1850,
+			"y": -10,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "status-band",
+			"type": "text",
+			"text": "# 状态与反馈\n\n状态卡只服务系统理解，不承担导航。要看其他图，用右侧导航栏。",
+			"x": -1040,
+			"y": 90,
+			"width": 2280,
+			"height": 80,
+			"color": "5"
+		},
+		{
+			"id": "taxonomy-status",
+			"type": "text",
+			"text": "# 分类状态\n\nv0.1 completed：45/45 二级完成，450 个三级方向簇。正式条目必须落到三级。",
+			"x": -560,
+			"y": 230,
+			"width": 420,
+			"height": 150,
+			"color": "3"
+		},
+		{
+			"id": "loop-status",
+			"type": "text",
+			"text": "# loop 状态\n\n`taxonomy-refinement` 已完成。后续新增 gap 时按 loop 单元继续打磨。",
+			"x": -80,
+			"y": 230,
+			"width": 420,
+			"height": 150,
+			"color": "5"
+		},
+		{
+			"id": "machine-truth-band",
+			"type": "text",
+			"text": "# 机器真相\n\n这些文件决定根定位、系统行为、模块拓扑、派生分层、分类、状态和索引。画布只做视觉投影。",
+			"x": -1040,
+			"y": 500,
+			"width": 2280,
+			"height": 80,
+			"color": "6"
+		},
+		{
+			"id": "information-map-file",
+			"type": "file",
+			"file": "system/information-map.json",
+			"x": -554,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "route-registry-file",
+			"type": "file",
+			"file": "system/route-registry.json",
+			"x": 6,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "taxonomy-registry-file",
+			"type": "file",
+			"file": "30-maps/domains/domain-taxonomy.registry.json",
+			"x": 286,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "3"
+		},
+		{
+			"id": "loop-state-file",
+			"type": "file",
+			"file": "system/loops/taxonomy-refinement/state.json",
+			"x": 566,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "catalog-file",
+			"type": "file",
+			"file": "70-indexes/catalog.json",
+			"x": 846,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "workflow-file",
+			"type": "file",
+			"file": "50-workflows/codex/kb-retrieval-context-pack.md",
+			"x": 1126,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "2"
+		},
+		{
+			"id": "nav-label-back-to-navigation-index",
+			"type": "text",
+			"text": "返回：知识工程系统入口",
+			"x": 1500,
+			"y": -470,
+			"width": 330,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "nav-label-domain-taxonomy-canvas-file",
+			"type": "text",
+			"text": "相关：知识领域分类",
+			"x": 1500,
+			"y": -410,
+			"width": 330,
+			"height": 48,
+			"color": "3"
+		},
+		{
+			"id": "nav-label-canvas-system-canvas-file",
+			"type": "text",
+			"text": "下钻：Canvas 子系统",
+			"x": 1500,
+			"y": -350,
+			"width": 330,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "nav-label-canvas-directory-layout-canvas-file",
+			"type": "text",
+			"text": "相关：Canvas 目录布局",
+			"x": 1500,
+			"y": 500,
+			"width": 330,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "nav-label-diagnostic-system-canvas-file",
+			"type": "text",
+			"text": "下钻：诊断与修复系统",
+			"x": 1500,
+			"y": 100,
+			"width": 330,
+			"height": 48,
+			"color": "1"
+		},
+		{
+			"id": "nav-label-system-closure-canvas-file",
+			"type": "text",
+			"text": "下钻：系统闭环总表",
+			"x": 1500,
+			"y": -10,
+			"width": 330,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "feedback-note",
+			"type": "text",
+			"text": "回流提示：项目复盘重新进入捕获登记。",
+			"x": 880,
+			"y": 0,
+			"width": 360,
+			"height": 70,
+			"color": "1"
+		},
+		{
+			"id": "canvas-system-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+			"x": 1850,
+			"y": -350,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "review-status",
+			"type": "text",
+			"x": 400,
+			"y": 230,
+			"width": 420,
+			"height": 150,
+			"color": "5",
+			"text": "# 审查状态\n\nreview-system 负责系统内部和外部知识质量审查。明确缺陷再交给 diagnostics。"
+		},
+		{
+			"id": "nav-label-review-system-canvas-file",
+			"type": "text",
+			"x": 1500,
+			"y": 210,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "下钻：审查模块"
+		},
+		{
+			"id": "review-system-canvas-file",
+			"type": "file",
+			"x": 1850,
+			"y": 210,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas"
+		},
+		{
+			"id": "file-label-information-map-file",
+			"type": "text",
+			"x": -760,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "6",
+			"text": "信息地图\n模块边界与数据流"
+		},
+		{
+			"id": "file-label-route-registry-file",
+			"type": "text",
+			"x": -200,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "6",
+			"text": "路由表\n任务入口与校验"
+		},
+		{
+			"id": "file-label-taxonomy-registry-file",
+			"type": "text",
+			"x": 80,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "3",
+			"text": "分类真相\n完整三级分类树"
+		},
+		{
+			"id": "file-label-loop-state-file",
+			"type": "text",
+			"x": 360,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "5",
+			"text": "循环状态\n分类打磨进度"
+		},
+		{
+			"id": "file-label-catalog-file",
+			"type": "text",
+			"x": 640,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "6",
+			"text": "索引入口\n可检索条目"
+		},
+		{
+			"id": "file-label-workflow-file",
+			"type": "text",
+			"x": 920,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "2",
+			"text": "工作流包\nCodex 调用与回流"
+		},
+		{
+			"id": "file-label-module-layer-model-file",
+			"type": "text",
+			"x": -480,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "6",
+			"text": "分层模型\n模块归属轴"
+		},
+		{
+			"id": "module-layer-model-file",
+			"type": "file",
+			"file": "system/module-layer-model.json",
+			"x": -274,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "structure-status",
+			"type": "text",
+			"text": "# 结构治理状态\n\nsystem-structure-governance 接管模块拓扑、关系图和新分支决策；module-layer-model 只是派生快照。",
+			"x": 880,
+			"y": 390,
+			"width": 360,
+			"height": 100,
+			"color": "6"
+		},
+		{
+			"id": "nav-label-system-structure-governance-canvas-file",
+			"type": "text",
+			"text": "下钻：系统结构治理",
+			"x": 1500,
+			"y": 320,
+			"width": 330,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "system-structure-governance-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas",
+			"x": 1850,
+			"y": 320,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "nav-label-system-information-map-canvas-file",
+			"type": "text",
+			"text": "下钻：信息地图系统",
+			"x": 1500,
+			"y": 430,
+			"width": 330,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "system-information-map-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
+			"x": 1850,
+			"y": 430,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "nav-label-loop-orchestration-canvas-file",
+			"type": "text",
+			"x": 1500,
+			"y": -240,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "下钻：loop 循环编排"
+		},
+		{
+			"id": "loop-orchestration-canvas-file",
+			"type": "file",
+			"x": 1850,
+			"y": -240,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas"
+		},
+		{
+			"id": "file-label-project-ontology-file",
+			"type": "text",
+			"x": -1040,
+			"y": 640,
+			"width": 188,
+			"height": 90,
+			"color": "6",
+			"text": "根定位\n知识工程系统"
+		},
+		{
+			"id": "project-ontology-file",
+			"type": "file",
+			"file": "system/project-ontology.json",
+			"x": -834,
+			"y": 662,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构.",
+			"x": 1500,
+			"y": 640,
+			"width": 360,
+			"height": 130,
+			"color": "6"
+		},
+		{
+			"id": "knowledge-ingestion-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+			"x": 1850,
+			"y": -292,
+			"width": 64,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "nav-label-knowledge-ingestion-canvas-file",
+			"type": "text",
+			"text": "下钻：知识摄入子系统",
+			"x": 1500,
+			"y": -292,
+			"width": 330,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "bridge-anchor-knowledge-ingestion",
+			"type": "text",
+			"text": "对应：进入链路",
+			"x": 1300,
+			"y": -292,
+			"width": 170,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "nav-label-git-governance-canvas-file",
+			"type": "text",
+			"x": 1500,
+			"y": 560,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "下钻：Git 版本治理"
+		},
+		{
+			"id": "git-governance-canvas-file",
+			"type": "file",
+			"x": 1850,
+			"y": 560,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas"
+		}
+	],
+	"edges": [
+		{
+			"id": "e1",
+			"fromNode": "stage-capture",
+			"fromSide": "right",
+			"toNode": "stage-domain",
+			"toSide": "left",
+			"color": "4"
+		},
+		{
+			"id": "e2",
+			"fromNode": "stage-domain",
+			"fromSide": "right",
+			"toNode": "stage-distill",
+			"toSide": "left",
+			"color": "3"
+		},
+		{
+			"id": "e3",
+			"fromNode": "stage-distill",
+			"fromSide": "right",
+			"toNode": "stage-index",
+			"toSide": "left",
+			"color": "6"
+		},
+		{
+			"id": "e4",
+			"fromNode": "stage-index",
+			"fromSide": "right",
+			"toNode": "stage-codex",
+			"toSide": "left",
+			"color": "2"
+		},
+		{
+			"id": "e5",
+			"fromNode": "stage-codex",
+			"fromSide": "bottom",
+			"toNode": "feedback-note",
+			"toSide": "top",
+			"color": "1"
+		},
+		{
+			"id": "bridge-edge-domain-taxonomy",
+			"fromNode": "nav-label-domain-taxonomy-canvas-file",
+			"fromSide": "left",
+			"toNode": "stage-domain",
+			"toSide": "top",
+			"color": "3",
+			"label": "对应："
+		},
+		{
+			"id": "bridge-edge-canvas-system",
+			"fromNode": "nav-label-canvas-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "stage-index",
+			"toSide": "top",
+			"color": "5",
+			"label": "对应："
+		},
+		{
+			"id": "bridge-edge-system-closure",
+			"fromNode": "nav-label-system-closure-canvas-file",
+			"fromSide": "left",
+			"toNode": "feedback-note",
+			"toSide": "right",
+			"color": "5",
+			"label": "对应："
+		},
+		{
+			"id": "bridge-edge-diagnostic",
+			"fromNode": "nav-label-diagnostic-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "status-band",
+			"toSide": "right",
+			"color": "1",
+			"label": "对应："
+		},
+		{
+			"id": "bridge-edge-canvas-directory",
+			"fromNode": "nav-label-canvas-directory-layout-canvas-file",
+			"fromSide": "left",
+			"toNode": "machine-truth-band",
+			"toSide": "right",
+			"color": "4",
+			"label": "对应："
+		},
+		{
+			"id": "bridge-edge-review-system",
+			"fromNode": "nav-label-review-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "review-status",
+			"toSide": "right",
+			"color": "5",
+			"label": "对应：审查状态"
+		},
+		{
+			"id": "bridge-edge-system-structure",
+			"fromNode": "nav-label-system-structure-governance-canvas-file",
+			"fromSide": "left",
+			"toNode": "structure-status",
+			"toSide": "right",
+			"color": "6",
+			"label": "对应："
+		},
+		{
+			"id": "bridge-edge-system-information-map",
+			"fromNode": "nav-label-system-information-map-canvas-file",
+			"fromSide": "left",
+			"toNode": "machine-truth-band",
+			"toSide": "right",
+			"color": "6",
+			"label": "对应：信息地图"
+		},
+		{
+			"id": "bridge-edge-knowledge-ingestion",
+			"fromNode": "nav-label-knowledge-ingestion-canvas-file",
+			"fromSide": "left",
+			"toNode": "bridge-anchor-knowledge-ingestion",
+			"toSide": "right",
+			"color": "4",
+			"label": "对应：进入链路"
+		},
+		{
+			"id": "bridge-edge-git-governance",
+			"fromNode": "nav-label-git-governance-canvas-file",
+			"fromSide": "left",
+			"toNode": "machine-truth-band",
+			"toSide": "right",
+			"color": "5",
+			"label": "对应：版本治理"
+		}
+	]
+}

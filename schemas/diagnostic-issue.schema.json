@@ -1,0 +1,383 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://unbounded-knowledge.local/schemas/diagnostic-issue.schema.json",
+	"title": "Diagnostic Issue Record",
+	"type": "object",
+	"additionalProperties": true,
+	"required": [
+		"issue_id",
+		"title",
+		"status",
+		"repair_class",
+		"failure_packet",
+		"lower_evidence_track",
+		"upper_principle_track",
+		"failed_mindset",
+		"immediate_root_cause",
+		"owning_repair_layer",
+		"positive_model_repair",
+		"constraint_decision",
+		"affected_surfaces",
+		"capture_paths",
+		"validation",
+		"diagnosis_acceptance"
+	],
+	"properties": {
+		"issue_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"title": {
+			"type": "string",
+			"minLength": 1
+		},
+		"status": {
+			"type": "string",
+			"enum": [
+				"new",
+				"diagnosing",
+				"in_progress",
+				"captured",
+				"blocked",
+				"archived"
+			]
+		},
+		"repair_class": {
+			"type": "string",
+			"enum": [
+				"local_repair",
+				"system_upgrade",
+				"blocked_investigation"
+			]
+		},
+		"failure_packet": {
+			"type": "string",
+			"minLength": 1
+		},
+		"lower_evidence_track": {
+			"type": "string",
+			"minLength": 1
+		},
+		"upper_principle_track": {
+			"type": "string",
+			"minLength": 1
+		},
+		"failed_mindset": {
+			"type": "string",
+			"minLength": 1
+		},
+		"immediate_root_cause": {
+			"type": "string",
+			"minLength": 1
+		},
+		"owning_repair_layer": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			},
+			"minItems": 1
+		},
+		"positive_rule": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Legacy or optional guardrail-support field. Prefer positive_model_repair for new records."
+		},
+		"forbidden_pattern": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Optional. Required only when constraint_decision says a guardrail is needed."
+		},
+		"quality_gate": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Optional. Required only when constraint_decision says a validation gate is needed."
+		},
+		"affected_surfaces": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			},
+			"minItems": 1
+		},
+		"capture_paths": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"validation": {
+			"type": "object",
+			"required": [
+				"status",
+				"reports"
+			],
+			"properties": {
+				"status": {
+					"type": "string",
+					"enum": [
+						"missing",
+						"pass",
+						"fail",
+						"blocked"
+					]
+				},
+				"reports": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		},
+		"diagnosis_acceptance": {
+			"type": "string"
+		},
+		"positive_model_repair": {
+			"type": "string",
+			"minLength": 1
+		},
+		"constraint_decision": {
+			"type": "string",
+			"minLength": 1
+		},
+		"generalization_scan": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "Required for captured system_upgrade records after the same-class impact scan contract becomes active.",
+			"required": [
+				"observed_instance",
+				"failure_class",
+				"same_class_assets_checked",
+				"sibling_surfaces_checked",
+				"affected_modules",
+				"exemptions",
+				"recurrence_gate"
+			],
+			"properties": {
+				"observed_instance": {
+					"type": "string",
+					"minLength": 1
+				},
+				"failure_class": {
+					"type": "string",
+					"minLength": 1
+				},
+				"same_class_assets_checked": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"sibling_surfaces_checked": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"affected_modules": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"exemptions": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"recurrence_gate": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"generalization_scan_exemption": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Legacy-only exemption for captured system_upgrade records created before the same-class impact scan contract."
+		},
+		"diagnostic_self_audit": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "Required when the issue diagnoses a diagnostic-system failure.",
+			"required": [
+				"trigger",
+				"missed_issue_pattern",
+				"missed_layer",
+				"corrective_contract",
+				"recurrence_gate"
+			],
+			"properties": {
+				"trigger": {
+					"type": "string",
+					"minLength": 1
+				},
+				"missed_issue_pattern": {
+					"type": "string",
+					"minLength": 1
+				},
+				"missed_layer": {
+					"type": "string",
+					"minLength": 1
+				},
+				"corrective_contract": {
+					"type": "string",
+					"minLength": 1
+				},
+				"recurrence_gate": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"incident_manifestation": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "Observed accident or symptom. This is evidence for diagnosis, not the root problem itself.",
+			"required": [
+				"observed_incident",
+				"evidence_surface",
+				"why_it_is_not_root_problem"
+			],
+			"properties": {
+				"observed_incident": {
+					"type": "string",
+					"minLength": 1
+				},
+				"evidence_surface": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					},
+					"minItems": 1
+				},
+				"why_it_is_not_root_problem": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"root_problem": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "The deeper recurring system problem inferred from the incident evidence.",
+			"required": [
+				"problem_statement",
+				"recurrence_mechanism",
+				"owning_system_model"
+			],
+			"properties": {
+				"problem_statement": {
+					"type": "string",
+					"minLength": 1
+				},
+				"recurrence_mechanism": {
+					"type": "string",
+					"minLength": 1
+				},
+				"owning_system_model": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"system_regulation_target": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "The system model, rule, schema, route, gate or workflow surface that must be adjusted to repair the root problem.",
+			"required": [
+				"target_surface",
+				"update_mode",
+				"acceptance_gate"
+			],
+			"properties": {
+				"target_surface": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					},
+					"minItems": 1
+				},
+				"update_mode": {
+					"type": "string",
+					"minLength": 1
+				},
+				"acceptance_gate": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"failure_learning_decision": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "Optional controlled failure-learning-loop decision for non-trivial captured system upgrades.",
+			"required": [
+				"status",
+				"reason"
+			],
+			"properties": {
+				"status": {
+					"type": "string",
+					"enum": [
+						"not_needed",
+						"deferred",
+						"opened",
+						"blocked"
+					]
+				},
+				"reason": {
+					"type": "string",
+					"minLength": 1
+				},
+				"risk_level": {
+					"type": "string",
+					"enum": [
+						"low",
+						"medium",
+						"high",
+						"critical"
+					]
+				},
+				"refs": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		},
+		"failure_postmortem_ref": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Optional reference to a failure-learning postmortem record."
+		},
+		"evolution_proposal_ref": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Optional reference to a controlled improvement proposal."
+		},
+		"regression_guard_ref": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Optional reference to a regression guard result or required guard."
+		},
+		"promotion_decision_ref": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Optional reference to a promotion/rejection/defer decision."
+		}
+	}
+}

@@ -1,0 +1,583 @@
+{
+	"id": "module-governance-policy",
+	"version": "2.0.1",
+	"updated": "2026-06-10",
+	"purpose": "Define reusable placement, registration, validation and lifecycle rules for any new module, directory, workflow, tool, schema, index, canvas, project-ontology surface or knowledge-engineering system capability.",
+	"decision_agent": {
+		"id": "module-governance-advisor",
+		"name": "新增模块治理代理",
+		"role": "Before creating or expanding a module, decide its layer, boundary, canonical truth, storage home, route entry, validation path and lifecycle.",
+		"trigger_when": [
+			"新增模块、目录、子系统或长期能力",
+			"新增工具、脚本、schema、workflow、loop、index、canvas 或数据流",
+			"现有文件开始变多，需要拆分目录、登记入口或归档旧版本",
+			"不确定一个东西应该放 system、docs、30-maps、50-workflows、scripts 还是 archive"
+		]
+	},
+	"principles": [
+		{
+			"id": "project-ontology-before-layering",
+			"rule": "讨论项目目标、系统/业务关系、Codex 工作流角色或顶层模块关系时，先读取 system/project-ontology.json；无界知识的根定位是知识工程系统，业务不是根层级。"
+		},
+		{
+			"id": "classify-before-create",
+			"rule": "新增内容前先判断 owner_layer、module_kind、生命周期和存储位置；不能先堆文件再事后解释。owner_layer 以 system/module-layer-model.json 为准。"
+		},
+		{
+			"id": "one-canonical-truth",
+			"rule": "每个模块必须声明机器真相来源；Markdown、Canvas 和 README 只做人类解释或视觉入口，不能替代登记文件。"
+		},
+		{
+			"id": "registered-or-draft",
+			"rule": "稳定模块必须登记到 route registry、information map、tool map、schema、loop registry、canvas registry 或 catalog 中的合适位置；未登记内容只能处于 draft 或 inbox 生命周期。"
+		},
+		{
+			"id": "separate-layer-and-lifecycle",
+			"rule": "分清职责层、目录位置和生命周期：owner_layer、storage_path、lifecycle_status 是三条轴，不能混成一个分类。"
+		},
+		{
+			"id": "thin-entry-fat-route",
+			"rule": "AGENTS.md、项目 AGENTS.md、.agents/skills/*/SKILL.md、模块基准文档、子 agent 文档和 subsystem README 都是薄层入口：只放触发条件、读序、机器真相位置、模块边界和一般性顶层原则；特殊模块说明、局部方法论、workflow、schema 字段、输出模板、校验细节和历史事故必须由 route、docs map、registry、schema、workflow 或专题文件接管。"
+		},
+		{
+			"id": "subsystem-thin-baseline-docs",
+			"rule": "重要模块和子系统内部同样遵守薄层入口：baseline_doc、child-agent doc、skill entrypoint 和 README 不承载模块全量知识；当内容需要增长时，先登记 docs_map 或机器 registry，再把细节路由到对应层。"
+		},
+		{
+			"id": "validation-follows-governance",
+			"rule": "新增模块若会影响系统行为，必须同时补校验入口或纳入现有校验，避免登记和实际文件漂移。"
+		},
+		{
+			"id": "migration-pressure-explicit",
+			"rule": "先用简单文件和薄脚本承载早期能力；当复杂度、数据量、查询需求或复用面上升时，再按明确触发条件迁移到 Node、Python、数据库、索引或服务。"
+		},
+		{
+			"id": "visual-coverage-explicit",
+			"rule": "Every stable module or important system structure must declare a visual coverage decision in system/visual-coverage-map.json: dedicated_required, shared_required, deferred, or not_applicable. The decision must include reason and review trigger when no dedicated view exists."
+		},
+		{
+			"id": "new-module-inherits-legacy-assets",
+			"rule": "新增或升级出的系统模块必须先审查并接管职责范围内已有资产；旧文件、旧图、旧规则、旧路由和旧状态不能因为新模块出现而继续游离。"
+		},
+		{
+			"id": "durable-loops-are-system-modules",
+			"rule": "任何会长期反复执行、持久记录状态、接收多个模块 handoff 或影响系统持续改进的 loop，都归入 loop-orchestration 系统模块；单个 loop 可以服务具体知识内容模块或知识工程工作流，但登记、生命周期、状态和接管责任由 loop-orchestration 统一治理。"
+		}
+	],
+	"layers": [
+		{
+			"id": "knowledge-content",
+			"name": "知识内容层",
+			"purpose": "承载外部世界知识的进入、来源、分类、原子化、综合与质量评估。",
+			"default_paths": [
+				"00-inbox/",
+				"10-sources/",
+				"20-notes/",
+				"30-maps/domains/",
+				"40-synthesis/",
+				"60-evals/"
+			],
+			"truth_policy": "Knowledge content must remain source-traceable and indexable; taxonomy registry decides classification truth.",
+			"module_layer_model": "system/module-layer-model.json"
+		},
+		{
+			"id": "system-governance",
+			"name": "系统治理层",
+			"purpose": "治理知识工程系统自身如何扩展、审查、诊断、闭环、运维、根定位和持续改进。",
+			"default_paths": [
+				".agents/skills/",
+				"system/",
+				"docs/"
+			],
+			"truth_policy": "Governance truth lives in JSON registries, queues, policies and docs maps; Markdown is explanatory.",
+			"module_layer_model": "system/module-layer-model.json"
+		},
+		{
+			"id": "machine-infrastructure",
+			"name": "机器基础设施层",
+			"purpose": "提供 schema、索引、脚本、工具和本地运行时，让系统行为可生成、可校验、可检索。",
+			"default_paths": [
+				"schemas/",
+				"scripts/",
+				"70-indexes/",
+				"system/tool-map.json"
+			],
+			"truth_policy": "Contracts, generated indexes and tool maps must be machine-readable and validated by scripts.",
+			"module_layer_model": "system/module-layer-model.json"
+		},
+		{
+			"id": "visual-projection",
+			"name": "视觉投影层",
+			"purpose": "把系统结构、模块边界、workflow、dataflow、schema、tool、loop、diagnostic 和知识结构投影成 Canvas。",
+			"default_paths": [
+				"30-maps/canvas/"
+			],
+			"truth_policy": "Canvas is the visual shadow; registry and view graph decide trust, status and navigation.",
+			"module_layer_model": "system/module-layer-model.json"
+		},
+		{
+			"id": "project-consumption",
+			"name": "Codex 工作流运行与项目调用层",
+			"purpose": "把知识工程系统能力包装为 Codex 可运行的 context pack、工作流、项目入口，并接收项目复盘回流。",
+			"default_paths": [
+				"50-workflows/",
+				"30-maps/canvas/40-project/"
+			],
+			"truth_policy": "Project-facing packs reference project ontology, catalog, routes and source-backed knowledge rather than becoming a second knowledge base.",
+			"module_layer_model": "system/module-layer-model.json"
+		},
+		{
+			"id": "temporary-and-archive",
+			"name": "临时与归档层",
+			"purpose": "表示生命周期状态：暂存、草稿、历史版本和归档。它不是稳定模块的 owner_layer。",
+			"default_paths": [
+				"00-inbox/",
+				"30-maps/canvas/80-drafts/",
+				"30-maps/canvas/90-archive/",
+				"90-archive/"
+			],
+			"truth_policy": "Temporary and archive assets can preserve evidence, but current ownership must point to one of the functional layers.",
+			"module_layer_model": "system/module-layer-model.json"
+		}
+	],
+	"governed_surfaces": [
+		{
+			"surface": "module-boundary",
+			"registry_or_map": "system/information-map.json",
+			"update_when": "A new module, subsystem, storage area, dataflow or boundary is created."
+		},
+		{
+			"surface": "project-ontology",
+			"registry_or_map": "system/project-ontology.json",
+			"update_when": "Project positioning, knowledge-engineering-system lifecycle, Codex workflow role, system-vs-knowledge boundary or top-level Canvas 读图口径 changes."
+		},
+		{
+			"surface": "system-information-map",
+			"registry_or_map": "system/information-map-manifest.json",
+			"update_when": "Information-map manifest, shards, schema, entrypoint or reference-surface lookup policy changes."
+		},
+		{
+			"surface": "task-routing",
+			"registry_or_map": "system/route-registry.json",
+			"update_when": "A task category needs a stable read/update/validate entry."
+		},
+		{
+			"surface": "diagnostics",
+			"registry_or_map": "system/diagnostics/diagnostic-system.json",
+			"update_when": "A recurring system issue, root-cause protocol, repair queue or diagnosis acceptance gate is added or changed."
+		},
+		{
+			"surface": "skills",
+			"registry_or_map": ".agents/skills/",
+			"update_when": "A thin agent entrypoint or reusable local skill is added, renamed or changes trigger ownership."
+		},
+		{
+			"surface": "subsystem-documentation",
+			"registry_or_map": "system/information-map.json",
+			"update_when": "A stable subsystem gains baseline docs, child-agent docs, routed human docs or a module-specific docs map such as system/canvas-docs-map.json."
+		},
+		{
+			"surface": "technical-documentation",
+			"registry_or_map": "system/technical-docs-map.json",
+			"update_when": "Repository setup, operations, validation, troubleshooting or GitHub-readiness documentation becomes durable."
+		},
+		{
+			"surface": "system-closure",
+			"registry_or_map": "system/system-closure-map.json",
+			"update_when": "A module is added, removed, split, merged, or its route, validation, docs, visual projection, diagnostics or lifecycle status changes."
+		},
+		{
+			"surface": "artifact-form",
+			"registry_or_map": "system/artifact-form-policy.json",
+			"update_when": "The decision concerns Markdown, JSON, Canvas, scripts, databases, services or runtime form."
+		},
+		{
+			"surface": "tools",
+			"registry_or_map": "system/tool-map.json",
+			"update_when": "A script, CLI, generator, validator or local executable becomes part of the system."
+		},
+		{
+			"surface": "canvas",
+			"registry_or_map": "system/canvas-registry.json",
+			"update_when": "A Canvas becomes a current, draft, project, domain, workflow or archived view."
+		},
+		{
+			"surface": "loops",
+			"registry_or_map": "system/loop-registry.json",
+			"update_when": "A repeated autonomous or semi-autonomous refinement process is added."
+		},
+		{
+			"surface": "schemas",
+			"registry_or_map": "schemas/",
+			"update_when": "A data structure needs stable fields, validation or cross-tool consumption."
+		},
+		{
+			"surface": "indexes",
+			"registry_or_map": "70-indexes/",
+			"update_when": "Knowledge entries, generated lookup data or catalog-facing surfaces change."
+		},
+		{
+			"surface": "visual-coverage",
+			"registry_or_map": "system/visual-coverage-map.json",
+			"update_when": "A module, workflow, schema, tool, loop, diagnostic process, taxonomy or other important structure is added, closed, visualized, shared, deferred or exempted from Canvas visualization."
+		},
+		{
+			"surface": "reviews",
+			"registry_or_map": "system/reviews/review-system.json",
+			"update_when": "A durable system review, external knowledge review, visual review, review queue, review schema or review handoff rule is added or changed."
+		},
+		{
+			"surface": "module-layer-model",
+			"registry_or_map": "system/module-layer-model.json",
+			"update_when": "system-structure-governance 做出 owner_layer/module_kind 判断后，作为派生快照同步。"
+		},
+		{
+			"surface": "system-structure-governance",
+			"registry_or_map": "system/system-structure-governance.json",
+			"update_when": "新增稳定模块、模块关系、分支归属、拆分/合并/归档判断或 module-layer-model 语义变化时更新。"
+		},
+		{
+			"surface": "module-relationship-map",
+			"registry_or_map": "system/module-relationship-map.json",
+			"update_when": "模块拓扑、关系边、分支归属或 pending_decisions 变化时更新。"
+		},
+		{
+			"surface": "thin-entrypoint-governance",
+			"registry_or_map": "system/module-governance-policy.json",
+			"update_when": "AGENTS.md, SKILL.md, module baseline docs, child-agent docs or subsystem README begin to own module-specific methods instead of routing to machine truth."
+		}
+	],
+	"new_module_contract": {
+		"required_fields": [
+			"module_id",
+			"layer",
+			"boundary",
+			"canonical_truth",
+			"storage_home",
+			"registry_entry",
+			"route_entry",
+			"inputs",
+			"outputs",
+			"consumers",
+			"validation",
+			"lifecycle_status",
+			"baseline_doc",
+			"docs_map",
+			"visual_coverage_decision",
+			"migration_or_archive_trigger",
+			"affected_surfaces_checked",
+			"owner_layer",
+			"module_kind",
+			"topology_decision",
+			"branch_decision",
+			"relationship_impact",
+			"legacy_scope",
+			"legacy_asset_audit",
+			"legacy_asset_action",
+			"activation_proof"
+		],
+		"recommended_fields": [
+			"owner_agent",
+			"naming_rule",
+			"source_of_truth_links",
+			"related_modules",
+			"quality_gate",
+			"visual_coverage_review_trigger",
+			"versioning_policy",
+			"legacy_asset_owner_before",
+			"legacy_asset_owner_after",
+			"legacy_follow_up_queue",
+			"activation_follow_up_queue",
+			"activation_owner"
+		]
+	},
+	"placement_checklist": [
+		{
+			"step": "diagnose-layer",
+			"question": "这个新增对象先由 system-structure-governance 判断：归入现有模块、创建子模块、同级模块、新分支、暂缓草稿还是合并归档？",
+			"required_output": "structure_decision_packet with owner_layer, module_kind, branch_decision and relationship_impact"
+		},
+		{
+			"step": "audit-existing-assets",
+			"question": "这个新模块或新分支的职责范围里，系统已经有哪些旧文件、旧图、旧 route、旧规则、旧状态或旧文档？它们分别由谁接管、迁移、弃用、归档或排队后续处理？",
+			"required_output": "legacy_scope, legacy_asset_audit and legacy_asset_action list"
+		},
+		{
+			"step": "choose-artifact-form",
+			"question": "它应该是 JSON、Markdown、Canvas、脚本、索引、数据库还是服务？",
+			"required_output": "chosen form and migration trigger"
+		},
+		{
+			"step": "choose-storage-home",
+			"question": "它的长期目录、草稿目录和归档目录分别在哪里？",
+			"required_output": "storage_home and lifecycle path"
+		},
+		{
+			"step": "declare-canonical-truth",
+			"question": "机器应该读哪个文件作为事实来源？人类说明放哪里？",
+			"required_output": "canonical_truth and human_explanation"
+		},
+		{
+			"step": "plan-documentation-boundary",
+			"question": "这个模块是否需要薄基准文档、子 agent 文档或文档地图？哪些细节必须拆到专题文件而不是塞进入口？",
+			"required_output": "baseline_doc, docs_map or reason not needed"
+		},
+		{
+			"step": "register-route",
+			"question": "未来遇到同类任务时，Codex 应该先读哪些文件、改哪些文件、跑哪些校验？",
+			"required_output": "route entry or reason not needed"
+		},
+		{
+			"step": "update-information-map",
+			"question": "它改变了哪些模块边界、数据流、入口、存储位置或工具环境？",
+			"required_output": "information map update"
+		},
+		{
+			"step": "attach-validation",
+			"question": "怎样发现登记漂移、文件缺失、格式错误或旧版本误用？",
+			"required_output": "validation command or validation gap"
+		},
+		{
+			"step": "record-lifecycle",
+			"question": "它现在是 draft、current、experimental、superseded 还是 archived？什么时候迁移或归档？",
+			"required_output": "lifecycle_status and trigger"
+		},
+		{
+			"step": "decide-visual-coverage",
+			"question": "Does this module or structure need a dedicated Canvas view, shared view coverage, deferred visual coverage, or a not_applicable decision?",
+			"required_output": "system/visual-coverage-map.json module_decision and required_views update, or explicit reason and review trigger"
+		},
+		{
+			"step": "prove-module-activation",
+			"question": "Before calling a new or upgraded stable system module active, does closure map contain activation_proof covering route, information map, closure, topology, legacy asset audit, visual coverage and validation?",
+			"required_output": "activation_proof in system/system-closure-map.json or a blocked/partial activation record with explicit follow-up"
+		}
+	],
+	"directory_policy": {
+		"root_rule": "Repository root and major layer roots should not become dumping grounds. If a file type will grow, create a named subdirectory and register the placement rule.",
+		"module_home_rule": "A module home directory should group files that share boundary, lifecycle and consumers. Do not group unrelated files just because they share file extension.",
+		"subdirectory_archetypes": [
+			{
+				"id": "system",
+				"meaning": "stable system truth, registries, policies and architecture state"
+			},
+			{
+				"id": "domain",
+				"meaning": "knowledge-domain classification and domain-specific maps"
+			},
+			{
+				"id": "workflow",
+				"meaning": "operational flows, context packs and reusable execution protocols"
+			},
+			{
+				"id": "project",
+				"meaning": "project-specific use of the knowledge base"
+			},
+			{
+				"id": "drafts",
+				"meaning": "unstable sketches, temporary maps and unsorted design notes"
+			},
+			{
+				"id": "archive",
+				"meaning": "superseded or historical artifacts kept for traceability"
+			}
+		]
+	},
+	"subsystem_documentation_policy": {
+		"required_when": [
+			"A subsystem has multiple human docs, machine registries, schemas, workflows, tools or Canvas views.",
+			"A baseline doc or child agent doc starts accumulating module-specific rules.",
+			"A skill entrypoint is only a thin trigger but the real method lives in several related files.",
+			"The subsystem will be maintained or extended across future Codex sessions."
+		],
+		"baseline_doc_rule": "Baseline docs, child-agent docs, skill entrypoints and subsystem README files must stay thin: role, trigger, read order, machine truth, route pointers, general constraints and explicit not_for only.",
+		"docs_map_rule": "When subsystem documentation or method detail will grow, create or update a machine-readable docs map, registry, schema or workflow and route the entrypoint to it.",
+		"doc_route_roles": [
+			"entry",
+			"architecture",
+			"boundary",
+			"workflow",
+			"data-separation",
+			"validation",
+			"audit",
+			"operations",
+			"archive"
+		],
+		"forbidden_patterns": [
+			"Putting all subsystem rules into one Markdown file.",
+			"Treating Markdown wording as machine truth when a registry or schema should own the behavior.",
+			"Adding hidden local method rules to a child-agent document without a route or docs map.",
+			"Updating a documentation rule without updating affected routes, information-map, validation and visual links.",
+			"Putting workflow steps, output templates or schema field lists into SKILL.md instead of the routed machine contract.",
+			"Letting an internal module README become the hidden behavior source for that module."
+		],
+		"canvas_reference_implementation": {
+			"docs_map": "system/canvas-docs-map.json",
+			"baseline_doc": "docs/canvas/README.md",
+			"human_doc_home": "docs/canvas/"
+		},
+		"technical_documentation_reference": {
+			"docs_map": "system/technical-docs-map.json",
+			"baseline_doc": "docs/technical/README.md",
+			"human_doc_home": "docs/technical/"
+		},
+		"entrypoint_policy_ref": "thin_entrypoint_policy"
+	},
+	"lifecycle_status_values": [
+		{
+			"status": "draft",
+			"meaning": "not canonical; may move, split or disappear"
+		},
+		{
+			"status": "experimental",
+			"meaning": "usable but not yet a default route or stable contract"
+		},
+		{
+			"status": "current",
+			"meaning": "default trusted entry for its module or view family"
+		},
+		{
+			"status": "superseded",
+			"meaning": "replaced by a newer current artifact"
+		},
+		{
+			"status": "archived",
+			"meaning": "kept only for historical traceability"
+		}
+	],
+	"minimum_system_change_validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-diagnostics.ps1",
+		"scripts/build-index.ps1",
+		"scripts/validate-kb.ps1",
+		"scripts/validate-reviews.ps1"
+	],
+	"conditional_validation": [
+		{
+			"trigger": "Canvas assets, Canvas registry, Canvas view graph, Canvas docs map or visual coverage map changes",
+			"validation": [
+				"scripts/validate-canvas.ps1",
+				"scripts/audit-canvas-visual.ps1"
+			]
+		},
+		{
+			"trigger": "Diagnostic contract, diagnostic queue, diagnostic skill or diagnostic schema changes",
+			"validation": [
+				"scripts/validate-diagnostics.ps1"
+			]
+		},
+		{
+			"trigger": "Knowledge source, note, synthesis, workflow, eval or catalog-facing content changes",
+			"validation": [
+				"scripts/build-index.ps1",
+				"scripts/validate-kb.ps1"
+			]
+		},
+		{
+			"trigger": "Review system contract, review queue, review skill, review docs map or review schema changes",
+			"validation": [
+				"scripts/validate-reviews.ps1"
+			]
+		},
+		{
+			"trigger": "New or upgraded stable system module activation changes",
+			"validation": [
+				"scripts/validate-system.ps1"
+			]
+		},
+		{
+			"trigger": "Agent, skill, module baseline doc, child-agent doc or subsystem README entrypoint changes",
+			"validation": [
+				"scripts/validate-system.ps1"
+			]
+		}
+	],
+	"module_layer_model": {
+		"path": "system/module-layer-model.json",
+		"owner_module": "system-structure-governance",
+		"role": "derived owner_layer/module_kind snapshot, not the full topology decision brain",
+		"validate_with": "scripts/validate-system.ps1"
+	},
+	"system_structure_governance": {
+		"owner_module": "system-structure-governance",
+		"contract": "新增稳定模块、子系统、分支或跨模块关系前，先由 system-structure-governance 形成结构判断；module-governance 负责把判断登记成路由、存储、文档、闭环、可视化和校验契约。",
+		"machine_truth": [
+			"system/system-structure-governance.json",
+			"system/module-relationship-map.json",
+			"system/module-layer-model.json"
+		],
+		"legacy_responsibility_rule": "system-structure-governance 的结构判断必须覆盖既有资产；module-governance 负责把 legacy_asset_audit 和 legacy_asset_action 登记进新模块契约。"
+	},
+	"module_activation_contract": {
+		"rule": "Registration is not activation. A new or upgraded stable system module is active only after activation_proof exists in system/system-closure-map.json and references legacy responsibility, topology, route, information-map, visual coverage and validation evidence.",
+		"required_when": [
+			"new stable system module",
+			"upgraded system module boundary",
+			"new child or peer module under a system-governance branch",
+			"module promoted from draft or partial to current"
+		],
+		"current_required_modules": [
+			"system-structure-governance",
+			"system-information-map",
+			"loop-orchestration",
+			"project-ontology",
+			"knowledge-ingestion"
+		],
+		"activation_status_values": [
+			"active",
+			"partial",
+			"blocked"
+		],
+		"required_fields": [
+			"activation_id",
+			"module_id",
+			"activation_status",
+			"activation_date",
+			"route_registered",
+			"information_map_registered",
+			"closure_registered",
+			"topology_registered",
+			"legacy_asset_audit",
+			"visual_coverage_decision",
+			"validation_reports",
+			"acceptance"
+		],
+		"acceptance_rule": "No response, diagnostic acceptance, review acceptance or closure status may claim the module is active/effective before activation_proof passes validation.",
+		"validation": [
+			"scripts/validate-system.ps1"
+		]
+	},
+	"thin_entrypoint_policy": {
+		"id": "thin-entrypoint-routing-and-layering",
+		"purpose": "Keep all agent, skill and module entry documents thin while preserving discoverability through machine routes and docs maps.",
+		"applies_to": [
+			"AGENTS.md",
+			"project AGENTS.md",
+			".agents/skills/*/SKILL.md",
+			"module baseline docs",
+			"child-agent docs",
+			"subsystem README entrypoints"
+		],
+		"allowed_content": [
+			"trigger or use boundary",
+			"read order and route id",
+			"machine truth references",
+			"owner layer and module boundary summary",
+			"general top-level principles"
+		],
+		"routed_content": [
+			"module-specific workflow",
+			"schema field list or output template",
+			"local methodology",
+			"special-case operating rules",
+			"validator implementation details",
+			"historical issue records",
+			"long examples or tutorials"
+		],
+		"routing_rule": "When an entrypoint needs more than thin guidance, update the owning route, docs map, registry, schema or workflow and keep the entrypoint as a pointer.",
+		"internal_module_rule": "The same boundary applies inside every module and subsystem; local README, skill or child-agent files cannot become hidden sources of system behavior.",
+		"validation": [
+			"scripts/validate-system.ps1"
+		]
+	}
+}

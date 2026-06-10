@@ -1,0 +1,66 @@
+{
+  "id": "loop-registry",
+  "version": "0.4.0",
+  "updated": "2026-06-08",
+  "loop_standard": {
+    "required_files": [
+      "loop.json",
+      "queue.json",
+      "state.json",
+      "runner-contract.json"
+    ],
+    "required_dirs": [
+      "runs/",
+      "outputs/"
+    ],
+    "rule": "Loop registry only points to loop roots. Loop-specific rules, queue, state, runs and outputs live inside each loop directory."
+  },
+  "loops": [
+    {
+      "id": "taxonomy-refinement",
+      "name": "知识分类体系逐项打磨循环",
+      "status": "active",
+      "kind": "sequential-agent-loop",
+      "scope": "knowledge-domain-taxonomy",
+      "root": "system/loops/taxonomy-refinement/",
+      "config": "system/loops/taxonomy-refinement/loop.json",
+      "queue": "system/loops/taxonomy-refinement/queue.json",
+      "state": "system/loops/taxonomy-refinement/state.json",
+      "runner_contract": "system/loops/taxonomy-refinement/runner-contract.json",
+      "runs_dir": "system/loops/taxonomy-refinement/runs/",
+      "outputs_dir": "system/loops/taxonomy-refinement/outputs/",
+      "baseline_doc": "system/loops/taxonomy-refinement/README.md",
+      "docs_map": "30-maps/domains/domain-taxonomy.docs.json",
+      "owner_module": "loop-orchestration",
+      "serving_module": "domain-maps",
+      "adoption_status": "adopted_legacy_loop",
+      "visual_view": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas"
+    }
+  ],
+  "module_boundary": {
+    "owner_module": "loop-orchestration",
+    "owner_layer": "system-governance",
+    "module_kind": "cross-module-loop-orchestration",
+    "role": "系统级循环编排模块，登记和治理所有稳定、可重复、可暂停、可恢复的人工/agent 协作循环。",
+    "owns": [
+      "loop registry and durable loop discovery",
+      "loop lifecycle status, queue, state, run logs and outputs contract",
+      "handoff intake from review, diagnostics, taxonomy and future system modules",
+      "legacy loop adoption and visual coverage requirement for important loops"
+    ],
+    "does_not_own": [
+      "the domain knowledge truth produced by a loop",
+      "root-cause diagnosis after a confirmed failure",
+      "visual layout aesthetics of Canvas views",
+      "unattended multi-loop scheduler until explicitly introduced as a runtime service"
+    ]
+  },
+  "adoption_policy": {
+    "rule": "新增或升格 loop-orchestration 后，必须接管旧 loop 资产；旧 loop 只能被 adopt、migrate、archive、deprecate、exempt_with_reason 或 queue_follow_up，不能无人负责。",
+    "current_legacy_asset_audit": "system/diagnostics/issue-repair-queue.json#diag-20260608-loop-orchestration-underclassified"
+  },
+  "visual_coverage": {
+    "module_decision": "system/visual-coverage-map.json#module_decisions.loop-orchestration",
+    "dedicated_view": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas"
+  }
+}

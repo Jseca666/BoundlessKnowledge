@@ -1,0 +1,68 @@
+{
+  "id": "2026-06-05-026",
+  "loop_id": "taxonomy-refinement",
+  "unit_id": "4.4",
+  "started_at": "2026-06-05",
+  "completed_at": "2026-06-05",
+  "inputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/queue.json",
+    "system/loops/taxonomy-refinement/state.json"
+  ],
+  "outputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/outputs/4.4-summary.md"
+  ],
+  "diagnosis": {
+    "level_1": "农业、生态与资源科学",
+    "level_2": "农业工程与智慧农业",
+    "boundary": "覆盖“农业、生态与资源科学”下与“农业工程与智慧农业”相关的稳定知识方向、研究对象、方法体系、证据形态和实践接口。若条目核心问题属于相邻二级，应以主要对象和主要证据链确定 primary_level_2，其他方向作为 related_level_3 关联。",
+    "adjacent_overlap_rule": "以知识条目的主要对象、主要证据链和主要使用场景确定 primary_level_3；交叉方向登记到 related_level_3。",
+    "risk_notes": [
+      "避免把工具、公司、产品、短期热点作为三级分类。",
+      "新兴交叉主题先落入最近三级方向簇，并通过 taxonomy_gap 标注缺口。"
+    ]
+  },
+  "level_3_count": 10,
+  "routing_examples": [
+    {
+      "item": "农业机械、装备与自动化相关知识条目",
+      "primary_level_3": "4.4.1 农业机械、装备与自动化",
+      "related_level_3": []
+    },
+    {
+      "item": "农田水利、灌溉与排水工程相关知识条目",
+      "primary_level_3": "4.4.2 农田水利、灌溉与排水工程",
+      "related_level_3": [
+        "4.4.1 农业机械、装备与自动化"
+      ]
+    },
+    {
+      "item": "农业建筑、设施与环境控制相关知识条目",
+      "primary_level_3": "4.4.3 农业建筑、设施与环境控制",
+      "related_level_3": [
+        "4.4.1 农业机械、装备与自动化"
+      ]
+    },
+    {
+      "item": "农业遥感、传感与物联网相关知识条目",
+      "primary_level_3": "4.4.4 农业遥感、传感与物联网",
+      "related_level_3": [
+        "4.4.1 农业机械、装备与自动化"
+      ]
+    }
+  ],
+  "quality_gate_result": {
+    "passed": true,
+    "coverage": "pass",
+    "stability": "pass",
+    "non_tool_or_product": "pass",
+    "routability": "pass",
+    "no_unclassified": "pass"
+  },
+  "state_transition": {
+    "from": "pending_or_in_progress",
+    "to": "completed",
+    "next_unit": "4.5"
+  }
+}

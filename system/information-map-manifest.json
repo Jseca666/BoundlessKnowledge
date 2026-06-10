@@ -1,0 +1,54 @@
+{
+	"id": "information-map-manifest",
+	"artifact_type": "information_map_manifest",
+	"owner_module": "system-information-map",
+	"status": "current",
+	"source_map_ref": "system/information-map.json",
+	"purpose": "Provide a token-light entrypoint for machine readers before loading the full system information map.",
+	"read_policy": {
+		"default_entrypoint": "Read this manifest before loading system/information-map.json when the task only needs map refs.",
+		"full_map_read_rule": "Load system/information-map.json only when the manifest and relevant shard are insufficient.",
+		"token_policy": "Prefer shard refs and reference surfaces over full-map scans."
+	},
+	"shard_index": [
+		{
+			"shard_id": "information-map-core-refs",
+			"shard_ref": "system/information-map-shards/information-map-core-refs.json",
+			"content_scope": [
+				"information_map_root",
+				"module_boundary_refs",
+				"dataflow_entrypoints",
+				"project_ontology_ref",
+				"knowledge_ingestion_ref"
+			],
+			"read_policy": "Use for module boundary, dataflow, entrypoint and root information-map refs."
+		},
+		{
+			"shard_id": "information-map-governance-refs",
+			"shard_ref": "system/information-map-shards/information-map-governance-refs.json",
+			"content_scope": [
+				"closure_refs",
+				"topology_refs",
+				"visual_coverage_refs",
+				"route_refs",
+				"validation_refs",
+				"project_ontology_closure_and_visual_refs",
+				"knowledge_ingestion_closure_and_visual_refs"
+			],
+			"read_policy": "Use before changing information-map related governance surfaces."
+		}
+	],
+	"compatibility_refs": [
+		"system/information-map.json",
+		"system/route-registry.json",
+		"system/project-ontology.json",
+		"system/knowledge-ingestion-system.json"
+	],
+	"validation_refs": [
+		"schemas/information-map.schema.json",
+		"schemas/information-map-manifest.schema.json",
+		"schemas/information-map-shard.schema.json",
+		"scripts/validate-system.ps1"
+	],
+	"updated": "2026-06-10"
+}

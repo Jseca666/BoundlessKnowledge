@@ -1,0 +1,68 @@
+{
+  "id": "2026-06-05-002",
+  "loop_id": "taxonomy-refinement",
+  "unit_id": "1.2",
+  "started_at": "2026-06-05",
+  "completed_at": "2026-06-05",
+  "inputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/queue.json",
+    "system/loops/taxonomy-refinement/state.json"
+  ],
+  "outputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/outputs/1.2-summary.md"
+  ],
+  "diagnosis": {
+    "level_1": "形式与自然科学",
+    "level_2": "统计、概率与复杂系统",
+    "boundary": "覆盖“形式与自然科学”下与“统计、概率与复杂系统”相关的稳定知识方向、研究对象、方法体系、证据形态和实践接口。若条目核心问题属于相邻二级，应以主要对象和主要证据链确定 primary_level_2，其他方向作为 related_level_3 关联。",
+    "adjacent_overlap_rule": "以知识条目的主要对象、主要证据链和主要使用场景确定 primary_level_3；交叉方向登记到 related_level_3。",
+    "risk_notes": [
+      "避免把工具、公司、产品、短期热点作为三级分类。",
+      "新兴交叉主题先落入最近三级方向簇，并通过 taxonomy_gap 标注缺口。"
+    ]
+  },
+  "level_3_count": 10,
+  "routing_examples": [
+    {
+      "item": "概率论与随机过程相关知识条目",
+      "primary_level_3": "1.2.1 概率论与随机过程",
+      "related_level_3": []
+    },
+    {
+      "item": "数理统计与统计推断相关知识条目",
+      "primary_level_3": "1.2.2 数理统计与统计推断",
+      "related_level_3": [
+        "1.2.1 概率论与随机过程"
+      ]
+    },
+    {
+      "item": "贝叶斯统计与不确定性推理相关知识条目",
+      "primary_level_3": "1.2.3 贝叶斯统计与不确定性推理",
+      "related_level_3": [
+        "1.2.1 概率论与随机过程"
+      ]
+    },
+    {
+      "item": "回归、因果与实验设计相关知识条目",
+      "primary_level_3": "1.2.4 回归、因果与实验设计",
+      "related_level_3": [
+        "1.2.1 概率论与随机过程"
+      ]
+    }
+  ],
+  "quality_gate_result": {
+    "passed": true,
+    "coverage": "pass",
+    "stability": "pass",
+    "non_tool_or_product": "pass",
+    "routability": "pass",
+    "no_unclassified": "pass"
+  },
+  "state_transition": {
+    "from": "pending_or_in_progress",
+    "to": "completed",
+    "next_unit": "1.3"
+  }
+}

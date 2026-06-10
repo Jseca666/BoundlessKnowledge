@@ -1,0 +1,55 @@
+{
+  "id": "2026-06-05-001",
+  "loop_id": "taxonomy-refinement",
+  "unit_id": "1.1",
+  "unit_name": "数学、逻辑与形式系统",
+  "started_at": "2026-06-05",
+  "completed_at": "2026-06-05",
+  "inputs": [
+    "system/loops/taxonomy-refinement/loop.json",
+    "system/loops/taxonomy-refinement/queue.json",
+    "system/loops/taxonomy-refinement/state.json",
+    "30-maps/domains/domain-taxonomy.registry.json"
+  ],
+  "outputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "30-maps/domains/domain-taxonomy-seed.md",
+    "system/loops/taxonomy-refinement/outputs/1.1-summary.md"
+  ],
+  "diagnosis": {
+    "boundary": "研究数学结构、逻辑形式、证明体系、连续与离散结构、优化、建模和计算数学方法。",
+    "adjacent_boundaries": [
+      "随机性、统计证据和概率模型优先进入 1.2",
+      "算法可计算性、复杂性、信息编码和密码协议优先进入 1.7",
+      "工程实现和系统落地进入对应工程类"
+    ]
+  },
+  "result": {
+    "level_3_count": 10,
+    "level_3_names": [
+      "数学基础与形式结构",
+      "代数与抽象结构",
+      "几何、拓扑与空间结构",
+      "分析、微积分与连续系统",
+      "离散结构与组合数学",
+      "逻辑、证明与形式化推理",
+      "优化、决策数学与运筹基础",
+      "计算数学与数值方法",
+      "数学建模与应用数学方法",
+      "综合前沿与结构统一"
+    ]
+  },
+  "quality_gate_result": {
+    "passed": true,
+    "notes": [
+      "三级均为稳定方向簇，不是具体工具、公司、产品或案例。",
+      "覆盖数学基础、结构、空间、连续、离散、逻辑、优化、数值和建模。",
+      "保留综合前沿，但标明不得作为偷懒分类。"
+    ]
+  },
+  "state_transition": {
+    "from": "1.1",
+    "to": "1.2",
+    "status": "completed"
+  }
+}

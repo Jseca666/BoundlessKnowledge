@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review System"
+  short_description: "Inspect system or knowledge quality and route confirmed defects to diagnostics."
+  default_prompt: "Use $review-system when a knowledge-base system surface, external knowledge item, Canvas view, source record, release surface, or quality concern needs review before diagnosis or repair."

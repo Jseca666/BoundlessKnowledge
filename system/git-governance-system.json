@@ -1,0 +1,207 @@
+{
+	"id": "git-governance-system",
+	"version": "0.2.0",
+	"updated": "2026-06-10",
+	"artifact_type": "subsystem-machine-truth",
+	"owner_module": "git-governance",
+	"role": "Git 版本控制与 GitHub 远端治理的机器真相",
+	"purpose": "治理本项目如何进入 Git 版本管理、如何维护本地版本历史、如何检查发布前状态、以及何时允许远端 GitHub 动作。",
+	"repository": {
+		"local_root": "C:/Users/dzw/Documents/无界知识",
+		"remote_name": "origin",
+		"remote_url": "https://github.com/Jseca666/BoundlessKnowledge.git",
+		"public_url": "https://github.com/Jseca666/BoundlessKnowledge",
+		"default_branch_policy": "Use the current local branch until the user decides the public default branch. Do not rename or push without explicit approval.",
+		"remote_action_boundary": "Read-only inspection is allowed. push, force-push, release creation, issue/PR creation, merge, remote branch deletion and credential changes require explicit user approval."
+	},
+	"positioning": {
+		"owner_layer": "system-governance",
+		"module_kind": "version-control-governance",
+		"reason": "Git 版本治理影响所有系统文件、知识内容、Canvas、索引和发布边界；它是系统治理层能力，不是单个工具脚本。"
+	},
+	"responsibility_boundary": {
+		"owns": [
+			"Git 本地仓库状态和 remote 绑定规则",
+			"提交前检查与发布前检查",
+			"版本记录策略、提交粒度和提交信息边界",
+			"敏感信息、个人工作区状态和生成物的版本控制边界",
+			"GitHub 远端动作授权边界",
+			"与技术文档、审查、诊断、工具和系统闭环的交接"
+		],
+		"does_not_own": [
+			"知识内容真假判断",
+			"具体模块业务规则",
+			"GitHub 账号凭据管理",
+			"未经授权的 push、release、issue、PR 或远端资源修改",
+			"替代 review-system 做发布审查",
+			"替代 diagnostics 做根因修复"
+		]
+	},
+	"managed_surfaces": {
+		"machine_truth": [
+			"system/git-governance-system.json",
+			"system/git-governance-docs-map.json",
+			"system/route-registry.json#routes.git-governance",
+			"system/information-map.json#modules.git-governance",
+			"system/module-relationship-map.json#modules.git-governance",
+			"system/system-closure-map.json#modules.git-governance",
+			"system/visual-coverage-map.json#module_decisions.git-governance",
+			".gitattributes"
+		],
+		"human_docs": [
+			"docs/git-governance/README.md",
+			"docs/technical/github-readiness.md"
+		],
+		"local_git_surfaces": [
+			".git/config",
+			".gitignore",
+			".gitattributes"
+		],
+		"validation": [
+			"scripts/validate-git-governance.ps1",
+			"scripts/git-governance-status.ps1",
+			"scripts/validate-system.ps1",
+			"scripts/validate-reviews.ps1",
+			"scripts/audit-text-integrity.ps1"
+		],
+		"visual_projection": [
+			"30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
+			"30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		]
+	},
+	"core_workflow": [
+		{
+			"step": "inspect-local-repository",
+			"output": "git_status_and_remote_snapshot",
+			"rule": "先检查是否在 Git 工作树、remote 是否绑定、当前分支和工作区状态；不要把未审查的 untracked 文件直接视为可提交内容。"
+		},
+		{
+			"step": "classify-change-scope",
+			"output": "change_scope",
+			"rule": "把变更分为 system-governance、knowledge-content、visual-projection、machine-infrastructure、project-consumption 或 mixed；提交应按可理解边界拆分。"
+		},
+		{
+			"step": "run-precommit-validation",
+			"output": "validation_report",
+			"rule": "提交前至少运行系统、诊断、审查、Canvas、文本完整性、索引和知识库相关校验；如果只改 Git 配置，也要运行 Git governance validator。"
+		},
+		{
+			"step": "review-sensitive-surfaces",
+			"output": "sensitive_surface_review",
+			"rule": "检查 .env、token、cookie、个人隐私、Obsidian workspace、本地缓存、生成临时文件和未登记的大文件是否被误纳入版本控制。"
+		},
+		{
+			"step": "prepare-local-commit",
+			"output": "commit_plan",
+			"rule": "可以准备本地提交计划和建议提交信息；实际 stage/commit 可由用户授权或明确要求后执行。"
+		},
+		{
+			"step": "remote-action-gate",
+			"output": "remote_action_decision",
+			"rule": "push、release、issue、PR、merge、远端分支修改、凭据修改都必须先得到用户明确授权。"
+		},
+		{
+			"step": "post-action-record",
+			"output": "version_record",
+			"rule": "提交或远端动作后记录关键版本状态、验证命令和后续风险。"
+		}
+	],
+	"quality_gates": [
+		{
+			"id": "remote-origin-registered",
+			"rule": "本地 Git remote origin 必须指向 https://github.com/Jseca666/BoundlessKnowledge.git。"
+		},
+		{
+			"id": "no-remote-action-without-approval",
+			"rule": "没有用户明确授权时，不执行 push、force-push、release、issue、PR、merge 或远端配置修改。"
+		},
+		{
+			"id": "precommit-validation-before-version-cut",
+			"rule": "提交前应运行相关 validator；系统级变更必须至少覆盖 validate-system、validate-diagnostics、validate-reviews、validate-canvas、audit-canvas-visual、audit-text-integrity、build-index、validate-kb。"
+		},
+		{
+			"id": "ignore-local-session-state",
+			"rule": "本地 UI/session 状态、缓存、临时文件、密钥和个人凭据不能进入 Git 版本真相。"
+		},
+		{
+			"id": "commit-scope-readable",
+			"rule": "提交应该按系统模块或知识内容边界组织；避免把无关系统升级、知识条目和生成物混在一个不可审查提交里。"
+		},
+		{
+			"id": "stable-line-ending-policy",
+			"rule": "Repository text assets should be governed by .gitattributes so Markdown, JSON, Canvas, PowerShell and YAML files keep stable LF line endings across Windows and future collaborators."
+		}
+	],
+	"handoff_contracts": [
+		{
+			"to": "review-system",
+			"when": "发布、提交或公开仓库前需要敏感信息、文档质量、外部读者可读性或变更风险审查",
+			"payload": [
+				"git_status_snapshot",
+				"changed_paths",
+				"validation_reports",
+				"requested_review_class"
+			]
+		},
+		{
+			"to": "diagnostics",
+			"when": "Git 状态、校验、远端、索引或发布流程暴露系统性失败",
+			"payload": [
+				"failure_packet",
+				"git_status_snapshot",
+				"affected_surfaces"
+			]
+		},
+		{
+			"to": "technical-documentation",
+			"when": "Git、GitHub、发布、CI 或维护流程需要人读说明",
+			"payload": [
+				"doc_update_scope",
+				"commands",
+				"approval_boundary"
+			]
+		},
+		{
+			"to": "tools",
+			"when": "Git 状态检查、提交前校验或发布前审查需要脚本化",
+			"payload": [
+				"script_entry",
+				"inputs",
+				"outputs"
+			]
+		}
+	],
+	"legacy_asset_adoption": [
+		{
+			"asset": ".git/",
+			"previous_role": "existing local Git worktree with all project files untracked",
+			"action": "adopt",
+			"new_role": "local repository state governed by git-governance; no bulk staging without review"
+		},
+		{
+			"asset": ".gitignore",
+			"previous_role": "basic ignore rules",
+			"action": "adopt-and-extend",
+			"new_role": "version boundary for local caches, secrets and Obsidian workspace state"
+		},
+		{
+			"asset": "docs/technical/github-readiness.md",
+			"previous_role": "future GitHub publication checklist",
+			"action": "adopt",
+			"new_role": "human publication checklist coordinated with git-governance"
+		},
+		{
+			"asset": "C:/Users/dzw/Documents/无界知识",
+			"previous_role": "knowledge engineering workspace",
+			"action": "adopt",
+			"new_role": "Git-managed local project root with remote origin configured"
+		}
+	],
+	"status": {
+		"lifecycle_status": "current",
+		"closure_status": "closed",
+		"activation_ref": "system/system-closure-map.json#modules.git-governance.activation_proof",
+		"remote_configured": true,
+		"initial_commit_status": "not_created_by_this_module_without_user_commit_request"
+	}
+}

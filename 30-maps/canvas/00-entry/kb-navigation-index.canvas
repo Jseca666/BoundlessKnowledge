@@ -1,0 +1,225 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -980,
+			"y": -700,
+			"width": 1960,
+			"height": 110,
+			"color": "6",
+			"text": "# 无界知识入口\n\n最上层先进入知识工程系统。系统下面再看知识库 agent、治理模块、可视化、循环、审查、诊断、工作流和知识内容分类。"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"x": -980,
+			"y": -545,
+			"width": 1960,
+			"height": 90,
+			"color": "5",
+			"text": "# 读图口径\n\nL0 只负责跳转和层级方位：无界知识的根定位是知识工程系统；先进入 L1 系统总览，单个分类、workflow 或子系统都不是系统同级。"
+		},
+		{
+			"id": "section-l1-trunks",
+			"type": "text",
+			"x": -980,
+			"y": -380,
+			"width": 280,
+			"height": 105,
+			"color": "6",
+			"text": "# L1 主干\n\n先看全局知识工程系统。分类只是系统下的知识内容模块之一。"
+		},
+		{
+			"id": "nav-label-kb-system-architecture-file",
+			"type": "text",
+			"x": -620,
+			"y": -390,
+			"width": 620,
+			"height": 130,
+			"color": "6",
+			"text": "# 知识工程系统总览\n\nL1 系统主干：根定位、知识工程生命周期、agent/模块边界、系统子系统和知识内容入口。"
+		},
+		{
+			"id": "kb-system-architecture-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+			"x": 20,
+			"y": -345,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "section-system-drilldown",
+			"type": "text",
+			"x": -980,
+			"y": -190,
+			"width": 280,
+			"height": 125,
+			"color": "5",
+			"text": "# 系统总览下钻\n\n以下都是 L2 系统子系统，属于 L1 系统总览。"
+		},
+		{
+			"id": "nav-label-canvas-system-canvas-file",
+			"type": "text",
+			"x": -620,
+			"y": -200,
+			"width": 500,
+			"height": 120,
+			"color": "5",
+			"text": "# Canvas 子系统\n\nL2 系统子系统，属于系统总览：图层级、目录、视觉规则和可视化闭环。"
+		},
+		{
+			"id": "canvas-system-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+			"x": -100,
+			"y": -155,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "nav-label-system-structure-governance-canvas-file",
+			"type": "text",
+			"x": 120,
+			"y": -200,
+			"width": 500,
+			"height": 120,
+			"color": "6",
+			"text": "# 系统结构治理\n\nL2 系统子系统，属于系统总览：模块归属、拓扑关系和新分支判断。"
+		},
+		{
+			"id": "system-structure-governance-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas",
+			"x": 640,
+			"y": -155,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "nav-label-review-system-canvas-file",
+			"type": "text",
+			"x": -620,
+			"y": -40,
+			"width": 500,
+			"height": 120,
+			"color": "5",
+			"text": "# 审查模块\n\nL2 系统子系统，属于系统总览：系统审查、知识审查、视觉审查和 handoff。"
+		},
+		{
+			"id": "review-system-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+			"x": -100,
+			"y": 5,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "nav-label-diagnostic-system-canvas-file",
+			"type": "text",
+			"x": 120,
+			"y": -40,
+			"width": 500,
+			"height": 120,
+			"color": "1",
+			"text": "# 诊断与修复\n\nL2 系统子系统，属于系统总览：问题归因、责任层判断、协同升级与验收。"
+		},
+		{
+			"id": "diagnostic-system-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+			"x": 640,
+			"y": 5,
+			"width": 64,
+			"height": 48,
+			"color": "1"
+		},
+		{
+			"id": "nav-label-system-closure-canvas-file",
+			"type": "text",
+			"x": -620,
+			"y": 120,
+			"width": 500,
+			"height": 120,
+			"color": "5",
+			"text": "# 系统闭环\n\nL2 系统子系统，属于系统总览：模块成熟度、缺口、可视化覆盖和治理状态。"
+		},
+		{
+			"id": "system-closure-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
+			"x": -100,
+			"y": 165,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "bottom-note",
+			"type": "text",
+			"x": -900,
+			"y": 455,
+			"width": 1800,
+			"height": 95,
+			"color": "6",
+			"text": "# 入口边界\n\nL0 可以放系统子模块快捷按钮，但机器父子关系仍是：总入口 -> 知识工程系统总览 -> 系统子模块 / 知识内容子图。分类入口在系统总览里，不在顶层和系统并列。"
+		},
+		{
+			"id": "nav-label-system-information-map-canvas-file",
+			"type": "text",
+			"text": "# 信息地图系统\n\nL2 系统子系统，属于系统总览：manifest、shard、系统引用面和机器读取入口。",
+			"x": 120,
+			"y": 120,
+			"width": 500,
+			"height": 120,
+			"color": "6"
+		},
+		{
+			"id": "system-information-map-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
+			"x": 640,
+			"y": 165,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "nav-label-loop-orchestration-canvas-file",
+			"type": "text",
+			"x": -620,
+			"y": 280,
+			"width": 500,
+			"height": 120,
+			"color": "5",
+			"text": "# Loop 循环编排\n\nL2 系统子系统，属于系统总览：持续打磨、状态、队列和 handoff。"
+		},
+		{
+			"id": "loop-orchestration-canvas-file",
+			"type": "file",
+			"x": -100,
+			"y": 325,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n6 L1 / 根入口与系统结构；5 L2 系统下钻快捷入口；1 诊断 / 风险入口。颜色只辅助入口分层，不代表数据流。",
+			"x": -620,
+			"y": 600,
+			"width": 1240,
+			"height": 90,
+			"color": "6"
+		}
+	],
+	"edges": []
+}

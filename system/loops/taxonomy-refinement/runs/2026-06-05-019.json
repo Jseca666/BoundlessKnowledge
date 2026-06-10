@@ -1,0 +1,68 @@
+{
+  "id": "2026-06-05-019",
+  "loop_id": "taxonomy-refinement",
+  "unit_id": "3.4",
+  "started_at": "2026-06-05",
+  "completed_at": "2026-06-05",
+  "inputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/queue.json",
+    "system/loops/taxonomy-refinement/state.json"
+  ],
+  "outputs": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/outputs/3.4-summary.md"
+  ],
+  "diagnosis": {
+    "level_1": "医学与健康科学",
+    "level_2": "药学、药物研发与转化医学",
+    "boundary": "覆盖“医学与健康科学”下与“药学、药物研发与转化医学”相关的稳定知识方向、研究对象、方法体系、证据形态和实践接口。若条目核心问题属于相邻二级，应以主要对象和主要证据链确定 primary_level_2，其他方向作为 related_level_3 关联。",
+    "adjacent_overlap_rule": "以知识条目的主要对象、主要证据链和主要使用场景确定 primary_level_3；交叉方向登记到 related_level_3。",
+    "risk_notes": [
+      "避免把工具、公司、产品、短期热点作为三级分类。",
+      "新兴交叉主题先落入最近三级方向簇，并通过 taxonomy_gap 标注缺口。"
+    ]
+  },
+  "level_3_count": 10,
+  "routing_examples": [
+    {
+      "item": "药物化学与先导发现相关知识条目",
+      "primary_level_3": "3.4.1 药物化学与先导发现",
+      "related_level_3": []
+    },
+    {
+      "item": "药剂学、递送系统与制剂工程相关知识条目",
+      "primary_level_3": "3.4.2 药剂学、递送系统与制剂工程",
+      "related_level_3": [
+        "3.4.1 药物化学与先导发现"
+      ]
+    },
+    {
+      "item": "药理药效、毒理与安全评价相关知识条目",
+      "primary_level_3": "3.4.3 药理药效、毒理与安全评价",
+      "related_level_3": [
+        "3.4.1 药物化学与先导发现"
+      ]
+    },
+    {
+      "item": "药代动力学、药效动力学与临床药理相关知识条目",
+      "primary_level_3": "3.4.4 药代动力学、药效动力学与临床药理",
+      "related_level_3": [
+        "3.4.1 药物化学与先导发现"
+      ]
+    }
+  ],
+  "quality_gate_result": {
+    "passed": true,
+    "coverage": "pass",
+    "stability": "pass",
+    "non_tool_or_product": "pass",
+    "routability": "pass",
+    "no_unclassified": "pass"
+  },
+  "state_transition": {
+    "from": "pending_or_in_progress",
+    "to": "completed",
+    "next_unit": "3.5"
+  }
+}

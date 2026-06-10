@@ -1,0 +1,245 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -860,
+			"y": -720,
+			"width": 1720,
+			"height": 120,
+			"color": "3",
+			"text": "# 领域分类层级图\n\n知识内容面的分类视图，是无界知识系统的一部分。这里不解释系统架构，只帮助你从一级领域快速进入二级和后续三级下钻。"
+		},
+		{
+			"id": "navigation-panel",
+			"type": "text",
+			"x": 1620,
+			"y": -730,
+			"width": 420,
+			"height": 110,
+			"color": "6",
+			"text": "# 导航栏\n只负责跳转，不参与领域分类结构。"
+		},
+		{
+			"id": "parent-kb-system-architecture-canvas-file",
+			"type": "file",
+			"x": 1970,
+			"y": -540,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		},
+		{
+			"id": "taxonomy-registry-file",
+			"type": "file",
+			"x": -376,
+			"y": -510,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "30-maps/domains/domain-taxonomy.registry.json"
+		},
+		{
+			"id": "routing-guide-file",
+			"type": "file",
+			"x": 64,
+			"y": -510,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "30-maps/domains/domain-taxonomy-routing-guide.md"
+		},
+		{
+			"id": "taxonomy-overview-file",
+			"type": "file",
+			"x": 504,
+			"y": -510,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "30-maps/domains/domain-taxonomy-overview.md"
+		},
+		{
+			"id": "taxonomy-audit-file",
+			"type": "file",
+			"x": 944,
+			"y": -510,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": "60-evals/taxonomy-routing-audit.md"
+		},
+		{
+			"id": "taxonomy-summary",
+			"type": "text",
+			"x": -520,
+			"y": -330,
+			"width": 1040,
+			"height": 145,
+			"color": "3",
+			"text": "# 分类总览\n\n6 个一级领域，45 个二级知识群，450 个三级方向簇。正式知识条目必须有一个 `primary_level_3`，交叉关系进入 `related_level_3`。"
+		},
+		{
+			"id": "natural-sciences",
+			"type": "text",
+			"x": -1120,
+			"y": -80,
+			"width": 520,
+			"height": 270,
+			"color": "3",
+			"text": "# 1. 形式与自然科学\n\n数学、统计、物理、化学、地球空间海洋、基础生物、计算理论与信息基础。"
+		},
+		{
+			"id": "engineering",
+			"type": "text",
+			"x": -520,
+			"y": -80,
+			"width": 520,
+			"height": 270,
+			"color": "2",
+			"text": "# 2. 工程与技术科学\n\n计算机软件、AI 数据知识工程、电子通信控制、机械制造、土木交通、能源环境、材料化工、航空航天海洋工程。"
+		},
+		{
+			"id": "health",
+			"type": "text",
+			"x": 80,
+			"y": -80,
+			"width": 520,
+			"height": 270,
+			"color": "4",
+			"text": "# 3. 医学与健康科学\n\n基础医学、临床医学、公共卫生、药学与转化、护理康复、医疗器械数字健康、医疗系统管理。"
+		},
+		{
+			"id": "agri-eco",
+			"type": "text",
+			"x": 680,
+			"y": -80,
+			"width": 520,
+			"height": 270,
+			"color": "5",
+			"text": "# 4. 农业、生态与资源科学\n\n作物种业、畜牧水产兽医、林草土地、农业工程、生态保护、环境气候、资源利用、食品安全。"
+		},
+		{
+			"id": "social-sciences",
+			"type": "text",
+			"x": -820,
+			"y": 280,
+			"width": 520,
+			"height": 270,
+			"color": "6",
+			"text": "# 5. 社会科学\n\n经济金融、管理商业、法律合规、政治治理、社会人口、教育心理、传播平台、城市区域发展。"
+		},
+		{
+			"id": "humanities-arts",
+			"type": "text",
+			"x": -220,
+			"y": 280,
+			"width": 520,
+			"height": 270,
+			"color": "1",
+			"text": "# 6. 人文与艺术\n\n哲学伦理宗教、历史考古、语言翻译、文学叙事、文化媒介、艺术设计、美学批评与文化遗产。"
+		},
+		{
+			"id": "level3-rule",
+			"type": "text",
+			"x": 380,
+			"y": 280,
+			"width": 520,
+			"height": 270,
+			"color": "4",
+			"text": "# 分类质量门\n\n- 一个主三级归属\n- 多个相关三级归属\n- 找不到精确类目时标记 `taxonomy_gap`\n- 不使用“其他 / 杂项 / 未分类”作为正式归属"
+		},
+		{
+			"id": "future-drilldown",
+			"type": "text",
+			"x": 980,
+			"y": 280,
+			"width": 420,
+			"height": 220,
+			"color": "5",
+			"text": "# 后续下钻图\n\n一级或二级变复杂后，再建独立子图：\n\n`domain-2-engineering-map.canvas`\n`domain-2-2-ai-data-knowledge-map.canvas`"
+		},
+		{
+			"id": "nav-label-parent-kb-system-architecture-canvas-file",
+			"type": "text",
+			"x": 1620,
+			"y": -540,
+			"width": 330,
+			"height": 48,
+			"color": "6",
+			"text": "返回：系统总览"
+		},
+		{
+			"id": "nav-label-level3-matrix-canvas-file",
+			"type": "text",
+			"text": "下钻：三级分类矩阵",
+			"x": 1620,
+			"y": -480,
+			"width": 330,
+			"height": 48,
+			"color": "3"
+		},
+		{
+			"id": "level3-matrix-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas",
+			"x": 1970,
+			"y": -480,
+			"width": 64,
+			"height": 48,
+			"color": "3"
+		},
+		{
+			"id": "file-label-taxonomy-registry-file",
+			"type": "text",
+			"x": -680,
+			"y": -540,
+			"width": 380,
+			"height": 90,
+			"color": "3",
+			"text": "分类真相\n完整三级分类树"
+		},
+		{
+			"id": "file-label-routing-guide-file",
+			"type": "text",
+			"x": -240,
+			"y": -540,
+			"width": 380,
+			"height": 90,
+			"color": "4",
+			"text": "路由指南\n如何判定归属"
+		},
+		{
+			"id": "file-label-taxonomy-overview-file",
+			"type": "text",
+			"x": 200,
+			"y": -540,
+			"width": 380,
+			"height": 90,
+			"color": "3",
+			"text": "人读总览\n分类结构说明"
+		},
+		{
+			"id": "file-label-taxonomy-audit-file",
+			"type": "text",
+			"x": 640,
+			"y": -540,
+			"width": 380,
+			"height": 90,
+			"color": "1",
+			"text": "评估记录\n分类路由质量"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n按一级知识领域家族着色: 3 形式与自然科学; 2 工程与技术科学; 4 医学健康/路由说明; 5 农业生态资源; 6 社会科学/导航; 1 人文艺术/审查. 颜色不表示系统状态.",
+			"x": 1620,
+			"y": -387,
+			"width": 420,
+			"height": 130,
+			"color": "6"
+		}
+	],
+	"edges": []
+}

@@ -1,0 +1,366 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"text": "# 系统结构治理：模块拓扑与分支决策\n\n这个模块负责判断新模块归属、维护模块关系图，并决定归入现有模块、子模块、同级模块、新分支、暂缓草稿或合并归档。",
+			"x": -1000,
+			"y": -720,
+			"width": 2100,
+			"height": 115,
+			"color": "6"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"text": "# 读图口径\n\n这里是系统结构治理模块，不是知识领域分类、Canvas 美学审查或诊断执行。新模块成立时必须先审查旧资产责任，再做拓扑和分支判断。",
+			"x": -1000,
+			"y": -555,
+			"width": 2100,
+			"height": 90,
+			"color": "5"
+		},
+		{
+			"id": "decision-band",
+			"type": "text",
+			"text": "# 决策类型\n\n这些是正向选择模型，不是先堆禁止项。旧资产审计完成后，才能选择一种结构决策并更新机器真相。",
+			"x": -1000,
+			"y": -65,
+			"width": 2100,
+			"height": 85,
+			"color": "5"
+		},
+		{
+			"id": "decision-attach",
+			"type": "text",
+			"text": "# attach\n\n只是现有模块内部资产：文件、脚本、文档、视图或小流程。",
+			"x": -1000,
+			"y": 80,
+			"width": 290,
+			"height": 145,
+			"color": "4"
+		},
+		{
+			"id": "decision-child",
+			"type": "text",
+			"text": "# child\n\n同一分支内有独立真相、路由、校验或生命周期。",
+			"x": -620,
+			"y": 80,
+			"width": 290,
+			"height": 145,
+			"color": "5"
+		},
+		{
+			"id": "decision-peer",
+			"type": "text",
+			"text": "# peer\n\n同一 owner_layer 下责任边界独立，消费者和验证不同。",
+			"x": -240,
+			"y": 80,
+			"width": 290,
+			"height": 145,
+			"color": "6"
+		},
+		{
+			"id": "decision-branch",
+			"type": "text",
+			"text": "# new branch\n\n现有 owner_layer 无法表达，并会长出多个稳定模块。",
+			"x": 140,
+			"y": 80,
+			"width": 290,
+			"height": 145,
+			"color": "3"
+		},
+		{
+			"id": "decision-defer",
+			"type": "text",
+			"text": "# defer\n\n边界或消费者不稳定，先留在草稿、inbox 或 archive 生命周期。",
+			"x": 520,
+			"y": 80,
+			"width": 290,
+			"height": 145,
+			"color": "1"
+		},
+		{
+			"id": "decision-merge",
+			"type": "text",
+			"text": "# merge / retire\n\n重复、过期或被新结构吸收时，合并迁移或归档。",
+			"x": 900,
+			"y": 80,
+			"width": 290,
+			"height": 145,
+			"color": "2"
+		},
+		{
+			"id": "machine-truth-band",
+			"type": "text",
+			"text": "# 机器真相\n结构治理输出拓扑与分层快照；闭环矩阵保存 activation_proof，证明模块已接管历史责任。",
+			"x": -1000,
+			"y": 330,
+			"width": 2100,
+			"height": 85,
+			"color": "6"
+		},
+		{
+			"id": "file-label-system-structure-governance-file",
+			"type": "text",
+			"text": "结构治理契约\n判断流程、职责边界、决策类型",
+			"x": -1000,
+			"y": 470,
+			"width": 300,
+			"height": 90,
+			"color": "6"
+		},
+		{
+			"id": "system-structure-governance-file",
+			"type": "file",
+			"file": "system/system-structure-governance.json",
+			"x": -765,
+			"y": 500,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "file-label-module-relationship-map-file",
+			"type": "text",
+			"text": "模块关系图\n分支、模块、关系边、待决策",
+			"x": -650,
+			"y": 470,
+			"width": 300,
+			"height": 90,
+			"color": "5"
+		},
+		{
+			"id": "module-relationship-map-file",
+			"type": "file",
+			"file": "system/module-relationship-map.json",
+			"x": -415,
+			"y": 500,
+			"width": 64,
+			"height": 48,
+			"color": "5"
+		},
+		{
+			"id": "file-label-module-layer-model-file",
+			"type": "text",
+			"text": "派生分层快照\nowner_layer 与 module_kind",
+			"x": -300,
+			"y": 470,
+			"width": 300,
+			"height": 90,
+			"color": "3"
+		},
+		{
+			"id": "module-layer-model-file",
+			"type": "file",
+			"file": "system/module-layer-model.json",
+			"x": -65,
+			"y": 500,
+			"width": 64,
+			"height": 48,
+			"color": "3"
+		},
+		{
+			"id": "file-label-information-map-file",
+			"type": "text",
+			"text": "信息地图\n模块边界与数据流投影",
+			"x": 50,
+			"y": 470,
+			"width": 300,
+			"height": 90,
+			"color": "6"
+		},
+		{
+			"id": "information-map-file",
+			"type": "file",
+			"file": "system/information-map.json",
+			"x": 285,
+			"y": 500,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "file-label-system-closure-map-file",
+			"type": "text",
+			"text": "闭环矩阵\n每个模块的覆盖和缺口",
+			"x": 400,
+			"y": 470,
+			"width": 300,
+			"height": 90,
+			"color": "4"
+		},
+		{
+			"id": "system-closure-map-file",
+			"type": "file",
+			"file": "system/system-closure-map.json",
+			"x": 635,
+			"y": 500,
+			"width": 64,
+			"height": 48,
+			"color": "4"
+		},
+		{
+			"id": "file-label-validate-system-file",
+			"type": "text",
+			"text": "系统校验\n检查拓扑、分层、闭环一致性",
+			"x": 750,
+			"y": 470,
+			"width": 300,
+			"height": 90,
+			"color": "1"
+		},
+		{
+			"id": "validate-system-file",
+			"type": "file",
+			"file": "scripts/validate-system.ps1",
+			"x": 985,
+			"y": 500,
+			"width": 64,
+			"height": 48,
+			"color": "1"
+		},
+		{
+			"id": "right-nav-title",
+			"type": "text",
+			"text": "# 导航栏\n\n只负责跳转，不参与左侧结构判断。",
+			"x": 1420,
+			"y": -555,
+			"width": 330,
+			"height": 70,
+			"color": "5"
+		},
+		{
+			"id": "nav-label-parent-kb-system-architecture-canvas-file",
+			"type": "text",
+			"text": "返回：系统总览",
+			"x": 1420,
+			"y": -460,
+			"width": 330,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "parent-kb-system-architecture-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+			"x": 1770,
+			"y": -460,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "stage-trigger",
+			"type": "text",
+			"text": "# 1. 触发\n\n出现新模块、子系统、长期能力、跨模块关系或现有层级不清。\n\n输入：候选对象和受影响面。",
+			"x": -1000,
+			"y": -350,
+			"width": 280,
+			"height": 180,
+			"color": "1"
+		},
+		{
+			"id": "stage-evidence",
+			"type": "text",
+			"text": "# 2. 判断包\n\n收集 purpose、边界、消费者、机器真相、校验、可视化和相关模块。",
+			"x": -630,
+			"y": -350,
+			"width": 280,
+			"height": 180,
+			"color": "6"
+		},
+		{
+			"id": "stage-legacy-audit",
+			"type": "text",
+			"text": "# 3. 旧资产审计\n\n列出职责范围内旧文件、旧图、旧 route、旧规则和旧状态。\n\n输出：legacy_asset_action。",
+			"x": -260,
+			"y": -350,
+			"width": 280,
+			"height": 180,
+			"color": "5"
+		},
+		{
+			"id": "stage-topology",
+			"type": "text",
+			"text": "# 4. 拓扑比较\n\n对照 relationship map、information-map 和 closure-map，找已有归属或缺失分支。",
+			"x": 110,
+			"y": -350,
+			"width": 280,
+			"height": 180,
+			"color": "5"
+		},
+		{
+			"id": "stage-decision",
+			"type": "text",
+			"text": "# 5. 分支决策\n\n选择归入现有模块、子模块、同级模块、新分支、暂缓或合并归档。",
+			"x": 480,
+			"y": -350,
+			"width": 280,
+			"height": 180,
+			"color": "3"
+		},
+		{
+			"id": "stage-sync",
+			"type": "text",
+			"text": "# 6. 协同更新与激活证明\n同步 route、information-map、closure、visual coverage、review 和 diagnostics。\n\n输出：activation_proof；没有证明不得称为生效。",
+			"x": 850,
+			"y": -350,
+			"width": 280,
+			"height": 190,
+			"color": "4"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构.",
+			"x": 1420,
+			"y": -367,
+			"width": 360,
+			"height": 130,
+			"color": "6"
+		}
+	],
+	"edges": [
+		{
+			"id": "e1",
+			"fromNode": "stage-trigger",
+			"fromSide": "right",
+			"toNode": "stage-evidence",
+			"toSide": "left",
+			"color": "1"
+		},
+		{
+			"id": "e2",
+			"fromNode": "stage-evidence",
+			"fromSide": "right",
+			"toNode": "stage-legacy-audit",
+			"toSide": "left",
+			"color": "6"
+		},
+		{
+			"id": "e3",
+			"fromNode": "stage-legacy-audit",
+			"fromSide": "right",
+			"toNode": "stage-topology",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e4",
+			"fromNode": "stage-topology",
+			"fromSide": "right",
+			"toNode": "stage-decision",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e5",
+			"fromNode": "stage-decision",
+			"fromSide": "right",
+			"toNode": "stage-sync",
+			"toSide": "left",
+			"color": "3"
+		}
+	]
+}

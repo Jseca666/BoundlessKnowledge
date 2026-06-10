@@ -1,0 +1,70 @@
+{
+  "id": "taxonomy-refinement",
+  "version": "0.2.0",
+  "updated": "2026-06-06",
+  "name": "知识分类体系逐项打磨循环",
+  "objective": "逐个打磨一级、二级、三级分类边界，形成可承接任意知识条目的分类体系。",
+  "loop_type": "sequential-refinement",
+  "unit_granularity": "level-2-domain-group",
+  "selection_rule": "优先选择 state.current_unit；若为空，选择 queue 中第一个 status 为 pending 的 unit。",
+  "iteration_phases": [
+    {
+      "id": "diagnose",
+      "name": "诊断边界",
+      "required_output": "该二级类的边界、相邻类重叠点、容易错分的知识类型"
+    },
+    {
+      "id": "draft",
+      "name": "产出三级方向簇",
+      "required_output": "稳定三级方向簇，每个方向簇有 scope、include、exclude"
+    },
+    {
+      "id": "route-tests",
+      "name": "路由测试",
+      "required_output": "至少 4 个正向路由例子和 2 个反例或边界例"
+    },
+    {
+      "id": "gate",
+      "name": "质量门",
+      "required_output": "覆盖性、稳定性、非工具化、可路由性检查结果"
+    },
+    {
+      "id": "commit-state",
+      "name": "推进状态",
+      "required_output": "更新 taxonomy registry、state、run log，并指向下一项"
+    }
+  ],
+  "quality_gate": [
+    "每个二级类必须能覆盖未来具体知识",
+    "三级不能是具体工具、公司、产品、短期热点或单一案例",
+    "三级必须能容纳多个主题",
+    "交叉知识必须有 primary_level_3，也可有 related_level_3",
+    "不能出现正式未分类归属",
+    "若分类树存在缺口，仍必须落入最近三级，并标记 taxonomy_gap",
+    "每个完成项必须写入 run log，说明边界、产出、质量门结果和下一项"
+  ],
+  "pause_conditions": [
+    "用户明确要求暂停",
+    "一级或二级分类需要重新打开讨论",
+    "连续三轮出现同一边界冲突，无法靠规则解决",
+    "需要用户价值判断而不是分类工程判断"
+  ],
+  "read": [
+    "30-maps/domains/domain-taxonomy.docs.json",
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "30-maps/domains/domain-taxonomy-baseline.md",
+    "system/loops/taxonomy-refinement/queue.json",
+    "system/loops/taxonomy-refinement/state.json"
+  ],
+  "write": [
+    "30-maps/domains/domain-taxonomy.registry.json",
+    "system/loops/taxonomy-refinement/state.json",
+    "system/loops/taxonomy-refinement/runs/",
+    "system/loops/taxonomy-refinement/outputs/"
+  ],
+  "validation": [
+    "scripts/validate-system.ps1",
+    "scripts/build-index.ps1",
+    "scripts/validate-kb.ps1"
+  ]
+}

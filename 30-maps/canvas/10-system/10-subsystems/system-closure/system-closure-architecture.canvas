@@ -1,0 +1,452 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -1060,
+			"y": -700,
+			"width": 2700,
+			"height": 120,
+			"color": "5",
+			"text": "# 系统闭环总表：模块成熟度与缺口审计\n\n这张图把 system/system-closure-map.json 投影成可视化检查面：模块不是只登记路径，还要被路由、校验、文档、诊断、可视化和生命周期接住。"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"x": -1060,
+			"y": -540,
+			"width": 2700,
+			"height": 90,
+			"color": "6",
+			"text": "# 读图口径\n\n左侧是闭环判断主线；中间是当前模块状态分布；底部是机器真相和校验。右侧是独立导航栏，不参与闭环判断。"
+		},
+		{
+			"id": "trigger",
+			"type": "text",
+			"x": -1060,
+			"y": -320,
+			"width": 340,
+			"height": 210,
+			"color": "1",
+			"text": "# 1. 触发\n\n新增模块、模块拆分、路由变化、校验变化、文档边界变化或用户质疑系统是否闭环。"
+		},
+		{
+			"id": "information-map",
+			"type": "text",
+			"x": -540,
+			"y": -320,
+			"width": 340,
+			"height": 210,
+			"color": "6",
+			"text": "# 2. 模块边界\n\n先以 information-map 判断系统有哪些稳定模块、边界、路径和数据流。"
+		},
+		{
+			"id": "closure-map",
+			"type": "text",
+			"x": -20,
+			"y": -320,
+			"width": 360,
+			"height": 210,
+			"color": "5",
+			"text": "# 3. 闭环矩阵\n\n逐项检查 truth、route、validation、docs、visual_projection、visual-coverage-map 是否关闭、共享、部分或不适用。"
+		},
+		{
+			"id": "gap-check",
+			"type": "text",
+			"x": 520,
+			"y": -320,
+			"width": 360,
+			"height": 210,
+			"color": "4",
+			"text": "# 4. 缺口判断\n\npartial 或 seed 不是失败，但必须写 known_gaps 和 next_action，不能靠记忆补洞。"
+		},
+		{
+			"id": "validator",
+			"type": "text",
+			"x": 1060,
+			"y": -320,
+			"width": 360,
+			"height": 210,
+			"color": "3",
+			"text": "# 5. 校验门\n\nvalidate-system 检查模块覆盖率、route_id 是否存在、引用路径是否存在、状态值是否合法。"
+		},
+		{
+			"id": "repair-loop",
+			"type": "text",
+			"x": -1060,
+			"y": 20,
+			"width": 340,
+			"height": 190,
+			"color": "1",
+			"text": "# 6. 诊断接入\n\n如果发现闭环缺口，进入 diagnostics：先判断责任层，再协同修复。"
+		},
+		{
+			"id": "visual-trigger",
+			"type": "text",
+			"x": -540,
+			"y": 20,
+			"width": 340,
+			"height": 190,
+			"color": "5",
+			"text": "# 7. 可视化覆盖\n\n稳定模块的可视化状态必须进入 visual-coverage-map，并由 validate-system 校验。"
+		},
+		{
+			"id": "status-closed",
+			"type": "text",
+			"x": -20,
+			"y": 20,
+			"width": 300,
+			"height": 150,
+			"color": "3",
+			"text": "# closed\n\n已有 9+ 个模块达到完整或共享闭环。"
+		},
+		{
+			"id": "status-partial",
+			"type": "text",
+			"x": 420,
+			"y": 20,
+			"width": 300,
+			"height": 150,
+			"color": "4",
+			"text": "# partial\n\n来源、原子知识、综合、workflow、eval 等仍有早期缺口。"
+		},
+		{
+			"id": "status-seed",
+			"type": "text",
+			"x": 860,
+			"y": 20,
+			"width": 300,
+			"height": 150,
+			"color": "5",
+			"text": "# seed -> current\n\n闭环模块已从 seed 升级为可视化接入的当前系统模块。"
+		},
+		{
+			"id": "machine-truth-band",
+			"type": "text",
+			"x": -1060,
+			"y": 360,
+			"width": 2700,
+			"height": 80,
+			"color": "6",
+			"text": "# 机器真相\n\nCanvas 只投影闭环结构；真实状态以 JSON registry、coverage map 与 validator 为准。"
+		},
+		{
+			"id": "system-closure-map-file",
+			"type": "file",
+			"x": -776,
+			"y": 530,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "system/system-closure-map.json"
+		},
+		{
+			"id": "information-map-file",
+			"type": "file",
+			"x": -376,
+			"y": 530,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "system/information-map.json"
+		},
+		{
+			"id": "route-registry-file",
+			"type": "file",
+			"x": 24,
+			"y": 530,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "system/route-registry.json"
+		},
+		{
+			"id": "module-governance-file",
+			"type": "file",
+			"x": 424,
+			"y": 530,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "system/module-governance-policy.json"
+		},
+		{
+			"id": "validate-system-file",
+			"type": "file",
+			"x": 824,
+			"y": 530,
+			"width": 64,
+			"height": 48,
+			"color": "3",
+			"file": "scripts/validate-system.ps1"
+		},
+		{
+			"id": "system-closure-doc-file",
+			"type": "file",
+			"x": 1164,
+			"y": 530,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "docs/system-closure.md"
+		},
+		{
+			"id": "right-nav-title",
+			"type": "text",
+			"x": 1900,
+			"y": -540,
+			"width": 420,
+			"height": 110,
+			"color": "5",
+			"text": "# 导航栏\n\n只负责跳转，不参与左侧闭环判断。"
+		},
+		{
+			"id": "parent-kb-system-architecture-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -370,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		},
+		{
+			"id": "diagnostic-system-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": -10,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas"
+		},
+		{
+			"id": "canvas-system-canvas-file",
+			"type": "file",
+			"x": 2250,
+			"y": 170,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-parent-kb-system-architecture-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -370,
+			"width": 330,
+			"height": 48,
+			"color": "6",
+			"text": "返回：系统总览"
+		},
+		{
+			"id": "nav-label-diagnostic-system-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": -10,
+			"width": 330,
+			"height": 48,
+			"color": "1",
+			"text": "相关：诊断与修复系统"
+		},
+		{
+			"id": "nav-label-canvas-system-canvas-file",
+			"type": "text",
+			"x": 1900,
+			"y": 170,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "相关：Canvas 子系统"
+		},
+		{
+			"id": "bridge-anchor-bridge-diagnostic",
+			"type": "text",
+			"x": 1700,
+			"y": -10,
+			"width": 160,
+			"height": 48,
+			"color": "1",
+			"text": "诊断接入"
+		},
+		{
+			"id": "bridge-anchor-bridge-canvas-system",
+			"type": "text",
+			"x": 1700,
+			"y": 170,
+			"width": 160,
+			"height": 48,
+			"color": "5",
+			"text": "可视化触发"
+		},
+		{
+			"id": "repair-loop-note",
+			"type": "text",
+			"x": 1060,
+			"y": -80,
+			"width": 360,
+			"height": 70,
+			"color": "1",
+			"text": "失败时进入诊断接入，按责任层协同修复。"
+		},
+		{
+			"id": "visual-coverage-map-file",
+			"type": "file",
+			"file": "system/visual-coverage-map.json",
+			"x": 824,
+			"y": 650,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "file-label-system-closure-map-file",
+			"type": "text",
+			"x": -1060,
+			"y": 500,
+			"width": 360,
+			"height": 90,
+			"color": "5",
+			"text": "闭环真相\n模块成熟度"
+		},
+		{
+			"id": "file-label-information-map-file",
+			"type": "text",
+			"x": -660,
+			"y": 500,
+			"width": 360,
+			"height": 90,
+			"color": "6",
+			"text": "信息地图\n模块与数据流"
+		},
+		{
+			"id": "file-label-route-registry-file",
+			"type": "text",
+			"x": -260,
+			"y": 500,
+			"width": 360,
+			"height": 90,
+			"color": "6",
+			"text": "路由表\n任务入口与校验"
+		},
+		{
+			"id": "file-label-module-governance-file",
+			"type": "text",
+			"x": 140,
+			"y": 500,
+			"width": 360,
+			"height": 90,
+			"color": "5",
+			"text": "治理规则\n模块登记"
+		},
+		{
+			"id": "file-label-validate-system-file",
+			"type": "text",
+			"x": 540,
+			"y": 500,
+			"width": 360,
+			"height": 90,
+			"color": "3",
+			"text": "校验脚本\n系统闭环"
+		},
+		{
+			"id": "file-label-system-closure-doc-file",
+			"type": "text",
+			"x": 940,
+			"y": 500,
+			"width": 300,
+			"height": 90,
+			"color": "4",
+			"text": "人读说明\n闭环口径"
+		},
+		{
+			"id": "file-label-visual-coverage-map-file",
+			"type": "text",
+			"x": 540,
+			"y": 620,
+			"width": 360,
+			"height": 90,
+			"color": "6",
+			"text": "可视化覆盖\n盲区检查"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构.",
+			"x": 1900,
+			"y": 263,
+			"width": 420,
+			"height": 130,
+			"color": "6"
+		}
+	],
+	"edges": [
+		{
+			"id": "e1",
+			"fromNode": "trigger",
+			"fromSide": "right",
+			"toNode": "information-map",
+			"toSide": "left",
+			"color": "1"
+		},
+		{
+			"id": "e2",
+			"fromNode": "information-map",
+			"fromSide": "right",
+			"toNode": "closure-map",
+			"toSide": "left",
+			"color": "6"
+		},
+		{
+			"id": "e3",
+			"fromNode": "closure-map",
+			"fromSide": "right",
+			"toNode": "gap-check",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e4",
+			"fromNode": "gap-check",
+			"fromSide": "right",
+			"toNode": "validator",
+			"toSide": "left",
+			"color": "3"
+		},
+		{
+			"id": "e6",
+			"fromNode": "repair-loop",
+			"fromSide": "right",
+			"toNode": "visual-trigger",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "bridge-edge-bridge-diagnostic",
+			"fromNode": "nav-label-diagnostic-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "bridge-anchor-bridge-diagnostic",
+			"toSide": "right",
+			"label": "对应：",
+			"color": "1"
+		},
+		{
+			"id": "bridge-edge-bridge-canvas-system",
+			"fromNode": "nav-label-canvas-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "bridge-anchor-bridge-canvas-system",
+			"toSide": "right",
+			"label": "对应：",
+			"color": "5"
+		},
+		{
+			"id": "e5",
+			"fromNode": "validator",
+			"fromSide": "bottom",
+			"toNode": "repair-loop-note",
+			"toSide": "top",
+			"color": "1"
+		}
+	]
+}

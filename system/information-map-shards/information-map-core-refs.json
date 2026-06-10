@@ -1,0 +1,98 @@
+{
+	"id": "information-map-core-refs",
+	"artifact_type": "information_map_shard",
+	"owner_module": "system-information-map",
+	"parent_manifest_ref": "system/information-map-manifest.json",
+	"scope": "Core information-map lookup refs for module boundaries, canonical truth groups, dataflows and entrypoints.",
+	"routing_policy": "Use this shard when a task needs to locate system modules or map surfaces without reading the full information map first.",
+	"entry_refs": [
+		{
+			"entry_id": "map.system-information-map",
+			"entry_type": "system_map",
+			"owner_module": "system-information-map",
+			"summary": "Full machine-readable map of system modules, canonical truth groups, dataflows and entrypoints.",
+			"reference_surfaces": [
+				"system/information-map.json"
+			],
+			"related_entries": [
+				"manifest.information-map",
+				"shard.information-map-governance-refs"
+			]
+		},
+		{
+			"entry_id": "manifest.information-map",
+			"entry_type": "manifest",
+			"owner_module": "system-information-map",
+			"summary": "Token-light entrypoint before full information-map reads.",
+			"reference_surfaces": [
+				"system/information-map-manifest.json"
+			],
+			"related_entries": [
+				"map.system-information-map"
+			]
+		},
+		{
+			"entry_id": "module.project-ontology",
+			"entry_type": "system_module",
+			"owner_module": "project-ontology",
+			"summary": "Root identity contract for 无界知识 as a knowledge engineering system and for Codex workflow dual roles.",
+			"reference_surfaces": [
+				"system/project-ontology.json",
+				"system/information-map.json#modules.project-ontology"
+			],
+			"related_entries": [
+				"route.project-ontology",
+				"visual.project-ontology"
+			]
+		},
+		{
+			"entry_id": "schema.information-map",
+			"entry_type": "schema",
+			"owner_module": "schemas",
+			"summary": "Schema contract for the root information map family.",
+			"reference_surfaces": [
+				"schemas/information-map.schema.json",
+				"schemas/information-map-manifest.schema.json",
+				"schemas/information-map-shard.schema.json"
+			],
+			"related_entries": [
+				"map.system-information-map"
+			]
+		},
+		{
+			"entry_id": "module.loop-orchestration",
+			"entry_type": "system_module",
+			"owner_module": "loop-orchestration",
+			"summary": "System-level module for durable loop orchestration, lifecycle state and legacy loop adoption.",
+			"reference_surfaces": [
+				"system/information-map.json#modules.loop-orchestration",
+				"system/loop-registry.json",
+				"system/loops/"
+			],
+			"related_entries": [
+				"route.loop-orchestration",
+				"visual.loop-orchestration"
+			]
+		},
+		{
+			"entry_id": "module.knowledge-ingestion",
+			"entry_type": "system_module",
+			"owner_module": "knowledge-ingestion",
+			"summary": "System-governance subsystem for knowledge entry, source-type selection, source-quality gates and handoffs before knowledge becomes reusable content.",
+			"reference_surfaces": [
+				"system/knowledge-ingestion-system.json",
+				"system/knowledge-ingestion-docs-map.json",
+				"system/information-map.json#modules.knowledge-ingestion"
+			],
+			"related_entries": [
+				"route.knowledge-ingestion",
+				"visual.knowledge-ingestion"
+			]
+		}
+	],
+	"boundary_refs": [
+		"shards_carry_refs_not_copied_payloads",
+		"information_map_manifest_is_lookup_entrypoint_not_truth_replacement"
+	],
+	"updated": "2026-06-10"
+}

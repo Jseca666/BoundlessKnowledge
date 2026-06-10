@@ -1,0 +1,207 @@
+{
+  "id": "development-principles",
+  "version": "0.9.0",
+  "updated": "2026-06-08",
+  "principles": [
+    {
+      "id": "knowledge-engineering-system-root",
+      "name": "知识工程系统根定位",
+      "rule": "无界知识的根定位是知识工程系统：系统搭建、知识内容、Canvas 可视化、诊断审查、loop 循环和 Codex workflow 都是为了让知识从来源进入、被结构化、被验证、被检索、被调用并持续回流闭环。不要把它拆成一个抽象系统和一个并列业务；业务领域只是外部知识内容的一类。",
+      "checkpoints": [
+        "讨论项目目标或系统/业务关系时先读 system/project-ontology.json",
+        "区分项目根定位、知识内容层、系统治理层、机器基础设施层、视觉投影层和 Codex 工作流运行层",
+        "领域分类服务知识路由，不作为项目顶层本体",
+        "Codex workflow 同时承担系统搭建维护和系统运行闭环",
+        "Canvas 投影根定位，但不替代机器真相"
+      ],
+      "owned_by": [
+        "system/project-ontology.json",
+        "system/route-registry.json",
+        "system/information-map.json"
+      ]
+    },
+    {
+      "id": "diagnose-before-fixing",
+      "name": "遇到问题先诊断",
+      "rule": "从局部现象向上追溯，先把事故表现当作证据入口，而不是问题本身；判断问题属于哪一层；找到更高层根因后，用最少改动、最大复用面收益的方式修复或升级。",
+      "checkpoints": [
+        "定位局部现象",
+        "判断所在层级",
+        "追溯更高层原因",
+        "选择最少改动且复用面收益最大的修复方式",
+        "区分事故表现、故障类和根因问题"
+      ]
+    },
+    {
+      "id": "incident-root-problem-separation",
+      "name": "事故不是问题本身",
+      "rule": "事故、截图、报错、线条遮挡、字段缺失或一次用户纠正只是问题的体现。系统诊断必须先记录事故表现，再抽象故障类，最后定位根因问题和调节目标；不能把针对某个事故的表面补丁当成系统修复。",
+      "checkpoints": [
+        "记录 observed incident 和 evidence surface",
+        "说明为什么事故本身不是 root problem",
+        "定位 recurrence mechanism 和 owning system model",
+        "把修复反馈给 system_regulation_target：规则、schema、route、workflow、validator、Canvas 或模块边界",
+        "只有当调节目标仍不足以防复发时，才新增负面约束或硬校验"
+      ],
+      "owned_by": [
+        "system/diagnostics/diagnostic-system.json",
+        "schemas/diagnostic-issue.schema.json",
+        "scripts/validate-diagnostics.ps1"
+      ]
+    },
+    {
+      "id": "coordinated-system-upgrade",
+      "name": "系统升级必须协同",
+      "rule": "无论是修复、需求、能力新增还是架构升级，都不能只改局部；必须检查相关模块、规则、schema、dataflow、gate、route、workflow、tool map、memory、版本记录等受影响面，并在必要时一起升级。",
+      "affected_surfaces": [
+        "modules",
+        "rules",
+        "schemas",
+        "dataflows",
+        "gates",
+        "routes",
+        "workflows",
+        "tool_maps",
+        "memory",
+        "version_records",
+        "same_class_assets",
+        "sibling_modules",
+        "peer_views",
+        "visual_projection",
+        "review_criteria",
+        "validation_gates"
+      ],
+      "generalization_rule": "系统升级不能只枚举被用户点名的对象；必须从具体故障抽象出 failure_class，再检查同类资产、兄弟模块、同层视图、相关 route、schema、validator、workflow、review 和 Canvas 投影。"
+    },
+    {
+      "id": "information-map-and-machine-friendly-flow",
+      "name": "信息地图与机器友好数据流",
+      "rule": "系统必须有 information map 记录模块边界、交互、内部结构、数据流、存储位置、工具环境和入口；内部数据流优先机器可读、省 token、可引用、可切片、可快速检索，Markdown 只做人类说明，不作为系统行为真相来源。",
+      "required_maps": [
+        "system/information-map.json",
+        "system/route-registry.json"
+      ]
+    },
+    {
+      "id": "govern-new-modules-before-growth",
+      "name": "新增模块先定归属",
+      "rule": "新增模块、目录、工具、schema、workflow、loop、index、Canvas 或长期能力前，必须先定义层级、边界、存储位置、机器真相、路由入口、校验方式和生命周期；不能先堆文件再补解释。",
+      "required_policy": "system/module-governance-policy.json",
+      "checkpoints": [
+        "判断所属层级和模块边界",
+        "声明机器真相来源和人类说明位置",
+        "选择长期目录、草稿目录和归档目录",
+        "登记 route、information map 及相关 registry",
+        "补充或复用校验入口",
+        "记录迁移或归档触发条件"
+      ]
+    },
+    {
+      "id": "diagnostic-upgrade-orchestration",
+      "name": "诊断驱动协同升级",
+      "rule": "诊断不是独立结论，而是上层更新能力的入口；一旦诊断判定为 system_upgrade，必须把根因、责任层、受影响面、规则更新、现有资产迁移、校验门和 diagnosis acceptance 串成闭环。不能只更新原则、文档或 registry 而不更新受影响资产。",
+      "required_sequence": [
+        "freeze failing path",
+        "diagnose owner layer",
+        "classify repair as local_repair / system_upgrade / blocked_investigation",
+        "enumerate affected surfaces",
+        "scan same-class assets and sibling surfaces",
+        "update machine policy and routes when needed",
+        "migrate existing assets governed by the new rule",
+        "add or update validation gates when recurrence risk is high",
+        "run validation",
+        "perform diagnosis acceptance against the original failure packet"
+      ],
+      "forbidden_patterns": [
+        "policy-only update",
+        "documentation-only closure",
+        "validation-only acceptance",
+        "single-artifact repair for a recurring system issue",
+        "target-only repair without same-class scan"
+      ],
+      "owned_by": [
+        "system/diagnostics/diagnostic-system.json",
+        "system/diagnostics/issue-repair-queue.json",
+        "system/route-registry.json",
+        "system/information-map.json"
+      ]
+    },
+    {
+      "id": "positive-model-before-constraints",
+      "name": "先修正向模型，再加约束",
+      "rule": "系统修复优先改善产生问题的正向模型：模块边界、状态机、路由、registry、schema、dataflow、生成机制或责任层。只有当问题高风险、易静默复发，且正向模型不足以防止时，才新增 forbidden pattern 或 validation gate。新增护栏应保护稳定不变量，并尽量合并旧规则。",
+      "checkpoints": [
+        "先说明应该修复哪个正向系统模型。",
+        "判断问题是否会静默复发或破坏机器真相。",
+        "只有保护稳定不变量时才新增负面约束。",
+        "新增规则前检查是否能合并、降级或删除旧规则。",
+        "validator 只检查可稳定判定的不变量，不承载临时偏好。"
+      ],
+      "forbidden_patterns": [
+        "one-issue-one-new-rule",
+        "negative-constraint-accumulation",
+        "validator-as-preference-dump",
+        "policy-bloat-without-model-repair"
+      ],
+      "owned_by": [
+        "system/development-principles.json",
+        "system/diagnostics/diagnostic-system.json",
+        "system/module-governance-policy.json"
+      ]
+    },
+    {
+      "id": "new-system-modules-inherit-legacy-responsibility",
+      "name": "新系统模块必须对旧内容负责",
+      "rule": "任何新增或升级出的系统模块，不只接管未来内容，也必须审查其职责范围内已经存在的旧文件、旧图、旧路由、旧规则、旧状态和旧文档，并明确接管、迁移、弃用、归档或登记后续处理。不能只创建新模块入口，却让旧内容继续无人负责。",
+      "checkpoints": [
+        "列出新模块职责范围内的既有文件、Canvas、route、registry、schema、workflow、tool、queue、docs 和历史状态。",
+        "逐项判断 adopt、migrate、deprecate、archive、exempt 或 queue_follow_up。",
+        "更新 information-map、module-relationship-map、closure、visual coverage、route 和文档边界。",
+        "把无法立即处理的旧内容写入明确的后续队列或 known_gaps，而不是留在聊天记忆里。",
+        "验收时检查旧内容是否已经被新模块接管或明确退出当前系统。"
+      ],
+      "owned_by": [
+        "system/development-principles.json",
+        "system/module-governance-policy.json",
+        "system/system-structure-governance.json",
+        "system/diagnostics/diagnostic-system.json"
+      ]
+    },
+    {
+      "id": "same-class-impact-scan",
+      "name": "同类面扫描后再闭环",
+      "rule": "遇到系统性问题时，先从局部现象自下而上定位 failure_class；一旦判定为 system_upgrade，就必须扫描同类资产、兄弟模块、同层视图和相关机器契约。不能只修用户指出的那个子系统或文件。",
+      "checkpoints": [
+        "确认 observed instance 和 failure_class",
+        "列出同类资产和兄弟面",
+        "判断每个面是 affected、unaffected、exempt 还是 queue_follow_up",
+        "把扫描结果写入机器记录 generalization_scan",
+        "用 validator 或 review gate 阻止新问题跳过扫描"
+      ],
+      "owned_by": [
+        "system/diagnostics/diagnostic-system.json",
+        "system/diagnostics/issue-repair-queue.json",
+        "schemas/diagnostic-issue.schema.json",
+        "scripts/validate-diagnostics.ps1",
+        "system/reviews/review-system.json"
+      ]
+    },
+    {
+      "id": "thin-entrypoints-route-to-machine-truth",
+      "name": "薄层入口只负责路由",
+      "rule": "所有 agent、skill、模块基准文档、子 agent 文档和子系统 README 只承载一般性顶层原则、入口顺序、机器真相位置和边界说明；具体模块方法、workflow、schema、输出模板、校验细节和历史问题记录必须进入 route registry、information map、docs map、registry、schema、workflow 或 queue。",
+      "checkpoints": [
+        "入口文件是否只说明 trigger/read order/machine truth/boundary/general principle",
+        "模块细节是否有对应 route 或 docs map 接管",
+        "skill 文档是否没有本地 workflow/output template",
+        "模块 README 或子 agent 文档是否没有成为隐藏真相源",
+        "validate-system 是否覆盖本地 entrypoint 漂移"
+      ],
+      "owned_by": [
+        "system/module-governance-policy.json",
+        "system/route-registry.json",
+        "scripts/validate-system.ps1"
+      ]
+    }
+  ]
+}

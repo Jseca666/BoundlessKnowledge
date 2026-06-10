@@ -1,0 +1,74 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://unbounded-knowledge.local/schemas/information-map.schema.json",
+	"title": "System Information Map",
+	"type": "object",
+	"additionalProperties": true,
+	"required": [
+		"id",
+		"version",
+		"updated",
+		"canonical_truth",
+		"modules",
+		"dataflows",
+		"entrypoints"
+	],
+	"properties": {
+		"id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"version": {
+			"type": "string",
+			"minLength": 1
+		},
+		"updated": {
+			"type": "string",
+			"minLength": 1
+		},
+		"canonical_truth": {
+			"type": "object"
+		},
+		"modules": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"id",
+					"name",
+					"paths",
+					"boundary",
+					"outputs",
+					"owner_layer",
+					"module_kind"
+				],
+				"additionalProperties": true
+			}
+		},
+		"dataflows": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"id",
+					"from",
+					"to",
+					"verb"
+				],
+				"additionalProperties": true
+			}
+		},
+		"entrypoints": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"id",
+					"path",
+					"purpose"
+				],
+				"additionalProperties": true
+			}
+		}
+	}
+}

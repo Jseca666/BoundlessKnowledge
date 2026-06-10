@@ -1,0 +1,77 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://unbounded-knowledge.local/schemas/information-map-manifest.schema.json",
+	"title": "Information Map Manifest",
+	"type": "object",
+	"additionalProperties": true,
+	"required": [
+		"id",
+		"artifact_type",
+		"owner_module",
+		"status",
+		"source_map_ref",
+		"purpose",
+		"read_policy",
+		"shard_index",
+		"compatibility_refs",
+		"validation_refs",
+		"updated"
+	],
+	"properties": {
+		"id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"artifact_type": {
+			"const": "information_map_manifest"
+		},
+		"owner_module": {
+			"type": "string",
+			"minLength": 1
+		},
+		"status": {
+			"type": "string",
+			"minLength": 1
+		},
+		"source_map_ref": {
+			"type": "string",
+			"minLength": 1
+		},
+		"purpose": {
+			"type": "string",
+			"minLength": 1
+		},
+		"read_policy": {
+			"type": "object"
+		},
+		"shard_index": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"shard_id",
+					"shard_ref",
+					"content_scope",
+					"read_policy"
+				],
+				"additionalProperties": true
+			}
+		},
+		"compatibility_refs": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"validation_refs": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"updated": {
+			"type": "string",
+			"minLength": 1
+		}
+	}
+}

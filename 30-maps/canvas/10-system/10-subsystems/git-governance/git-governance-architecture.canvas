@@ -1,0 +1,457 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -1060,
+			"y": -680,
+			"width": 2480,
+			"height": 120,
+			"color": "6",
+			"text": "# Git 版本治理模块\n\n治理本项目的本地 Git 状态、origin 远端、提交前校验、敏感边界和 GitHub 远端动作授权。"
+		},
+		{
+			"id": "scope-note",
+			"type": "text",
+			"x": -1060,
+			"y": -520,
+			"width": 2480,
+			"height": 90,
+			"color": "6",
+			"text": "# 读图口径\n\n左侧是版本治理流程；底部是机器真相和工具；右侧只做上下游跳转。Git 模块维护版本边界，但不替代审查、诊断和用户授权。"
+		},
+		{
+			"id": "local-repo-state",
+			"type": "text",
+			"x": -1060,
+			"y": -330,
+			"width": 340,
+			"height": 170,
+			"color": "6",
+			"text": "# 1. 本地仓库状态\n\n读取 worktree、当前分支、origin、未跟踪/未提交变更。\n\n输出：状态快照。"
+		},
+		{
+			"id": "change-scope",
+			"type": "text",
+			"x": -610,
+			"y": -330,
+			"width": 340,
+			"height": 170,
+			"color": "5",
+			"text": "# 2. 变更范围归类\n\n区分系统治理、知识内容、可视化投影、工具脚本、技术文档和混合变更。"
+		},
+		{
+			"id": "precommit-validation",
+			"type": "text",
+			"x": -160,
+			"y": -330,
+			"width": 340,
+			"height": 170,
+			"color": "5",
+			"text": "# 3. 提交前校验\n\n先跑相关 validator：system、canvas、review、diagnostics、index、kb 和 Git 治理。"
+		},
+		{
+			"id": "sensitive-boundary",
+			"type": "text",
+			"x": 290,
+			"y": -330,
+			"width": 340,
+			"height": 170,
+			"color": "1",
+			"text": "# 4. 敏感边界\n\n检查 .env、token、cookie、Obsidian workspace、本地缓存、临时文件和个人材料。"
+		},
+		{
+			"id": "remote-action-gate",
+			"type": "text",
+			"x": 740,
+			"y": -330,
+			"width": 340,
+			"height": 170,
+			"color": "2",
+			"text": "# 5. 远端动作门\n\npush、release、issue、PR、merge、远端分支和凭据变更都需要用户明确授权。"
+		},
+		{
+			"id": "commit-plan",
+			"type": "text",
+			"x": -1060,
+			"y": -40,
+			"width": 500,
+			"height": 150,
+			"color": "5",
+			"text": "# 本地提交计划\n\n可以准备建议的提交范围和 commit message；实际 stage/commit 只在明确请求后执行。"
+		},
+		{
+			"id": "publication-review",
+			"type": "text",
+			"x": -420,
+			"y": -40,
+			"width": 500,
+			"height": 150,
+			"color": "5",
+			"text": "# 发布/公开前审查\n\n由 review-system 判断外部可读性、敏感内容、文档完整性和公开仓库风险。"
+		},
+		{
+			"id": "diagnostic-handoff",
+			"type": "text",
+			"x": 860,
+			"y": -40,
+			"width": 560,
+			"height": 150,
+			"color": "1",
+			"text": "# 诊断交接\n\nGit 状态、校验、发布流程或版本边界暴露系统性失败时，交给 diagnostics 定位根因。"
+		},
+		{
+			"id": "status-output",
+			"type": "text",
+			"x": 220,
+			"y": -40,
+			"width": 500,
+			"height": 150,
+			"color": "4",
+			"text": "# 状态输出\n\n`git-governance-status.ps1` 只输出本地状态和授权边界，不执行远端动作。"
+		},
+		{
+			"id": "machine-truth-band",
+			"type": "text",
+			"x": -1060,
+			"y": 170,
+			"width": 2480,
+			"height": 80,
+			"color": "6",
+			"text": "# 机器真相\n\n这些文件决定 Git 治理边界、文档路由、状态检查、校验门和发布准备；Markdown 只做人类说明。"
+		},
+		{
+			"id": "file-label-git-system-file",
+			"type": "text",
+			"x": -1060,
+			"y": 310,
+			"width": 250,
+			"height": 90,
+			"color": "6",
+			"text": "治理真相\n远端、边界、流程"
+		},
+		{
+			"id": "git-system-file",
+			"type": "file",
+			"x": -790,
+			"y": 330,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "system/git-governance-system.json"
+		},
+		{
+			"id": "file-label-git-docs-map-file",
+			"type": "text",
+			"x": -700,
+			"y": 310,
+			"width": 250,
+			"height": 90,
+			"color": "6",
+			"text": "文档地图\n薄入口与路由"
+		},
+		{
+			"id": "git-docs-map-file",
+			"type": "file",
+			"x": -430,
+			"y": 330,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "system/git-governance-docs-map.json"
+		},
+		{
+			"id": "file-label-validate-git-file",
+			"type": "text",
+			"x": -340,
+			"y": 310,
+			"width": 250,
+			"height": 90,
+			"color": "5",
+			"text": "校验门\norigin 与边界"
+		},
+		{
+			"id": "validate-git-file",
+			"type": "file",
+			"x": -70,
+			"y": 330,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "scripts/validate-git-governance.ps1"
+		},
+		{
+			"id": "file-label-git-status-tool-file",
+			"type": "text",
+			"x": 20,
+			"y": 310,
+			"width": 250,
+			"height": 90,
+			"color": "4",
+			"text": "状态工具\n只读快照输出"
+		},
+		{
+			"id": "git-status-tool-file",
+			"type": "file",
+			"x": 290,
+			"y": 330,
+			"width": 64,
+			"height": 48,
+			"color": "4",
+			"file": "scripts/git-governance-status.ps1"
+		},
+		{
+			"id": "file-label-gitignore-file",
+			"type": "text",
+			"x": 380,
+			"y": 310,
+			"width": 250,
+			"height": 90,
+			"color": "1",
+			"text": "版本边界\n忽略私有状态"
+		},
+		{
+			"id": "gitignore-file",
+			"type": "file",
+			"x": 650,
+			"y": 330,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": ".gitignore"
+		},
+		{
+			"id": "file-label-git-readme-file",
+			"type": "text",
+			"x": 740,
+			"y": 310,
+			"width": 250,
+			"height": 90,
+			"color": "5",
+			"text": "人类入口\nGit 治理读法"
+		},
+		{
+			"id": "git-readme-file",
+			"type": "file",
+			"x": 1010,
+			"y": 330,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "docs/git-governance/README.md"
+		},
+		{
+			"id": "file-label-github-readiness-file",
+			"type": "text",
+			"x": 1100,
+			"y": 310,
+			"width": 250,
+			"height": 90,
+			"color": "5",
+			"text": "发布清单\nGitHub 准备"
+		},
+		{
+			"id": "github-readiness-file",
+			"type": "file",
+			"x": 1370,
+			"y": 330,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "docs/technical/github-readiness.md"
+		},
+		{
+			"id": "right-nav-title",
+			"type": "text",
+			"x": 1680,
+			"y": -520,
+			"width": 420,
+			"height": 90,
+			"color": "5",
+			"text": "# 导航栏\n\n只做跳转，不参与 Git 状态和版本真相。"
+		},
+		{
+			"id": "nav-label-parent-kb-system-canvas-file",
+			"type": "text",
+			"x": 1680,
+			"y": -400,
+			"width": 330,
+			"height": 48,
+			"color": "6",
+			"text": "返回：系统总览"
+		},
+		{
+			"id": "parent-kb-system-canvas-file",
+			"type": "file",
+			"x": 2030,
+			"y": -400,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-review-system-canvas-file",
+			"type": "text",
+			"x": 1680,
+			"y": -340,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "相关：发布审查"
+		},
+		{
+			"id": "review-system-canvas-file",
+			"type": "file",
+			"x": 2030,
+			"y": -340,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-diagnostic-system-canvas-file",
+			"type": "text",
+			"x": 1680,
+			"y": -280,
+			"width": 330,
+			"height": 48,
+			"color": "1",
+			"text": "相关：诊断修复"
+		},
+		{
+			"id": "diagnostic-system-canvas-file",
+			"type": "file",
+			"x": 2030,
+			"y": -280,
+			"width": 64,
+			"height": 48,
+			"color": "1",
+			"file": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas"
+		},
+		{
+			"id": "nav-label-system-closure-canvas-file",
+			"type": "text",
+			"x": 1680,
+			"y": -220,
+			"width": 330,
+			"height": 48,
+			"color": "5",
+			"text": "相关：系统闭环"
+		},
+		{
+			"id": "system-closure-canvas-file",
+			"type": "file",
+			"x": 2030,
+			"y": -220,
+			"width": 64,
+			"height": 48,
+			"color": "5",
+			"file": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas"
+		},
+		{
+			"id": "color-legend",
+			"type": "text",
+			"x": 1680,
+			"y": -110,
+			"width": 420,
+			"height": 150,
+			"color": "6",
+			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构。"
+		}
+	],
+	"edges": [
+		{
+			"id": "e1",
+			"fromNode": "local-repo-state",
+			"fromSide": "right",
+			"toNode": "change-scope",
+			"toSide": "left",
+			"color": "6"
+		},
+		{
+			"id": "e2",
+			"fromNode": "change-scope",
+			"fromSide": "right",
+			"toNode": "precommit-validation",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e3",
+			"fromNode": "precommit-validation",
+			"fromSide": "right",
+			"toNode": "sensitive-boundary",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e4",
+			"fromNode": "sensitive-boundary",
+			"fromSide": "right",
+			"toNode": "remote-action-gate",
+			"toSide": "left",
+			"color": "1"
+		},
+		{
+			"id": "e5",
+			"fromNode": "commit-plan",
+			"fromSide": "right",
+			"toNode": "publication-review",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e6",
+			"fromNode": "publication-review",
+			"fromSide": "right",
+			"toNode": "status-output",
+			"toSide": "left",
+			"color": "5"
+		},
+		{
+			"id": "e7",
+			"fromNode": "status-output",
+			"fromSide": "right",
+			"toNode": "diagnostic-handoff",
+			"toSide": "left",
+			"color": "1"
+		},
+		{
+			"id": "e8",
+			"fromNode": "remote-action-gate",
+			"fromSide": "bottom",
+			"toNode": "diagnostic-handoff",
+			"toSide": "top",
+			"color": "2"
+		},
+		{
+			"id": "bridge-edge-review-system",
+			"fromNode": "nav-label-review-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "remote-action-gate",
+			"toSide": "right",
+			"color": "5",
+			"label": "对应：发布审查"
+		},
+		{
+			"id": "bridge-edge-diagnostic-system",
+			"fromNode": "nav-label-diagnostic-system-canvas-file",
+			"fromSide": "left",
+			"toNode": "diagnostic-handoff",
+			"toSide": "right",
+			"color": "1",
+			"label": "对应：诊断交接"
+		},
+		{
+			"id": "bridge-edge-system-closure",
+			"fromNode": "nav-label-system-closure-canvas-file",
+			"fromSide": "left",
+			"toNode": "diagnostic-handoff",
+			"toSide": "right",
+			"color": "5",
+			"label": "对应：闭环状态"
+		}
+	]
+}

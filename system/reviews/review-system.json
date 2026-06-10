@@ -1,0 +1,391 @@
+{
+	"id": "review-system",
+	"version": "0.3.0",
+	"updated": "2026-06-10",
+	"role": "system-and-knowledge-review",
+	"purpose": "Provide a reusable review module for proactive inspection of system structure and external knowledge quality before defects are handed to diagnostics.",
+	"principle_bridge": [
+		"diagnose-before-fixing",
+		"coordinated-system-upgrade",
+		"information-map-and-machine-friendly-flow",
+		"review-before-diagnosis-when-no-clear-failure",
+		"visual-shadow-for-stable-structure"
+	],
+	"responsibility_boundary": {
+		"owns": [
+			"review scope definition",
+			"review packet construction",
+			"criteria-based inspection",
+			"risk and finding classification",
+			"review record contract",
+			"handoff decision to diagnostics, evals, taxonomy loop or content workflow",
+			"review acceptance"
+		],
+		"does_not_own": [
+			"root-cause diagnosis after a defect is confirmed",
+			"repair execution in another module",
+			"final truth of external domain knowledge",
+			"taxonomy category design itself",
+			"Canvas layout repair itself",
+			"automated eval runner implementation"
+		],
+		"handoff_rule": "Review identifies observations, risks and confirmed defects. Confirmed systemic defects enter diagnostics; measurable quality checks may enter evals; taxonomy gaps may enter the taxonomy-refinement loop."
+	},
+	"review_classes": [
+		{
+			"id": "system_internal_review",
+			"scope": "Routes, information map, module boundaries, closure, schemas, scripts, tools, Canvas coverage, docs boundaries and lifecycle state.",
+			"default_handoff": "diagnostics when a concrete defect or recurrence risk is found"
+		},
+		{
+			"id": "external_knowledge_review",
+			"scope": "Papers, web sources, GitHub topics, claims, evidence chains, recency, source quality, domain placement and uncertainty.",
+			"default_handoff": "knowledge workflow, evals or diagnostics depending on whether the issue is content quality, measurable quality or system structure"
+		},
+		{
+			"id": "visual_review",
+			"scope": "Canvas scanability, navigation clarity, view boundary, line routing, edge label clearance, visual aesthetics, color semantics, support relation semantics and visual projection completeness.",
+			"default_handoff": "architecture-views or diagnostics when visual blind spots recur"
+		},
+		{
+			"id": "release_readiness_review",
+			"scope": "Technical documentation, validation coverage, GitHub readiness, setup instructions and operations surfaces.",
+			"default_handoff": "technical-documentation or diagnostics"
+		}
+	],
+	"specialized_review_modules": [
+		{
+			"id": "canvas_visual_aesthetic_review",
+			"name": "Canvas 视觉审美审查",
+			"parent_review_class": "visual_review",
+			"role": "专门审查 current / active Canvas 图是否具备人眼可读的视觉质量：主流程边是否无标签、节点间距、边标签净空、线条遮挡、导航与正文关系、颜色语义、可见图例、主路径稳定性和视觉投影完整性。",
+			"owns": [
+				"Canvas visual scanability review",
+				"primary-flow unlabeled-edge review",
+				"edge label clearance review for exceptional labeled edges",
+				"line obstruction and node overlap review",
+				"main-to-navigation gutter review",
+				"visual projection readability review",
+				"view-scoped color semantics review",
+				"visible color legend review",
+				"palette-role separation review",
+				"Canvas screenshot-level evidence review",
+				"rendered PNG nonblank/readability evidence review",
+				"support file binding semantics review",
+				"registry-first support relation review"
+			],
+			"does_not_own": [
+				"Canvas registry truth",
+				"root-cause diagnosis after confirmed defect",
+				"domain taxonomy content design",
+				"external knowledge evidence review"
+			],
+			"criteria_set": "canvas-visual-aesthetic-review",
+			"audit_tool": "scripts/audit-canvas-visual.ps1",
+			"docs": [
+				"docs/review/canvas-visual-aesthetic-review.md",
+				"docs/canvas/visual-audit.md",
+				"system/reviews/canvas-screenshots/latest-report.json"
+			],
+			"handoff_rule": "If a visual finding is a confirmed layout or policy defect with recurrence risk, record the review finding and hand it to diagnostics for owner-layer repair; local one-off drawing polish can stay in architecture-views.",
+			"screenshot_audit_tool": "scripts/audit-canvas-screenshot.ps1",
+			"key_review_steps": [
+				"load Canvas registry, view graph and affected .canvas files",
+				"run geometry/structure visual audit with scripts/audit-canvas-visual.ps1 -Strict",
+				"run screenshot evidence audit with scripts/audit-canvas-screenshot.ps1 -Strict",
+				"inspect generated PNG/report before accepting user-visible visual quality",
+				"handoff recurring visual gate defects to diagnostics",
+				"check that non-navigation support file labels have support_bindings to upper Canvas content nodes",
+				"treat missing support semantics as a visual blind spot because the bottom machine-truth band becomes loose bibliography"
+			]
+		},
+		{
+			"id": "git_version_publication_review",
+			"name": "Git 版本与发布审查",
+			"parent_review_class": "release_readiness_review",
+			"role": "专门审查本地版本边界、提交范围、敏感信息、远端授权和 GitHub 公开前准备；它判断发布风险，不替代 Git 治理模块维护状态。",
+			"owns": [
+				"Git status and origin review",
+				"commit scope readability review",
+				"sensitive surface review before staging or publication",
+				"GitHub readiness review",
+				"remote action approval boundary review"
+			],
+			"does_not_own": [
+				"running remote push/release/PR actions",
+				"credential management",
+				"root-cause diagnosis after failed Git workflow",
+				"knowledge content truth review"
+			],
+			"criteria_set": "git-version-publication-review",
+			"audit_tool": "scripts/validate-git-governance.ps1",
+			"docs": [
+				"docs/git-governance/README.md",
+				"docs/technical/github-readiness.md",
+				"system/git-governance-system.json"
+			],
+			"handoff_rule": "If review finds a concrete Git workflow defect, privacy leak risk, validation gap or repeated publication-boundary failure, hand off to diagnostics with git status snapshot and changed paths."
+		}
+	],
+	"finding_status_values": [
+		{
+			"status": "observation",
+			"meaning": "Something worth noting, but no immediate defect or action is confirmed."
+		},
+		{
+			"status": "risk",
+			"meaning": "A plausible weakness that may become a defect if volume, reuse or dependency grows."
+		},
+		{
+			"status": "defect",
+			"meaning": "A confirmed mismatch, missing surface, false claim, stale source, invalid route or broken contract."
+		},
+		{
+			"status": "blocked",
+			"meaning": "Review cannot decide without missing evidence, access or user choice."
+		}
+	],
+	"handoff_targets": [
+		{
+			"id": "none",
+			"rule": "Use when review finds no actionable defect."
+		},
+		{
+			"id": "diagnostics",
+			"rule": "Use when a finding has a concrete failure path, system owner layer or recurrence risk that needs root-cause repair."
+		},
+		{
+			"id": "evals",
+			"rule": "Use when the finding should become a measurable quality test or benchmark."
+		},
+		{
+			"id": "taxonomy-refinement-loop",
+			"rule": "Use when the finding is mainly a classification gap or domain-routing ambiguity."
+		},
+		{
+			"id": "knowledge-workflow",
+			"rule": "Use when the finding is a content update, source-quality note, claim uncertainty or synthesis issue."
+		}
+	],
+	"core_workflow": [
+		{
+			"step": "define-review-scope",
+			"output": "scope",
+			"rule": "Name what is being reviewed, why now, and which surfaces are in or out of scope."
+		},
+		{
+			"step": "load-authoritative-surfaces",
+			"output": "evidence_paths",
+			"rule": "Read route registry, information map, relevant module registries, source records, schemas, docs maps, Canvas registry or catalog entries before judging."
+		},
+		{
+			"step": "select-review-criteria",
+			"output": "criteria",
+			"rule": "Choose criteria appropriate to the review class instead of using one generic checklist for all reviews."
+		},
+		{
+			"step": "collect-visual-evidence",
+			"output": "visual_evidence_paths",
+			"rule": "For visual_review of current/active Canvas layout, navigation, color, readability or user-visible defects, run scripts/audit-canvas-visual.ps1 -Strict and scripts/audit-canvas-screenshot.ps1 -Strict before classifying final findings."
+		},
+		{
+			"step": "inspect-and-classify-findings",
+			"output": "findings",
+			"rule": "Classify each finding as observation, risk, defect or blocked. Do not diagnose root cause inside review unless the defect path is already explicit."
+		},
+		{
+			"step": "decide-handoff",
+			"output": "handoff_decision",
+			"rule": "Send confirmed systemic defects to diagnostics; send measurable quality gaps to evals; send taxonomy gaps to the taxonomy loop; keep non-actionable observations in the review record."
+		},
+		{
+			"step": "write-review-record",
+			"output": "review_record",
+			"rule": "Capture scope, evidence, criteria, findings, risk assessment, handoff decision and acceptance before claiming the review is complete."
+		},
+		{
+			"step": "validate-review",
+			"output": "validation",
+			"rule": "Run review validation and any route-specific validators required by the reviewed surfaces."
+		},
+		{
+			"step": "review-accept",
+			"output": "review_acceptance",
+			"rule": "Confirm the review answered the original review question and routed defects to the correct downstream module."
+		}
+	],
+	"review_record_contract": {
+		"schema": "schemas/review-record.schema.json",
+		"queue": "system/reviews/review-queue.json",
+		"required_fields": [
+			"review_id",
+			"title",
+			"status",
+			"review_class",
+			"trigger",
+			"scope",
+			"evidence_paths",
+			"criteria",
+			"findings",
+			"risk_assessment",
+			"handoff_decision",
+			"capture_paths",
+			"validation",
+			"review_acceptance"
+		]
+	},
+	"criteria_sets": [
+		{
+			"id": "system-internal-review",
+			"review_class": "system_internal_review",
+			"criteria": [
+				"module is registered in information-map",
+				"route has read, update and validation surfaces",
+				"canonical truth is machine-readable",
+				"schema or contract exists when structured records exist",
+				"validator can catch drift",
+				"closure map records lifecycle and gaps",
+				"visual coverage decision exists",
+				"docs remain thin and routed",
+				"module owner_layer and module_kind match system/module-layer-model.json",
+				"module layer, storage path, lifecycle and Canvas view_level are not conflated",
+				"new stable module placement has a system-structure-governance decision before route, closure or Canvas registration",
+				"module-relationship-map covers the module and its key relationships",
+				"new or upgraded system modules audit and inherit existing assets in their responsibility boundary",
+				"modules listed in module_activation_contract.current_required_modules have closure-map activation_proof",
+				"diagnostic-system self-audit exists when user correction proves a missed or shallow diagnosis",
+				"system upgrades include same-class impact scan before closure",
+				"system upgrades separate incident_manifestation from root_problem and name system_regulation_target before closure",
+				"agent, skill and module entrypoint docs stay thin and route to machine truth",
+				"module-specific methods live in registered route, docs map, registry, schema or workflow surfaces"
+			]
+		},
+		{
+			"id": "external-knowledge-review",
+			"review_class": "external_knowledge_review",
+			"criteria": [
+				"source is traceable",
+				"claim is separated from evidence",
+				"recency and version are named when unstable",
+				"uncertainty and conflicts are recorded",
+				"domain classification reaches level 3 when applicable",
+				"copyright-sensitive content is summarized rather than copied",
+				"source quality or methodological limits are visible",
+				"knowledge item can be indexed and retrieved"
+			]
+		},
+		{
+			"id": "visual-review",
+			"review_class": "visual_review",
+			"criteria": [
+				"main structure stays left and navigation stays right",
+				"navigation file buttons are compact",
+				"nav labels explain the destination",
+				"bridge lines mean correspondence only",
+				"lines do not cross unrelated nodes",
+				"edge labels have enough whitespace and are not hidden by adjacent cards",
+				"view boundary is registered",
+				"Canvas points back to machine truth",
+				"L0 navigation grouping follows registered view_level, layer and primary_subject",
+				"L2 system-subsystem views are visually and graph-wise nested under L1 system overview, not peers of it",
+				"visual fixes scan peer current/active Canvas views for the same failure class",
+				"current/active Canvas visual changes have screenshot-level evidence when user-visible layout or readability is affected"
+			]
+		},
+		{
+			"id": "canvas-visual-aesthetic-review",
+			"review_class": "visual_review",
+			"criteria": [
+				"primary reading path has one dominant direction",
+				"L0 navigation index reads as a layer-aware route map, not a subjective mixed bucket list or plain file-preview stack",
+				"navigation file buttons stay visually subordinate to human-readable destination cards",
+				"support files use file-label-* as integrated readable cards with compact embedded file buttons",
+				"primary-flow edges are unlabeled by default",
+				"exceptional edge labels are readable and do not overlap node borders",
+				"lines do not cross unrelated cards, labels, file nodes or section bands",
+				"navigation panel stays visually separate from the main structure",
+				"navigation-to-content bridge lines use one explanation and one direct line",
+				"machine truth file nodes stay in a separate band",
+				"scripts/audit-canvas-visual.ps1 -Strict passes before visual acceptance",
+				"entry navigation cards expose L1/L2 ownership before opening child views",
+				"entry and overview views do not confuse Canvas view_level with module owner_layer",
+				"L0 entry exposes L1 trunks first and nests L2 system-subsystem shortcuts under the L1 system overview",
+				"view-scoped color_semantics exists for every current or active Canvas view",
+				"visible color-legend nodes explain the active palette without becoming machine truth",
+				"taxonomy/domain colors are not interpreted as system status colors",
+				"layer guide lines remain distinct from workflow/dataflow edges",
+				"Canvas colors use registered view-scoped palettes and stable Obsidian color tokens 1-6 or #RRGGBB; plain named colors are treated as a style defect.",
+				"Review acceptance separates static audit results from user-visible visual acceptance; if rendered Obsidian inspection is unavailable, the limitation is stated instead of pretending full visual certainty.",
+				"scripts/audit-canvas-screenshot.ps1 -Strict generates PNG evidence and system/reviews/canvas-screenshots/latest-report.json before screenshot-level visual acceptance",
+				"screenshot evidence is treated as review evidence, while Canvas registry and view graph remain machine truth",
+				"Screenshot-level visual audit is a key step of Canvas visual review, not an optional artifact-generation step."
+			]
+		},
+		{
+			"id": "git-version-publication-review",
+			"applies_to": [
+				"git-governance",
+				"release_readiness_review"
+			],
+			"criteria": [
+				"origin remote points to the registered BoundlessKnowledge repository",
+				"no secrets, tokens, cookies, local workspace state or personal private material are included in the intended version surface",
+				"changed paths have a readable commit scope and do not mix unrelated system, knowledge and generated artifacts",
+				"required validators passed or failures are explicitly diagnosed before commit or publication",
+				"remote actions are not performed without explicit user approval",
+				"GitHub readiness document and Git governance machine truth agree on publication boundaries"
+			]
+		}
+	],
+	"storage_policy": {
+		"agent_entry": [
+			".agents/skills/review-system/SKILL.md",
+			".agents/skills/review-system/agents/openai.yaml"
+		],
+		"machine_truth": [
+			"system/reviews/review-system.json",
+			"system/reviews/review-queue.json",
+			"system/reviews/review-docs-map.json",
+			"schemas/review-record.schema.json"
+		],
+		"human_explanation": [
+			"docs/review/README.md",
+			"docs/review/system-review.md",
+			"docs/review/knowledge-review.md",
+			"docs/review/canvas-visual-aesthetic-review.md"
+		],
+		"visual_projection": [
+			"30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas"
+		],
+		"validation": [
+			"scripts/validate-reviews.ps1",
+			"scripts/validate-system.ps1",
+			"scripts/validate-canvas.ps1",
+			"scripts/audit-canvas-screenshot.ps1",
+			"scripts/validate-git-governance.ps1"
+		]
+	},
+	"quality_gates": [
+		"Review must name scope before judging quality.",
+		"Review must read the authoritative machine surfaces for the selected scope.",
+		"Review must distinguish observation, risk, defect and blocked evidence.",
+		"Review must not replace diagnostics when a confirmed defect needs root-cause repair.",
+		"External knowledge review must preserve source traceability and uncertainty.",
+		"System review must check whether visual projection, closure and validation surfaces need updates.",
+		"Canvas visual aesthetic review must run scripts/audit-canvas-visual.ps1 -Strict for current or active Canvas layout changes and treat primary-flow edge labels or edge-label obstruction as visual defects.",
+		"Canvas visual aesthetic review must check that L0 entry navigation groups destinations by registered view_level/layer/primary_subject, not only by visual neatness.",
+		"System review must check module-layer-model alignment when module boundaries, information-map, closure map or entry Canvas views change.",
+		"System review must check system-structure-governance and module-relationship-map when module boundaries, ownership, branch decisions or new stable modules change.",
+		"System review must check legacy_asset_audit when a new system module, child module, peer module or branch is introduced.",
+		"System review must check activation_proof before accepting a new or upgraded stable system module as active/effective.",
+		"Canvas entry and view graph review must reject L2 system-subsystem views being parented directly by L0 or shown as peers of L1 system overview.",
+		"System review must check diagnostic_self_audit when a user correction reveals that diagnostics missed the true owner layer or accepted closure too early.",
+		"System review must reject target-only system_upgrade closure when same-class assets and sibling surfaces were not scanned.",
+		"Review handoff to diagnostics must mention whether the finding appears isolated, repeated across same-class assets, or requires a generalization_scan.",
+		"System review must reject a system_upgrade that treats an observed accident, screenshot, graph defect or file-specific failure as the root problem without naming recurrence mechanism and regulation target.",
+		"System review must reject entrypoint documents that carry module-specific workflow, output template, schema field list or hidden local method instead of routing to machine truth.",
+		"Canvas visual review must run scripts/audit-canvas-screenshot.ps1 -Strict for current or active Canvas visual changes that involve layout, navigation, color, readability or user-visible visual defects.",
+		"Canvas screenshot audit is a key review step: do not accept current/active Canvas visual review when screenshot evidence is skipped without an explicit limitation record.",
+		"Git/version publication review must run before any public remote action when the project is being prepared for GitHub publication."
+	]
+}

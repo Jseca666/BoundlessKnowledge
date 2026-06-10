@@ -1,0 +1,68 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://unbounded-knowledge.local/schemas/information-map-shard.schema.json",
+	"title": "Information Map Shard",
+	"type": "object",
+	"additionalProperties": true,
+	"required": [
+		"id",
+		"artifact_type",
+		"owner_module",
+		"parent_manifest_ref",
+		"scope",
+		"routing_policy",
+		"entry_refs",
+		"boundary_refs",
+		"updated"
+	],
+	"properties": {
+		"id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"artifact_type": {
+			"const": "information_map_shard"
+		},
+		"owner_module": {
+			"type": "string",
+			"minLength": 1
+		},
+		"parent_manifest_ref": {
+			"type": "string",
+			"minLength": 1
+		},
+		"scope": {
+			"type": "string",
+			"minLength": 1
+		},
+		"routing_policy": {
+			"type": "string",
+			"minLength": 1
+		},
+		"entry_refs": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"entry_id",
+					"entry_type",
+					"owner_module",
+					"summary",
+					"reference_surfaces",
+					"related_entries"
+				],
+				"additionalProperties": true
+			}
+		},
+		"boundary_refs": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"updated": {
+			"type": "string",
+			"minLength": 1
+		}
+	}
+}

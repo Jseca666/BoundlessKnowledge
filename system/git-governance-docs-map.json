@@ -1,0 +1,73 @@
+{
+	"id": "git-governance-docs-map",
+	"version": "0.2.0",
+	"updated": "2026-06-10",
+	"role": "machine-readable-doc-map-for-git-governance",
+	"purpose": "Keep Git governance human documentation thin and routed while machine truth remains in system/git-governance-system.json.",
+	"baseline_doc": {
+		"path": "docs/git-governance/README.md",
+		"role": "Thin human entrypoint for Git governance",
+		"not_for": [
+			"Full release checklist",
+			"Credential handling",
+			"Replacing system/git-governance-system.json",
+			"Remote publishing action"
+		]
+	},
+	"machine_truth": [
+		{
+			"path": "system/git-governance-system.json",
+			"role": "Canonical Git governance contract"
+		},
+		{
+			"path": "system/route-registry.json",
+			"role": "Task route entry"
+		},
+		{
+			"path": "system/information-map.json",
+			"role": "Module and dataflow registration"
+		},
+		{
+			"path": "system/tool-map.json",
+			"role": "Git governance tool registry"
+		},
+		{
+			"path": ".gitattributes",
+			"role": "Repository line-ending and binary-file policy"
+		}
+	],
+	"doc_routes": [
+		{
+			"id": "entry",
+			"path": "docs/git-governance/README.md",
+			"role": "Thin read order and operating boundary",
+			"boundary": "Explains where Git governance starts and points to machine truth.",
+			"not_for": [
+				"Detailed Git tutorial",
+				"Credential setup",
+				"Remote action execution"
+			]
+		},
+		{
+			"id": "github-readiness",
+			"path": "docs/technical/github-readiness.md",
+			"role": "Publication checklist and external-reader readiness",
+			"boundary": "Explains GitHub publication readiness and remote-action approval boundary.",
+			"not_for": [
+				"Machine truth",
+				"Automatic publishing",
+				"Secret storage"
+			]
+		}
+	],
+	"split_policy": {
+		"baseline_doc_rule": "docs/git-governance/README.md stays thin and routes to system/git-governance-system.json.",
+		"technical_docs_rule": "GitHub publication checklist remains under docs/technical because it is an operations publication topic.",
+		"growth_trigger": "Add separate docs only when Git governance gains CI, release, branching, changelog or contribution workflows."
+	},
+	"validation": [
+		"scripts/validate-git-governance.ps1",
+		"scripts/validate-system.ps1",
+		"scripts/audit-text-integrity.ps1"
+	]
+}

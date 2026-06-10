@@ -1,0 +1,941 @@
+{
+	"id": "information-map",
+	"version": "1.11.0",
+	"updated": "2026-06-10",
+	"canonical_truth": {
+		"system_behavior": [
+			"system/route-registry.json",
+			"system/information-map.json",
+			"system/development-principles.json",
+			"system/module-governance-policy.json",
+			"system/system-structure-governance.json",
+			"system/module-relationship-map.json",
+			"system/canvas-system.json",
+			"system/canvas-registry.json",
+			"system/canvas-view-graph.json",
+			"system/canvas-docs-map.json",
+			"system/visual-coverage-map.json",
+			"system/technical-docs-map.json",
+			"system/system-closure-map.json",
+			".agents/skills/diagnostic-system/SKILL.md",
+			"system/diagnostics/diagnostic-system.json",
+			"system/diagnostics/issue-repair-queue.json",
+			"system/artifact-form-policy.json",
+			"system/tool-map.json",
+			"system/loop-registry.json",
+			"system/loops/taxonomy-refinement/loop.json",
+			"system/loops/taxonomy-refinement/queue.json",
+			"system/loops/taxonomy-refinement/state.json",
+			"system/loops/taxonomy-refinement/runner-contract.json",
+			".agents/skills/review-system/SKILL.md",
+			"system/reviews/review-system.json",
+			"system/reviews/review-queue.json",
+			"system/reviews/review-docs-map.json",
+			"schemas/review-record.schema.json",
+			"system/module-layer-model.json",
+			"system/information-map-manifest.json",
+			"system/information-map-shards/",
+			"schemas/information-map.schema.json",
+			"schemas/information-map-manifest.schema.json",
+			"schemas/information-map-shard.schema.json",
+			"docs/system-information-map.md",
+			"30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
+			"docs/loop-orchestration.md",
+			"30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
+			"system/project-ontology.json",
+			"system/knowledge-ingestion-system.json",
+			"system/knowledge-ingestion-docs-map.json",
+			"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+			"system/diagnostics/diagnostic-layer-matrix.json",
+			"system/diagnostics/failure-learning-loop.json",
+			"system/git-governance-system.json",
+			"system/git-governance-docs-map.json",
+			"30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas"
+		],
+		"knowledge_entries": [
+			"10-sources/",
+			"20-notes/",
+			"30-maps/",
+			"40-synthesis/",
+			"50-workflows/",
+			"60-evals/"
+		],
+		"human_explanation": [
+			"README.md",
+			"docs/"
+		]
+	},
+	"modules": [
+		{
+			"id": "inbox",
+			"name": "原始输入暂存",
+			"paths": [
+				"00-inbox/"
+			],
+			"boundary": "未整理材料；不作为可引用知识真相来源",
+			"outputs": [
+				"source-records"
+			],
+			"owner_layer": "knowledge-content",
+			"module_kind": "capture-buffer"
+		},
+		{
+			"id": "source-registry",
+			"name": "来源登记",
+			"paths": [
+				"10-sources/"
+			],
+			"boundary": "记录来源事实、出处、访问时间、可信度、领域候选",
+			"outputs": [
+				"registered-sources"
+			],
+			"owner_layer": "knowledge-content",
+			"module_kind": "source-registration"
+		},
+		{
+			"id": "project-ontology",
+			"name": "项目根定位与知识工程系统本体",
+			"paths": [
+				"system/project-ontology.json"
+			],
+			"boundary": "定义无界知识的根定位、存在形式、知识工程生命周期和 Codex agent 工作流双重角色；它是系统判断项目本体的机器真相，不承载具体分类树、Canvas 坐标、单项 workflow 细节或外部知识内容。",
+			"outputs": [
+				"project-root-identity-contract",
+				"knowledge-engineering-lifecycle",
+				"codex-workflow-role-boundary"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "root-identity-contract"
+		},
+		{
+			"id": "domain-maps",
+			"name": "领域地图与分类",
+			"paths": [
+				"30-maps/domains/",
+				"30-maps/domains/domain-taxonomy.registry.json",
+				"30-maps/domains/domain-taxonomy.docs.json",
+				"30-maps/domains/domain-taxonomy-seed.md",
+				"30-maps/domains/domain-taxonomy-baseline.md",
+				"30-maps/canvas/20-knowledge/10-domain-taxonomy/"
+			],
+			"boundary": "维护知识领域门类、三级方向簇、分类路由、关系图和跨领域连接；Markdown 只做人类说明，registry JSON 是分类机器真相来源，domain-taxonomy.docs.json 接管分类子系统的人读文档边界和 loop 资产路由",
+			"outputs": [
+				"domain-routes",
+				"domain-maps",
+				"domain-taxonomy-registry",
+				"domain-taxonomy-docs-map",
+				"domain-taxonomy-baseline",
+				"domain-taxonomy-visual-overview",
+				"domain-taxonomy-level-3-visual-matrix"
+			],
+			"owner_layer": "knowledge-content",
+			"module_kind": "taxonomy-routing"
+		},
+		{
+			"id": "architecture-views",
+			"name": "可视化架构系统",
+			"paths": [
+				"30-maps/canvas/",
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"system/canvas-docs-map.json",
+				"docs/canvas/",
+				"system/visual-coverage-map.json"
+			],
+			"boundary": "维护 Canvas 可视化架构系统：视图族、当前图、父子导航网络、机器图数据、人读画布文件、文件放置、图层级、图类别、图边界、Canvas 子系统薄入口文档、专题文档路由、视觉投影关系、模块内部结构、workflow、dataflow、skill、schema、tool、loop、diagnostic、项目上下文、架构同步触发器和校验规则；Canvas 只做视觉入口和设计面，不覆盖机器真相",
+			"outputs": [
+				"system-architecture-views",
+				"module-architecture-views",
+				"module-internal-views",
+				"workflow-dataflow-views",
+				"skill-architecture-views",
+				"schema-contract-views",
+				"tool-runtime-views",
+				"loop-state-views",
+				"diagnostic-repair-views",
+				"canvas-version-registry",
+				"canvas-placement-rules",
+				"canvas-view-boundary-rules",
+				"canvas-view-category-rules",
+				"canvas-view-navigation",
+				"canvas-machine-view-graph",
+				"canvas-docs-map",
+				"canvas-system-architecture",
+				"visual-coverage-governance",
+				"visual-coverage-map",
+				"visual-blind-spot-gate",
+				"canvas-screenshot-visual-evidence"
+			],
+			"owner_layer": "visual-projection",
+			"module_kind": "visual-shadow-system"
+		},
+		{
+			"id": "module-governance",
+			"name": "模块治理与存放原则",
+			"paths": [
+				"system/module-governance-policy.json",
+				"docs/module-governance-principles.md",
+				"system/module-layer-model.json",
+				"system/system-structure-governance.json",
+				"system/module-relationship-map.json"
+			],
+			"boundary": "定义新增模块、目录、工具、schema、workflow、loop、index、Canvas、子系统文档、子 agent 文档和长期能力的登记契约、存储位置、路由入口、校验要求和生命周期；具体模块拓扑、归属判断和新分支决策由 system-structure-governance 接管；不参与外部知识领域分类。",
+			"outputs": [
+				"module-placement-rules",
+				"new-module-contract",
+				"module-lifecycle-rules",
+				"subsystem-documentation-rules",
+				"module-layer-model",
+				"structure-governance-dependency"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "module-boundary-governance"
+		},
+		{
+			"id": "system-structure-governance",
+			"name": "系统结构治理",
+			"paths": [
+				"system/system-structure-governance.json",
+				"system/module-relationship-map.json",
+				"system/module-layer-model.json",
+				"30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas"
+			],
+			"boundary": "维护系统模块拓扑、关系类型、分支归属、新模块接入决策、拆分/合并/归档判断；module-layer-model 是它输出的分层快照。它不替代具体模块实现、知识领域分类、Canvas 坐标布局或诊断修复执行。",
+			"outputs": [
+				"structure-decision-packet",
+				"module-relationship-map",
+				"branch-decision-records",
+				"module-layer-model",
+				"new-module-placement-decision",
+				"module-activation-readiness"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "module-topology-governance"
+		},
+		{
+			"id": "system-information-map",
+			"name": "系统信息地图",
+			"paths": [
+				"system/information-map.json",
+				"system/information-map-manifest.json",
+				"system/information-map-shards/",
+				"schemas/information-map.schema.json",
+				"schemas/information-map-manifest.schema.json",
+				"schemas/information-map-shard.schema.json",
+				"docs/system-information-map.md",
+				"30-maps/canvas/10-system/10-subsystems/system-information-map/"
+			],
+			"boundary": "维护机器可读系统字典、轻量读取 manifest、信息地图 shard、系统引用面和信息地图 schema；记录系统模块、真相文件、数据流、入口和检索/引用路径。它不替代系统结构治理的拓扑判断、不替代规则权威归属、不替代 Canvas 视觉布局，也不执行具体诊断修复。",
+			"outputs": [
+				"information-map-manifest",
+				"information-map-shards",
+				"module-boundary-index",
+				"dataflow-entrypoint-index",
+				"system-reference-surface-index"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "system-dictionary-map"
+		},
+		{
+			"id": "system-closure",
+			"name": "系统闭环总表",
+			"paths": [
+				"system/system-closure-map.json",
+				"docs/system-closure.md"
+			],
+			"boundary": "审计每个稳定模块是否具备入口、机器真相、路由、输入输出、校验、文档边界、可视化、诊断接入和生命周期；只记录跨模块闭环状态和缺口，不替代各模块自身 registry、schema、docs map 或 validator",
+			"outputs": [
+				"module-closure-matrix",
+				"closure-gap-backlog",
+				"closure-quality-gates",
+				"visual-coverage-audit",
+				"module-activation-proof"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "closure-matrix"
+		},
+		{
+			"id": "technical-documentation",
+			"name": "技术文档与运维发布",
+			"paths": [
+				"docs/technical/",
+				"system/technical-docs-map.json",
+				"README.md"
+			],
+			"boundary": "维护本地设置、日常运维、校验、故障排查、GitHub 发布准备和外部读者上手文档；技术文档只解释运维，不替代 system JSON、schemas 或 scripts 的机器真相",
+			"outputs": [
+				"technical-docs-map",
+				"operations-guide",
+				"validation-guide",
+				"github-readiness-checklist",
+				"troubleshooting-guide"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "technical-ops-docs"
+		},
+		{
+			"id": "diagnostics",
+			"name": "诊断与系统修复",
+			"paths": [
+				".agents/skills/diagnostic-system/",
+				"system/diagnostics/",
+				"schemas/diagnostic-issue.schema.json",
+				"scripts/validate-diagnostics.ps1",
+				"docs/diagnostic-system.md",
+				"system/diagnostics/diagnostic-layer-matrix.json",
+				"system/diagnostics/failure-learning-loop.json"
+			],
+			"boundary_addendum": "For system_upgrade, diagnostics must produce generalization_scan after bottom-up failure-class discovery: same-class assets, sibling modules, peer views, routes, schemas, validators, workflows, review gates and Canvas projections must be scanned before closure.",
+			"boundary": "在修复前构造 failure packet、下层证据链、上层原则链、责任修复层、修复分类、质量门和 diagnosis acceptance；当问题被判定为 system_upgrade 时，它还负责把诊断、更新原则、受影响面、现有资产迁移、校验门和验收串成上层协同升级能力；借鉴 OR 的层级诊断矩阵与受控失败学习循环，诊断模块可以生成 postmortem、proposal、regression guard 与 promotion decision 的受控对象，但不自动改写规则、记忆或外部系统。它决定问题归属和闭环要求，不替代具体模块执行修复。",
+			"outputs": [
+				"diagnosis-record-contract",
+				"issue-repair-queue",
+				"repair-layer-routing",
+				"coordinated-upgrade-plan",
+				"affected-surface-list",
+				"same-class-impact-scan",
+				"existing-asset-migration-requirements",
+				"diagnosis-acceptance-gates",
+				"diagnostic-layer-matrix",
+				"failure-learning-loop",
+				"failure-postmortem-proposal-guard-promotion-contract"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "repair-routing"
+		},
+		{
+			"id": "artifact-form-decision",
+			"name": "留存形式选择",
+			"paths": [
+				"system/artifact-form-policy.json"
+			],
+			"boundary": "为新增服务、脚本、工具、索引、画布、schema 和文档选择合适留存形式",
+			"outputs": [
+				"artifact-form-decisions"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "artifact-form-governance"
+		},
+		{
+			"id": "loop-orchestration",
+			"name": "循环编排与持续改进",
+			"paths": [
+				"system/loop-registry.json",
+				"system/loops/",
+				"system/loops/taxonomy-refinement/README.md",
+				"docs/loop-orchestration.md",
+				"30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas"
+			],
+			"boundary": "系统级循环编排模块，登记并治理所有稳定、可重复、可暂停和可恢复的人工/agent 协作循环；负责 loop registry、生命周期、队列、状态、runner 契约、历史 loop 接管、handoff 入口和可视化覆盖；具体 loop 产出的知识真相仍归所属知识内容模块或知识工程工作流。",
+			"outputs": [
+				"loop-registry",
+				"loop-lifecycle-state",
+				"loop-queue-and-run-records",
+				"loop-runner-contracts",
+				"loop-handoff-intake",
+				"loop-thin-entrypoints",
+				"loop-visual-architecture-view",
+				"legacy-loop-adoption-record"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "cross-module-loop-orchestration"
+		},
+		{
+			"id": "atomic-knowledge",
+			"name": "原子知识",
+			"paths": [
+				"20-notes/"
+			],
+			"boundary": "保存可复用的概念、判断、方法、风险；每条必须可追溯",
+			"outputs": [
+				"atomic-notes"
+			],
+			"owner_layer": "knowledge-content",
+			"module_kind": "atomic-note-store"
+		},
+		{
+			"id": "synthesis",
+			"name": "综合产物",
+			"paths": [
+				"40-synthesis/"
+			],
+			"boundary": "多来源综合判断、简报、实践手册、决策框架",
+			"outputs": [
+				"synthesis-briefs"
+			],
+			"owner_layer": "knowledge-content",
+			"module_kind": "synthesis-output"
+		},
+		{
+			"id": "workflows",
+			"name": "Codex 工作流",
+			"paths": [
+				"50-workflows/"
+			],
+			"boundary": "把知识转化为 Codex 可执行的项目上下文包和操作流程",
+			"outputs": [
+				"context-packs",
+				"workflow-guides"
+			],
+			"owner_layer": "project-consumption",
+			"module_kind": "codex-consumption"
+		},
+		{
+			"id": "evals",
+			"name": "评估与质量门",
+			"paths": [
+				"60-evals/"
+			],
+			"boundary": "检索质量、认知质量、流程有效性测试",
+			"outputs": [
+				"eval-cases"
+			],
+			"owner_layer": "knowledge-content",
+			"module_kind": "knowledge-quality-eval"
+		},
+		{
+			"id": "indexes",
+			"name": "机器索引",
+			"paths": [
+				"70-indexes/"
+			],
+			"boundary": "由脚本生成或维护的机器友好入口",
+			"outputs": [
+				"catalog-json",
+				"catalog-csv"
+			],
+			"owner_layer": "machine-infrastructure",
+			"module_kind": "retrieval-index"
+		},
+		{
+			"id": "schemas",
+			"name": "结构约束",
+			"paths": [
+				"schemas/"
+			],
+			"boundary": "定义条目 metadata 和未来机器数据结构",
+			"outputs": [
+				"schema-definitions"
+			],
+			"owner_layer": "machine-infrastructure",
+			"module_kind": "data-contract"
+		},
+		{
+			"id": "tools",
+			"name": "本地工具",
+			"paths": [
+				"scripts/",
+				"system/tool-map.json"
+			],
+			"boundary": "登记和执行本地工具；脚本不应成为未登记的孤立能力",
+			"outputs": [
+				"generated-indexes",
+				"validation-results",
+				"tool-registry",
+				"canvas-screenshot-audit-report"
+			],
+			"owner_layer": "machine-infrastructure",
+			"module_kind": "local-tool-runtime"
+		},
+		{
+			"id": "review-system",
+			"name": "审查与质量检查",
+			"paths": [
+				".agents/skills/review-system/",
+				"system/reviews/",
+				"schemas/review-record.schema.json",
+				"scripts/validate-reviews.ps1",
+				"docs/review/",
+				"30-maps/canvas/10-system/10-subsystems/review-system/"
+			],
+			"boundary": "负责系统内部结构审查、外部知识质量审查、视觉审查和发布准备审查；输出 review record、finding 分类、risk assessment 和 handoff_decision。确认缺陷后交给 diagnostics、evals、taxonomy loop 或知识工作流，不替代根因诊断或具体修复。",
+			"outputs": [
+				"review-record-contract",
+				"review-queue",
+				"review-findings",
+				"risk-assessment",
+				"diagnostic-handoff-packet",
+				"knowledge-quality-review",
+				"system-internal-review",
+				"canvas-visual-aesthetic-review",
+				"canvas-screenshot-review-evidence"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "quality-review"
+		},
+		{
+			"id": "knowledge-ingestion",
+			"name": "知识摄入子系统",
+			"paths": [
+				"system/knowledge-ingestion-system.json",
+				"system/knowledge-ingestion-docs-map.json",
+				"docs/knowledge-ingestion/",
+				"docs/ingestion-workflow.md",
+				"docs/source-quality.md",
+				"templates/",
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas"
+			],
+			"boundary": "治理知识进入知识库的方式：捕获、来源类型、来源登记、质量预审、领域路由、原子化准备、索引和审查/诊断/loop 交接；它不保存每条知识内容，也不替代领域分类、来源事实、原子知识或索引工具。",
+			"outputs": [
+				"knowledge-ingestion-system-contract",
+				"intake-mode-contract",
+				"source-quality-gates",
+				"ingestion-handoff-map",
+				"legacy-ingestion-asset-adoption",
+				"knowledge-ingestion-visual-architecture"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "knowledge-ingestion-subsystem"
+		},
+		{
+			"id": "git-governance",
+			"name": "Git 版本治理",
+			"paths": [
+				"system/git-governance-system.json",
+				"system/git-governance-docs-map.json",
+				"docs/git-governance/",
+				"scripts/git-governance-status.ps1",
+				"scripts/validate-git-governance.ps1",
+				"30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
+				".gitattributes"
+			],
+			"boundary": "治理本项目的 Git 本地版本状态、远端 origin、提交前检查、敏感信息边界、发布前状态和远端动作授权；它不替代知识内容审查、诊断根因修复、GitHub 凭据管理或未经授权的 push/release/issue/PR。",
+			"outputs": [
+				"git-governance-contract",
+				"remote-origin-contract",
+				"precommit-validation-policy",
+				"remote-action-boundary",
+				"git-status-report",
+				"git-governance-visual-architecture"
+			],
+			"owner_layer": "system-governance",
+			"module_kind": "version-control-governance"
+		}
+	],
+	"dataflows": [
+		{
+			"id": "ingestion-to-source",
+			"from": "inbox",
+			"to": "source-registry",
+			"verb": "register",
+			"machine_readable_output": "source metadata"
+		},
+		{
+			"id": "source-to-domain",
+			"from": "source-registry",
+			"to": "domain-maps",
+			"verb": "route",
+			"machine_readable_output": "primary and secondary domain labels"
+		},
+		{
+			"id": "source-to-atomic",
+			"from": "source-registry",
+			"to": "atomic-knowledge",
+			"verb": "distill",
+			"machine_readable_output": "frontmatter-linked notes"
+		},
+		{
+			"id": "atomic-to-synthesis",
+			"from": "atomic-knowledge",
+			"to": "synthesis",
+			"verb": "combine",
+			"machine_readable_output": "source-linked synthesis"
+		},
+		{
+			"id": "knowledge-to-workflow",
+			"from": "synthesis",
+			"to": "workflows",
+			"verb": "operationalize",
+			"machine_readable_output": "context pack references"
+		},
+		{
+			"id": "knowledge-to-index",
+			"from": [
+				"source-registry",
+				"domain-maps",
+				"architecture-views",
+				"atomic-knowledge",
+				"synthesis",
+				"workflows",
+				"evals"
+			],
+			"to": "indexes",
+			"verb": "index",
+			"machine_readable_output": "70-indexes/catalog.json"
+		},
+		{
+			"id": "artifact-form-to-tools",
+			"from": "artifact-form-decision",
+			"to": "tools",
+			"verb": "select-runtime",
+			"machine_readable_output": "system/tool-map.json"
+		},
+		{
+			"id": "module-governance-to-system-surfaces",
+			"from": "module-governance",
+			"to": [
+				"domain-maps",
+				"architecture-views",
+				"system-closure",
+				"technical-documentation",
+				"artifact-form-decision",
+				"loop-orchestration",
+				"workflows",
+				"evals",
+				"indexes",
+				"schemas",
+				"tools",
+				"review-system",
+				"system-structure-governance",
+				"system-information-map",
+				"knowledge-ingestion"
+			],
+			"verb": "govern-placement-registration-validation",
+			"machine_readable_output": "system/module-governance-policy.json"
+		},
+		{
+			"id": "project-ontology-to-system-surfaces",
+			"from": "project-ontology",
+			"to": [
+				"module-governance",
+				"system-structure-governance",
+				"system-information-map",
+				"architecture-views",
+				"loop-orchestration",
+				"workflows",
+				"domain-maps",
+				"diagnostics",
+				"review-system",
+				"knowledge-ingestion"
+			],
+			"verb": "define-root-identity-and-role-boundaries",
+			"machine_readable_output": "system/project-ontology.json"
+		},
+		{
+			"id": "system-surfaces-to-diagnostics",
+			"from": [
+				"module-governance",
+				"domain-maps",
+				"architecture-views",
+				"system-closure",
+				"technical-documentation",
+				"artifact-form-decision",
+				"loop-orchestration",
+				"workflows",
+				"evals",
+				"indexes",
+				"schemas",
+				"tools",
+				"review-system",
+				"system-structure-governance",
+				"system-information-map",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"to": "diagnostics",
+			"verb": "diagnose-before-repair",
+			"machine_readable_output": "system/diagnostics/issue-repair-queue.json"
+		},
+		{
+			"id": "diagnostics-to-system-surfaces",
+			"from": "diagnostics",
+			"to": [
+				"module-governance",
+				"domain-maps",
+				"architecture-views",
+				"system-closure",
+				"technical-documentation",
+				"artifact-form-decision",
+				"loop-orchestration",
+				"workflows",
+				"evals",
+				"indexes",
+				"schemas",
+				"tools",
+				"review-system",
+				"system-structure-governance",
+				"system-information-map",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"verb": "route-repair-and-accept",
+			"machine_readable_output": "owning_repair_layer and diagnosis_acceptance"
+		},
+		{
+			"id": "system-truth-to-canvas",
+			"from": [
+				"module-governance",
+				"system-structure-governance",
+				"diagnostics",
+				"artifact-form-decision",
+				"domain-maps",
+				"system-closure",
+				"technical-documentation",
+				"loop-orchestration",
+				"workflows",
+				"schemas",
+				"tools",
+				"indexes",
+				"system-information-map",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"to": [
+				"architecture-views",
+				"review-system",
+				"project-ontology"
+			],
+			"verb": "project-visual-architecture-view",
+			"machine_readable_output": "system/canvas-registry.json, system/canvas-view-graph.json and system/visual-coverage-map.json"
+		},
+		{
+			"id": "system-surfaces-to-closure-map",
+			"from": [
+				"module-governance",
+				"domain-maps",
+				"architecture-views",
+				"technical-documentation",
+				"diagnostics",
+				"artifact-form-decision",
+				"loop-orchestration",
+				"workflows",
+				"evals",
+				"indexes",
+				"schemas",
+				"tools",
+				"system-structure-governance",
+				"system-information-map",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"to": [
+				"system-closure",
+				"review-system",
+				"system-structure-governance",
+				"project-ontology"
+			],
+			"verb": "audit-module-closure",
+			"machine_readable_output": "system/system-closure-map.json"
+		},
+		{
+			"id": "taxonomy-loop-to-domain-maps",
+			"from": "loop-orchestration",
+			"to": "domain-maps",
+			"verb": "refine-sequentially",
+			"machine_readable_output": "30-maps/domains/domain-taxonomy.registry.json"
+		},
+		{
+			"id": "system-and-knowledge-surfaces-to-review",
+			"from": [
+				"source-registry",
+				"domain-maps",
+				"architecture-views",
+				"module-governance",
+				"system-closure",
+				"technical-documentation",
+				"diagnostics",
+				"artifact-form-decision",
+				"loop-orchestration",
+				"atomic-knowledge",
+				"synthesis",
+				"workflows",
+				"evals",
+				"indexes",
+				"schemas",
+				"tools",
+				"system-structure-governance",
+				"system-information-map",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"to": "review-system",
+			"verb": "review-quality-and-structure",
+			"machine_readable_output": "system/reviews/review-queue.json"
+		},
+		{
+			"id": "review-to-downstream-handlers",
+			"from": "review-system",
+			"to": [
+				"diagnostics",
+				"evals",
+				"loop-orchestration",
+				"domain-maps",
+				"workflows"
+			],
+			"verb": "handoff-finding",
+			"machine_readable_output": "handoff_decision and review record references"
+		},
+		{
+			"id": "module-governance-to-system-structure",
+			"from": "module-governance",
+			"to": "system-structure-governance",
+			"verb": "request-module-placement-and-branch-decision",
+			"machine_readable_output": "structure_decision_packet and branch_decision"
+		},
+		{
+			"id": "system-structure-to-module-registries",
+			"from": "system-structure-governance",
+			"to": [
+				"module-governance",
+				"architecture-views",
+				"system-closure",
+				"diagnostics",
+				"review-system",
+				"system-information-map"
+			],
+			"verb": "synchronize-module-topology-relationships-and-visual-coverage",
+			"machine_readable_output": "system/module-relationship-map.json, system/module-layer-model.json and activation readiness consumed by system/system-closure-map.json activation_proof"
+		},
+		{
+			"id": "system-surfaces-to-information-map",
+			"from": [
+				"module-governance",
+				"system-structure-governance",
+				"system-closure",
+				"architecture-views",
+				"technical-documentation",
+				"diagnostics",
+				"review-system",
+				"schemas",
+				"tools",
+				"project-ontology",
+				"knowledge-ingestion",
+				"git-governance"
+			],
+			"to": "system-information-map",
+			"verb": "register-system-reference-surfaces",
+			"machine_readable_output": "system/information-map.json, system/information-map-manifest.json and system/information-map-shards/"
+		},
+		{
+			"id": "loop-orchestration-to-managed-loops",
+			"from": "loop-orchestration",
+			"to": [
+				"domain-maps",
+				"review-system",
+				"diagnostics",
+				"system-closure"
+			],
+			"verb": "coordinate-repeatable-refinement-or-repair-loops",
+			"machine_readable_output": "loop registry entries, loop state, run records and handoff references"
+		},
+		{
+			"id": "knowledge-ingestion-to-content-entry",
+			"from": "knowledge-ingestion",
+			"to": [
+				"inbox",
+				"source-registry"
+			],
+			"verb": "govern-capture-and-source-registration",
+			"machine_readable_output": "source type, provenance fields and source-quality precheck contract"
+		},
+		{
+			"id": "knowledge-ingestion-to-domain-routing",
+			"from": "knowledge-ingestion",
+			"to": "domain-maps",
+			"verb": "handoff-domain-route-before-distillation",
+			"machine_readable_output": "domain candidates, classification uncertainty and taxonomy gaps"
+		},
+		{
+			"id": "knowledge-ingestion-to-review-and-diagnostics",
+			"from": "knowledge-ingestion",
+			"to": [
+				"review-system",
+				"diagnostics",
+				"loop-orchestration"
+			],
+			"verb": "handoff-quality-structure-or-repeatable-gap",
+			"machine_readable_output": "review trigger, diagnostic failure packet or loop candidate"
+		},
+		{
+			"id": "knowledge-ingestion-to-indexes",
+			"from": "knowledge-ingestion",
+			"to": "indexes",
+			"verb": "require-index-refresh-after-ingestion",
+			"machine_readable_output": "catalog rebuild requirement"
+		},
+		{
+			"id": "git-governance-to-review",
+			"from": "git-governance",
+			"to": "review-system",
+			"verb": "request-version-or-publication-review",
+			"machine_readable_output": "git status snapshot, changed paths and review request"
+		},
+		{
+			"id": "git-governance-to-diagnostics",
+			"from": "git-governance",
+			"to": "diagnostics",
+			"verb": "handoff-git-or-release-failure",
+			"machine_readable_output": "failure packet and affected version surfaces"
+		},
+		{
+			"id": "git-governance-to-tools",
+			"from": "git-governance",
+			"to": "tools",
+			"verb": "register-version-control-validation-tools",
+			"machine_readable_output": "tool-map entries for git-governance scripts"
+		}
+	],
+	"entrypoints": [
+		{
+			"id": "agent-entry",
+			"path": "AGENTS.md",
+			"purpose": "thin general agent instructions"
+		},
+		{
+			"id": "project-ontology",
+			"path": "system/project-ontology.json",
+			"purpose": "machine truth for project root identity, knowledge-engineering-system positioning and Codex workflow roles"
+		},
+		{
+			"id": "route-registry",
+			"path": "system/route-registry.json",
+			"purpose": "machine-friendly task routing; project ontology tasks route to system/project-ontology.json"
+		},
+		{
+			"id": "technical-docs",
+			"path": "docs/technical/README.md",
+			"purpose": "technical operations and GitHub readiness entrypoint"
+		},
+		{
+			"id": "visual-navigation",
+			"path": "30-maps/canvas/00-entry/kb-navigation-index.canvas",
+			"purpose": "human visual entrypoint into registered Canvas architecture views"
+		},
+		{
+			"id": "catalog",
+			"path": "70-indexes/catalog.json",
+			"purpose": "knowledge item lookup"
+		},
+		{
+			"id": "information-map-manifest",
+			"path": "system/information-map-manifest.json",
+			"purpose": "token-light machine entrypoint for system map lookup before full information-map reads"
+		},
+		{
+			"id": "knowledge-ingestion",
+			"path": "docs/knowledge-ingestion/README.md",
+			"purpose": "thin human entrypoint for the knowledge ingestion subsystem; machine truth lives in system/knowledge-ingestion-system.json"
+		},
+		{
+			"id": "git-governance",
+			"path": "docs/git-governance/README.md",
+			"purpose": "thin human entrypoint for Git version governance; machine truth lives in system/git-governance-system.json"
+		}
+	],
+	"module_layer_model": {
+		"path": "system/module-layer-model.json",
+		"role": "derived owner_layer and module_kind snapshot produced by system-structure-governance",
+		"boundary": "Information map records module boundaries and dataflows; system-structure-governance decides topology; module-layer-model stores the current owner_layer snapshot."
+	},
+	"module_relationship_map": {
+		"path": "system/module-relationship-map.json",
+		"owner_module": "system-structure-governance",
+		"role": "canonical module topology and branch-decision graph"
+	}
+}

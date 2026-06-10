@@ -1,0 +1,147 @@
+{
+  "id": "artifact-form-policy",
+  "version": "0.2.0",
+  "updated": "2026-06-06",
+  "decision_agent": {
+    "id": "artifact-form-advisor",
+    "name": "留存形式选择代理",
+    "role": "When a new service, tool, workflow, dataflow, schema, index, canvas, or document is added, decide the most suitable persistence/runtime form before implementation.",
+    "trigger_when": [
+      "新增模块、目录或长期能力，需要先判断归属和留存方式",
+      "新增脚本、服务、工具或自动化",
+      "新增系统规则、路由、schema 或 gate",
+      "新增索引、缓存、导出文件或机器数据流",
+      "不确定内容应该放 Markdown、JSON、Canvas、脚本、数据库还是服务"
+    ]
+  },
+  "principles": [
+    {
+      "id": "machine-truth-first",
+      "rule": "System behavior truth should live in machine-readable files such as JSON or schemas. Markdown explains; it should not be the only source of behavior truth."
+    },
+    {
+      "id": "thin-wrapper",
+      "rule": "OS-specific scripts can be used as thin local entrypoints, but growing core logic should move to a more portable runtime such as Node.js or Python."
+    },
+    {
+      "id": "choose-by-dataflow",
+      "rule": "Choose form by inputs, outputs, consumers, execution frequency, portability, dependencies, data size, and whether the artifact needs to be indexed or referenced."
+    },
+    {
+      "id": "placement-before-implementation",
+      "rule": "Before implementation, route the artifact through system/module-governance-policy.json to decide layer, storage home, registry, validation and lifecycle."
+    },
+    {
+      "id": "delay-heavy-infrastructure",
+      "rule": "Prefer simple files and scripts until there is clear pressure for a database, daemon, service, vector store, or graph store."
+    }
+  ],
+  "form_rules": [
+    {
+      "form": "json",
+      "use_when": [
+        "机器需要稳定读取",
+        "需要被路由、校验、索引或引用",
+        "内容是规则、登记表、状态、schema-like metadata"
+      ],
+      "avoid_when": [
+        "主要是长篇解释或叙述"
+      ]
+    },
+    {
+      "form": "markdown",
+      "use_when": [
+        "主要面向人类阅读",
+        "需要解释背景、原则、使用方式、决策理由"
+      ],
+      "avoid_when": [
+        "唯一承担系统行为真相",
+        "需要高频机器解析"
+      ]
+    },
+    {
+      "form": "canvas",
+      "use_when": [
+        "需要表达系统结构、关系、流程、讨论草图",
+        "需要人类拖拽和视觉推理"
+      ],
+      "avoid_when": [
+        "作为唯一机器行为来源",
+        "没有登记当前版本和用途"
+      ]
+    },
+    {
+      "form": "powershell",
+      "use_when": [
+        "Windows 本地一键入口",
+        "简单文件检查、脚本编排、调用其他核心工具"
+      ],
+      "avoid_when": [
+        "核心逻辑复杂增长",
+        "需要跨平台复用",
+        "需要大量 JSON/文本算法或第三方生态"
+      ]
+    },
+    {
+      "form": "node",
+      "use_when": [
+        "主要处理 JSON、Canvas、Markdown frontmatter、Web/Obsidian 生态",
+        "需要跨平台 CLI",
+        "需要与前端或 JavaScript 工具链衔接"
+      ],
+      "avoid_when": [
+        "主要是科学计算、embedding pipeline 或复杂数据分析"
+      ]
+    },
+    {
+      "form": "python",
+      "use_when": [
+        "主要做数据处理、论文处理、爬取、embedding、机器学习、批处理分析",
+        "需要成熟数据科学库"
+      ],
+      "avoid_when": [
+        "只是 Windows 本地快捷入口"
+      ]
+    },
+    {
+      "form": "database-or-index",
+      "use_when": [
+        "文件检索开始变慢",
+        "需要复杂查询、全文搜索、向量检索或图关系查询",
+        "数据量或并发需求超过文件系统舒适区"
+      ],
+      "avoid_when": [
+        "结构还没有稳定",
+        "只是少量人工维护条目"
+      ]
+    },
+    {
+      "form": "service",
+      "use_when": [
+        "需要长期运行、监听、调度、API、权限或多进程访问",
+        "多个项目需要共享同一个能力"
+      ],
+      "avoid_when": [
+        "可以用一次性 CLI 或文件生成解决"
+      ]
+    }
+  ],
+  "decision_contract": {
+    "required_fields": [
+      "artifact_id",
+      "problem",
+      "module_layer",
+      "storage_home",
+      "registry_entry",
+      "lifecycle_status",
+      "chosen_form",
+      "runtime",
+      "canonical_truth",
+      "inputs",
+      "outputs",
+      "consumers",
+      "validation",
+      "migration_trigger"
+    ]
+  }
+}

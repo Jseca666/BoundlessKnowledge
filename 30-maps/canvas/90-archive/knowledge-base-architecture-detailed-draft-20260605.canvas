@@ -1,0 +1,627 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"x": -720,
+			"y": -760,
+			"width": 960,
+			"height": 170,
+			"color": "6",
+			"text": "# 无界知识：知识网络操作架构\n\n先把脑内系统外化成可拖动结构。这里不是最终方案，而是你和 Codex 共同迭代的架构白板。"
+		},
+		{
+			"id": "group-sources",
+			"type": "group",
+			"x": -1760,
+			"y": -470,
+			"width": 520,
+			"height": 850,
+			"color": "4",
+			"label": "1. Knowledge Sources"
+		},
+		{
+			"id": "source-papers",
+			"type": "text",
+			"x": -1700,
+			"y": -370,
+			"width": 400,
+			"height": 120,
+			"color": "4",
+			"text": "## 论文\narXiv / 期刊 / 会议 / 标准文档\n\n重点：方法、证据、局限、可复用概念"
+		},
+		{
+			"id": "source-github",
+			"type": "text",
+			"x": -1700,
+			"y": -190,
+			"width": 400,
+			"height": 120,
+			"color": "4",
+			"text": "## GitHub 技术主题\nrepo / topic / release / issue / PR\n\n重点：成熟度、生态位置、风险信号"
+		},
+		{
+			"id": "source-web",
+			"type": "text",
+			"x": -1700,
+			"y": -10,
+			"width": 400,
+			"height": 120,
+			"color": "4",
+			"text": "## 专业网页\n官方文档 / 技术博客 / 行业报告 / 法规\n\n重点：可信度、更新时间、适用边界"
+		},
+		{
+			"id": "source-personal",
+			"type": "text",
+			"x": -1700,
+			"y": 170,
+			"width": 400,
+			"height": 120,
+			"color": "4",
+			"text": "## 个人草稿与经验\n项目经验 / 灵感 / 复盘 / 对话记录\n\n重点：场景、观察、边界、待验证问题"
+		},
+		{
+			"id": "group-ingestion",
+			"type": "group",
+			"x": -1110,
+			"y": -470,
+			"width": 620,
+			"height": 850,
+			"color": "5",
+			"label": "2. 捕获登记与领域路由"
+		},
+		{
+			"id": "capture-inbox",
+			"type": "text",
+			"x": -1040,
+			"y": -390,
+			"width": 480,
+			"height": 110,
+			"color": "5",
+			"text": "## 捕获到 Inbox\n00-inbox/\n\n先收集原始材料，不急着完美整理"
+		},
+		{
+			"id": "source-registry",
+			"type": "text",
+			"x": -1040,
+			"y": -230,
+			"width": 480,
+			"height": 120,
+			"color": "5",
+			"text": "## 来源登记\n10-sources/\n\n记录 id、URL、时间、可信度、来源类型、初步领域候选"
+		},
+		{
+			"id": "domain-taxonomy",
+			"type": "text",
+			"x": -1040,
+			"y": -50,
+			"width": 480,
+			"height": 150,
+			"color": "3",
+			"text": "## 领域门类规划\n先定义顶层知识领域\n\nAI / 软件工程 / 数据知识工程 / 安全合规 / 商业投资 / 产业行业 / 认知方法"
+		},
+		{
+			"id": "domain-routing",
+			"type": "text",
+			"x": -1040,
+			"y": 150,
+			"width": 480,
+			"height": 130,
+			"color": "5",
+			"text": "## 领域路由\n给每个来源分配：\nprimary_domain + secondary_domains + tags\n\n先定归属，再做提炼"
+		},
+		{
+			"id": "extraction",
+			"type": "text",
+			"x": -1040,
+			"y": 320,
+			"width": 480,
+			"height": 130,
+			"color": "5",
+			"text": "## 领域感知提炼\n在所属领域内提取：\nconcept / claim / method / pattern / risk\n\n避免同一知识点在多个门类重复生长"
+		},
+		{
+			"id": "group-knowledge",
+			"type": "group",
+			"x": -350,
+			"y": -470,
+			"width": 640,
+			"height": 850,
+			"color": "3",
+			"label": "3. Atomic Knowledge & Synthesis"
+		},
+		{
+			"id": "atomic-notes",
+			"type": "text",
+			"x": -280,
+			"y": -360,
+			"width": 500,
+			"height": 130,
+			"color": "3",
+			"text": "## 原子知识\n20-notes/\n\n一条笔记只承载一个可复用判断，并连接来源与领域"
+		},
+		{
+			"id": "knowledge-types",
+			"type": "text",
+			"x": -280,
+			"y": -150,
+			"width": 500,
+			"height": 150,
+			"color": "3",
+			"text": "## 知识对象\nConcept / Claim / Method / Risk / Tool / Domain\n\n用 related、sources、domains 连接成网络"
+		},
+		{
+			"id": "synthesis",
+			"type": "text",
+			"x": -280,
+			"y": 80,
+			"width": 500,
+			"height": 140,
+			"color": "3",
+			"text": "## 综合产物\n40-synthesis/\n\n领域地图、技术雷达、行业简报、实践手册、决策框架"
+		},
+		{
+			"id": "cross-domain",
+			"type": "text",
+			"x": -280,
+			"y": 270,
+			"width": 500,
+			"height": 120,
+			"color": "3",
+			"text": "## 跨领域连接\n同一概念可以被多个领域引用\n\n主归属保持唯一，跨领域关系用 related / secondary_domains 表达"
+		},
+		{
+			"id": "group-storage",
+			"type": "group",
+			"x": 470,
+			"y": -470,
+			"width": 640,
+			"height": 850,
+			"color": "6",
+			"label": "4. Storage, Index & Quality"
+		},
+		{
+			"id": "markdown-store",
+			"type": "text",
+			"x": 540,
+			"y": -370,
+			"width": 500,
+			"height": 120,
+			"color": "6",
+			"text": "## Canonical Store\nGit + Markdown + Canvas\n\n先让文件系统成为长期事实源"
+		},
+		{
+			"id": "catalog-index",
+			"type": "text",
+			"x": 540,
+			"y": -190,
+			"width": 500,
+			"height": 120,
+			"color": "6",
+			"text": "## 结构化索引\n70-indexes/catalog.json\n\n给 Codex 快速读 metadata、路径、标签、领域、置信度"
+		},
+		{
+			"id": "semantic-index",
+			"type": "text",
+			"x": 540,
+			"y": -10,
+			"width": 500,
+			"height": 140,
+			"color": "6",
+			"text": "## 后续增强\nSQLite FTS / Vector Index / Graph DB / MCP Memory\n\n等领域结构稳定后再接入"
+		},
+		{
+			"id": "quality-monitor",
+			"type": "text",
+			"x": 540,
+			"y": 190,
+			"width": 500,
+			"height": 120,
+			"color": "1",
+			"text": "## 质量与过期检查\nfreshness / confidence / evals / duplicate check\n\n变化快的事实必须刷新"
+		},
+		{
+			"id": "group-codex",
+			"type": "group",
+			"x": 1290,
+			"y": -470,
+			"width": 620,
+			"height": 850,
+			"color": "2",
+			"label": "5. Codex Consumption"
+		},
+		{
+			"id": "retrieval",
+			"type": "text",
+			"x": 1360,
+			"y": -350,
+			"width": 480,
+			"height": 120,
+			"color": "2",
+			"text": "## 检索\n按任务先筛领域，再检索 workflow / synthesis / notes / sources\n\n先窄后宽，避免上下文泛滥"
+		},
+		{
+			"id": "context-pack",
+			"type": "text",
+			"x": 1360,
+			"y": -150,
+			"width": 480,
+			"height": 130,
+			"color": "2",
+			"text": "## Context Pack\n50-workflows/\n\n把领域知识变成 Codex 可执行的项目上下文包"
+		},
+		{
+			"id": "project-workflow",
+			"type": "text",
+			"x": 1360,
+			"y": 60,
+			"width": 480,
+			"height": 130,
+			"color": "2",
+			"text": "## 项目工作流\n调研 / 架构 / 编码 / 评审 / 测试 / 上线\n\n在具体仓库中落地"
+		},
+		{
+			"id": "feedback-loop",
+			"type": "text",
+			"x": 1360,
+			"y": 260,
+			"width": 480,
+			"height": 100,
+			"color": "2",
+			"text": "## 反馈回流\n项目经验、失败案例、复盘结论重新进入知识库"
+		},
+		{
+			"id": "architecture-doc",
+			"type": "file",
+			"x": -1760,
+			"y": 520,
+			"width": 460,
+			"height": 90,
+			"color": "6",
+			"file": "docs/architecture.md"
+		},
+		{
+			"id": "domain-taxonomy-doc",
+			"type": "file",
+			"x": -1110,
+			"y": 520,
+			"width": 540,
+			"height": 90,
+			"color": "3",
+			"file": "30-maps/domains/domain-taxonomy-seed.md"
+		},
+		{
+			"id": "source-quality-doc",
+			"type": "file",
+			"x": -1110,
+			"y": 650,
+			"width": 540,
+			"height": 90,
+			"color": "1",
+			"file": "docs/source-quality.md"
+		},
+		{
+			"id": "question-card",
+			"type": "text",
+			"x": -330,
+			"y": 520,
+			"width": 800,
+			"height": 190,
+			"color": "1",
+			"text": "## 待继续补充的问题\n\n- 第一批顶层知识领域是否够用？哪些要拆分或合并？\n- 每个来源是否必须有 primary_domain？\n- 跨领域知识如何避免重复建档？\n- GitHub 技术主题、论文、个人经验分别需要哪些领域路由规则？"
+		},
+		{
+			"id": "workflow-doc",
+			"type": "file",
+			"x": 1290,
+			"y": 520,
+			"width": 520,
+			"height": 90,
+			"color": "2",
+			"file": "50-workflows/codex/kb-retrieval-context-pack.md"
+		},
+		{
+			"id": "archive-status-note",
+			"type": "text",
+			"text": "## 归档旧图\n此图是 2026-06-05 的早期详细草稿，仅供追溯，不作为当前系统架构图。当前版本请打开右侧小按钮。",
+			"x": -720,
+			"y": -980,
+			"width": 960,
+			"height": 130,
+			"color": "1"
+		},
+		{
+			"id": "navigation-panel",
+			"type": "text",
+			"text": "## 导航栏\n归档图只保留跳到当前版本的入口，不参与当前结构判断。",
+			"x": 2130,
+			"y": -760,
+			"width": 420,
+			"height": 110,
+			"color": "5"
+		},
+		{
+			"id": "nav-label-current-system-architecture-canvas-file",
+			"type": "text",
+			"text": "当前：系统架构图",
+			"x": 2130,
+			"y": -600,
+			"width": 330,
+			"height": 48,
+			"color": "6"
+		},
+		{
+			"id": "current-system-architecture-canvas-file",
+			"type": "file",
+			"file": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+			"x": 2480,
+			"y": -600,
+			"width": 64,
+			"height": 48,
+			"color": "6"
+		}
+	],
+	"edges": [
+		{
+			"id": "edge-papers-capture",
+			"fromNode": "source-papers",
+			"fromSide": "right",
+			"toNode": "capture-inbox",
+			"toSide": "left",
+			"label": "capture",
+			"color": "4"
+		},
+		{
+			"id": "edge-github-capture",
+			"fromNode": "source-github",
+			"fromSide": "right",
+			"toNode": "capture-inbox",
+			"toSide": "left",
+			"label": "capture",
+			"color": "4"
+		},
+		{
+			"id": "edge-web-capture",
+			"fromNode": "source-web",
+			"fromSide": "right",
+			"toNode": "capture-inbox",
+			"toSide": "left",
+			"label": "capture",
+			"color": "4"
+		},
+		{
+			"id": "edge-personal-capture",
+			"fromNode": "source-personal",
+			"fromSide": "right",
+			"toNode": "capture-inbox",
+			"toSide": "left",
+			"label": "capture",
+			"color": "4"
+		},
+		{
+			"id": "edge-capture-registry",
+			"fromNode": "capture-inbox",
+			"fromSide": "bottom",
+			"toNode": "source-registry",
+			"toSide": "top",
+			"label": "register",
+			"color": "5"
+		},
+		{
+			"id": "edge-registry-routing",
+			"fromNode": "source-registry",
+			"fromSide": "bottom",
+			"toNode": "domain-routing",
+			"toSide": "top",
+			"label": "assign domain",
+			"color": "5"
+		},
+		{
+			"id": "edge-taxonomy-routing",
+			"fromNode": "domain-taxonomy",
+			"fromSide": "bottom",
+			"toNode": "domain-routing",
+			"toSide": "top",
+			"label": "provides categories",
+			"color": "3"
+		},
+		{
+			"id": "edge-domain-routing-extraction",
+			"fromNode": "domain-routing",
+			"fromSide": "bottom",
+			"toNode": "extraction",
+			"toSide": "top",
+			"label": "extract within domain",
+			"color": "5"
+		},
+		{
+			"id": "edge-extraction-atomic",
+			"fromNode": "extraction",
+			"fromSide": "right",
+			"toNode": "atomic-notes",
+			"toSide": "left",
+			"label": "distill",
+			"color": "3"
+		},
+		{
+			"id": "edge-domain-taxonomy-types",
+			"fromNode": "domain-taxonomy",
+			"fromSide": "right",
+			"toNode": "knowledge-types",
+			"toSide": "left",
+			"label": "defines domains",
+			"color": "3"
+		},
+		{
+			"id": "edge-atomic-types",
+			"fromNode": "atomic-notes",
+			"fromSide": "bottom",
+			"toNode": "knowledge-types",
+			"toSide": "top",
+			"label": "classify",
+			"color": "3"
+		},
+		{
+			"id": "edge-types-synthesis",
+			"fromNode": "knowledge-types",
+			"fromSide": "bottom",
+			"toNode": "synthesis",
+			"toSide": "top",
+			"label": "combine",
+			"color": "3"
+		},
+		{
+			"id": "edge-synthesis-cross-domain",
+			"fromNode": "synthesis",
+			"fromSide": "bottom",
+			"toNode": "cross-domain",
+			"toSide": "top",
+			"label": "link across fields",
+			"color": "3"
+		},
+		{
+			"id": "edge-atomic-store",
+			"fromNode": "atomic-notes",
+			"fromSide": "right",
+			"toNode": "markdown-store",
+			"toSide": "left",
+			"label": "store",
+			"color": "6"
+		},
+		{
+			"id": "edge-synthesis-store",
+			"fromNode": "synthesis",
+			"fromSide": "right",
+			"toNode": "markdown-store",
+			"toSide": "left",
+			"label": "store",
+			"color": "6"
+		},
+		{
+			"id": "edge-store-catalog",
+			"fromNode": "markdown-store",
+			"fromSide": "bottom",
+			"toNode": "catalog-index",
+			"toSide": "top",
+			"label": "index",
+			"color": "6"
+		},
+		{
+			"id": "edge-catalog-semantic",
+			"fromNode": "catalog-index",
+			"fromSide": "bottom",
+			"toNode": "semantic-index",
+			"toSide": "top",
+			"label": "enhance later",
+			"color": "6"
+		},
+		{
+			"id": "edge-quality-registry",
+			"fromNode": "quality-monitor",
+			"fromSide": "left",
+			"toNode": "source-registry",
+			"toSide": "right",
+			"label": "refresh stale facts",
+			"color": "1"
+		},
+		{
+			"id": "edge-catalog-retrieval",
+			"fromNode": "catalog-index",
+			"fromSide": "right",
+			"toNode": "retrieval",
+			"toSide": "left",
+			"label": "lookup by domain",
+			"color": "2"
+		},
+		{
+			"id": "edge-semantic-retrieval",
+			"fromNode": "semantic-index",
+			"fromSide": "right",
+			"toNode": "retrieval",
+			"toSide": "left",
+			"label": "semantic search",
+			"color": "2"
+		},
+		{
+			"id": "edge-quality-retrieval",
+			"fromNode": "quality-monitor",
+			"fromSide": "right",
+			"toNode": "retrieval",
+			"toSide": "left",
+			"label": "filter risk",
+			"color": "1"
+		},
+		{
+			"id": "edge-retrieval-context",
+			"fromNode": "retrieval",
+			"fromSide": "bottom",
+			"toNode": "context-pack",
+			"toSide": "top",
+			"label": "assemble",
+			"color": "2"
+		},
+		{
+			"id": "edge-context-project",
+			"fromNode": "context-pack",
+			"fromSide": "bottom",
+			"toNode": "project-workflow",
+			"toSide": "top",
+			"label": "inject",
+			"color": "2"
+		},
+		{
+			"id": "edge-project-feedback",
+			"fromNode": "project-workflow",
+			"fromSide": "bottom",
+			"toNode": "feedback-loop",
+			"toSide": "top",
+			"label": "learn",
+			"color": "2"
+		},
+		{
+			"id": "edge-feedback-registry",
+			"fromNode": "feedback-loop",
+			"fromSide": "left",
+			"toNode": "source-registry",
+			"toSide": "right",
+			"label": "new personal source",
+			"color": "2"
+		},
+		{
+			"id": "edge-architecture-doc",
+			"fromNode": "architecture-doc",
+			"fromSide": "right",
+			"toNode": "question-card",
+			"toSide": "left",
+			"label": "read while editing",
+			"color": "6"
+		},
+		{
+			"id": "edge-domain-taxonomy-doc",
+			"fromNode": "domain-taxonomy-doc",
+			"fromSide": "right",
+			"toNode": "question-card",
+			"toSide": "left",
+			"label": "taxonomy seed",
+			"color": "3"
+		},
+		{
+			"id": "edge-source-quality-doc",
+			"fromNode": "source-quality-doc",
+			"fromSide": "right",
+			"toNode": "question-card",
+			"toSide": "left",
+			"label": "quality rules",
+			"color": "1"
+		},
+		{
+			"id": "edge-workflow-doc",
+			"fromNode": "context-pack",
+			"fromSide": "bottom",
+			"toNode": "workflow-doc",
+			"toSide": "top",
+			"label": "source workflow",
+			"color": "2"
+		}
+	]
+}

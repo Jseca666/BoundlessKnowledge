@@ -1,0 +1,252 @@
+{
+	"id": "tool-map",
+	"version": "1.6.0",
+	"updated": "2026-06-10",
+	"runtime_policy": {
+		"current_default": "powershell-thin-entrypoint",
+		"rule": "PowerShell is acceptable for Windows-local bootstrap and orchestration. If a script grows into reusable core logic, route the decision through system/artifact-form-policy.json and consider Node.js or Python.",
+		"encoding_safety": {
+			"id": "utf8-safe-writes-for-cjk-json-and-canvas",
+			"rule": "When writing Chinese text into JSON, Canvas or Markdown, use an UTF-8 safe writer path such as apply_patch, an existing UTF-8 file transform, or escaped string literals. Do not pipe new Chinese literal strings through an unverified shell-to-runtime encoding path.",
+			"validation": "scripts/validate-system.ps1 and scripts/validate-canvas.ps1 reject stable unreadable-text markers after writes."
+		},
+		"future_bias": [
+			"Node.js for JSON, Canvas, Markdown metadata, Obsidian and web-adjacent tooling",
+			"Python for paper processing, data pipelines, embeddings and analysis",
+			"PowerShell for Windows convenience wrappers"
+		]
+	},
+	"tools": [
+		{
+			"id": "build-index",
+			"runtime": "powershell",
+			"entry": "scripts/build-index.ps1",
+			"role": "Build machine-readable catalog files from knowledge Markdown frontmatter.",
+			"inputs": [
+				"10-sources/",
+				"20-notes/",
+				"30-maps/",
+				"40-synthesis/",
+				"50-workflows/",
+				"60-evals/"
+			],
+			"outputs": [
+				"70-indexes/catalog.json",
+				"70-indexes/catalog.csv"
+			],
+			"migration_trigger": "Move core parsing to Node.js if frontmatter parsing, chunking, or multiple export formats become complex."
+		},
+		{
+			"id": "validate-kb",
+			"runtime": "powershell",
+			"entry": "scripts/validate-kb.ps1",
+			"role": "Validate knowledge Markdown frontmatter and ids.",
+			"inputs": [
+				"10-sources/",
+				"20-notes/",
+				"30-maps/",
+				"40-synthesis/",
+				"50-workflows/",
+				"60-evals/"
+			],
+			"outputs": [
+				"validation-result"
+			],
+			"migration_trigger": "Move to Node.js if schema validation should use full JSON Schema or YAML parser behavior."
+		},
+		{
+			"id": "validate-system",
+			"runtime": "powershell",
+			"entry": "scripts/validate-system.ps1",
+			"role": "Validate system registries, project ontology, routes, information map, closure map, visual coverage map, canvas registry, review module registration, thin entrypoint policy, project-local skills, text integrity, likely UTF-8/GBK mojibake, domain-taxonomy visual coverage and tool paths.",
+			"inputs": [
+				"system/*.json",
+				"system/system-closure-map.json",
+				"system/visual-coverage-map.json",
+				"docs/technical/",
+				"30-maps/domains/domain-taxonomy.docs.json",
+				"system/reviews/",
+				"schemas/",
+				"30-maps/domains/",
+				"system/information-map-manifest.json",
+				"system/information-map-shards/",
+				".agents/skills/",
+				"docs/",
+				"30-maps/",
+				"70-indexes/",
+				"scripts/audit-text-integrity.ps1",
+				"system/diagnostics/text-integrity-audit-2026-06-08.json",
+				"system/project-ontology.json"
+			],
+			"outputs": [
+				"validation-result"
+			],
+			"migration_trigger": "Move to Node.js if registry validation needs richer schemas and cross-file graph checks."
+		},
+		{
+			"id": "new-kb-item",
+			"runtime": "powershell",
+			"entry": "scripts/new-kb-item.ps1",
+			"role": "Create a new knowledge item from templates.",
+			"inputs": [
+				"templates/"
+			],
+			"outputs": [
+				"10-sources/",
+				"20-notes/",
+				"30-maps/",
+				"40-synthesis/",
+				"50-workflows/"
+			],
+			"migration_trigger": "Move to Node.js if template generation needs richer prompts, schema-aware defaults or interactive selection."
+		},
+		{
+			"id": "loop-status",
+			"runtime": "powershell",
+			"entry": "scripts/loop-status.ps1",
+			"role": "Report the current status of a registered loop under the loop-orchestration system module without changing loop state or scheduling work.",
+			"inputs": [
+				"system/loop-registry.json",
+				"system/loops/",
+				"system/route-registry.json"
+			],
+			"outputs": [
+				"loop-status-json"
+			],
+			"migration_trigger": "Move to Node.js or a service runtime only if loop-orchestration gains multi-loop scheduling, richer schemas, automated run-one execution or unattended monitoring."
+		},
+		{
+			"id": "validate-canvas",
+			"runtime": "powershell",
+			"entry": "scripts/validate-canvas.ps1",
+			"role": "Validate Canvas registry, canvas JSON files, text integrity, color semantics, stable Obsidian color token compatibility, visible color legends, current-view uniqueness, registered placement and archive/replaced_by visual retirement markers.",
+			"inputs": [
+				"system/canvas-system.json",
+				"system/canvas-registry.json",
+				"system/canvas-view-graph.json",
+				"30-maps/canvas/"
+			],
+			"outputs": [
+				"validation-result"
+			],
+			"migration_trigger": "Move to Node.js if Canvas validation needs richer schema checks, graph layout checks or automatic view generation."
+		},
+		{
+			"id": "audit-canvas-visual",
+			"runtime": "powershell",
+			"entry": "scripts/audit-canvas-visual.ps1",
+			"role": "Audit current and active Canvas views for visual scanability issues, including empty cards, node overlap, visible color legend readability, primary-flow edge labels, edge label clearance, cramped bridge anchors, cramped main-to-navigation gutters, edge crossings, long diagonal routing, over-routed navigation-to-content lines and visible route-card clutter.",
+			"inputs": [
+				"system/canvas-registry.json",
+				"30-maps/canvas/"
+			],
+			"outputs": [
+				"visual-audit-result"
+			],
+			"migration_trigger": "Move to Node.js if visual auditing needs rendered screenshots, path finding, interactive layout repair or richer geometry metrics."
+		},
+		{
+			"id": "validate-diagnostics",
+			"runtime": "powershell",
+			"entry": "scripts/validate-diagnostics.ps1",
+			"role": "Validate the diagnostic system protocol, diagnostic issue queue, issue schema and referenced capture or validation paths.",
+			"inputs": [
+				".agents/skills/diagnostic-system/SKILL.md",
+				"system/diagnostics/diagnostic-system.json",
+				"system/diagnostics/issue-repair-queue.json",
+				"schemas/diagnostic-issue.schema.json",
+				"docs/diagnostic-system.md",
+				"30-maps/canvas/10-system/10-subsystems/diagnostic-system/"
+			],
+			"outputs": [
+				"validation-result"
+			],
+			"migration_trigger": "Move to Node.js if diagnosis queue validation needs full JSON Schema, richer state transitions or generated reports."
+		},
+		{
+			"id": "validate-reviews",
+			"runtime": "powershell",
+			"entry": "scripts/validate-reviews.ps1",
+			"role": "Validate the review system protocol, specialized review modules, review queue, review docs map, review record schema and referenced paths.",
+			"inputs": [
+				".agents/skills/review-system/SKILL.md",
+				"system/reviews/review-system.json",
+				"system/reviews/review-queue.json",
+				"system/reviews/review-docs-map.json",
+				"schemas/review-record.schema.json",
+				"docs/review/",
+				"30-maps/canvas/10-system/10-subsystems/review-system/"
+			],
+			"outputs": [
+				"validation-result"
+			],
+			"migration_trigger": "Move to Node.js if review queue validation needs full JSON Schema, richer handoff graph checks or generated reports."
+		},
+		{
+			"id": "audit-text-integrity",
+			"runtime": "powershell",
+			"entry": "scripts/audit-text-integrity.ps1",
+			"role": "Loop through text files one by one and report UTF-8 round-trip status, replacement characters, question placeholders, private-use characters and known UTF-8/GBK mojibake patterns.",
+			"inputs": [
+				"system/",
+				"docs/",
+				".agents/",
+				"scripts/",
+				"schemas/",
+				"30-maps/",
+				"70-indexes/",
+				"AGENTS.md",
+				"README.md"
+			],
+			"outputs": [
+				"system/diagnostics/text-integrity-audit-*.json"
+			],
+			"migration_trigger": "Move to Node.js if text integrity auditing needs richer encoding heuristics, diff-aware changed-file selection or large binary/text classification."
+		},
+		{
+			"id": "audit-canvas-screenshot",
+			"runtime": "powershell-system-drawing",
+			"entry": "scripts/audit-canvas-screenshot.ps1",
+			"role": "Render registered current/active Canvas views into PNG screenshot evidence and a machine-readable report, then check that the rendered artifact is non-empty and free of obvious source-text corruption markers.",
+			"inputs": [
+				"system/canvas-registry.json",
+				"30-maps/canvas/"
+			],
+			"outputs": [
+				"system/reviews/canvas-screenshots/latest-report.json",
+				"system/reviews/canvas-screenshots/*.png"
+			],
+			"migration_trigger": "Move the renderer to Node.js plus browser automation if Obsidian-real rendering, DOM-level screenshot comparison, OCR, or visual-diff baselines become required."
+		},
+		{
+			"id": "git-governance-status",
+			"runtime": "powershell",
+			"entry": "scripts/git-governance-status.ps1",
+			"role": "Report local Git worktree, origin remote, branch and short status without mutating repository state.",
+			"inputs": [
+				".git/",
+				"system/git-governance-system.json"
+			],
+			"outputs": [
+				"git-governance-status-json"
+			],
+			"migration_trigger": "Move to Node.js only if Git status reporting needs richer JSON normalization or GitHub API integration."
+		},
+		{
+			"id": "validate-git-governance",
+			"runtime": "powershell",
+			"entry": "scripts/validate-git-governance.ps1",
+			"role": "Validate Git governance machine truth, docs map, origin remote and .gitignore safety patterns.",
+			"inputs": [
+				"system/git-governance-system.json",
+				"system/git-governance-docs-map.json",
+				".gitignore",
+				".git/"
+			],
+			"outputs": [
+				"validation-result"
+			],
+			"migration_trigger": "Move to Node.js only if validation needs richer Git graph, branch policy or GitHub API checks."
+		}
+	]
+}
