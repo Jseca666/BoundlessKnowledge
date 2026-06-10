@@ -1220,7 +1220,18 @@
 				"branch",
 				"分支",
 				"远端",
-				"BoundlessKnowledge"
+				"BoundlessKnowledge",
+				"git周期",
+				"Git 周期",
+				"版本周期",
+				"周期管理",
+				"远端同步",
+				"备份",
+				"同步 GitHub",
+				"git push",
+				"remote sync",
+				"version cycle",
+				"version cut"
 			],
 			"read": [
 				"system/git-governance-system.json",

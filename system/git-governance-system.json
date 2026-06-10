@@ -1,6 +1,6 @@
 {
 	"id": "git-governance-system",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"updated": "2026-06-10",
 	"artifact_type": "subsystem-machine-truth",
 	"owner_module": "git-governance",
@@ -26,7 +26,8 @@
 			"版本记录策略、提交粒度和提交信息边界",
 			"敏感信息、个人工作区状态和生成物的版本控制边界",
 			"GitHub 远端动作授权边界",
-			"与技术文档、审查、诊断、工具和系统闭环的交接"
+			"与技术文档、审查、诊断、工具和系统闭环的交接",
+			"Git 周期运行闭环：状态快照、变更归类、校验、提交、远端授权门、动作后记录和后续交接"
 		],
 		"does_not_own": [
 			"知识内容真假判断",
@@ -34,7 +35,8 @@
 			"GitHub 账号凭据管理",
 			"未经授权的 push、release、issue、PR 或远端资源修改",
 			"替代 review-system 做发布审查",
-			"替代 diagnostics 做根因修复"
+			"替代 diagnostics 做根因修复",
+			"把每一次 push 的瞬时状态当作永久机器真相；瞬时状态由状态脚本输出，长期规则由本文件接管"
 		]
 	},
 	"managed_surfaces": {
@@ -101,6 +103,11 @@
 			"rule": "push、release、issue、PR、merge、远端分支修改、凭据修改都必须先得到用户明确授权。"
 		},
 		{
+			"step": "cycle-closure-update",
+			"output": "git_cycle_closure_record",
+			"rule": "每轮重要版本动作结束后，确认状态脚本、校验报告、提交边界、远端授权结果和后续 handoff 已形成可追踪闭环；失败进入 diagnostics，发布前进入 review-system。"
+		},
+		{
 			"step": "post-action-record",
 			"output": "version_record",
 			"rule": "提交或远端动作后记录关键版本状态、验证命令和后续风险。"
@@ -130,6 +137,10 @@
 		{
 			"id": "stable-line-ending-policy",
 			"rule": "Repository text assets should be governed by .gitattributes so Markdown, JSON, Canvas, PowerShell and YAML files keep stable LF line endings across Windows and future collaborators."
+		},
+		{
+			"id": "version-cycle-closed-loop",
+			"rule": "Git 不能只是手动提交工具；重要变更必须形成状态快照、影响范围、校验结果、本地提交边界、远端授权门和动作后闭环记录。"
 		}
 	],
 	"handoff_contracts": [
@@ -202,6 +213,91 @@
 		"closure_status": "closed",
 		"activation_ref": "system/system-closure-map.json#modules.git-governance.activation_proof",
 		"remote_configured": true,
-		"initial_commit_status": "not_created_by_this_module_without_user_commit_request"
+		"initial_commit_status": "created_after_user_request",
+		"cycle_management_status": "active",
+		"remote_sync_policy": "approval-gated; execute push only after explicit user authorization"
+	},
+	"cycle_management": {
+		"status": "active",
+		"cycle_id": "git-version-cycle",
+		"purpose": "把 Git 从一次性提交/推送动作升级为长期版本治理循环，确保系统文件、知识内容、Canvas、索引和文档更新后都能进入可检查、可提交、可远端同步的闭环。",
+		"triggers": [
+			"系统机器真相、路由、schema、workflow、tool map、Canvas 或技术文档发生变更",
+			"知识内容、来源记录、索引或综合产物进入可保存状态",
+			"用户要求提交、推送、备份、发布或同步 GitHub",
+			"校验、诊断、审查或视觉审查发现版本边界相关问题"
+		],
+		"state_model": [
+			{
+				"state": "dirty",
+				"meaning": "存在未登记或未提交变更，需要先做状态快照和范围归类。"
+			},
+			{
+				"state": "validated",
+				"meaning": "相关校验通过，变更可进入 stage/commit 决策。"
+			},
+			{
+				"state": "committed",
+				"meaning": "本地版本已形成可追踪提交。"
+			},
+			{
+				"state": "remote_sync_authorized",
+				"meaning": "用户明确授权远端写入后，允许执行 push 或其他远端动作。"
+			},
+			{
+				"state": "remote_synced",
+				"meaning": "远端同步完成；如失败，交给 diagnostics 处理。"
+			},
+			{
+				"state": "blocked",
+				"meaning": "存在校验失败、敏感信息风险、凭据问题、远端冲突或未授权远端动作。"
+			}
+		],
+		"required_loop": [
+			{
+				"step": "status_snapshot",
+				"owner": "git-governance",
+				"output": "scripts/git-governance-status.ps1 JSON output"
+			},
+			{
+				"step": "scope_classification",
+				"owner": "git-governance",
+				"output": "changed paths grouped by system, knowledge, visual, docs and tools"
+			},
+			{
+				"step": "coordinated_validation",
+				"owner": "git-governance + affected modules",
+				"output": "validation command results"
+			},
+			{
+				"step": "review_sensitive_surfaces",
+				"owner": "git-governance + review-system when public-facing",
+				"output": "sensitive surface decision"
+			},
+			{
+				"step": "local_version_cut",
+				"owner": "git-governance",
+				"output": "commit ref when user requested or approved commit"
+			},
+			{
+				"step": "remote_action_gate",
+				"owner": "git-governance",
+				"output": "explicit user authorization before push/release/issue/PR/merge"
+			},
+			{
+				"step": "closure_handoff",
+				"owner": "git-governance + system-closure",
+				"output": "closed, blocked, or diagnostics/review handoff"
+			}
+		],
+		"closure_outputs": [
+			"git_status_snapshot",
+			"changed_paths_classification",
+			"validation_report",
+			"commit_ref_when_committed",
+			"remote_sync_result_when_authorized_and_executed",
+			"next_action_or_handoff"
+		],
+		"system_closure_contract": "system-closure-map must record Git cycle management as active; validate-git-governance.ps1 must fail if this contract disappears."
 	}
 }

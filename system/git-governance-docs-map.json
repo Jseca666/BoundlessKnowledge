@@ -32,6 +32,10 @@
 			"role": "Git governance tool registry"
 		},
 		{
+			"path": "system/system-closure-map.json",
+			"role": "Version-cycle closure registration"
+		},
+		{
 			"path": ".gitattributes",
 			"role": "Repository line-ending and binary-file policy"
 		}

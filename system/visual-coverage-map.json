@@ -424,7 +424,7 @@
 				"knowledge-base-system-architecture-map"
 			],
 			"reason": "Git 版本治理是长期稳定的系统治理能力，影响所有文件的版本、发布和远端动作边界，必须有 dedicated 视觉影子。",
-			"review_trigger": "当 remote、branch policy、提交策略、发布策略、CI、敏感信息边界或 GitHub 操作权限变化时，审查此图。"
+			"review_trigger": "当 remote、branch policy、提交策略、版本周期、发布策略、CI、敏感信息边界或 GitHub 操作权限变化时，审查此图。"
 		}
 	],
 	"validation": [

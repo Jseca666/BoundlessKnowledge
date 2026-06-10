@@ -1,6 +1,6 @@
 {
 	"id": "module-relationship-map",
-	"version": "0.8.0",
+	"version": "0.9.0",
 	"updated": "2026-06-10",
 	"role": "canonical-system-module-topology",
 	"purpose": "记录系统稳定模块之间的归属、关系、分支和协同边，作为 system-structure-governance 判断新模块归属或新建分支的机器真相。",
@@ -578,6 +578,12 @@
 			"to": "git-governance",
 			"relation": "validates",
 			"reason": "结构治理确认 Git 治理是系统治理层同级模块，而不是技术文档的局部说明。"
+		},
+		{
+			"from": "git-governance",
+			"to": "system-closure",
+			"relation": "feeds",
+			"reason": "Git 周期管理把状态快照、校验结果、本地提交、远端授权门和后续 handoff 反馈给系统闭环。"
 		}
 	],
 	"branch_decision_policy": {
@@ -595,7 +601,7 @@
 	"current_layer_relationship_audit": {
 		"date": "2026-06-10",
 		"status": "closed",
-		"trigger": "Git governance added as a stable system-governance module with local remote origin configured.",
+		"trigger": "Git governance version-cycle closure added a system-closure feedback edge.",
 		"scope": [
 			"system/information-map.json modules",
 			"system/module-layer-model.json owner_layer/module_kind snapshot",
@@ -691,10 +697,10 @@
 			}
 		],
 		"relationship_edge_audit": {
-			"total_edges": 54,
+			"total_edges": 55,
 			"orphan_edges": [],
-			"action": "adopt_current_relationship_edges_with_knowledge_ingestion_handoffs",
-			"result": "relationship_edge_count_matches_current_relationships_after_git_governance_activation"
+			"action": "adopt_current_relationship_edges_with_git_cycle_closure_handoffs",
+			"result": "relationship_edge_count_matches_current_relationships_after_git_cycle_closure_activation"
 		},
 		"legacy_asset_actions": [
 			{
@@ -733,7 +739,7 @@
 				"result": "overview entry point linking to dedicated knowledge-ingestion subsystem view"
 			}
 		],
-		"acceptance": "Accepted. git-governance is now a system-governance module for local version control, remote origin, validation and approval boundaries; 23 stable modules are covered across information-map, module-layer-model, module-relationship-map and system-closure-map."
+		"acceptance": "Accepted. git-governance is a system-governance module for local version control, remote origin, validation, approval boundaries and version-cycle closure; 23 stable modules and all current relationship edges are covered across information-map, module-layer-model, module-relationship-map and system-closure-map."
 	},
 	"latest_project_ontology_structure_audit": {
 		"date": "2026-06-08",

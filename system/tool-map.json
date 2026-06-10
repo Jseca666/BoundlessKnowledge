@@ -1,6 +1,6 @@
 {
 	"id": "tool-map",
-	"version": "1.6.0",
+	"version": "0.8.0",
 	"updated": "2026-06-10",
 	"runtime_policy": {
 		"current_default": "powershell-thin-entrypoint",
@@ -222,13 +222,15 @@
 			"id": "git-governance-status",
 			"runtime": "powershell",
 			"entry": "scripts/git-governance-status.ps1",
-			"role": "Report local Git worktree, origin remote, branch and short status without mutating repository state.",
+			"role": "Report local Git worktree, origin remote, branch, short status and current version-cycle state without mutating repository state.",
 			"inputs": [
 				".git/",
 				"system/git-governance-system.json"
 			],
 			"outputs": [
-				"git-governance-status-json"
+				"git-governance-status-json",
+				"git-cycle-state",
+				"remote-action-boundary"
 			],
 			"migration_trigger": "Move to Node.js only if Git status reporting needs richer JSON normalization or GitHub API integration."
 		},
@@ -236,12 +238,13 @@
 			"id": "validate-git-governance",
 			"runtime": "powershell",
 			"entry": "scripts/validate-git-governance.ps1",
-			"role": "Validate Git governance machine truth, docs map, origin remote and .gitignore safety patterns.",
+			"role": "Validate Git governance machine truth, docs map, origin remote, .gitignore/.gitattributes safety patterns and version-cycle closure contract.",
 			"inputs": [
 				"system/git-governance-system.json",
 				"system/git-governance-docs-map.json",
 				".gitignore",
-				".git/"
+				".git/",
+				"system/system-closure-map.json"
 			],
 			"outputs": [
 				"validation-result"

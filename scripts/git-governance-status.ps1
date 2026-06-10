@@ -22,6 +22,16 @@ $remote = Invoke-Git @("remote", "get-url", "origin")
 $branch = Invoke-Git @("branch", "--show-current")
 $status = Invoke-Git @("status", "--short")
 
+$cycleState = "blocked"
+if ($inside.ExitCode -eq 0 -and $inside.Output.Trim() -eq "true") {
+    if ([string]::IsNullOrWhiteSpace($status.Output)) {
+        $cycleState = "clean"
+    }
+    else {
+        $cycleState = "dirty"
+    }
+}
+
 $result = [PSCustomObject]@{
     repository_root = $Root
     inside_work_tree = ($inside.ExitCode -eq 0 -and $inside.Output.Trim() -eq "true")
@@ -29,6 +39,8 @@ $result = [PSCustomObject]@{
     current_branch = if ($branch.ExitCode -eq 0) { $branch.Output.Trim() } else { $null }
     has_uncommitted_or_untracked_changes = -not [string]::IsNullOrWhiteSpace($status.Output)
     status_short = @($status.Output -split "`n" | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    version_cycle_state = $cycleState
+    version_cycle_contract = "status snapshot -> scope classification -> validation -> commit when requested -> explicit remote-action gate -> closure handoff"
     remote_action_boundary = "No push, release, issue, PR, merge, remote branch mutation or credential change without explicit user approval."
 }
 

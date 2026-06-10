@@ -1,390 +1,334 @@
 {
-    "id":  "canvas-screenshot-audit-report",
-    "generated_at":  "2026-06-10T13:51:41",
-    "renderer":  "powershell-system-drawing",
-    "scope":  "current-active-canvas-views",
-    "output_dir":  "system/reviews/canvas-screenshots",
-    "max_image_size":  {
-                           "width":  2600,
-                           "height":  1900
-                       },
-    "checks":  [
-                   "registered current/active canvas can be rendered into PNG",
-                   "rendered PNG is non-empty",
-                   "rendered PNG has non-blank pixels",
-                   "source text has no obvious corruption markers",
-                   "registered color legend node exists when declared"
-               ],
-    "result":  {
-                   "view_count":  14,
-                   "error_count":  0,
-                   "warning_count":  0,
-                   "strict":  true
-               },
-    "views":  [
-                  {
-                      "view_id":  "canvas-system-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "canvas-system-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/canvas-system-architecture-map.png",
-                      "node_count":  44,
-                      "edge_count":  10,
-                      "logical_bounds":  {
-                                             "width":  3460,
-                                             "height":  1610
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1210,
-                                             "scale":  0.7514,
-                                             "bytes":  153481,
-                                             "non_blank_pixel_ratio":  0.4227
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "canvas-directory-layout-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-directory-layout.canvas",
-                      "status":  "current",
-                      "view_type":  "canvas-directory-layout-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/canvas-directory-layout-map.png",
-                      "node_count":  27,
-                      "edge_count":  10,
-                      "logical_bounds":  {
-                                             "width":  2640,
-                                             "height":  1820
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1793,
-                                             "scale":  0.9848,
-                                             "bytes":  221606,
-                                             "non_blank_pixel_ratio":  0.3255
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "kb-navigation-index",
-                      "canvas_path":  "30-maps/canvas/00-entry/kb-navigation-index.canvas",
-                      "status":  "current",
-                      "view_type":  "visual-navigation-index",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/kb-navigation-index.png",
-                      "node_count":  22,
-                      "edge_count":  0,
-                      "logical_bounds":  {
-                                             "width":  2120,
-                                             "height":  1550
-                                         },
-                      "rendered_image":  {
-                                             "width":  2120,
-                                             "height":  1550,
-                                             "scale":  1,
-                                             "bytes":  147136,
-                                             "non_blank_pixel_ratio":  0.4571
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "knowledge-base-system-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "system-architecture-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/knowledge-base-system-architecture-map.png",
-                      "node_count":  57,
-                      "edge_count":  15,
-                      "logical_bounds":  {
-                                             "width":  3114,
-                                             "height":  1630
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1361,
-                                             "scale":  0.8349,
-                                             "bytes":  210728,
-                                             "non_blank_pixel_ratio":  0.4228
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "diagnostic-system-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "diagnostic-system-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/diagnostic-system-architecture-map.png",
-                      "node_count":  43,
-                      "edge_count":  9,
-                      "logical_bounds":  {
-                                             "width":  3580,
-                                             "height":  1690
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1228,
-                                             "scale":  0.7263,
-                                             "bytes":  167500,
-                                             "non_blank_pixel_ratio":  0.4222
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "system-closure-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "module-architecture-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/system-closure-architecture-map.png",
-                      "node_count":  38,
-                      "edge_count":  8,
-                      "logical_bounds":  {
-                                             "width":  3540,
-                                             "height":  1570
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1154,
-                                             "scale":  0.7345,
-                                             "bytes":  137623,
-                                             "non_blank_pixel_ratio":  0.355
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "domain-taxonomy-overview-map",
-                      "canvas_path":  "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
-                      "status":  "current",
-                      "view_type":  "domain-taxonomy-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/domain-taxonomy-overview-map.png",
-                      "node_count":  24,
-                      "edge_count":  0,
-                      "logical_bounds":  {
-                                             "width":  3320,
-                                             "height":  1440
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1128,
-                                             "scale":  0.7831,
-                                             "bytes":  125274,
-                                             "non_blank_pixel_ratio":  0.375
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "domain-taxonomy-level-3-matrix-map",
-                      "canvas_path":  "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas",
-                      "status":  "active",
-                      "view_type":  "domain-taxonomy-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/domain-taxonomy-level-3-matrix-map.png",
-                      "node_count":  65,
-                      "edge_count":  0,
-                      "logical_bounds":  {
-                                             "width":  2950,
-                                             "height":  6710
-                                         },
-                      "rendered_image":  {
-                                             "width":  836,
-                                             "height":  1900,
-                                             "scale":  0.2832,
-                                             "bytes":  308419,
-                                             "non_blank_pixel_ratio":  0.5717
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "review-system-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "module-architecture-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/review-system-architecture-map.png",
-                      "node_count":  36,
-                      "edge_count":  6,
-                      "logical_bounds":  {
-                                             "width":  3520,
-                                             "height":  1410
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1042,
-                                             "scale":  0.7386,
-                                             "bytes":  133136,
-                                             "non_blank_pixel_ratio":  0.4287
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "system-structure-governance-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "module-architecture-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/system-structure-governance-architecture-map.png",
-                      "node_count":  32,
-                      "edge_count":  5,
-                      "logical_bounds":  {
-                                             "width":  2994,
-                                             "height":  1440
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1251,
-                                             "scale":  0.8684,
-                                             "bytes":  175527,
-                                             "non_blank_pixel_ratio":  0.3992
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "system-information-map-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "module-architecture-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/system-information-map-architecture-map.png",
-                      "node_count":  26,
-                      "edge_count":  5,
-                      "logical_bounds":  {
-                                             "width":  3174,
-                                             "height":  1130
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  926,
-                                             "scale":  0.8192,
-                                             "bytes":  113973,
-                                             "non_blank_pixel_ratio":  0.3676
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "loop-orchestration-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "loop-state-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/loop-orchestration-architecture-map.png",
-                      "node_count":  40,
-                      "edge_count":  5,
-                      "logical_bounds":  {
-                                             "width":  3520,
-                                             "height":  1410
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1042,
-                                             "scale":  0.7386,
-                                             "bytes":  139662,
-                                             "non_blank_pixel_ratio":  0.4249
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "knowledge-ingestion-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "module-architecture-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/knowledge-ingestion-architecture-map.png",
-                      "node_count":  42,
-                      "edge_count":  9,
-                      "logical_bounds":  {
-                                             "width":  3174,
-                                             "height":  1632
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  1337,
-                                             "scale":  0.8192,
-                                             "bytes":  173497,
-                                             "non_blank_pixel_ratio":  0.4084
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  },
-                  {
-                      "view_id":  "git-governance-architecture-map",
-                      "canvas_path":  "30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
-                      "status":  "current",
-                      "view_type":  "module-architecture-map",
-                      "screenshot_path":  "system/reviews/canvas-screenshots/git-governance-architecture-map.png",
-                      "node_count":  36,
-                      "edge_count":  11,
-                      "logical_bounds":  {
-                                             "width":  3320,
-                                             "height":  1240
-                                         },
-                      "rendered_image":  {
-                                             "width":  2600,
-                                             "height":  972,
-                                             "scale":  0.7831,
-                                             "bytes":  140829,
-                                             "non_blank_pixel_ratio":  0.4365
-                                         },
-                      "warnings":  [
-
-                                   ],
-                      "errors":  [
-
-                                 ]
-                  }
-              ]
+	"id": "canvas-screenshot-audit-report",
+	"generated_at": "2026-06-10T14:40:06",
+	"renderer": "powershell-system-drawing",
+	"scope": "current-active-canvas-views",
+	"output_dir": "system/reviews/canvas-screenshots",
+	"max_image_size": {
+		"width": 2600,
+		"height": 1900
+	},
+	"checks": [
+		"registered current/active canvas can be rendered into PNG",
+		"rendered PNG is non-empty",
+		"rendered PNG has non-blank pixels",
+		"source text has no obvious corruption markers",
+		"registered color legend node exists when declared"
+	],
+	"result": {
+		"view_count": 14,
+		"error_count": 0,
+		"warning_count": 0,
+		"strict": false
+	},
+	"views": [
+		{
+			"view_id": "canvas-system-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-system-architecture.canvas",
+			"status": "current",
+			"view_type": "canvas-system-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/canvas-system-architecture-map.png",
+			"node_count": 44,
+			"edge_count": 10,
+			"logical_bounds": {
+				"width": 3460,
+				"height": 1610
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1210,
+				"scale": 0.7514,
+				"bytes": 153481,
+				"non_blank_pixel_ratio": 0.4227
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "canvas-directory-layout-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/canvas-system/canvas-directory-layout.canvas",
+			"status": "current",
+			"view_type": "canvas-directory-layout-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/canvas-directory-layout-map.png",
+			"node_count": 27,
+			"edge_count": 10,
+			"logical_bounds": {
+				"width": 2640,
+				"height": 1820
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1793,
+				"scale": 0.9848,
+				"bytes": 221606,
+				"non_blank_pixel_ratio": 0.3255
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "kb-navigation-index",
+			"canvas_path": "30-maps/canvas/00-entry/kb-navigation-index.canvas",
+			"status": "current",
+			"view_type": "visual-navigation-index",
+			"screenshot_path": "system/reviews/canvas-screenshots/kb-navigation-index.png",
+			"node_count": 22,
+			"edge_count": 0,
+			"logical_bounds": {
+				"width": 2120,
+				"height": 1550
+			},
+			"rendered_image": {
+				"width": 2120,
+				"height": 1550,
+				"scale": 1,
+				"bytes": 147136,
+				"non_blank_pixel_ratio": 0.4571
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "knowledge-base-system-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/00-overview/kb-system-architecture.canvas",
+			"status": "current",
+			"view_type": "system-architecture-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/knowledge-base-system-architecture-map.png",
+			"node_count": 57,
+			"edge_count": 15,
+			"logical_bounds": {
+				"width": 3114,
+				"height": 1630
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1361,
+				"scale": 0.8349,
+				"bytes": 210728,
+				"non_blank_pixel_ratio": 0.4228
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "diagnostic-system-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/diagnostic-system/diagnostic-system-architecture.canvas",
+			"status": "current",
+			"view_type": "diagnostic-system-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/diagnostic-system-architecture-map.png",
+			"node_count": 43,
+			"edge_count": 9,
+			"logical_bounds": {
+				"width": 3580,
+				"height": 1690
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1228,
+				"scale": 0.7263,
+				"bytes": 167500,
+				"non_blank_pixel_ratio": 0.4222
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "system-closure-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/system-closure/system-closure-architecture.canvas",
+			"status": "current",
+			"view_type": "module-architecture-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/system-closure-architecture-map.png",
+			"node_count": 38,
+			"edge_count": 8,
+			"logical_bounds": {
+				"width": 3540,
+				"height": 1570
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1154,
+				"scale": 0.7345,
+				"bytes": 137623,
+				"non_blank_pixel_ratio": 0.355
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "domain-taxonomy-overview-map",
+			"canvas_path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-overview.canvas",
+			"status": "current",
+			"view_type": "domain-taxonomy-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/domain-taxonomy-overview-map.png",
+			"node_count": 24,
+			"edge_count": 0,
+			"logical_bounds": {
+				"width": 3320,
+				"height": 1440
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1128,
+				"scale": 0.7831,
+				"bytes": 125274,
+				"non_blank_pixel_ratio": 0.375
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "domain-taxonomy-level-3-matrix-map",
+			"canvas_path": "30-maps/canvas/20-knowledge/10-domain-taxonomy/domain-taxonomy-level-3-matrix.canvas",
+			"status": "active",
+			"view_type": "domain-taxonomy-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/domain-taxonomy-level-3-matrix-map.png",
+			"node_count": 65,
+			"edge_count": 0,
+			"logical_bounds": {
+				"width": 2950,
+				"height": 6710
+			},
+			"rendered_image": {
+				"width": 836,
+				"height": 1900,
+				"scale": 0.2832,
+				"bytes": 308419,
+				"non_blank_pixel_ratio": 0.5717
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "review-system-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/review-system/review-system-architecture.canvas",
+			"status": "current",
+			"view_type": "module-architecture-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/review-system-architecture-map.png",
+			"node_count": 36,
+			"edge_count": 6,
+			"logical_bounds": {
+				"width": 3520,
+				"height": 1410
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1042,
+				"scale": 0.7386,
+				"bytes": 133136,
+				"non_blank_pixel_ratio": 0.4287
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "system-structure-governance-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/system-structure-governance/system-structure-governance-architecture.canvas",
+			"status": "current",
+			"view_type": "module-architecture-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/system-structure-governance-architecture-map.png",
+			"node_count": 32,
+			"edge_count": 5,
+			"logical_bounds": {
+				"width": 2994,
+				"height": 1440
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1251,
+				"scale": 0.8684,
+				"bytes": 175527,
+				"non_blank_pixel_ratio": 0.3992
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "system-information-map-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/system-information-map/system-information-map-architecture.canvas",
+			"status": "current",
+			"view_type": "module-architecture-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/system-information-map-architecture-map.png",
+			"node_count": 26,
+			"edge_count": 5,
+			"logical_bounds": {
+				"width": 3174,
+				"height": 1130
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 926,
+				"scale": 0.8192,
+				"bytes": 113973,
+				"non_blank_pixel_ratio": 0.3676
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "loop-orchestration-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/loop-orchestration/loop-orchestration-architecture.canvas",
+			"status": "current",
+			"view_type": "loop-state-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/loop-orchestration-architecture-map.png",
+			"node_count": 40,
+			"edge_count": 5,
+			"logical_bounds": {
+				"width": 3520,
+				"height": 1410
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1042,
+				"scale": 0.7386,
+				"bytes": 139662,
+				"non_blank_pixel_ratio": 0.4249
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "knowledge-ingestion-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+			"status": "current",
+			"view_type": "module-architecture-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/knowledge-ingestion-architecture-map.png",
+			"node_count": 42,
+			"edge_count": 9,
+			"logical_bounds": {
+				"width": 3174,
+				"height": 1632
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1337,
+				"scale": 0.8192,
+				"bytes": 173497,
+				"non_blank_pixel_ratio": 0.4084
+			},
+			"warnings": [],
+			"errors": []
+		},
+		{
+			"view_id": "git-governance-architecture-map",
+			"canvas_path": "30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
+			"status": "current",
+			"view_type": "module-architecture-map",
+			"screenshot_path": "system/reviews/canvas-screenshots/git-governance-architecture-map.png",
+			"node_count": 37,
+			"edge_count": 13,
+			"logical_bounds": {
+				"width": 3320,
+				"height": 1400
+			},
+			"rendered_image": {
+				"width": 2600,
+				"height": 1097,
+				"scale": 0.7831,
+				"bytes": 154469,
+				"non_blank_pixel_ratio": 0.4093
+			},
+			"warnings": [],
+			"errors": []
+		}
+	]
 }

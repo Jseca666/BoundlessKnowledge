@@ -1,6 +1,6 @@
 {
 	"id": "system-closure-map",
-	"version": "0.9.0",
+	"version": "1.0.0",
 	"updated": "2026-06-10",
 	"role": "machine-readable-module-closure-matrix",
 	"purpose": "Track whether each stable module has enough routing, truth, validation, documentation, diagnostics and lifecycle coverage to be maintained without relying on chat memory.",
@@ -1284,13 +1284,13 @@
 				"documentation": "closed",
 				"visual_projection": "closed",
 				"diagnostics": "shared",
-				"lifecycle": "closed"
+				"lifecycle": "closed",
+				"cycle_management": "closed"
 			},
 			"known_gaps": [
-				"No initial commit or remote push was created by this module because staging, committing and pushing should remain explicit user actions unless requested.",
 				"No CI workflow is configured yet."
 			],
-			"next_action": "When the user asks for the first commit, run validation, review changed paths, stage intentionally, commit locally, then ask before push.",
+			"next_action": "For every substantial change cycle, run git-governance-status, classify changed paths, run routed validations, commit when requested or approved, and push only after explicit user authorization.",
 			"activation_proof": {
 				"activation_id": "activation-20260610-git-governance",
 				"module_id": "git-governance",
@@ -1312,9 +1312,28 @@
 					"scripts/validate-diagnostics.ps1",
 					"scripts/audit-text-integrity.ps1",
 					"scripts/build-index.ps1",
-					"scripts/validate-kb.ps1"
+					"scripts/validate-kb.ps1",
+					"scripts/git-governance-status.ps1"
 				],
-				"acceptance": "Active after origin remote was configured, Git governance machine truth/docs map/tools/route/information/topology/closure/visual coverage and dedicated Canvas were synchronized, while remote actions remain approval-gated."
+				"acceptance": "Active after origin remote, Git governance machine truth/docs map/tools/route/information/topology/closure/visual coverage and dedicated Canvas were synchronized; Git cycle management is now a closed system loop while remote actions remain approval-gated."
+			},
+			"cycle_management": {
+				"status": "closed",
+				"governed_by": "system/git-governance-system.json#cycle_management",
+				"cycle_id": "git-version-cycle",
+				"required_outputs": [
+					"git_status_snapshot",
+					"changed_paths_classification",
+					"validation_report",
+					"commit_ref_when_committed",
+					"remote_sync_result_when_authorized_and_executed",
+					"next_action_or_handoff"
+				],
+				"handoff_when_failed": [
+					"diagnostics",
+					"review-system"
+				],
+				"validation_gate": "scripts/validate-git-governance.ps1"
 			}
 		}
 	],

@@ -1,6 +1,6 @@
 {
 	"id": "information-map",
-	"version": "1.11.0",
+	"version": "1.12.0",
 	"updated": "2026-06-10",
 	"canonical_truth": {
 		"system_behavior": [
@@ -500,14 +500,17 @@
 				"30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
 				".gitattributes"
 			],
-			"boundary": "治理本项目的 Git 本地版本状态、远端 origin、提交前检查、敏感信息边界、发布前状态和远端动作授权；它不替代知识内容审查、诊断根因修复、GitHub 凭据管理或未经授权的 push/release/issue/PR。",
+			"boundary": "治理本项目的 Git 本地版本状态、远端 origin、提交前检查、敏感信息边界、发布前状态、周期运行闭环和远端动作授权；它不替代知识内容审查、诊断根因修复、GitHub 凭据管理或未经授权的 push/release/issue/PR。",
 			"outputs": [
 				"git-governance-contract",
 				"remote-origin-contract",
 				"precommit-validation-policy",
 				"remote-action-boundary",
 				"git-status-report",
-				"git-governance-visual-architecture"
+				"git-governance-visual-architecture",
+				"git-version-cycle-report",
+				"remote-sync-result-when-authorized",
+				"version-cycle-closure-record"
 			],
 			"owner_layer": "system-governance",
 			"module_kind": "version-control-governance"
@@ -879,6 +882,13 @@
 			"to": "tools",
 			"verb": "register-version-control-validation-tools",
 			"machine_readable_output": "tool-map entries for git-governance scripts"
+		},
+		{
+			"id": "git-governance-to-system-closure",
+			"from": "git-governance",
+			"to": "system-closure",
+			"verb": "record-version-cycle-closure",
+			"machine_readable_output": "system/git-governance-system.json#cycle_management and system/system-closure-map.json#modules.git-governance.cycle_management"
 		}
 	],
 	"entrypoints": [
