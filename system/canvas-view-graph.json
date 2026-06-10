@@ -401,7 +401,9 @@
 				"system/system-closure-map.json",
 				"system/visual-coverage-map.json",
 				"docs/ingestion-workflow.md",
-				"docs/source-quality.md"
+				"docs/source-quality.md",
+				"system/knowledge-ingestion-source-types.json",
+				"templates/book-source.md"
 			]
 		},
 		{

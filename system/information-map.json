@@ -1,6 +1,6 @@
 {
 	"id": "information-map",
-	"version": "1.12.0",
+	"version": "1.13.0",
 	"updated": "2026-06-10",
 	"canonical_truth": {
 		"system_behavior": [
@@ -50,7 +50,8 @@
 			"system/diagnostics/failure-learning-loop.json",
 			"system/git-governance-system.json",
 			"system/git-governance-docs-map.json",
-			"30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas"
+			"30-maps/canvas/10-system/10-subsystems/git-governance/git-governance-architecture.canvas",
+			"system/knowledge-ingestion-source-types.json"
 		],
 		"knowledge_entries": [
 			"10-sources/",
@@ -474,16 +475,21 @@
 				"docs/ingestion-workflow.md",
 				"docs/source-quality.md",
 				"templates/",
-				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas"
+				"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
+				"system/knowledge-ingestion-source-types.json",
+				"templates/book-source.md"
 			],
-			"boundary": "治理知识进入知识库的方式：捕获、来源类型、来源登记、质量预审、领域路由、原子化准备、索引和审查/诊断/loop 交接；它不保存每条知识内容，也不替代领域分类、来源事实、原子知识或索引工具。",
+			"boundary": "治理知识进入知识库的方式：捕获、来源类型注册表、来源登记、质量预审、领域路由、原子化准备、索引和审查/诊断/loop 交接；它不保存每条知识内容，也不替代领域分类、来源事实、原子知识或索引工具。",
 			"outputs": [
 				"knowledge-ingestion-system-contract",
 				"intake-mode-contract",
 				"source-quality-gates",
 				"ingestion-handoff-map",
 				"legacy-ingestion-asset-adoption",
-				"knowledge-ingestion-visual-architecture"
+				"knowledge-ingestion-visual-architecture",
+				"source-type-registry",
+				"book-textbook-source-template",
+				"dynamic-source-type-update-contract"
 			],
 			"owner_layer": "system-governance",
 			"module_kind": "knowledge-ingestion-subsystem"
@@ -889,6 +895,18 @@
 			"to": "system-closure",
 			"verb": "record-version-cycle-closure",
 			"machine_readable_output": "system/git-governance-system.json#cycle_management and system/system-closure-map.json#modules.git-governance.cycle_management"
+		},
+		{
+			"id": "knowledge-ingestion-source-types-to-templates",
+			"from": "knowledge-ingestion",
+			"to": [
+				"schemas",
+				"tools",
+				"review-system",
+				"architecture-views"
+			],
+			"verb": "synchronize-dynamic-source-type-registry",
+			"machine_readable_output": "system/knowledge-ingestion-source-types.json, source templates, kb type enum, validation and Canvas projection"
 		}
 	],
 	"entrypoints": [

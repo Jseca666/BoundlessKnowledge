@@ -1,0 +1,211 @@
+{
+	"id": "knowledge-ingestion-source-types",
+	"version": "0.1.0",
+	"updated": "2026-06-10",
+	"artifact_type": "source-type-registry",
+	"owner_module": "knowledge-ingestion",
+	"role": "知识摄入来源类型的机器可读注册表",
+	"purpose": "把来源类型从流程说明中抽离为可动态维护的数据；新增来源类型时在这里登记模板、必填出处、质量预审、审查触发和领域路由提示。",
+	"dynamic_update_policy": {
+		"rule": "新增稳定来源类型时，先更新本 registry，再同步 knowledge-ingestion-system、docs map、template、schema/validator、route、visual projection 和必要的 review trigger。",
+		"add_source_type_when": [
+			"现有来源类型无法准确表达出处身份或质量判断方式",
+			"需要不同的必填出处字段、版权边界、时效策略或模板结构",
+			"同类来源会重复进入知识库，值得形成可复用入口"
+		],
+		"required_fields": [
+			"id",
+			"kb_type",
+			"name",
+			"status",
+			"source_template",
+			"provenance_required",
+			"quality_focus",
+			"review_triggers",
+			"domain_routing_hint"
+		],
+		"future_gap_rule": "如果只出现一次且边界不清，先挂到 future-source-type gap；重复出现或影响质量门时升级为 current source type。"
+	},
+	"source_types": [
+		{
+			"id": "paper",
+			"kb_type": "source-paper",
+			"name": "论文",
+			"status": "current",
+			"source_template": "templates/paper-source.md",
+			"provenance_required": [
+				"authors",
+				"title",
+				"venue_or_publisher",
+				"published_at",
+				"doi_or_url"
+			],
+			"quality_focus": [
+				"研究问题",
+				"方法",
+				"样本/实验/证明",
+				"局限",
+				"结论强度"
+			],
+			"review_triggers": [
+				"高风险领域",
+				"证据冲突",
+				"方法或结论无法判断",
+				"只读摘要未读全文"
+			],
+			"domain_routing_hint": "按研究对象、方法和应用场景给出领域候选。"
+		},
+		{
+			"id": "github-topic",
+			"kb_type": "source-github",
+			"name": "GitHub 技术主题",
+			"status": "current",
+			"source_template": "templates/github-topic.md",
+			"provenance_required": [
+				"owner",
+				"repo",
+				"source_url",
+				"license",
+				"last_checked_at"
+			],
+			"quality_focus": [
+				"维护频率",
+				"release/commit 活跃度",
+				"issue/PR 状态",
+				"测试和文档",
+				"许可证"
+			],
+			"review_triggers": [
+				"安全相关",
+				"许可证不清",
+				"维护停滞",
+				"生态热度变化快"
+			],
+			"domain_routing_hint": "按技术栈、问题域、工程用途和依赖生态给出领域候选。"
+		},
+		{
+			"id": "web-source",
+			"kb_type": "source-web",
+			"name": "专业网页",
+			"status": "current",
+			"source_template": "templates/web-source.md",
+			"provenance_required": [
+				"source_url",
+				"publisher",
+				"authors_if_any",
+				"published_at_if_any",
+				"accessed_at"
+			],
+			"quality_focus": [
+				"发布者身份",
+				"时效性",
+				"引用链",
+				"商业/宣传倾向",
+				"可复核性"
+			],
+			"review_triggers": [
+				"事实易变",
+				"营销内容",
+				"无出处断言",
+				"法律/医疗/金融等高风险内容"
+			],
+			"domain_routing_hint": "按网页主题、发布者行业和知识用途给出领域候选。"
+		},
+		{
+			"id": "personal-draft",
+			"kb_type": "source-personal",
+			"name": "个人草稿经验",
+			"status": "current",
+			"source_template": "templates/personal-draft.md",
+			"provenance_required": [
+				"context",
+				"observed_at_or_created_at",
+				"scenario",
+				"applicability_boundary"
+			],
+			"quality_focus": [
+				"场景边界",
+				"可迁移性",
+				"外部验证状态",
+				"反例或限制"
+			],
+			"review_triggers": [
+				"要提升为通用结论",
+				"缺少外部证据",
+				"影响项目决策"
+			],
+			"domain_routing_hint": "按经验所处理的问题、工具、行业或认知方法给出领域候选。"
+		},
+		{
+			"id": "book-textbook",
+			"kb_type": "source-book",
+			"name": "教材与权威图书",
+			"aliases": [
+				"教材",
+				"教科书",
+				"权威教材",
+				"权威图书",
+				"专著",
+				"textbook",
+				"book",
+				"monograph"
+			],
+			"status": "current",
+			"source_template": "templates/book-source.md",
+			"provenance_required": [
+				"authors_or_editors",
+				"title",
+				"edition",
+				"publisher",
+				"published_year",
+				"isbn_or_stable_identifier",
+				"chapter_or_page_range_when_quoted"
+			],
+			"quality_focus": [
+				"作者/编者权威性",
+				"版本和出版机构",
+				"领域共识程度",
+				"体系化覆盖范围",
+				"时效性和需要补充的新进展"
+			],
+			"review_triggers": [
+				"版本过旧",
+				"领域快速变化",
+				"只适合入门不适合作为最新事实",
+				"版权引用边界不清",
+				"与最新标准/论文/官方文档冲突"
+			],
+			"copyright_boundary": "不大段复制图书内容；保存书目信息、章节定位、摘要、自己的分析和短引用线索。",
+			"domain_routing_hint": "教材通常适合作为领域基础入口；按学科/工程领域、章节主题和目标知识粒度给出领域候选。"
+		},
+		{
+			"id": "future-source-type",
+			"kb_type": "source-future-gap",
+			"name": "未来来源类型缺口",
+			"status": "gap-handler",
+			"source_template": "templates/",
+			"provenance_required": [
+				"provenance",
+				"candidate_source_type",
+				"quality_level",
+				"domain_candidates",
+				"review_trigger"
+			],
+			"quality_focus": [
+				"是否需要升级为稳定来源类型",
+				"是否需要新模板",
+				"是否影响质量门或领域路由"
+			],
+			"review_triggers": [
+				"重复出现",
+				"无法用现有模板表达",
+				"高风险或版权边界不清"
+			],
+			"domain_routing_hint": "先给出临时候选并记录分类/来源类型缺口。"
+		}
+	],
+	"validation": [
+		"scripts/validate-system.ps1",
+		"scripts/validate-kb.ps1"
+	]
+}

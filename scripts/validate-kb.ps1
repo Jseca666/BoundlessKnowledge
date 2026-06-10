@@ -30,6 +30,7 @@ $RequiredFields = @(
 
 $AllowedTypes = @(
     "source-paper",
+    "source-book",
     "source-github",
     "source-web",
     "source-personal",

@@ -8,7 +8,7 @@
 			"width": 2320,
 			"height": 120,
 			"color": "6",
-			"text": "# 知识摄入子系统：知识进入知识库的治理层\n\n治理论文、GitHub、网页、个人草稿和未来来源从捕获到可引用知识的进入方式；具体内容仍保存在 inbox、sources、notes、synthesis 和 workflows。"
+			"text": "# 知识摄入子系统：知识进入知识库的治理层\n\n治理论文、教材/权威图书、GitHub、网页、个人草稿和未来来源从捕获到可引用知识的进入方式；具体内容仍保存在 inbox、sources、notes、synthesis 和 workflows。"
 		},
 		{
 			"id": "scope-note",
@@ -38,7 +38,7 @@
 			"width": 360,
 			"height": 190,
 			"color": "4",
-			"text": "# 2. 来源类型\n\n论文、GitHub、网页、个人经验和未来来源先选模板。\n\n输出 source_type。"
+			"text": "# 2. 来源类型\n\n先查 source type registry：论文、教材/权威图书、GitHub、网页、个人经验或未来来源缺口。\n\n输出 source_type。"
 		},
 		{
 			"id": "quality-precheck",
@@ -118,7 +118,7 @@
 			"width": 500,
 			"height": 170,
 			"color": "4",
-			"text": "# 未来扩展\n\n新增来源类型时先更新摄入子系统、模板路由、review 触发、taxonomy 交接和可视化覆盖。"
+			"text": "# 未来扩展\n\n新增来源类型时先更新 source type registry，再同步模板、schema、validator、review 触发、taxonomy 交接和可视化覆盖。"
 		},
 		{
 			"id": "machine-truth-band",
@@ -128,14 +128,14 @@
 			"width": 2320,
 			"height": 90,
 			"color": "6",
-			"text": "# 机器真相\n\n这些文件决定知识摄入子系统的边界、路由、旧资产接管、质量门、可视化和闭环状态。Markdown 只做人读说明。"
+			"text": "# 机器真相\n\n这些文件决定摄入边界、来源类型 registry、模板路由、旧资产接管、质量门、可视化和闭环状态。Markdown 只做人读说明。"
 		},
 		{
 			"id": "file-label-ki-system-file",
 			"type": "text",
 			"x": -1040,
 			"y": 640,
-			"width": 330,
+			"width": 300,
 			"height": 70,
 			"color": "6",
 			"text": "摄入系统真相\nsystem/knowledge-ingestion-system.json"
@@ -153,9 +153,9 @@
 		{
 			"id": "file-label-ki-docs-map-file",
 			"type": "text",
-			"x": -660,
+			"x": -360,
 			"y": 640,
-			"width": 330,
+			"width": 300,
 			"height": 70,
 			"color": "6",
 			"text": "文档路由\nsystem/knowledge-ingestion-docs-map.json"
@@ -164,7 +164,7 @@
 			"id": "ki-docs-map-file",
 			"type": "file",
 			"file": "system/knowledge-ingestion-docs-map.json",
-			"x": -630,
+			"x": -330,
 			"y": 724,
 			"width": 64,
 			"height": 48,
@@ -173,7 +173,7 @@
 		{
 			"id": "file-label-ingestion-workflow-file",
 			"type": "text",
-			"x": -280,
+			"x": -20,
 			"y": 640,
 			"width": 300,
 			"height": 70,
@@ -184,7 +184,7 @@
 			"id": "ingestion-workflow-file",
 			"type": "file",
 			"file": "docs/ingestion-workflow.md",
-			"x": -250,
+			"x": 10,
 			"y": 724,
 			"width": 64,
 			"height": 48,
@@ -193,7 +193,7 @@
 		{
 			"id": "file-label-source-quality-file",
 			"type": "text",
-			"x": 70,
+			"x": 320,
 			"y": 640,
 			"width": 300,
 			"height": 70,
@@ -204,7 +204,7 @@
 			"id": "source-quality-file",
 			"type": "file",
 			"file": "docs/source-quality.md",
-			"x": 100,
+			"x": 350,
 			"y": 724,
 			"width": 64,
 			"height": 48,
@@ -213,7 +213,7 @@
 		{
 			"id": "file-label-route-file",
 			"type": "text",
-			"x": 420,
+			"x": 660,
 			"y": 640,
 			"width": 300,
 			"height": 70,
@@ -224,7 +224,7 @@
 			"id": "route-file",
 			"type": "file",
 			"file": "system/route-registry.json",
-			"x": 450,
+			"x": 690,
 			"y": 724,
 			"width": 64,
 			"height": 48,
@@ -233,7 +233,7 @@
 		{
 			"id": "file-label-closure-file",
 			"type": "text",
-			"x": 770,
+			"x": 1000,
 			"y": 640,
 			"width": 300,
 			"height": 70,
@@ -244,7 +244,7 @@
 			"id": "closure-file",
 			"type": "file",
 			"file": "system/system-closure-map.json",
-			"x": 800,
+			"x": 1030,
 			"y": 724,
 			"width": 64,
 			"height": 48,
@@ -419,6 +419,26 @@
 			"height": 130,
 			"color": "6",
 			"text": "**颜色图例**\n1 风险/诊断/阻断; 2 工作流输出/交接; 3 知识内容/模型层; 4 来源/输入/边界; 5 系统治理/方法/审查; 6 机器真相/registry/根结构."
+		},
+		{
+			"id": "file-label-source-types-file",
+			"type": "text",
+			"x": -700,
+			"y": 640,
+			"width": 300,
+			"height": 70,
+			"color": "6",
+			"text": "来源类型表\nsystem/knowledge-ingestion-source-types.json"
+		},
+		{
+			"id": "source-types-file",
+			"type": "file",
+			"x": -670,
+			"y": 724,
+			"width": 64,
+			"height": 48,
+			"color": "6",
+			"file": "system/knowledge-ingestion-source-types.json"
 		}
 	],
 	"edges": [

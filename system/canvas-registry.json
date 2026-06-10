@@ -2494,7 +2494,7 @@
 			"view_level": "L2",
 			"view_category": "module-architecture",
 			"primary_subject": "Knowledge ingestion subsystem as the governed entry path for external and personal knowledge",
-			"boundary": "Explains intake modes, source registration governance, source quality gates, domain routing handoff, legacy asset adoption, validation and navigation for knowledge entering the system.",
+			"boundary": "展示知识摄入子系统的进入链路、动态来源类型 registry、质量门、交接对象、机器真相和导航关系；不保存具体知识内容。",
 			"not_for": [
 				"Specific source record content",
 				"Full domain taxonomy tree",
@@ -2512,13 +2512,16 @@
 				"system/system-closure-map.json",
 				"system/visual-coverage-map.json",
 				"docs/ingestion-workflow.md",
-				"docs/source-quality.md"
+				"docs/source-quality.md",
+				"system/knowledge-ingestion-source-types.json",
+				"templates/book-source.md"
 			],
 			"use_when": [
 				"用户讨论知识如何进入知识库",
 				"用户讨论论文、GitHub、网页或个人草稿如何登记",
 				"需要判断新来源类型、模板、质量门或摄入交接是否应该新增",
-				"需要解释 inbox/source-registry/domain/review/diagnostics/loop 之间的进入链路"
+				"需要解释 inbox/source-registry/domain/review/diagnostics/loop 之间的进入链路",
+				"需要判断教材/权威图书或其他新来源类型如何进入知识库"
 			],
 			"parent_views": [
 				"knowledge-base-system-architecture-map"
@@ -2593,6 +2596,12 @@
 					"from_node": "file-label-closure-file",
 					"to_node": "file-label-ki-system-file",
 					"label": "closure proves activation"
+				},
+				{
+					"relation_id": "rel-source-types-to-templates",
+					"from_node": "file-label-source-types-file",
+					"to_node": "file-label-ki-docs-map-file",
+					"label": "registry routes templates"
 				}
 			],
 			"support_bindings": [
@@ -2631,6 +2640,12 @@
 					"support_node": "file-label-closure-file",
 					"target_node": "future-extension",
 					"label": "records activation and gaps"
+				},
+				{
+					"binding_id": "bind-source-types-source-type",
+					"support_node": "file-label-source-types-file",
+					"target_node": "source-type",
+					"label": "registers source types"
 				}
 			]
 		},

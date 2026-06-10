@@ -1,6 +1,6 @@
 {
 	"id": "knowledge-ingestion-docs-map",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"updated": "2026-06-10",
 	"artifact_type": "subsystem-docs-map",
 	"owner_module": "knowledge-ingestion",
@@ -12,7 +12,8 @@
 	},
 	"machine_truth": [
 		"system/knowledge-ingestion-system.json",
-		"system/knowledge-ingestion-docs-map.json"
+		"system/knowledge-ingestion-docs-map.json",
+		"system/knowledge-ingestion-source-types.json"
 	],
 	"managed_human_docs": [
 		"docs/knowledge-ingestion/README.md",
@@ -74,12 +75,17 @@
 		{
 			"output_type": "workflow-pack",
 			"template": "templates/workflow-pack.md"
+		},
+		{
+			"source_type": "book-textbook",
+			"template": "templates/book-source.md"
 		}
 	],
 	"boundary_rules": [
 		"Markdown 说明只能解释如何使用，不作为系统行为真相。",
 		"来源类型、质量门、handoff 和闭环状态以 system/knowledge-ingestion-system.json 为准。",
-		"如果摄入文档增长为多个专题，先更新本 docs map，再新增文档。"
+		"如果摄入文档增长为多个专题，先更新本 docs map，再新增文档。",
+		"新增来源类型先更新 system/knowledge-ingestion-source-types.json，再同步模板、schema/validator、route 和 Canvas。"
 	],
 	"validation": [
 		"scripts/validate-system.ps1",

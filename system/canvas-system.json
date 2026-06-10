@@ -520,8 +520,8 @@
 			"check": "system structure governance Canvas view, entry navigation, system overview and visual coverage decisions"
 		},
 		{
-			"changed": "system/knowledge-ingestion-system.json or system/knowledge-ingestion-docs-map.json",
-			"check": "knowledge-ingestion subsystem Canvas view and system overview navigation"
+			"changed": "system/knowledge-ingestion-system.json, system/knowledge-ingestion-docs-map.json or system/knowledge-ingestion-source-types.json",
+			"check": "knowledge-ingestion subsystem Canvas view, source type registry projection and system overview navigation"
 		}
 	],
 	"quality_gates": [

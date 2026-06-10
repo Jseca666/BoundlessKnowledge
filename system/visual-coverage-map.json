@@ -410,7 +410,7 @@
 				"knowledge-base-system-architecture-map"
 			],
 			"reason": "知识进入方式是长期稳定、跨模块的系统能力，必须有 dedicated 视觉影子，避免只在 source-registry 或系统总览阶段块里隐形。",
-			"review_trigger": "当新增来源类型、摄入模板、来源质量门、领域路由交接、review/diagnostics/loop handoff 或 source-registry 结构变化时，审查此图。"
+			"review_trigger": "当新增来源类型、摄入模板、来源质量门、领域路由交接、review/diagnostics/loop handoff、source-registry 结构或 source type registry 变化时，审查此图。"
 		},
 		{
 			"module_id": "git-governance",

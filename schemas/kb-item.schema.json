@@ -37,7 +37,8 @@
         "domain-map",
         "synthesis",
         "workflow",
-        "eval"
+        "eval",
+        "source-book"
       ]
     },
     "status": {

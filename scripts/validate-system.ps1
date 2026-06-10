@@ -190,6 +190,7 @@ $toolMap = Read-JsonFile "system/tool-map.json"
 $loopRegistry = Read-JsonFile "system/loop-registry.json"
 $domainTaxonomy = Read-JsonFile "30-maps/domains/domain-taxonomy.registry.json"
 $domainTaxonomyDocsMap = Read-JsonFile "30-maps/domains/domain-taxonomy.docs.json"
+$knowledgeIngestionSourceTypes = Read-JsonFile "system/knowledge-ingestion-source-types.json"
 
 $textIntegrityRoots = @(
     "system",
@@ -1689,6 +1690,62 @@ if ($null -ne $domainTaxonomyDocsMap) {
 
     foreach ($pathValue in @($domainTaxonomyDocsMap.validation)) {
         Test-RegistryPath -PathValue $pathValue -Context "30-maps/domains/domain-taxonomy.docs.json validation"
+    }
+}
+
+if ($null -ne $knowledgeIngestionSourceTypes) {
+    foreach ($fieldName in @("id", "owner_module", "dynamic_update_policy", "source_types", "validation")) {
+        Test-RequiredField -Object $knowledgeIngestionSourceTypes -Field $fieldName -Context "system/knowledge-ingestion-source-types.json" | Out-Null
+    }
+
+    if ([string]$knowledgeIngestionSourceTypes.owner_module -ne "knowledge-ingestion") {
+        $Errors.Add("system/knowledge-ingestion-source-types.json: owner_module must be knowledge-ingestion")
+    }
+
+    foreach ($fieldName in @("rule", "add_source_type_when", "required_fields", "future_gap_rule")) {
+        Test-RequiredField -Object $knowledgeIngestionSourceTypes.dynamic_update_policy -Field $fieldName -Context "system/knowledge-ingestion-source-types.json dynamic_update_policy" | Out-Null
+    }
+
+    $sourceTypeIds = New-Object System.Collections.Generic.HashSet[string]
+    $sourceTypeKbTypes = New-Object System.Collections.Generic.HashSet[string]
+    foreach ($sourceType in @($knowledgeIngestionSourceTypes.source_types)) {
+        if (-not (Test-RequiredField -Object $sourceType -Field "id" -Context "system/knowledge-ingestion-source-types.json source_type")) {
+            continue
+        }
+
+        $sourceTypeId = [string]$sourceType.id
+        if (-not $sourceTypeIds.Add($sourceTypeId)) {
+            $Errors.Add("system/knowledge-ingestion-source-types.json: duplicate source type id '$sourceTypeId'")
+        }
+
+        foreach ($fieldName in @("kb_type", "name", "status", "source_template", "provenance_required", "quality_focus", "review_triggers", "domain_routing_hint")) {
+            Test-RequiredField -Object $sourceType -Field $fieldName -Context "source type '$sourceTypeId'" | Out-Null
+        }
+
+        if ($sourceType.PSObject.Properties.Name -contains "kb_type") {
+            [void]$sourceTypeKbTypes.Add([string]$sourceType.kb_type)
+        }
+
+        if ($sourceType.PSObject.Properties.Name -contains "source_template") {
+            $templatePath = [string]$sourceType.source_template
+            if ($templatePath -ne "templates/") {
+                Test-RegistryPath -PathValue $templatePath -Context "source type '$sourceTypeId' source_template"
+            }
+        }
+    }
+
+    foreach ($requiredSourceTypeId in @("paper", "book-textbook", "github-topic", "web-source", "personal-draft", "future-source-type")) {
+        if (-not $sourceTypeIds.Contains($requiredSourceTypeId)) {
+            $Errors.Add("system/knowledge-ingestion-source-types.json: missing required source type '$requiredSourceTypeId'")
+        }
+    }
+
+    if (-not $sourceTypeKbTypes.Contains("source-book")) {
+        $Errors.Add("system/knowledge-ingestion-source-types.json: missing kb_type 'source-book' for textbook/book intake")
+    }
+
+    foreach ($pathValue in @($knowledgeIngestionSourceTypes.validation)) {
+        Test-RegistryPath -PathValue ([string]$pathValue) -Context "system/knowledge-ingestion-source-types.json validation"
     }
 }
 

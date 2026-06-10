@@ -174,9 +174,10 @@
 			"entry_id": "route.knowledge-ingestion",
 			"entry_type": "route",
 			"owner_module": "knowledge-ingestion",
-			"summary": "Task route for knowledge ingestion, source types, intake templates, source quality, legacy ingestion docs and handoffs.",
+			"summary": "Task route for knowledge ingestion, dynamic source types including textbooks/books, intake templates, source quality, legacy ingestion docs and handoffs.",
 			"reference_surfaces": [
-				"system/route-registry.json#routes.knowledge-ingestion"
+				"system/route-registry.json#routes.knowledge-ingestion",
+				"system/knowledge-ingestion-source-types.json"
 			],
 			"related_entries": [
 				"module.knowledge-ingestion"

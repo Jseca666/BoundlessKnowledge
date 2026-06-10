@@ -1,6 +1,6 @@
 {
 	"id": "system-closure-map",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"updated": "2026-06-10",
 	"role": "machine-readable-module-closure-matrix",
 	"purpose": "Track whether each stable module has enough routing, truth, validation, documentation, diagnostics and lifecycle coverage to be maintained without relying on chat memory.",
@@ -1165,7 +1165,8 @@
 			"overall_status": "closed",
 			"canonical_truth": [
 				"system/knowledge-ingestion-system.json",
-				"system/knowledge-ingestion-docs-map.json"
+				"system/knowledge-ingestion-docs-map.json",
+				"system/knowledge-ingestion-source-types.json"
 			],
 			"routes": [
 				{
@@ -1187,7 +1188,8 @@
 				"docs/knowledge-ingestion/README.md",
 				"docs/ingestion-workflow.md",
 				"docs/source-quality.md",
-				"00-inbox/README.md"
+				"00-inbox/README.md",
+				"templates/book-source.md"
 			],
 			"visual_projection": {
 				"status": "closed",
@@ -1207,13 +1209,14 @@
 				"documentation": "closed",
 				"visual_projection": "closed",
 				"diagnostics": "shared",
-				"lifecycle": "closed"
+				"lifecycle": "closed",
+				"source_type_registry": "closed"
 			},
 			"known_gaps": [
 				"No dedicated source-record registry JSON yet; current source records still rely on Markdown/frontmatter plus catalog indexing.",
 				"No automatic ingestion crawler or unattended source watcher is part of the current subsystem."
 			],
-			"next_action": "When source volume grows, decide whether source-registry needs a dedicated JSON registry, intake queue schema or ingestion loop runner.",
+			"next_action": "When a new source family repeats or needs distinct provenance/quality/template rules, add it to system/knowledge-ingestion-source-types.json and synchronize template, schema, validators, route and Canvas.",
 			"activation_proof": {
 				"activation_id": "activation-20260610-knowledge-ingestion",
 				"module_id": "knowledge-ingestion",
@@ -1236,6 +1239,18 @@
 					"scripts/validate-kb.ps1"
 				],
 				"acceptance": "Active after knowledge-ingestion has its own machine truth, docs map, route, information-map module, topology placement, closure record, legacy asset adoption and dedicated Canvas view; inbox/source-registry remain knowledge-content assets governed by this subsystem."
+			},
+			"source_type_registry": {
+				"status": "closed",
+				"path": "system/knowledge-ingestion-source-types.json",
+				"current_stable_types": [
+					"paper",
+					"book-textbook",
+					"github-topic",
+					"web-source",
+					"personal-draft"
+				],
+				"gap_handler": "future-source-type"
 			}
 		},
 		{

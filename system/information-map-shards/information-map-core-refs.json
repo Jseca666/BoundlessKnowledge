@@ -78,11 +78,12 @@
 			"entry_id": "module.knowledge-ingestion",
 			"entry_type": "system_module",
 			"owner_module": "knowledge-ingestion",
-			"summary": "System-governance subsystem for knowledge entry, source-type selection, source-quality gates and handoffs before knowledge becomes reusable content.",
+			"summary": "System-governance subsystem for knowledge entry, dynamic source-type registry, source-quality gates and handoffs before knowledge becomes reusable content.",
 			"reference_surfaces": [
 				"system/knowledge-ingestion-system.json",
 				"system/knowledge-ingestion-docs-map.json",
-				"system/information-map.json#modules.knowledge-ingestion"
+				"system/information-map.json#modules.knowledge-ingestion",
+				"system/knowledge-ingestion-source-types.json"
 			],
 			"related_entries": [
 				"route.knowledge-ingestion",

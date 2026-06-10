@@ -1,6 +1,6 @@
 {
 	"id": "knowledge-ingestion-system",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"updated": "2026-06-10",
 	"artifact_type": "subsystem-machine-truth",
 	"owner_module": "knowledge-ingestion",
@@ -18,7 +18,8 @@
 			"source quality precheck 和升级交接规则",
 			"进入领域分类、原子知识、综合、索引和 Codex workflow 的 handoff contract",
 			"旧摄入文档、模板和入口资产的接管状态",
-			"知识摄入可视化覆盖和闭环状态"
+			"知识摄入可视化覆盖和闭环状态",
+			"动态来源类型注册表：教材/权威图书、论文、GitHub、网页、个人经验和未来来源类型缺口"
 		],
 		"does_not_own": [
 			"每条具体来源记录的事实内容",
@@ -37,7 +38,8 @@
 			"system/information-map.json#modules.knowledge-ingestion",
 			"system/module-relationship-map.json#modules.knowledge-ingestion",
 			"system/system-closure-map.json#modules.knowledge-ingestion",
-			"system/visual-coverage-map.json#module_decisions.knowledge-ingestion"
+			"system/visual-coverage-map.json#module_decisions.knowledge-ingestion",
+			"system/knowledge-ingestion-source-types.json"
 		],
 		"human_docs": [
 			"docs/knowledge-ingestion/README.md",
@@ -60,7 +62,8 @@
 			"templates/personal-draft.md",
 			"templates/atomic-note.md",
 			"templates/synthesis-brief.md",
-			"templates/workflow-pack.md"
+			"templates/workflow-pack.md",
+			"templates/book-source.md"
 		],
 		"visual_projection": [
 			"30-maps/canvas/10-system/10-subsystems/knowledge-ingestion/knowledge-ingestion-architecture.canvas",
@@ -117,7 +120,7 @@
 		},
 		{
 			"id": "future-source-type",
-			"name": "未来来源类型",
+			"name": "未来来源类型缺口",
 			"source_template": "templates/",
 			"required_precheck": [
 				"provenance",
@@ -125,6 +128,19 @@
 				"quality level",
 				"domain candidates",
 				"review trigger"
+			]
+		},
+		{
+			"id": "book-textbook",
+			"name": "教材与权威图书",
+			"source_template": "templates/book-source.md",
+			"required_precheck": [
+				"bibliographic identity",
+				"edition and publisher",
+				"chapter or page locator when cited",
+				"authority context",
+				"recency caveat",
+				"copyright boundary"
 			]
 		}
 	],
@@ -137,7 +153,7 @@
 		{
 			"step": "identify-source-type",
 			"output": "source_type",
-			"rule": "先判断论文、GitHub、网页、个人经验或未来来源类型，再选择模板和必填字段。"
+			"rule": "先查 system/knowledge-ingestion-source-types.json，判断论文、教材/权威图书、GitHub、网页、个人经验或未来来源类型缺口，再选择模板和必填字段。"
 		},
 		{
 			"step": "register-provenance",
@@ -221,7 +237,7 @@
 		},
 		{
 			"id": "source-type-before-template",
-			"rule": "先确定来源类型，再选择模板；模板缺失时先登记 future-source-type gap。"
+			"rule": "先从 source type registry 确定来源类型，再选择模板；模板缺失时先登记 future-source-type gap，不把新来源硬塞进旧模板。"
 		},
 		{
 			"id": "volatile-facts-need-last-checked-at",
@@ -292,5 +308,17 @@
 		"lifecycle_status": "current",
 		"closure_status": "closed",
 		"activation_ref": "system/system-closure-map.json#modules.knowledge-ingestion.activation_proof"
+	},
+	"source_type_registry": {
+		"path": "system/knowledge-ingestion-source-types.json",
+		"dynamic_update_rule": "新增来源类型时先改 registry，再同步模板、schema/validator、route、docs map、Canvas 和必要的 review trigger。",
+		"current_stable_types": [
+			"paper",
+			"book-textbook",
+			"github-topic",
+			"web-source",
+			"personal-draft"
+		],
+		"gap_handler": "future-source-type"
 	}
 }

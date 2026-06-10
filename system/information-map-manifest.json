@@ -19,7 +19,8 @@
 				"module_boundary_refs",
 				"dataflow_entrypoints",
 				"project_ontology_ref",
-				"knowledge_ingestion_ref"
+				"knowledge_ingestion_ref",
+				"source_type_registry_ref"
 			],
 			"read_policy": "Use for module boundary, dataflow, entrypoint and root information-map refs."
 		},
@@ -42,7 +43,8 @@
 		"system/information-map.json",
 		"system/route-registry.json",
 		"system/project-ontology.json",
-		"system/knowledge-ingestion-system.json"
+		"system/knowledge-ingestion-system.json",
+		"system/knowledge-ingestion-source-types.json"
 	],
 	"validation_refs": [
 		"schemas/information-map.schema.json",
